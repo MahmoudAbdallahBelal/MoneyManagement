@@ -1,7 +1,8 @@
-package mab.moneymanagement.view;
+package mab.moneymanagement.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import mab.moneymanagement.R;
 
 public class SplashActivity extends AppCompatActivity {

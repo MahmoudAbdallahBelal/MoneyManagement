@@ -9,13 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.activity.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.ChartActivity" />
+        <activity android:name=".view.activity.Category" />
+        <activity android:name=".view.activity.MonthlyStatics" />
+        <activity android:name=".view.activity.ExpectedActivity" />
+        <activity android:name=".view.activity.SettingActivity" />
+        <activity android:name=".view.activity.AccountActivity" />
+        <activity android:name=".view.activity.NewTransferActivity" />
+        <activity android:name=".view.activity.CashActivity" />
+        <activity android:name=".view.activity.CreditActivity" />
+        <activity android:name=".view.activity.CompleteLoginActivity"></activity>
     </application>
 
 </manifest>
