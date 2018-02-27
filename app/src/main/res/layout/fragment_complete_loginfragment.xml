@@ -4,10 +4,74 @@
     android:layout_height="match_parent"
     tools:context="mab.moneymanagement.view.fragment.CompleteLoginfragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- TODO: user will complete data name ,salary,start of month,currency
+
+     -->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:gravity="center"
+
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_login_et_name"
+            android:hint="@string/complete_login_enter_name"
+            android:padding="8dp"
+            android:layout_margin="10dp"
+
+            />
+
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_login_et_salary"
+            android:hint="@string/complete_login_salary"
+            android:padding="8dp"
+            android:layout_margin="10dp"
+
+            />
+
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_login_et_start_month"
+            android:hint="@string/complete_login_enter_start_month"
+            android:padding="8dp"
+            android:layout_margin="10dp"
+
+            />
+
+        <TextView
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_login_tv_select_currency"
+            android:padding="8dp"
+            android:text="select currency"
+            android:textColor="@android:color/black"
+            android:layout_margin="10dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:text="Next"
+            android:background="@color/colorPrimaryDark"
+
+
+            />
+
+    </LinearLayout>
+
 
 </FrameLayout>

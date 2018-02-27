@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="mab.moneymanagement.view.fragment.ExpectedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <!-- TODO: we will make expected here on list  the row of list on row expected layout  -->
 
+    <ListView
+        android:id="@+id/expected_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 </FrameLayout>

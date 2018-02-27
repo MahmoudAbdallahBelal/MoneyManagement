@@ -24,7 +24,7 @@ public class ExpectedActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.expected_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.expected_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

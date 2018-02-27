@@ -4,6 +4,71 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+
+
+    <string-array name="currency">
+        <item>RSA</item>
+        <item>LE</item>
+        <item>dollar</item>
+        <item>KWD</item>
+    </string-array>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_hint_enter_email">Enter email</string>
+    <string name="login_hint_enter_password">Enter Password</string>
+    <string name="login_button_login">login</string>
+    <string name="complete_login_enter_name">Enter name</string>
+    <string name="complete_login_salary">salary</string>
+    <string name="complete_login_enter_start_month">Enter start month</string>
+    <string name="complete_login_title">Complete data</string>
+    <string name="nav_myaccount">My Account</string>
+    <string name="nav_category">Category</string>
+    <string name="nav_account">Account</string>
+    <string name="nav_expect">Expect</string>
+    <string name="nav_monthly_statics">Monthly statics</string>
+    <string name="nav_calender">Calender</string>
+    <string name="nav_setting">Setting</string>
+    <string name="nav_choosedate">ChooseDate</string>
+    <string name="add_item_title">Add item</string>
+    <string name="add_item_item_name">Enter Item name ..</string>
+    <string name="add_item_add_note">Add note</string>
+    <string name="add_item_btn_ok">Ok</string>
+    <string name="add_item_btn_cancel">Cancel</string>
+    <string name="row_expected_target">Target</string>
+    <string name="row_expected_expense">Expense</string>
+    <string name="row_expected_percentage">Percentage</string>
+    <string name="row_expected_hint_target">100 RSA</string>
+    <string name="row_expected_hint_percentage">70%</string>
+    <string name="row_expected_hint_expense">70 RSA</string>
+    <string name="setting_language">Language</string>
+    <string name="setting_currency">Currency</string>
+    <string name="setting_kind_currency">RSA</string>
+    <string name="setting_first_day_of_week">First Day of week</string>
+    <string name="setting_first_day_on_month">first day on month</string>
+    <string name="setting_password_protection">Password Protection</string>
+    <string name="setting_daily_alert">Daily alert</string>
+    <string name="setting_budget">Budget</string>
+    <string name="setting_export_file">Export file</string>
+    <string name="setting_create_data_backup">Create data backup</string>
+    <string name="seeting_delete_database">Delete database</string>
+    <string name="budget_title">Budget</string>
+    <string name="budget_descripe">Monthly budget mode how much you want to spent in month</string>
+    <string name="budget_value">0.0</string>
+    <string name="budget_btn_cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="select_currency_title">Select Currency</string>
+    <string name="select_language_title">Select Language</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="le">LE</string>
+    <string name="kdw">KDW</string>
+    <string name="dollar">Dollar</string>
+    <string name="rsa">RSA</string>
+    <string name="account_cash">Cash</string>
+    <string name="account_payment_card">Payment card</string>
+    <string name="account_new_teansfer">new Teansfer</string>
+    <string name="account_title">Account title</string>
+    <string name="expected_title">Expected</string>
 </resources>

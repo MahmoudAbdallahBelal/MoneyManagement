@@ -24,7 +24,7 @@ public class MonthlyStatics extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.monthly_statics_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.nav_monthly_statics));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

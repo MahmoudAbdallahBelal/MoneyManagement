@@ -1,13 +1,69 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context="mab.moneymanagement.view.fragment.AccountFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/account_btn_cash"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/account_cash" />
+
+        <Button
+            android:id="@+id/account_btn_payment_card"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/account_payment_card" />
+
+        <ImageButton
+
+            android:id="@+id/account_btn_add_payment_method"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/add" />
+
+
+    </LinearLayout>
+
+    <Button
+
+        android:id="@+id/account_btn_new_transfer"
+
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/account_new_teansfer"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        tools:ignore="RtlCompat" />
+
+
+</LinearLayout>

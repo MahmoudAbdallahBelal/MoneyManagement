@@ -24,7 +24,7 @@ public class AccountActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.account_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.account_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

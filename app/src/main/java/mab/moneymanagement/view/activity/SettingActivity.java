@@ -24,7 +24,7 @@ public class SettingActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.setting_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.nav_setting));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
