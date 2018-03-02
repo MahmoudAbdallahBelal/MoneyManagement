@@ -1,18 +1,12 @@
 package mab.moneymanagement.view.activity;
 
-import android.accounts.Account;
-import android.app.AlertDialog;
+
 import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,22 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.DialogAddItemFragment;
 
-public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Spinner spinner;
+
+    ViewPager mViewPager;
+    SectionBageAdapter mSectionBageAdapter;
+    TabLayout mTablLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +35,16 @@ public class Main2Activity extends AppCompatActivity
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //-------------View Pager ------
+        mViewPager = (ViewPager) findViewById(R.id.main_tab_pager);
+        mSectionBageAdapter = new SectionBageAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mSectionBageAdapter);
+
+        mTablLayout=(TabLayout)findViewById(R.id.main_tabs);
+        mTablLayout.setupWithViewPager(mViewPager);
+
+        //----------------------------
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,6 @@ public class Main2Activity extends AppCompatActivity
                 FragmentManager fm = getFragmentManager();
                 DialogAddItemFragment dialogFragment = new DialogAddItemFragment();
                 dialogFragment.show(fm, "");
-
 
 
             }
@@ -100,7 +99,7 @@ public class Main2Activity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_chart) {
-            Intent chartIntent=new Intent(getApplicationContext(),ChartActivity.class);
+            Intent chartIntent = new Intent(getApplicationContext(), ChartActivity.class);
             startActivity(chartIntent);
 
             return true;
@@ -108,6 +107,7 @@ public class Main2Activity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -161,8 +161,6 @@ public class Main2Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }

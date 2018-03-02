@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/setting_fragment"
     tools:context="mab.moneymanagement.view.fragment.SettingFragment">
 
     <!-- TODO: setting activity to control application  -->
@@ -12,7 +13,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:checkMark="@drawable/checked"
-        android:checked="false"
         android:padding="5dp"
         android:layout_margin="15dp"
         android:text="@string/setting_budget" />
@@ -34,6 +34,7 @@
             />
 
         <TextView
+            android:id="@+id/setting_tv_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="190dp"

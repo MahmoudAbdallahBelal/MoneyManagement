@@ -21,15 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/chart_icon"
-        android:padding="8dp"
-        android:layout_marginLeft="80dp"
 
-
-        />
 
     <include layout="@layout/content_main2" />
 
