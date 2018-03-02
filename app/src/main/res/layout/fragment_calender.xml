@@ -6,4 +6,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="@color/colorPrimaryDark"
+        android:layout_marginTop="50dp"
+        />
+
 </FrameLayout>
