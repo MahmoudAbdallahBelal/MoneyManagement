@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.AccountFragment;
+import mab.moneymanagement.view.fragment.MonthlystaticsFragment;
 
 public class MonthlyStatics extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MonthlyStatics extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.monthly_statics_activity, new AccountFragment())
+                    .add(R.id.monthly_statics_activity, new MonthlystaticsFragment())
                     .commit();
         }
 

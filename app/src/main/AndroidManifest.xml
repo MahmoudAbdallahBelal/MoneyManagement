@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.SplashActivity">
+        <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             android:name=".view.activity.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.SplashActivity" />
         <activity android:name=".view.activity.ChartActivity" />
         <activity android:name=".view.activity.Category" />
         <activity android:name=".view.activity.MonthlyStatics" />
@@ -30,7 +30,10 @@
         <activity android:name=".view.activity.NewTransferActivity" />
         <activity android:name=".view.activity.CashActivity" />
         <activity android:name=".view.activity.CreditActivity" />
-        <activity android:name=".view.activity.CompleteLoginActivity"></activity>
+        <activity android:name=".view.activity.CompleteLoginActivity" />
+        <activity android:name=".view.activity.ChooseActivity" />
+        <activity android:name=".view.activity.PersonalAccountActivity" />
+        <activity android:name=".view.activity.CalenderActivity"></activity>
     </application>
 
 </manifest>

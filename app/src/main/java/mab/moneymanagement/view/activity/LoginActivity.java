@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.AccountFragment;
+import mab.moneymanagement.view.fragment.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,14 +18,14 @@ public class LoginActivity extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.login_activity, new AccountFragment())
+                    .add(R.id.login_activity, new LoginFragment())
                     .commit();
         }
 
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.login_button_login));
+        getSupportActionBar().setTitle(getString(R.string.login_toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

@@ -25,7 +25,7 @@ public class CashActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.cash_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.cash_activity_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.AccountFragment;
+import mab.moneymanagement.view.fragment.ChartFragment;
 
 public class ChartActivity extends AppCompatActivity {
 
@@ -17,14 +18,14 @@ public class ChartActivity extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.chart_activity, new AccountFragment())
+                    .add(R.id.chart_activity, new ChartFragment())
                     .commit();
         }
 
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.chart_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.chart_activity_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

@@ -25,7 +25,7 @@ public class Category extends AppCompatActivity {
 
         Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.category_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("  ");
+        getSupportActionBar().setTitle(getString(R.string.category_activity_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.AccountFragment;
+import mab.moneymanagement.view.fragment.SettingFragment;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class SettingActivity extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.setting_activity, new AccountFragment())
+                    .add(R.id.setting_activity, new SettingFragment())
                     .commit();
         }
 

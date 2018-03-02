@@ -48,24 +48,23 @@
 
             />
 
-        <TextView
-            android:inputType="number"
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/complete_login_tv_select_currency"
+            android:id="@+id/complete_login_spinner_select_currency"
             android:padding="8dp"
-            android:text="select currency"
             android:textColor="@android:color/black"
             android:layout_margin="10dp" />
 
 
         <Button
+            android:id="@+id/complete_login_btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
             android:padding="8dp"
             android:textColor="@android:color/white"
-            android:text="Next"
+            android:text="@string/complete_login_btn_next"
             android:background="@color/colorPrimaryDark"
 
 

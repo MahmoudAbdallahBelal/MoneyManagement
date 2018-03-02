@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!-- TODO: this layout to appear when enter on + on main activity on bottom  we will add data of item and select category and method of payment in  from spinner when user enter on  ok add item  in database enter on cancel make nothing  -->
@@ -46,6 +47,8 @@
             />
 
         <EditText
+            android:id="@+id/add_item_et_note"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -57,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-
             android:padding="8dp"></Spinner>
 
         <Spinner
@@ -65,14 +67,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-
             android:padding="8dp"></Spinner>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp">
+            android:layout_marginLeft="30dp">
 
             <Button
                 android:id="@+id/add_item_cancel"
