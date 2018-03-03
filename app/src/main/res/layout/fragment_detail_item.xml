@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mab.moneymanagement.view.fragment.DetailItem">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/item_detail_et_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/add_item_item_name"
+            android:padding="10dp"
+
+            />
+
+        <EditText
+            android:id="@+id/item_detail_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint=" Price  "
+            android:inputType="number"
+            android:padding="10dp"
+
+
+            />
+
+        <EditText
+            android:id="@+id/item_detail_et_note"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/add_item_add_note"
+            android:padding="10dp" />
+
+        <Spinner
+            android:id="@+id/item_detail_category_spiner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="8dp"></Spinner>
+
+        <Spinner
+            android:id="@+id/item_detail_payment_spiner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="8dp"></Spinner>
+
+
+            <Button
+                android:id="@+id/item_detail_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp"
+                android:text="@string/item_detail_update"
+                android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</FrameLayout>

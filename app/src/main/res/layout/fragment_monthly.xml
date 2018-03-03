@@ -5,9 +5,12 @@
     tools:context="mab.moneymanagement.view.fragment.MonthlyFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/monthly_fragment_list"
+        android:layout_margin="10dp"
+        android:background="@android:color/white"
+        ></ListView>
 
 </FrameLayout>

@@ -5,28 +5,29 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.fragment.SettingFragment;
+import mab.moneymanagement.view.fragment.CreditFragment;
+import mab.moneymanagement.view.fragment.DetailItem;
 
-public class SettingActivity extends AppCompatActivity {
+public class DetailItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_detail_item);
+
 
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.setting_activityy, new SettingFragment())
+                    .add(R.id.item_detail_activity, new DetailItem())
                     .commit();
         }
 
 
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.setting_toolbar);
+        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.item_detail_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.nav_setting));
+        getSupportActionBar().setTitle(getString(R.string.item_detail_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 }

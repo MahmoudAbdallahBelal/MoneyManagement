@@ -39,6 +39,4 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 
 
-
-
 }

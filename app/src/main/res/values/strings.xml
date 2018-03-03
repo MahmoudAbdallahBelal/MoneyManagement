@@ -92,4 +92,6 @@
     <string name="new_transfer_activity_title">New transfer</string>
     <string name="personal_account_activity_title">Personal account</string>
     <string name="complete_login_btn_next">Next</string>
+    <string name="item_detail_title">Item detail</string>
+    <string name="item_detail_update">update</string>
 </resources>

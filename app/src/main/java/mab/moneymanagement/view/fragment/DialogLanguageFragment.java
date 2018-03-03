@@ -38,11 +38,6 @@ public class  DialogLanguageFragment extends DialogFragment {
 
         return language_layout;
     }
-//
-//    void showDialog() {
-//        DialogFragment newFragment = DialogLanguageFragment.newInstance(
-//                R.string.alert_dialog_two_buttons_title);
-//        newFragment.show(getFragmentManager(), "dialog");
-//    }
+
 
 }

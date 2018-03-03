@@ -1,0 +1,8 @@
+<root>
+    <item
+        name='android.support.v4.app.Fragment android.support.v4.app.FragmentManager getChildFragmentManager()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true" />
+        </annotation>
+    </item>
+</root>

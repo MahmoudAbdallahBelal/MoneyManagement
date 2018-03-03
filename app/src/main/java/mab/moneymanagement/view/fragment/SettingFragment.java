@@ -3,15 +3,12 @@ package mab.moneymanagement.view.fragment;
 
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +56,10 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                DialogLanguageFragment dd=new DialogLanguageFragment();
-                dd.showDialog();
+//
+//                FragmentManager fm = getChildFragmentManager();
+//                DialogAddItemFragment dialogFragment = new DialogAddItemFragment();
+//                dialogFragment.show(fm, "");
 
 
             }
@@ -71,10 +70,10 @@ public class SettingFragment extends Fragment {
 
     private void showBudgetDialog() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 
-        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
         View budget_layout = inflater.inflate(R.layout.budget, null);
 
 
