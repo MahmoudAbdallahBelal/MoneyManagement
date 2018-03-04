@@ -1,4 +1,4 @@
-package mab.moneymanagement.view.fragment;
+package mab.moneymanagement.view.dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

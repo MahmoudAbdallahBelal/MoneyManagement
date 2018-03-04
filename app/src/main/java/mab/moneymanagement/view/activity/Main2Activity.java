@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.widget.Spinner;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.fragment.DialogAddItemFragment;
+import mab.moneymanagement.view.dialog.DialogAddItemFragment;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
