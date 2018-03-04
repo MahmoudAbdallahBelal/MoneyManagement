@@ -94,4 +94,5 @@
     <string name="complete_login_btn_next">Next</string>
     <string name="item_detail_title">Item detail</string>
     <string name="item_detail_update">update</string>
+    <string name="category_detail_title">Category detail</string>
 </resources>

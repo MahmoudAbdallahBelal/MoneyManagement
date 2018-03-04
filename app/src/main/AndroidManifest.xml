@@ -34,7 +34,8 @@
         <activity android:name=".view.activity.ChooseActivity" />
         <activity android:name=".view.activity.PersonalAccountActivity" />
         <activity android:name=".view.activity.CalenderActivity" />
-        <activity android:name=".view.activity.DetailItemActivity"></activity>
+        <activity android:name=".view.activity.DetailItemActivity" />
+        <activity android:name=".view.activity.CategoryDetailActivity"></activity>
     </application>
 
 </manifest>
