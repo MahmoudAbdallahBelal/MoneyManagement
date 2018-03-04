@@ -28,21 +28,19 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        etEmail=(EditText)v.findViewById(R.id.login_et_email);
-        etPassword=(EditText)v.findViewById(R.id.login_et_password);
-        btnLogin=(Button)v.findViewById(R.id.login_btn);
+        etEmail = (EditText) v.findViewById(R.id.login_et_email);
+        etPassword = (EditText) v.findViewById(R.id.login_et_password);
+        btnLogin = (Button) v.findViewById(R.id.login_btn);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent completeIntent=new Intent(getActivity(), CompleteLoginActivity.class);
+                Intent completeIntent = new Intent(getActivity(), CompleteLoginActivity.class);
                 startActivity(completeIntent);
 
             }
         });
-
-
 
 
         return v;

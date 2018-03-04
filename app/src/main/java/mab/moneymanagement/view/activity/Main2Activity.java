@@ -41,7 +41,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         mSectionBageAdapter = new SectionBageAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionBageAdapter);
 
-        mTablLayout=(TabLayout)findViewById(R.id.main_tabs);
+        mTablLayout = (TabLayout) findViewById(R.id.main_tabs);
         mTablLayout.setupWithViewPager(mViewPager);
 
         //----------------------------

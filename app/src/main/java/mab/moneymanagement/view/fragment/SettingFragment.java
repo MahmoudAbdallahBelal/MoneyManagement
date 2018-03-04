@@ -1,7 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
 
-
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -26,21 +25,15 @@ public class SettingFragment extends Fragment {
 
     CheckedTextView tvBudget;
     TextView tvLanguage;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        tvBudget=v.findViewById(R.id.setting_check_tv_budget);
-        tvLanguage=v.findViewById(R.id.setting_tv_select_language);
-
-
-
-
-
-
-
+        tvBudget = v.findViewById(R.id.setting_check_tv_budget);
+        tvLanguage = v.findViewById(R.id.setting_tv_select_language);
 
 
         //-------------
@@ -77,12 +70,12 @@ public class SettingFragment extends Fragment {
         View budget_layout = inflater.inflate(R.layout.budget, null);
 
 
-        EditText budgetValue=budget_layout.findViewById(R.id.budget_et_value);
-        Button ok=budget_layout.findViewById(R.id.budget_btn_ok);
-        Button cancel=budget_layout.findViewById(R.id.budget_btn_cancel);
+        EditText budgetValue = budget_layout.findViewById(R.id.budget_et_value);
+        Button ok = budget_layout.findViewById(R.id.budget_btn_ok);
+        Button cancel = budget_layout.findViewById(R.id.budget_btn_cancel);
 
 
-        final DialogInterface dialog=new DialogInterface() {
+        final DialogInterface dialog = new DialogInterface() {
             @Override
             public void cancel() {
 
@@ -96,7 +89,7 @@ public class SettingFragment extends Fragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               dialog.dismiss();
+                dialog.dismiss();
             }
         });
 

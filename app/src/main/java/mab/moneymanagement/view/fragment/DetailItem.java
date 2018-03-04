@@ -19,21 +19,21 @@ import mab.moneymanagement.view.model.Item;
 
 public class DetailItem extends Fragment {
 
-    EditText name,price,note;
-    Spinner categorySpinner,paymentSpinner;
+    EditText name, price, note;
+    Spinner categorySpinner, paymentSpinner;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_detail_item, container, false);
+        View v = inflater.inflate(R.layout.fragment_detail_item, container, false);
 
-        name=(EditText)v.findViewById(R.id.item_detail_et_item_name);
-        price=(EditText)v.findViewById(R.id.item_detail_price);
-        note=(EditText)v.findViewById(R.id.item_detail_et_note);
-        categorySpinner=(Spinner)v.findViewById(R.id.item_detail_category_spiner);
-        paymentSpinner=(Spinner)v.findViewById(R.id.item_detail_payment_spiner);
+        name = (EditText) v.findViewById(R.id.item_detail_et_item_name);
+        price = (EditText) v.findViewById(R.id.item_detail_price);
+        note = (EditText) v.findViewById(R.id.item_detail_et_note);
+        categorySpinner = (Spinner) v.findViewById(R.id.item_detail_category_spiner);
+        paymentSpinner = (Spinner) v.findViewById(R.id.item_detail_payment_spiner);
 
 
         //------spinner for category ----------
@@ -49,24 +49,15 @@ public class DetailItem extends Fragment {
         paymentSpinner.setAdapter(paymentAdapter);
 
 
-        Item item= (Item) getActivity().getIntent().getSerializableExtra("item");
+        Item item = (Item) getActivity().getIntent().getSerializableExtra("item");
 
         name.setText(item.getName());
         price.setText(item.getPrice().toString());
         note.setText(item.getNote());
 
 
-
-
-
-
-
-
         return v;
     }
-
-
-
 
 
 }

@@ -25,11 +25,9 @@ import mab.moneymanagement.view.activity.Main2Activity;
 public class DialogAddItemFragment extends DialogFragment {
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View edit_layout = inflater.inflate(R.layout.add_item, container, false);
-
 
 
 //        getDialog().setTitle(R.string.add_item_title);
@@ -40,20 +38,20 @@ public class DialogAddItemFragment extends DialogFragment {
         EditText itemName = edit_layout.findViewById(R.id.add_item_et_item_name);
         EditText itemPrice = edit_layout.findViewById(R.id.add_item_price);
         EditText itemNote = edit_layout.findViewById(R.id.add_item_et_note);
-        Button ok=edit_layout.findViewById(R.id.add_item_ok);
-        Button cancel=edit_layout.findViewById(R.id.add_item_cancel);
+        Button ok = edit_layout.findViewById(R.id.add_item_ok);
+        Button cancel = edit_layout.findViewById(R.id.add_item_cancel);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"add item done",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "add item done", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"cancel",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -63,7 +61,7 @@ public class DialogAddItemFragment extends DialogFragment {
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.category,
                 android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setAdapter(categoryAdapter);
 
         //------spinner for currency ----------
         Spinner paymentSpinner = edit_layout.findViewById(R.id.add_item_payment_spiner);

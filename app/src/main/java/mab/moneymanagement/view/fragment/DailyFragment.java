@@ -42,13 +42,12 @@ public class DailyFragment extends Fragment {
         mList.setAdapter(adapter);
 
 
-
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item item= data.get(position);
-                Intent detailIntent=new Intent(getActivity(),DetailItemActivity.class);
-                detailIntent.putExtra("item",item);
+                Item item = data.get(position);
+                Intent detailIntent = new Intent(getActivity(), DetailItemActivity.class);
+                detailIntent.putExtra("item", item);
                 startActivity(detailIntent);
 
             }

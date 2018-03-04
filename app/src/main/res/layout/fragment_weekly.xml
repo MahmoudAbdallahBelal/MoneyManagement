@@ -2,14 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="mab.moneymanagement.view.fragment.WeeklyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
+        android:id="@+id/weekly_fragment_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/weekly_fragment_list"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@android:color/white"
-        ></ListView>
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="10.0sp"></ListView>
 </FrameLayout>

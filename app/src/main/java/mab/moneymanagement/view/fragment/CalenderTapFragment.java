@@ -17,7 +17,7 @@ public class CalenderTapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_calender_tap, container, false);
+        View v = inflater.inflate(R.layout.fragment_calender_tap, container, false);
 
         return v;
     }

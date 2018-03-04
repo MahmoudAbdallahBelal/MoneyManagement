@@ -29,11 +29,16 @@
             android:weightSum="5">
 
             <GridView
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:layout_margin="15dp"
                 android:id="@+id/category_expense_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:numColumns="2"></GridView>
+                android:numColumns="3"
+                android:scrollbars="vertical"
+                ></GridView>
 
             <ImageView
                 android:id="@+id/addd_expense_image"
@@ -66,16 +71,20 @@
             android:weightSum="5">
 
             <GridView
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
                 android:id="@+id/category_income_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:numColumns="2"></GridView>
+                android:layout_margin="15dp"
+                android:numColumns="3"></GridView>
 
             <ImageView
                 android:id="@+id/add_income_image"
                 android:layout_width="0dp"
-
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"

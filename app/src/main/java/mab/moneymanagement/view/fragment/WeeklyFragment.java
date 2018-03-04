@@ -30,7 +30,7 @@ public class WeeklyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_weekly, container, false);
+        View v = inflater.inflate(R.layout.fragment_weekly, container, false);
         mList = (ListView) v.findViewById(R.id.weekly_fragment_list);
 
         data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
@@ -43,13 +43,12 @@ public class WeeklyFragment extends Fragment {
         mList.setAdapter(adapter);
 
 
-
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item item= data.get(position);
-                Intent detailIntent=new Intent(getActivity(),DetailItemActivity.class);
-                detailIntent.putExtra("item",item);
+                Item item = data.get(position);
+                Intent detailIntent = new Intent(getActivity(), DetailItemActivity.class);
+                detailIntent.putExtra("item", item);
                 startActivity(detailIntent);
 
             }

@@ -23,11 +23,5 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.login_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.login_toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 }

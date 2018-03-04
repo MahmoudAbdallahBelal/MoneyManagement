@@ -1,24 +1,30 @@
 package mab.moneymanagement.view.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import mab.moneymanagement.R;
+import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
+import mab.moneymanagement.view.model.Category;
 
 public class CategoryFragment extends Fragment {
 
     ImageView addIncome, addExpense;
 
+    CategoryExpenseAdapter adapter;
+    GridView mList;
+    GridView expenceList;
+    ArrayList<Category> expenseData = new ArrayList<>();
+    ArrayList<Category> incomeData = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +50,31 @@ public class CategoryFragment extends Fragment {
             }
         });
 
+        //List Expense  -----------
+        mList = (GridView) v.findViewById(R.id.category_expense_list);
 
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+        expenseData.add(new Category("food", 2000.0, R.drawable.home));
+
+
+        adapter = new CategoryExpenseAdapter(getContext(), expenseData);
+        mList.setAdapter(adapter);
+        //-------------------------
+        //List Expense  -----------
+        expenceList = (GridView) v.findViewById(R.id.category_income_list);
+
+        incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
+        incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
+
+
+        adapter = new CategoryExpenseAdapter(getContext(), incomeData);
+        expenceList.setAdapter(adapter);
+        //-------------------------
         return v;
     }
 

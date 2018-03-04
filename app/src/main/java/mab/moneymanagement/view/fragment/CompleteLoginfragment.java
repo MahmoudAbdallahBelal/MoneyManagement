@@ -18,7 +18,7 @@ import mab.moneymanagement.view.activity.CompleteLoginActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
 
 public class CompleteLoginfragment extends Fragment {
-    EditText etName,etSalary,etStartMonth;
+    EditText etName, etSalary, etStartMonth;
     Button btnNext;
     Spinner currncySpinner;
 
@@ -30,10 +30,10 @@ public class CompleteLoginfragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_complete_loginfragment, container, false);
 
-        etName=(EditText)v.findViewById(R.id.complete_login_et_name);
-        etSalary=(EditText)v.findViewById(R.id.complete_login_et_salary);
-        etStartMonth=(EditText)v.findViewById(R.id.complete_login_et_start_month);
-        btnNext=(Button)v.findViewById(R.id.complete_login_btn_next);
+        etName = (EditText) v.findViewById(R.id.complete_login_et_name);
+        etSalary = (EditText) v.findViewById(R.id.complete_login_et_salary);
+        etStartMonth = (EditText) v.findViewById(R.id.complete_login_et_start_month);
+        btnNext = (Button) v.findViewById(R.id.complete_login_btn_next);
 
         //------spinner for category ----------
         Spinner currencySpinner = v.findViewById(R.id.complete_login_spinner_select_currency);
@@ -46,7 +46,7 @@ public class CompleteLoginfragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent=new Intent(getActivity(),Main2Activity.class);
+                Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
                 startActivity(mainIntent);
 
             }
