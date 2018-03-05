@@ -5,9 +5,73 @@
     tools:context="mab.moneymanagement.view.fragment.CategoryDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
+        >
+
+        <EditText
+            android:id="@+id/category_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Enter imcome name"
+            android:padding="10dp"
+
+            />
+        <EditText
+            android:id="@+id/category_detail_value"
+
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="enter income value"
+            android:padding="10dp"
+
+            />
+        <Spinner
+            android:id="@+id/category_detail_spinner_icon"
+
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></Spinner>
+
+        <LinearLayout
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/category_detail_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:background="@android:color/white"
+                android:padding="10dp"
+                android:text="@string/item_detail_delete"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/category_detail_update_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp"
+                android:text="@string/item_detail_update"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

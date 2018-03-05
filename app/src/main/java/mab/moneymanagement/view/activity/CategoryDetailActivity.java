@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.view.fragment.CategoryDetailFragment;
 import mab.moneymanagement.view.fragment.ChartFragment;
 
 public class CategoryDetailActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.category_detail_ativity, new ChartFragment())
+                    .add(R.id.category_detail_ativity, new CategoryDetailFragment())
                     .commit();
         }
 

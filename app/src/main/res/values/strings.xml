@@ -95,4 +95,7 @@
     <string name="item_detail_title">Item detail</string>
     <string name="item_detail_update">update</string>
     <string name="category_detail_title">Category detail</string>
+    <string name="item_detail_delete">Delete</string>
+    <string name="all_item_category_title">All item</string>
+    <string name="edit_category">Edit category</string>
 </resources>

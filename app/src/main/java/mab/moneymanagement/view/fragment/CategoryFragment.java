@@ -2,19 +2,24 @@ package mab.moneymanagement.view.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.view.activity.AllItemCategory;
+import mab.moneymanagement.view.activity.DetailItemActivity;
 import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
 import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.Item;
 
 public class CategoryFragment extends Fragment {
 
@@ -61,19 +66,41 @@ public class CategoryFragment extends Fragment {
         expenseData.add(new Category("food", 2000.0, R.drawable.home));
         expenseData.add(new Category("food", 2000.0, R.drawable.home));
 
-
         adapter = new CategoryExpenseAdapter(getContext(), expenseData);
         mList.setAdapter(adapter);
-        //-------------------------
-        //List Expense  -----------
+
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category category = expenseData.get(position);
+                Intent detailIntent = new Intent(getActivity(), AllItemCategory.class);
+                detailIntent.putExtra("categoryData", category);
+                startActivity(detailIntent);
+
+            }
+        });
+
+        //List Expense  ------------------------------------------------------------
         expenceList = (GridView) v.findViewById(R.id.category_income_list);
 
         incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
         incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
 
-
         adapter = new CategoryExpenseAdapter(getContext(), incomeData);
         expenceList.setAdapter(adapter);
+
+        expenceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category category = incomeData.get(position);
+                Intent detailIntent = new Intent(getActivity(), AllItemCategory.class);
+                detailIntent.putExtra("categoryData", category);
+                startActivity(detailIntent);
+
+            }
+        });
+
+
         //-------------------------
         return v;
     }
