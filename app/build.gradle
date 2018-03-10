@@ -24,6 +24,7 @@ android {
 repositories {
     maven { url "https://jitpack.io" }
 
+
 }
 dependencies {
     implementation 'com.android.support:design:26.1.0'
@@ -39,6 +40,9 @@ dependencies {
     //----------
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
+
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+
 
 
 
