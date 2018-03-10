@@ -111,11 +111,11 @@ public class CompleteLoginfragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Regester();
+//                Regester();
 
-//
-//                Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
-//                startActivity(mainIntent);
+
+                Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
+                startActivity(mainIntent);
 
 
             }
