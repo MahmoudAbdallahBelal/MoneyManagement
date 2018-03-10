@@ -8,6 +8,20 @@
     <!-- TODO: user will complete data name ,salary,start of month,currency
 
      -->
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        android:textSize="25sp"
+        android:text="@string/complete_login_btn_next"
+        android:textColor="@android:color/white"
+
+
+        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,10 +31,32 @@
 
         >
 
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/complete_login_et_name"
+            android:id="@+id/regester_et_email"
+            android:hint="@string/login_hint_enter_email"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            android:layout_margin="10dp"
+
+            />
+
+        <EditText
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/regester_et_password"
+            android:hint="@string/login_hint_enter_password"
+            android:padding="8dp"
+            android:layout_margin="10dp"
+
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/regester_et_name"
             android:hint="@string/complete_login_enter_name"
             android:padding="8dp"
             android:layout_margin="10dp"
@@ -31,7 +67,7 @@
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/complete_login_et_salary"
+            android:id="@+id/regester_et_salary"
             android:hint="@string/complete_login_salary"
             android:padding="8dp"
             android:layout_margin="10dp"
@@ -49,6 +85,13 @@
 
             />
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_login_spinner_select_day"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:layout_margin="10dp" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -61,9 +104,10 @@
 
         <Button
             android:id="@+id/complete_login_btn_next"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="100dp"
             android:padding="8dp"
             android:textColor="@android:color/white"
             android:text="@string/complete_login_btn_next"

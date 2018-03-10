@@ -9,7 +9,5 @@
     tools:context="mab.moneymanagement.view.activity.CompleteLoginActivity">
 
 
-    <include
-        android:id="@+id/complete_login_toolbar"
-        layout="@layout/tool_bar" />
+
 </LinearLayout>

@@ -23,10 +23,6 @@ public class CompleteLoginActivity extends AppCompatActivity {
         }
 
 
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.complete_login_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.complete_login_title));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }

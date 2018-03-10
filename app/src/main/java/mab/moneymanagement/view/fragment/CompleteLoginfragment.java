@@ -21,6 +21,8 @@ public class CompleteLoginfragment extends Fragment {
     EditText etName, etSalary, etStartMonth;
     Button btnNext;
     Spinner currncySpinner;
+    Spinner daySpinner;
+
 
 
     @Override
@@ -30,17 +32,23 @@ public class CompleteLoginfragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_complete_loginfragment, container, false);
 
-        etName = (EditText) v.findViewById(R.id.complete_login_et_name);
-        etSalary = (EditText) v.findViewById(R.id.complete_login_et_salary);
+        etName = (EditText) v.findViewById(R.id.regester_et_name);
+        etSalary = (EditText) v.findViewById(R.id.regester_et_salary);
         etStartMonth = (EditText) v.findViewById(R.id.complete_login_et_start_month);
         btnNext = (Button) v.findViewById(R.id.complete_login_btn_next);
 
-        //------spinner for category ----------
-        Spinner currencySpinner = v.findViewById(R.id.complete_login_spinner_select_currency);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency,
+        //------spinner for currency ----------
+        currncySpinner = v.findViewById(R.id.complete_login_spinner_select_currency);
+        ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency,
                 android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        currencySpinner.setAdapter(categoryAdapter);
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currncySpinner.setAdapter(currencyAdapter);
+        //------spinner for day ----------
+         daySpinner = v.findViewById(R.id.complete_login_spinner_select_day);
+        ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.day,
+                android.R.layout.simple_spinner_item);
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        daySpinner.setAdapter(dayAdapter);
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {

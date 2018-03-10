@@ -64,5 +64,14 @@
 
             />
 
+        <TextView
+            android:id="@+id/login_tv_crate_account"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create new Account"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
     </LinearLayout>
 </LinearLayout>

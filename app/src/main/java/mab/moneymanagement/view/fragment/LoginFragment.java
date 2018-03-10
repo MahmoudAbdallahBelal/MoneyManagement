@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.activity.CompleteLoginActivity;
@@ -21,6 +22,7 @@ public class LoginFragment extends Fragment {
     EditText etEmail;
     EditText etPassword;
     Button btnLogin;
+    TextView tvRegester;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +33,9 @@ public class LoginFragment extends Fragment {
         etEmail = (EditText) v.findViewById(R.id.login_et_email);
         etPassword = (EditText) v.findViewById(R.id.login_et_password);
         btnLogin = (Button) v.findViewById(R.id.login_btn);
+        tvRegester=(TextView)v.findViewById(R.id.login_tv_crate_account);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        tvRegester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
