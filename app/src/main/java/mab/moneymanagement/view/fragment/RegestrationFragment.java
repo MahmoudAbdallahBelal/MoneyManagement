@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,24 +33,25 @@ import org.json.JSONObject;
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.Main2Activity;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
-public class CompleteLoginfragment extends Fragment {
+public class RegestrationFragment extends Fragment {
     EditText etName, etSalary, etStartMonth, etEmail, etPassword;
     Button btnNext;
     Spinner currncySpinner;
     Spinner daySpinner;
     String reg_url = "http://gasem1234-001-site1.dtempurl.com/api/Register";
-    //http://gasem1234-001-site1.dtempurl.com/api/Register
 
 
     String name, email, password;
-    double salary;
-    int day, startMonth;
+    int day;
     String kindCurrency;
     String selectedDay;
+    String accessTocken;
+    String authorization;
 
 
-    AlertDialog.Builder builder;
+    MaterialDialog.Builder loginDaolog;
 
 
     @Override
@@ -59,13 +63,10 @@ public class CompleteLoginfragment extends Fragment {
 
         etName = (EditText) v.findViewById(R.id.regester_et_name);
         etPassword = (EditText) v.findViewById(R.id.regester_et_password);
-
         etEmail = (EditText) v.findViewById(R.id.regester_et_email);
-        etSalary = (EditText) v.findViewById(R.id.regester_et_salary);
-        etStartMonth = (EditText) v.findViewById(R.id.complete_login_et_start_month);
         btnNext = (Button) v.findViewById(R.id.complete_login_btn_next);
 
-        builder = new AlertDialog.Builder(getActivity());
+        loginDaolog = new MaterialDialog.Builder(getContext());
 
 
         //------spinner for currency ----------
@@ -111,11 +112,7 @@ public class CompleteLoginfragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Regester();
-
-
-                Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
-                startActivity(mainIntent);
+                Regester();
 
 
             }
@@ -127,27 +124,25 @@ public class CompleteLoginfragment extends Fragment {
         name = etName.getText().toString();
         password = etPassword.getText().toString();
         email = etEmail.getText().toString();
-        startMonth = Integer.parseInt(etStartMonth.getText().toString());
-        salary = Double.parseDouble(etSalary.getText().toString());
-        //day && currency
 
 
-        if (name.equals("") || password.equals("") || email.equals("") && selectedDay.equals("") || kindCurrency.equals("")) {
-
-            builder.setTitle("Some thing wrong hppen ");
-            builder.setMessage("Please fill all filed ");
-            displayAlert("input_error");
+        if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
+            Toast.makeText(getContext(), "complete all data ", Toast.LENGTH_LONG).show();
 
 
         } else {
 
+            loginDaolog.title("Create Account ").content("Please wait untol regester ..").show();
             final JSONObject regsterObject = new JSONObject();
             try {
                 regsterObject.put("Email", email);
                 regsterObject.put("FullName", name);
                 regsterObject.put("ConcuranceyId", 1);
                 regsterObject.put("Password", password);
-                regsterObject.put("BegainDayOfWeek", 1);
+                regsterObject.put("BegainDayOfWeek", getDay(selectedDay));
+                regsterObject.put("BadgetSelected", false);
+                regsterObject.put(" BadgetValue", 0);
+                regsterObject.put("DailyAlert", false);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -164,26 +159,30 @@ public class CompleteLoginfragment extends Fragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
+                                accessTocken = response.getString("access_token");
+                                authorization = response.getString("token_type");
 
-                                if (message == "create account success") {
-                                    builder.setTitle(" server response ");
-                                    builder.setMessage(message);
-                                    displayAlert("sucessful");
+                                if (message.equals("create account success")) {
+                                    loginDaolog.build().dismiss();
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    //save id  in shared prefrence
+                                    SharedPreference shar=new SharedPreference();
+                                    shar.save(getActivity(),accessTocken,authorization);
+
+                                    Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
+                                    startActivity(mainIntent);
+                                    getActivity().finish();
 
 
                                 } else {
-                                    builder.setTitle(" server response ");
-                                    builder.setMessage(message);
-                                    displayAlert("Error");
-
+                                    loginDaolog.build().hide();
+                                    Toast.makeText(getContext(),"error message"+ message, Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                builder.setTitle(" Error happen  ");
-                                builder.setMessage(e.toString());
-                                displayAlert("error");
-
+                                loginDaolog.build().hide();
+                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                             }
 
 
@@ -207,33 +206,21 @@ public class CompleteLoginfragment extends Fragment {
     }
 
 
-    private void displayAlert(final String code) {
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (code.equals("sucessful")) {
-
-                    Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
-                    startActivity(mainIntent);
-                    getActivity().finish();
-
-                }
-
-                if (code.equals("input_error")) {
-
-                    etPassword.setText("");
-                }
-
-
-            //    dialog.dismiss();
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
+    private int getDay(String day) {
+        if (day.equals("Saturday")) {
+            return 1;
+        } else if (day.equals("Sunday")) {
+            return 2;
+        } else if (day.equals("Monday")) {
+            return 3;
+        } else if (day.equals("Tuesday")) {
+            return 4;
+        } else if (day.equals("Wednesday")) {
+            return 5;
+        } else if (day.equals("Thurthday")) {
+            return 6;
+        } else
+            return 7;
     }
-
 
 }

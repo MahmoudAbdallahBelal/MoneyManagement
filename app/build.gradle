@@ -41,6 +41,8 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+
     compile 'com.mcxiaoke.volley:library:1.0.19'
 
 

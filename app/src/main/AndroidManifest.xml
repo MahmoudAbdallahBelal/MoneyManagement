@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="mab.moneymanagement">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCOUNT_MANAGER"
+        tools:ignore="ProtectedPermissions" />
+
 
     <application
         android:allowBackup="true"
@@ -11,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.LoginActivity">
+        <activity android:name=".view.activity.Main2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.Main2Activity"
+            android:name=".view.activity.LoginActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activity.SplashActivity" />
@@ -32,7 +36,7 @@
         <activity android:name=".view.activity.NewTransferActivity" />
         <activity android:name=".view.activity.CashActivity" />
         <activity android:name=".view.activity.CreditActivity" />
-        <activity android:name=".view.activity.CompleteLoginActivity" />
+        <activity android:name=".view.activity.RegestrationActivity" />
         <activity android:name=".view.activity.ChooseActivity" />
         <activity android:name=".view.activity.PersonalAccountActivity" />
         <activity android:name=".view.activity.CalenderActivity" />

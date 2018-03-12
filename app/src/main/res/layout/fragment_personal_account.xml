@@ -6,69 +6,67 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    >
-
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/_et_name"
-        android:hint="Mohamed Ahmed"
-        android:padding="8dp"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:text="@string/tv_name" />
 
-    <EditText
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/personal_account_et_salary"
-        android:hint="25000"
-        android:padding="8dp"
-        android:layout_margin="10dp"
+        <EditText
+            android:id="@+id/personal_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="8dp"
 
-        />
+            />
 
-    <EditText
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/personal_account_et_start_month"
-        android:hint="27"
-        android:padding="8dp"
-        android:layout_margin="10dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:text="@string/tv_email" />
 
-        />
+        <EditText
+            android:id="@+id/personal_account_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="8dp"
 
+            />
 
+        <Spinner
+            android:id="@+id/personal_account_spinner_select_currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
 
+            />
 
-    <Spinner
-        android:id="@+id/personal_account_spinner_select_currency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        <Button
+            android:id="@+id/personal_account_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorPrimaryDark"
+            android:padding="8dp"
+            android:text="update"
+            android:textColor="@android:color/white"
+            android:textSize="23sp" />
 
-       />
-
-    <Button
-        android:id="@+id/personal_account_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="110dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="8dp"
-        android:text="update"
-        android:textColor="@android:color/white"
-        android:textSize="23sp" />
-
-</LinearLayout>
+    </LinearLayout>
 </FrameLayout>

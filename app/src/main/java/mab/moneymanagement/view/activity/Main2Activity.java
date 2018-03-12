@@ -3,6 +3,7 @@ package mab.moneymanagement.view.activity;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -18,16 +19,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
 
+
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.dialog.DialogAddItemFragment;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Spinner spinner;
-
     ViewPager mViewPager;
     SectionBageAdapter mSectionBageAdapter;
     TabLayout mTablLayout;
+    public static SharedPreferences mSharedPreferences;
+
+    String accesTocken;
+    String authorization;
+    public static Boolean isLoggin = false;
+    SharedPreference shar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,27 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        shar=new SharedPreference();
+
+        if (shar.getValue(getApplicationContext()).equals("null null")){
+            Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(logoutIntent);
+            finish();
+
+        }
+            //-------------------get data from intent -------------
+
+//            accesTocken = getIntent().getExtras().getString("accesTocken").toString();
+//            authorization = getIntent().getExtras().getString("authorize").toString();
+//            //--------save data shared prefrence
+//            shar.save(getApplicationContext(),accesTocken,authorization);
+//
+
+
+
+
+
 
         //-------------View Pager ------
         mViewPager = (ViewPager) findViewById(R.id.main_tab_pager);
@@ -71,6 +101,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -115,8 +146,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_my_account) {
+         //   Toast.makeText(getApplicationContext(), "111111111111"+accesTocken, Toast.LENGTH_LONG).show();
 
             Intent personalIntent = new Intent(getApplicationContext(), PersonalAccountActivity.class);
+//            personalIntent.putExtra("accesTocken", accesTocken);
+//            personalIntent.putExtra("authorize", authorization);
             startActivity(personalIntent);
 
         } else if (id == R.id.nav_category) {
@@ -153,9 +187,15 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             Intent choosedateIntent = new Intent(getApplicationContext(), ChooseActivity.class);
             startActivity(choosedateIntent);
 
+        } else if (id == R.id.nav_logout) {
 
+            //change status of loggin
+            shar.removeValue(getApplicationContext());
+
+            Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(logoutIntent);
+            finish();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

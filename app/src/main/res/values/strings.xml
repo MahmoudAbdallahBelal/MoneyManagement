@@ -27,6 +27,7 @@
         <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
+        <item>Wednesday</item>
         <item>Thurthday</item>
         <item>Friday</item>
     </string-array>
@@ -106,4 +107,7 @@
     <string name="item_detail_delete">Delete</string>
     <string name="all_item_category_title">All item</string>
     <string name="edit_category">Edit category</string>
+    <string name="nav_log_out">LogOut</string>
+    <string name="tv_name">Name</string>
+    <string name="tv_email">Email</string>
 </resources>

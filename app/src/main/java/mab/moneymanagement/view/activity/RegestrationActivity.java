@@ -2,13 +2,11 @@ package mab.moneymanagement.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.fragment.AccountFragment;
-import mab.moneymanagement.view.fragment.CompleteLoginfragment;
+import mab.moneymanagement.view.fragment.RegestrationFragment;
 
-public class CompleteLoginActivity extends AppCompatActivity {
+public class RegestrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +16,7 @@ public class CompleteLoginActivity extends AppCompatActivity {
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.completeLogin, new CompleteLoginfragment())
+                    .add(R.id.completeLogin, new RegestrationFragment())
                     .commit();
         }
 

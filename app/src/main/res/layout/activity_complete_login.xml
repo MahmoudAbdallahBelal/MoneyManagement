@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/completeLogin"
-    tools:context="mab.moneymanagement.view.activity.CompleteLoginActivity">
+    tools:context="mab.moneymanagement.view.activity.RegestrationActivity">
 
 
 
