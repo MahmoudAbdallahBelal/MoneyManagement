@@ -18,9 +18,11 @@
         <item>house</item>
     </string-array>
     <string-array name="currency">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>UK</item>
         <item>RSA</item>
-        <item>KWD</item>
-        <item>Dollar</item>
+        <item>L.E</item>
     </string-array>
     <string-array name="day">
         <item>Saturday</item>

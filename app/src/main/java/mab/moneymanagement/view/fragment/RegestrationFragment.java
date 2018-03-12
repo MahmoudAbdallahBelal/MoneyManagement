@@ -44,7 +44,6 @@ public class RegestrationFragment extends Fragment {
 
 
     String name, email, password;
-    int day;
     String kindCurrency;
     String selectedDay;
     String accessTocken;
@@ -137,9 +136,9 @@ public class RegestrationFragment extends Fragment {
             try {
                 regsterObject.put("Email", email);
                 regsterObject.put("FullName", name);
-                regsterObject.put("ConcuranceyId", 1);
+                regsterObject.put("ConcuranceyId", getCurrency(kindCurrency)+1);
                 regsterObject.put("Password", password);
-                regsterObject.put("BegainDayOfWeek", getDay(selectedDay));
+                regsterObject.put("BegainDayOfWeek", getDay(selectedDay)+1);
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);
@@ -208,19 +207,35 @@ public class RegestrationFragment extends Fragment {
 
     private int getDay(String day) {
         if (day.equals("Saturday")) {
-            return 1;
+            return 0;
         } else if (day.equals("Sunday")) {
-            return 2;
+            return 1;
         } else if (day.equals("Monday")) {
-            return 3;
+            return 2;
         } else if (day.equals("Tuesday")) {
-            return 4;
+            return 3;
         } else if (day.equals("Wednesday")) {
-            return 5;
+            return 4;
         } else if (day.equals("Thurthday")) {
-            return 6;
+            return 5;
         } else
-            return 7;
+            return 6;
     }
+    private int getCurrency(String cur) {
+
+        if (cur.equals("USD")) {
+            return 0;
+        } else if (cur.equals("EUR")) {
+            return 1;
+        } else if (cur.equals("UK")) {
+            return 2;
+        } else if (cur.equals("RSA")) {
+            return 3;
+        } else
+            return 4;
+
+
+    }
+
 
 }

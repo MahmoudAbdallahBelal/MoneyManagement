@@ -106,7 +106,7 @@ public class PersonalAccountFragment extends Fragment {
 
         final JSONObject data = new JSONObject();
         try {
-        //    data.put("Content-Type", "application/json");
+            //    data.put("Content-Type", "application/json");
             data.put("Authorization", shar.getValue(getActivity()));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class PersonalAccountFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url,data,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, data,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -127,7 +127,9 @@ public class PersonalAccountFragment extends Fragment {
                             String message = response.getString("RequstDetails");
                             et_name.setText(response.getString("FullName"));
                             et_email.setText(response.getString("Email"));
-                            Toast.makeText(getContext(), "mmmmm"+message, Toast.LENGTH_LONG).show();
+                            currncySpinner.setSelection(getCurrency("L.E"));
+
+                            Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -221,6 +223,22 @@ public class PersonalAccountFragment extends Fragment {
             MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }
+
+    }
+
+    private int getCurrency(String cur) {
+
+        if (cur.equals("USD")) {
+            return 0;
+        } else if (cur.equals("EUR")) {
+            return 1;
+        } else if (cur.equals("UK")) {
+            return 2;
+        } else if (cur.equals("RSA")) {
+            return 3;
+        } else
+            return 4;
+
 
     }
 }
