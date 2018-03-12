@@ -39,13 +39,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class PersonalAccountFragment extends Fragment {
 
-    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo ";
+    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo";
     String update_user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo";
 
     User user;
-    SharedPreferences mSharedPreferences;
-    String accesTocken;
-    String authntification;
     EditText et_name;
     EditText et_email;
     Spinner currncySpinner;
@@ -95,8 +92,9 @@ public class PersonalAccountFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "555" + shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
+                // Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
                 //makeUpdate();
+                getUserData();
             }
         });
 
@@ -106,31 +104,30 @@ public class PersonalAccountFragment extends Fragment {
 
     private void getUserData() {
 
-        final JSONObject loginObject = new JSONObject();
+        final JSONObject data = new JSONObject();
         try {
-            // loginObject.put("Content-Type","application/json");
-//            "access_token": ",
-//                    "token_type": "bearer",
-            //   loginObject.put("token_type", "bearer");
-
-            loginObject.put("Authorization", shar.getValue(getActivity()));
+        //    data.put("Content-Type", "application/json");
+            data.put("Authorization", shar.getValue(getActivity()));
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
         }
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, loginObject,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url,data,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            et_name.setText(response.getString("Email"));
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            et_name.setText(response.getString("FullName"));
+                            et_email.setText(response.getString("Email"));
+                            Toast.makeText(getContext(), "mmmmm"+message, Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

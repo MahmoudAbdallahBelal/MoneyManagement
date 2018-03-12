@@ -27,6 +27,7 @@ public class SharedPreference {
     }
 
     public void save(Context context, String acess,String auth) {
+
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
