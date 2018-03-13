@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import mab.moneymanagement.R;
@@ -30,12 +31,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     ViewPager mViewPager;
     SectionBageAdapter mSectionBageAdapter;
     TabLayout mTablLayout;
-    public static SharedPreferences mSharedPreferences;
-
-    String accesTocken;
-    String authorization;
     public static Boolean isLoggin = false;
     SharedPreference shar;
+
 
 
     @Override
@@ -45,26 +43,13 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        shar=new SharedPreference();
-
-        if (shar.getValue(getApplicationContext()).equals("null null")){
+        shar = new SharedPreference();
+        String tt=shar.getValue(getApplicationContext());
+        if (tt.equals("null null")) {
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
             finish();
-
         }
-            //-------------------get data from intent -------------
-
-//            accesTocken = getIntent().getExtras().getString("accesTocken").toString();
-//            authorization = getIntent().getExtras().getString("authorize").toString();
-//            //--------save data shared prefrence
-//            shar.save(getApplicationContext(),accesTocken,authorization);
-//
-
-
-
-
-
 
         //-------------View Pager ------
         mViewPager = (ViewPager) findViewById(R.id.main_tab_pager);
@@ -146,11 +131,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_my_account) {
-         //   Toast.makeText(getApplicationContext(), "111111111111"+accesTocken, Toast.LENGTH_LONG).show();
+            //   Toast.makeText(getApplicationContext(), "111111111111"+accesTocken, Toast.LENGTH_LONG).show();
 
             Intent personalIntent = new Intent(getApplicationContext(), PersonalAccountActivity.class);
-//            personalIntent.putExtra("accesTocken", accesTocken);
-//            personalIntent.putExtra("authorize", authorization);
             startActivity(personalIntent);
 
         } else if (id == R.id.nav_category) {
@@ -191,6 +174,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             //change status of loggin
             shar.removeValue(getApplicationContext());
+             shar.clearSharedPreference(getApplicationContext());
+            Toast.makeText(getApplicationContext(),shar.getValue(getApplicationContext()),Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);

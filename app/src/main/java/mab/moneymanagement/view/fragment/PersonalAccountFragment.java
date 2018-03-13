@@ -39,7 +39,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class PersonalAccountFragment extends Fragment {
 
-    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo";
+    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo ";
     String update_user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo";
 
     User user;
@@ -92,7 +92,7 @@ public class PersonalAccountFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
+                 Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
                 //makeUpdate();
                 getUserData();
             }
@@ -143,6 +143,7 @@ public class PersonalAccountFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -160,12 +161,12 @@ public class PersonalAccountFragment extends Fragment {
         String email = et_email.getText().toString();
         String name = et_name.getText().toString();
 
-        if (email.equals("") || name.equals("") || currncySpinner.equals("")) {
+        if (email.equals("") || name.equals("") || kindCurrency.equals("")) {
             loginDaolog.build().dismiss();
             Toast.makeText(getActivity(), "Please Complete data ... ", Toast.LENGTH_LONG).show();
 
 
-        } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) && currncySpinner.equals(user.getCurrency())) {
+        } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) && kindCurrency.equals(user.getCurrency())) {
             loginDaolog.build().dismiss();
             Toast.makeText(getActivity(), "No data changes ", Toast.LENGTH_LONG).show();
 
@@ -175,7 +176,7 @@ public class PersonalAccountFragment extends Fragment {
             try {
                 regsterObject.put("Email", email);
                 regsterObject.put("FullName", name);
-                regsterObject.put("ConcuranceyId", 1);
+                regsterObject.put("ConcuranceyId", getCurrency(kindCurrency)+1);
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);

@@ -136,9 +136,9 @@ public class RegestrationFragment extends Fragment {
             try {
                 regsterObject.put("Email", email);
                 regsterObject.put("FullName", name);
-                regsterObject.put("ConcuranceyId", getCurrency(kindCurrency)+1);
+                regsterObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
                 regsterObject.put("Password", password);
-                regsterObject.put("BegainDayOfWeek", getDay(selectedDay)+1);
+                regsterObject.put("BegainDayOfWeek", getDay(selectedDay) + 1);
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);
@@ -165,8 +165,8 @@ public class RegestrationFragment extends Fragment {
                                     loginDaolog.build().dismiss();
                                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                     //save id  in shared prefrence
-                                    SharedPreference shar=new SharedPreference();
-                                    shar.save(getActivity(),accessTocken,authorization);
+                                    SharedPreference shar = new SharedPreference();
+                                    shar.save(getActivity(), accessTocken, authorization);
 
                                     Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
                                     startActivity(mainIntent);
@@ -175,7 +175,7 @@ public class RegestrationFragment extends Fragment {
 
                                 } else {
                                     loginDaolog.build().hide();
-                                    Toast.makeText(getContext(),"error message"+ message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "error message" + message, Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (JSONException e) {
@@ -221,6 +221,7 @@ public class RegestrationFragment extends Fragment {
         } else
             return 6;
     }
+
     private int getCurrency(String cur) {
 
         if (cur.equals("USD")) {
