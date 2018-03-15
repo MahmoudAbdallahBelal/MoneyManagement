@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.model.User;
@@ -37,10 +38,13 @@ import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 import static android.content.Context.MODE_PRIVATE;
 
 
+
 public class PersonalAccountFragment extends Fragment {
 
-    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo ";
-    String update_user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo";
+
+    URL url=new URL();
+    String user_info_url = URL.PATH+URL.USER_INFO;
+    String update_user_info_url =URL.PATH+URL.UPDATE_USER_INFO;
 
     User user;
     EditText et_name;
@@ -78,6 +82,8 @@ public class PersonalAccountFragment extends Fragment {
             }
 
             @Override
+
+
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
@@ -92,9 +98,9 @@ public class PersonalAccountFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
-                //makeUpdate();
-                getUserData();
+                // Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
+                makeUpdate();
+                // getUserData();
             }
         });
 
@@ -106,8 +112,9 @@ public class PersonalAccountFragment extends Fragment {
 
         final JSONObject data = new JSONObject();
         try {
-            //    data.put("Content-Type", "application/json");
-            data.put("Authorization", shar.getValue(getActivity()));
+            String v = "bearer jYfZKvuTA7ccsWsirAV9Hh7OLUWRW9UkThNrZ0SDVpo9iunNIx1Ec-1DZ_-cLkVrns7CD6tkenVKryL1ws3hrygNo5EiOlQV0W0V0ya8m8-ofQb7n0q0JDo3ljKSREFGLJJUXDaJSbFbQmSJCjEGLk-EtYJMIiErov-wwo2okyG6ytvOdiRoViiCpn-Hfp4NrMN9b0IOJafMeFWKQgBsuRElAI8R24BRY4rLu_oL0dEVm3KuQ1JjtxWD6YOQ_NA33gxp4Gx2bzgqT782hzxxQKlX-de3rMhna8BIRN7Co30SJqrc7ikyGyWnUARB8spCRjCbN6b4TV5s2FdkeahQwr7Sfmh75B5sjzZP26werzLq5sd3fF9bA3zd7dlZdLPFBtpQ1zz5AKdRw3DBCBFrwDkpdPMY4A9-7pR2gIODOMRxtqKaJb6OPXM2iI04Pe_YNyIWllP5xixBMtEH67Uz2g_idXyqrhnG8BjDcRRdkCU";
+            data.put("Content-Type", "application/json");
+            data.put("Authorization", shar.getValue(getContext()));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
@@ -125,9 +132,9 @@ public class PersonalAccountFragment extends Fragment {
                         try {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            et_name.setText(response.getString("FullName"));
-                            et_email.setText(response.getString("Email"));
-                            currncySpinner.setSelection(getCurrency("L.E"));
+//                            et_name.setText(response.getString("FullName"));
+//                            et_email.setText(response.getString("Email"));
+//                            currncySpinner.setSelection(getCurrency("L.E"));
 
                             Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
 
@@ -172,15 +179,15 @@ public class PersonalAccountFragment extends Fragment {
 
         } else {
 
-            final JSONObject regsterObject = new JSONObject();
+            final JSONObject updateObject = new JSONObject();
             try {
-                regsterObject.put("Email", email);
-                regsterObject.put("FullName", name);
-                regsterObject.put("ConcuranceyId", getCurrency(kindCurrency)+1);
-                regsterObject.put("BadgetSelected", false);
-                regsterObject.put(" BadgetValue", 0);
-                regsterObject.put("DailyAlert", false);
-                regsterObject.put("Authorization", "bearer");
+                updateObject.put("Email", email);
+                updateObject.put("FullName", name);
+                updateObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
+                updateObject.put("BadgetSelected", false);
+                updateObject.put(" BadgetValue", 0);
+                updateObject.put("DailyAlert", false);
+                updateObject.put("Authorization", "bearer");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -189,7 +196,7 @@ public class PersonalAccountFragment extends Fragment {
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, regsterObject,
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -200,13 +207,17 @@ public class PersonalAccountFragment extends Fragment {
 
 
                                 loginDaolog.build().dismiss();
-                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                loginDaolog.autoDismiss(true);
+                                Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
 
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 loginDaolog.build().dismiss();
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                loginDaolog.build().hide();
+                                Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                loginDaolog.autoDismiss(true);
+
                             }
 
 
@@ -216,11 +227,17 @@ public class PersonalAccountFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
+                            loginDaolog.build().hide();
+
+                            Toast.makeText(getContext(), "volley" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            loginDaolog.autoDismiss(true);
+
 
                         }
                     });
 
             // Add JsonObjectRequest to the RequestQueue
+            jsonObjectRequest.setShouldCache(false);
             MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }

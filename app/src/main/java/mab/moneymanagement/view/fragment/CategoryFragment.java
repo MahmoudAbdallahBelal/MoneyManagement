@@ -11,15 +11,33 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
+import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.AllItemCategory;
 import mab.moneymanagement.view.activity.DetailItemActivity;
+import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
 import mab.moneymanagement.view.model.Category;
 import mab.moneymanagement.view.model.Item;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class CategoryFragment extends Fragment {
 
@@ -31,6 +49,13 @@ public class CategoryFragment extends Fragment {
     ArrayList<Category> expenseData = new ArrayList<>();
     ArrayList<Category> incomeData = new ArrayList<>();
 
+    URL url = new URL();
+
+    String incomeCategoryUrl = url.PATH + url.CATEGORY_INCOME;
+    MaterialDialog.Builder loginDaolog;
+    SharedPreference shar;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -40,10 +65,16 @@ public class CategoryFragment extends Fragment {
         addIncome = (ImageView) v.findViewById(R.id.add_income_image);
         addExpense = (ImageView) v.findViewById(R.id.addd_expense_image);
 
+        loginDaolog = new MaterialDialog.Builder(getContext());
+        shar = new SharedPreference();
+
+        getAllCategory();
+
         addIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogAddIncome();
+              //  dialogAddIncome();
+                getAllCategory();
 
             }
         });
@@ -171,6 +202,92 @@ public class CategoryFragment extends Fragment {
 
 
         builder.show();
+    }
+
+
+    private void getAllCategory() {
+
+        final JSONObject loadObject = new JSONObject();
+        try {
+            loadObject.put("Authorization", shar.getValue(getContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString(Integer.parseInt("RequstDetails"));
+
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loginDaolog.build().dismiss();
+
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG);
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG);
+
+                    }
+                });
+
+
+//        // Initialize a new JsonObjectRequest instance
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//
+//                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+//                            String message = response.getString("RequstDetails");
+//
+//                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                            loginDaolog.build().dismiss();
+//
+//                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG);
+//
+//                        }
+//
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // Do something when error occurred
+//                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG);
+//
+//                    }
+//                });
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonArrayRequest);
+
     }
 
 

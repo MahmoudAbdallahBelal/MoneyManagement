@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogBudgetFragment;
 import mab.moneymanagement.view.dialog.DialogLanguageFragment;
@@ -42,10 +43,12 @@ public class SettingActivity extends AppCompatActivity {
     SharedPreference shar;
     TextView delete;
 
+    URL url=new URL();
 
-    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo";
-    String update_user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo";
-    String delete_url = "http://gasem1234-001-site1.dtempurl.com/api/DeleteAllData";
+
+    String user_info_url =url.PATH+url.USER_INFO;
+    String update_user_info_url =URL.PATH+URL.UPDATE_USER_INFO;
+    String delete_url = url.PATH+url.DELETE_ALL_DATA;
 
 
     @Override

@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.RegestrationActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
@@ -37,7 +38,9 @@ public class LoginFragment extends Fragment {
     TextView tvRegester;
     String email;
     String password;
-    String login_url = "http://gasem1234-001-site1.dtempurl.com/api/Login";
+    URL url = new URL();
+
+    String login_url = URL.PATH + url.LOGIN;
 
     MaterialDialog.Builder loginDaolog;
 

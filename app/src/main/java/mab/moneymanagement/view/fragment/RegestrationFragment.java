@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
@@ -40,9 +41,9 @@ public class RegestrationFragment extends Fragment {
     Button btnNext;
     Spinner currncySpinner;
     Spinner daySpinner;
-    String reg_url = "http://gasem1234-001-site1.dtempurl.com/api/Register";
+    URL url = new URL();
 
-
+    String reg_url = url.PATH + url.REGISTER;
     String name, email, password;
     String kindCurrency;
     String selectedDay;
