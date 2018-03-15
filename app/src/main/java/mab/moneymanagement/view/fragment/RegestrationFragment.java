@@ -207,17 +207,17 @@ public class RegestrationFragment extends Fragment {
 
 
     private int getDay(String day) {
-        if (day.equals("Saturday")) {
+        if (day.equals("Sunday")) {
             return 0;
-        } else if (day.equals("Sunday")) {
-            return 1;
         } else if (day.equals("Monday")) {
-            return 2;
+            return 1;
         } else if (day.equals("Tuesday")) {
-            return 3;
+            return 2;
         } else if (day.equals("Wednesday")) {
-            return 4;
+            return 3;
         } else if (day.equals("Thurthday")) {
+            return 4;
+        } else if (day.equals("Friday")) {
             return 5;
         } else
             return 6;
