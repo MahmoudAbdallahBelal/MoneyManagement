@@ -112,4 +112,6 @@
     <string name="nav_log_out">LogOut</string>
     <string name="tv_name">Name</string>
     <string name="tv_email">Email</string>
+    <string name="forget_Password">Reset new password</string>
+    <string name="forget_password_reset">Reset</string>
 </resources>

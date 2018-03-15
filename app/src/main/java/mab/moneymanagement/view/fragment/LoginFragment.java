@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
+import mab.moneymanagement.view.activity.ForgetPasswordActivity;
 import mab.moneymanagement.view.activity.RegestrationActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
@@ -36,6 +37,7 @@ public class LoginFragment extends Fragment {
     EditText etPassword;
     Button btnLogin;
     TextView tvRegester;
+    TextView restePassword;
     String email;
     String password;
     URL url = new URL();
@@ -55,6 +57,7 @@ public class LoginFragment extends Fragment {
         etPassword = (EditText) v.findViewById(R.id.login_et_password);
         btnLogin = (Button) v.findViewById(R.id.login_btn);
         tvRegester = (TextView) v.findViewById(R.id.login_tv_crate_account);
+        restePassword = (TextView) v.findViewById(R.id.login_tv_forget_password);
 
         loginDaolog = new MaterialDialog.Builder(getContext());
 
@@ -77,6 +80,15 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        restePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent completeIntent = new Intent(getActivity(), ForgetPasswordActivity.class);
+                startActivity(completeIntent);
+
+            }
+        });
 
         return v;
     }

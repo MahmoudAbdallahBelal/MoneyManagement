@@ -72,6 +72,15 @@
             android:text="Create new Account"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
+        <TextView
+            android:id="@+id/login_tv_forget_password"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget Password"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 </LinearLayout>

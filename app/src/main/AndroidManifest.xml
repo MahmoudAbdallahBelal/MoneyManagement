@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="mab.moneymanagement">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCOUNT_MANAGER"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.ACCOUNT_MANAGER"
         tools:ignore="ProtectedPermissions" />
-
 
     <application
         android:allowBackup="true"
@@ -42,8 +42,8 @@
         <activity android:name=".view.activity.CalenderActivity" />
         <activity android:name=".view.activity.DetailItemActivity" />
         <activity android:name=".view.activity.CategoryDetailActivity" />
-        <activity android:name=".view.activity.AllItemCategory"></activity>
+        <activity android:name=".view.activity.AllItemCategory" />
+        <activity android:name=".view.activity.ForgetPasswordActivity"></activity>
     </application>
-
 
 </manifest>

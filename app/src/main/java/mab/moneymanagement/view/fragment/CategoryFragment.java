@@ -73,7 +73,7 @@ public class CategoryFragment extends Fragment {
         addIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  dialogAddIncome();
+                //  dialogAddIncome();
                 getAllCategory();
 
             }
@@ -218,24 +218,14 @@ public class CategoryFragment extends Fragment {
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        try {
 
-                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                            String message = response.getString(Integer.parseInt("RequstDetails"));
-
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            loginDaolog.build().dismiss();
-
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG);
+                        //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                        for (int i = 0; i < response.length(); i++) {
 
                         }
 
