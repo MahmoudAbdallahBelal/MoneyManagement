@@ -21,8 +21,25 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
+import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogAddItemFragment;
+import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +50,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     TabLayout mTablLayout;
     public static Boolean isLoggin = false;
     SharedPreference shar;
+    User user;
 
+
+    URL url = new URL();
+    String user_info_url = URL.PATH + URL.USER_INFO;
 
 
     @Override
@@ -44,7 +65,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         setSupportActionBar(toolbar);
 
         shar = new SharedPreference();
-        String tt=shar.getValue(getApplicationContext());
+        user=new User();
+        String tt = shar.getValue(getApplicationContext());
         if (tt.equals("null null")) {
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
@@ -66,8 +88,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             @Override
             public void onClick(View view) {
                 //  showAddItemDialog();
-
-
                 FragmentManager fm = getFragmentManager();
                 DialogAddItemFragment dialogFragment = new DialogAddItemFragment();
                 dialogFragment.show(fm, "");
@@ -174,8 +194,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             //change status of loggin
             shar.removeValue(getApplicationContext());
-             shar.clearSharedPreference(getApplicationContext());
-            Toast.makeText(getApplicationContext(),shar.getValue(getApplicationContext()),Toast.LENGTH_LONG).show();
+            shar.clearSharedPreference(getApplicationContext());
+            Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
@@ -187,5 +207,79 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUserData();
+    }
+
+    private void getUserData() {
+
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+
+                        try {
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+
+                            ///**----put user data in object
+                            user.setFullName(response.getString("FullName"));
+                            user.setEmail(response.getString("Email"));
+                            user.setCurrency(response.getInt("ConcuranceyId") - 1);
+                            user.setDailyAlert(response.getBoolean("DailyAlert"));
+                            user.setBadgetSelected(response.getBoolean("BadgetSelected"));
+                            user.setBadgetValue(response.getInt("BadgetValue"));
+                            user.setBegainDayOfWeek(response.getInt("BegainDay"));
+
+
+
+                            //  Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            //  Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // if error time out happen  call method again to get all data for user
+                        if (error.toString().equals("")) {
+
+                        }
+                        // Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("Authorization", shar.getValue(getApplicationContext()));
+                return params;
+            }
+        };
+
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+
+    }
 
 }

@@ -10,16 +10,16 @@ public class User implements Serializable {
     String Email;
     String Password;
     String FullName;
-    String Currency;
+    int Currency;
     int BegainDayOfWeek;
     Boolean BadgetSelected;
     boolean DailyAlert;
-    double BadgetValue;
+    int BadgetValue;
 
     public User() {
     }
 
-    public User(String email, String password, String fullName, String currency, int begainDayOfWeek, Boolean badgetSelected, boolean dailyAlert, double badgetValue) {
+    public User(String email, String password, String fullName, int currency, int begainDayOfWeek, Boolean badgetSelected, boolean dailyAlert,int badgetValue) {
         Email = email;
         Password = password;
         FullName = fullName;
@@ -54,11 +54,11 @@ public class User implements Serializable {
         FullName = fullName;
     }
 
-    public String getCurrency() {
+    public int getCurrency() {
         return Currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(int currency) {
         Currency = currency;
     }
 
@@ -87,11 +87,11 @@ public class User implements Serializable {
     }
 
 
-    public double getBadgetValue() {
+    public int getBadgetValue() {
         return BadgetValue;
     }
 
-    public void setBadgetValue(double badgetValue) {
+    public void setBadgetValue(int badgetValue) {
         BadgetValue = badgetValue;
     }
 }

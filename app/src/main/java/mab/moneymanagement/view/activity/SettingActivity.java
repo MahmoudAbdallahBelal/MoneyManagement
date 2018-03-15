@@ -12,6 +12,7 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +22,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
@@ -195,23 +199,19 @@ public class SettingActivity extends AppCompatActivity {
 
 
     private void makeUpdate() {
-       String value = ""; //et_Value.getText().toString();
-        int v = Integer.parseInt(value);
-        if (value.equals("")) {
-            Toast.makeText(getApplicationContext(), "Sorrry no value", Toast.LENGTH_SHORT).show();
 
 
-        } else {
 
-            final JSONObject regsterObject = new JSONObject();
+
+
+            final JSONObject updateObject = new JSONObject();
             try {
-                regsterObject.put("Email", user.getEmail());
-                regsterObject.put("FullName", user.getFullName());
-                regsterObject.put("ConcuranceyId", user.getCurrency());
-                regsterObject.put("BadgetSelected", true);
-                regsterObject.put(" BadgetValue", v);
-                regsterObject.put("DailyAlert", false);
-                regsterObject.put("Authorization", "bearer");
+                updateObject.put("Email", user.getEmail());
+                updateObject.put("FullName", user.getFullName());
+                updateObject.put("ConcuranceyId", user.getCurrency());
+                updateObject.put("BadgetSelected", user.getBadgetSelected());
+                updateObject.put("BadgetValue", user.getBadgetValue());
+                updateObject.put("DailyAlert", user.isDailyAlert());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -220,7 +220,7 @@ public class SettingActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
             // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, regsterObject,
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -228,11 +228,10 @@ public class SettingActivity extends AppCompatActivity {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
                             }
 
 
@@ -242,62 +241,25 @@ public class SettingActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
+                            Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+
 
                         }
-                    });
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", shar.getValue(getApplicationContext()));
+                    return params;
+                }
+            };
 
             // Add JsonObjectRequest to the RequestQueue
             MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
         }
 
-    }
 
-    private void getUserData() {
 
-        final JSONObject data = new JSONObject();
-        try {
-            //    data.put("Content-Type", "application/json");
-            data.put("Authorization", shar.getValue(getApplicationContext()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-
-        }
-
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, data,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                            String message = response.getString("RequstDetails");
-
-                            Toast.makeText(getApplicationContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
-
-                    }
-                });
-
-        // Add JsonObjectRequest to the RequestQueue
-        MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
-
-    }
 
 }
