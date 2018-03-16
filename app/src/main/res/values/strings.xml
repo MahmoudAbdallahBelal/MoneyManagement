@@ -119,4 +119,7 @@
     <string name="login_hint_enter_password_new">Enter new password</string>
     <string name="done">Done</string>
     <string name="reset_new_password">Please enter code has send to email and new password</string>
+    <string name="change_password">Change pasword</string>
+    <string name="old_password">Enter old Password</string>
+    <string name="new_password">Enter new password</string>
 </resources>

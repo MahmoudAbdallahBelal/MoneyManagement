@@ -52,11 +52,6 @@ public class ForgetPasswordFragment extends Fragment {
     }
 
     void showDialog() {
-//
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        builder.setTitle(getString(R.string.forget_password_reset));
-//        builder.setMessage(getString(R.string.reset_new_password));
-//
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View login_layout = inflater.inflate(R.layout.verify_password, null);

@@ -17,7 +17,7 @@ public class URL {
    public static String UPDATE_USER_INFO="/api/UpdateUserInfo";
    public static String DELETE_ALL_DATA="/api/DeleteAllData";
    public static String CATEGORY_INCOME="/api/CategoriesIncome";
-
+   public static String PASSWORD_PROTECTION="/api/ResetPassword";
 
 
 

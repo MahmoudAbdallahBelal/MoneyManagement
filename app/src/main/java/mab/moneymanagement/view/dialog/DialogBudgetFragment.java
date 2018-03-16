@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,7 +20,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
@@ -36,10 +41,8 @@ public class DialogBudgetFragment extends DialogFragment {
     EditText et_Value;
     User user;
     SharedPreference shar;
+    String update_user_info_url = URL.PATH+URL.UPDATE_USER_INFO;
 
-
-    String user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/GetUserInfo";
-    String update_user_info_url = "http://gasem1234-001-site1.dtempurl.com/api/UpdateUserInfo";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,32 +78,28 @@ public class DialogBudgetFragment extends DialogFragment {
     }
 
     private void makeUpdate() {
-        String value = et_Value.getText().toString();
-        int v = Integer.parseInt(value);
-        if (value.equals("")) {
-            Toast.makeText(getActivity(), "Sorrry no value", Toast.LENGTH_SHORT).show();
 
+        if (et_Value.getText().toString().equals("")) {
 
         } else {
 
-            final JSONObject regsterObject = new JSONObject();
+            String v = et_Value.getText().toString();
+            int tt = Integer.parseInt(v);
+            final JSONObject updateObject = new JSONObject();
             try {
-                regsterObject.put("Email", user.getEmail());
-                regsterObject.put("FullName", user.getFullName());
-                regsterObject.put("ConcuranceyId", user.getCurrency());
-                regsterObject.put("BadgetSelected", true);
-                regsterObject.put(" BadgetValue", v);
-                regsterObject.put("DailyAlert", false);
-                regsterObject.put("Authorization", "bearer");
+                updateObject.put("Email", user.getEmail());
+                updateObject.put("FullName", user.getFullName());
+                updateObject.put("ConcuranceyId", user.getCurrency());
+                updateObject.put("BadgetSelected", true);
+                updateObject.put("BadgetValue", tt);
+                updateObject.put("DailyAlert", user.isDailyAlert());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            // Initialize a new RequestQueue instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, regsterObject,
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -108,11 +107,10 @@ public class DialogBudgetFragment extends DialogFragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+
                             }
 
 
@@ -122,62 +120,23 @@ public class DialogBudgetFragment extends DialogFragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
+                            Toast.makeText(getActivity(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+
 
                         }
-                    });
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", shar.getValue(getActivity()));
+                    return params;
+                }
+            };
 
             // Add JsonObjectRequest to the RequestQueue
             MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }
-
-    }
-
-    private void getUserData() {
-
-        final JSONObject data = new JSONObject();
-        try {
-            //    data.put("Content-Type", "application/json");
-            data.put("Authorization", shar.getValue(getActivity()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-
-        }
-
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-        // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, data,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                            String message = response.getString("RequstDetails");
-
-                            Toast.makeText(getActivity(), "mmmmm" + message, Toast.LENGTH_LONG).show();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
-
-                    }
-                });
-
-        // Add JsonObjectRequest to the RequestQueue
-        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
-
     }
 
 

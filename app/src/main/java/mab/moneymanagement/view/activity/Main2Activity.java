@@ -183,6 +183,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         } else if (id == R.id.nav_setting) {
             Intent settingIntent = new Intent(getApplicationContext(), SettingActivity.class);
+            settingIntent.putExtra("user",user);
             startActivity(settingIntent);
 
 

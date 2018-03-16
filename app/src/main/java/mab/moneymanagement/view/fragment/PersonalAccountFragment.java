@@ -208,8 +208,6 @@ public class PersonalAccountFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            // Initialize a new RequestQueue instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             // Initialize a new JsonObjectRequest instance
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
@@ -283,4 +281,6 @@ public class PersonalAccountFragment extends Fragment {
 
 
     }
+
+
 }

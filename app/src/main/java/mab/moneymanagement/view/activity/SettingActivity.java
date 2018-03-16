@@ -7,8 +7,13 @@ import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,13 +51,16 @@ public class SettingActivity extends AppCompatActivity {
     User user;
     SharedPreference shar;
     TextView delete;
+    Spinner daySpinner;
+    TextView password;
 
-    URL url=new URL();
+    URL url = new URL();
 
+    String selectedDay;
+    String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
+    String delete_url = url.PATH + url.DELETE_ALL_DATA;
+    String password_url = url.PATH + url.PASSWORD_PROTECTION;
 
-    String user_info_url =url.PATH+url.USER_INFO;
-    String update_user_info_url =URL.PATH+URL.UPDATE_USER_INFO;
-    String delete_url = url.PATH+url.DELETE_ALL_DATA;
 
 
     @Override
@@ -66,21 +74,38 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         builder = new AlertDialog.Builder(this);
+
+
         shar = new SharedPreference();
+        if (user == null) {
+            user = (User) getIntent().getSerializableExtra("user");
+
+        }
 
 
         //------------------------------------budget
         tvBudget = findViewById(R.id.setting_check_tv_budget);
-        if (isBudget == 1) {
+
+        if (user == null) {
+            user = (User) getIntent().getSerializableExtra("user");
+        } else {
             tvBudget.setCheckMarkDrawable(R.drawable.checked);
+
         }
+
+
         tvBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                FragmentManager fm = getFragmentManager();
-                DialogBudgetFragment dialogFragment = new DialogBudgetFragment();
-                dialogFragment.show(fm, "");
+
+                if (user.getBadgetSelected() == false) {
+                    FragmentManager fm = getFragmentManager();
+                    DialogBudgetFragment dialogFragment = new DialogBudgetFragment();
+                    dialogFragment.show(fm, "");
+                } else {
+                    removeBudget();
+                }
 
             }
         });
@@ -94,20 +119,49 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (tv_DailyAlert.isChecked() == false) {
-
-                    createDialog();
-
-                } else {
-
+                if (user.isDailyAlert() == false) {
+                    setAlert();
 
                 }
 
 
             }
         });
+
+        //------spinner for day ----------
+        daySpinner = findViewById(R.id.setting_spinner_select_day);
+        ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.day, android.R.layout.simple_spinner_item);
+
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        daySpinner.setAdapter(dayAdapter);
+        daySpinner.setSelection(user.getBegainDayOfWeek());
+        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedDay = daySpinner.getItemAtPosition(position).toString();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //------------------password protection
+        password=(TextView)findViewById(R.id.setting_tv_password_protection);
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passwordProtection();
+            }
+        });
+
+
+
         //--------------------
-        delete=(TextView)findViewById(R.id.setting_delete_database);
+        delete = (TextView) findViewById(R.id.setting_delete_database);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,21 +175,11 @@ public class SettingActivity extends AppCompatActivity {
     private void deleteAllData() {
 
 
-        final JSONObject data = new JSONObject();
-        try {
-            //    data.put("Content-Type", "application/json");
-            data.put("Authorization", shar.getValue(getApplicationContext()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-
-        }
-
         // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, delete_url, data,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, delete_url, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -160,10 +204,17 @@ public class SettingActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
-                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getApplicationContext()));
+                return params;
+            }
+        };
 
         // Add JsonObjectRequest to the RequestQueue
-        MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+        MysingleTon.getInstance(this).addToRequestqueue(jsonObjectRequest);
 
 
     }
@@ -198,40 +249,102 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-    private void makeUpdate() {
+    private void removeBudget() {
+
+        final JSONObject updateObject = new JSONObject();
+        try {
+            updateObject.put("Email", user.getEmail());
+            updateObject.put("FullName", user.getFullName());
+            updateObject.put("ConcuranceyId", user.getCurrency());
+            updateObject.put("BadgetSelected", false);
+            updateObject.put("BadgetValue", 0);
+            updateObject.put("DailyAlert", user.isDailyAlert());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+        }
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            //load data on screen after change data
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            Toast.makeText(getApplicationContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
 
 
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
-            final JSONObject updateObject = new JSONObject();
+
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getApplicationContext()));
+                return params;
+            }
+        };
+        // Add JsonObjectRequest to the RequestQueue
+
+        MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+    private void setAlert() {
+
+        if (user == null) {
+
+            user = (User) getIntent().getSerializableExtra("user");
+            Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
+
+        } else {
+
+            JSONObject update = new JSONObject();
             try {
-                updateObject.put("Email", user.getEmail());
-                updateObject.put("FullName", user.getFullName());
-                updateObject.put("ConcuranceyId", user.getCurrency());
-                updateObject.put("BadgetSelected", user.getBadgetSelected());
-                updateObject.put("BadgetValue", user.getBadgetValue());
-                updateObject.put("DailyAlert", user.isDailyAlert());
+                update.put("Email", user.getEmail());
+                update.put("FullName", user.getFullName());
+                update.put("ConcuranceyId", user.getCurrency());
+                update.put("BadgetSelected", user.getBadgetSelected());
+                update.put("BadgetValue", user.getBadgetValue());
+                update.put("DailyAlert", true);
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
             }
-
-            // Initialize a new RequestQueue instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
             // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, update,
                     new Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject response) {
-                            try {
+                        public void onResponse(JSONObject jsonObject) {
 
-                                //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                                String message = response.getString("RequstDetails");
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+
+                            try {
+                                Toast.makeText(getApplicationContext(), jsonObject.getString("RequstDetails"), Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
                             }
 
 
@@ -255,11 +368,181 @@ public class SettingActivity extends AppCompatActivity {
             };
 
             // Add JsonObjectRequest to the RequestQueue
-            MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+            MysingleTon.getInstance(this).addToRequestqueue(jsonRequest);
 
+        }
+    }
+
+    private int getDay(String day) {
+        if (day.equals("Sunday")) {
+            return 0;
+        } else if (day.equals("Monday")) {
+            return 1;
+        } else if (day.equals("Tuesday")) {
+            return 2;
+        } else if (day.equals("Wednesday")) {
+            return 3;
+        } else if (day.equals("Thurthday")) {
+            return 4;
+        } else if (day.equals("Friday")) {
+            return 5;
+        } else
+            return 6;
+    }
+
+    private void updateDay() {
+
+
+        final JSONObject updateObject = new JSONObject();
+        try {
+            updateObject.put("Email", user.getEmail());
+            updateObject.put("FullName", user.getFullName());
+            updateObject.put("ConcuranceyId", user.getCurrency());
+            updateObject.put("BadgetSelected", user.getBadgetSelected());
+            updateObject.put("BadgetValue", user.getBadgetValue());
+            updateObject.put("DailyAlert", user.isDailyAlert());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
 
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+
+
+                            Toast.makeText(getApplicationContext(), "message" + message, Toast.LENGTH_LONG).show();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getApplicationContext()));
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+
+
+    }
+
+
+    void passwordProtection() {
+
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View login_layout = inflater.inflate(R.layout.create_new_password, null);
+
+        final EditText old = login_layout.findViewById(R.id.new_et_password_old);
+        final EditText newPassword = login_layout.findViewById(R.id.new_et_password_new);
+
+
+        builder.setView(login_layout);
+
+        //SET BUTTON
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Check Validation
+
+                if (newPassword.getText().toString().equals("") && old.getText().toString().equals("")) {
+
+                    dialog.dismiss();
+                } else {
+
+                    JSONObject update = new JSONObject();
+                    try {
+                        update.put("NewPassword", newPassword.getText().toString());
+                        update.put("OldPassword", old.getText().toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                    // Initialize a new JsonObjectRequest instance
+                    JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, password_url, update,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {
+
+                                    //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+
+                                    try {
+                                        Toast.makeText(getApplicationContext(), jsonObject.getString("RequstDetails"), Toast.LENGTH_LONG).show();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Do something when error occurred
+                                    Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+
+
+                                }
+                            }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("Authorization", shar.getValue(getApplicationContext()));
+                            return params;
+                        }
+                    };
+
+                    // Add JsonObjectRequest to the RequestQueue
+                    MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonRequest);
+
+
+                }
+
+            }
+
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+
+    }
 
 }
+
+
+

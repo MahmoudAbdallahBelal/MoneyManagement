@@ -24,33 +24,14 @@
         android:text="@string/setting_budget" />
 
 
-    <LinearLayout
+
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-
-        <TextView
-            android:id="@+id/setting_tv_first_day_of_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/setting_first_day_of_week"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"
-
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:hint="sunday"
-            android:padding="5dp"
-
-            />
-    </LinearLayout>
-
+        android:id="@+id/setting_spinner_select_day"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/setting_tv_password_protection"
