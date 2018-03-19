@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -29,7 +29,6 @@ import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
-import static mab.moneymanagement.view.activity.SettingActivity.isBudget;
 
 /**
  * Created by Gihan on 3/4/2018.
@@ -41,12 +40,12 @@ public class DialogBudgetFragment extends DialogFragment {
     EditText et_Value;
     User user;
     SharedPreference shar;
-    String update_user_info_url = URL.PATH+URL.UPDATE_USER_INFO;
-
+    String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
+    View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.budget, container, false);
+        v = inflater.inflate(R.layout.budget, container, false);
 
         shar = new SharedPreference();
 
@@ -54,16 +53,14 @@ public class DialogBudgetFragment extends DialogFragment {
         et_Value = v.findViewById(R.id.budget_et_value);
         Button ok = v.findViewById(R.id.budget_btn_ok);
         Button cancel = v.findViewById(R.id.budget_btn_cancel);
-
+        user = shar.getUser(getActivity());
 
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                isBudget=1;
-                dismiss();
-
+                makeUpdate();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -79,20 +76,26 @@ public class DialogBudgetFragment extends DialogFragment {
 
     private void makeUpdate() {
 
-        if (et_Value.getText().toString().equals("")) {
+        if (et_Value.getText().toString().equals("") || user == null) {
 
         } else {
+
 
             String v = et_Value.getText().toString();
             int tt = Integer.parseInt(v);
             final JSONObject updateObject = new JSONObject();
             try {
+
+
                 updateObject.put("Email", user.getEmail());
                 updateObject.put("FullName", user.getFullName());
-                updateObject.put("ConcuranceyId", user.getCurrency());
-                updateObject.put("BadgetSelected", true);
+                updateObject.put("ConcuranceyId", user.getCurrency() + 1);
+                //    updateObject.put("BadgetSelected", true);
                 updateObject.put("BadgetValue", tt);
                 updateObject.put("DailyAlert", user.isDailyAlert());
+                updateObject.put("BegainDay", user.getBegainDayOfWeek());
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -107,6 +110,14 @@ public class DialogBudgetFragment extends DialogFragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
+                                if (message.equals("Infromation Changed Successfuly")) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    shar.saveUser(getContext(), user);
+
+                                    dismiss();
+                                }
+
+                                // Toast.makeText(getContext().getApplicationContext(),"bu"+message,Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -120,7 +131,7 @@ public class DialogBudgetFragment extends DialogFragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
-                            Toast.makeText(getActivity(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }
@@ -134,7 +145,8 @@ public class DialogBudgetFragment extends DialogFragment {
             };
 
             // Add JsonObjectRequest to the RequestQueue
-            MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+            MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
         }
     }

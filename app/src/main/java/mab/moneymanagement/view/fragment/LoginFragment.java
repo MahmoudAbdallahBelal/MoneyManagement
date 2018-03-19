@@ -28,6 +28,7 @@ import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.ForgetPasswordActivity;
 import mab.moneymanagement.view.activity.RegestrationActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
+import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
@@ -40,9 +41,10 @@ public class LoginFragment extends Fragment {
     TextView restePassword;
     String email;
     String password;
+    SharedPreference cc = new SharedPreference();
     URL url = new URL();
 
-    String login_url = URL.PATH + url.LOGIN;
+    String login_url = URL.PATH + URL.LOGIN;
 
     MaterialDialog.Builder loginDaolog;
 
@@ -53,14 +55,14 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        etEmail = (EditText) v.findViewById(R.id.login_et_email);
-        etPassword = (EditText) v.findViewById(R.id.login_et_password);
-        btnLogin = (Button) v.findViewById(R.id.login_btn);
-        tvRegester = (TextView) v.findViewById(R.id.login_tv_crate_account);
-        restePassword = (TextView) v.findViewById(R.id.login_tv_forget_password);
+        etEmail = v.findViewById(R.id.login_et_email);
+        etPassword = v.findViewById(R.id.login_et_password);
+        btnLogin = v.findViewById(R.id.login_btn);
+        tvRegester = v.findViewById(R.id.login_tv_crate_account);
+        restePassword = v.findViewById(R.id.login_tv_forget_password);
+
 
         loginDaolog = new MaterialDialog.Builder(getContext());
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

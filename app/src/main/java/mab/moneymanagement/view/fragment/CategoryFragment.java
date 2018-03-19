@@ -1,5 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,7 +52,7 @@ public class CategoryFragment extends Fragment {
 
     URL url = new URL();
 
-    String incomeCategoryUrl = url.PATH + url.CATEGORY_INCOME;
+    String incomeCategoryUrl = URL.PATH + URL.CATEGORY_INCOME;
     MaterialDialog.Builder loginDaolog;
     SharedPreference shar;
 
@@ -62,8 +63,8 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_category, container, false);
 
-        addIncome = (ImageView) v.findViewById(R.id.add_income_image);
-        addExpense = (ImageView) v.findViewById(R.id.addd_expense_image);
+        addIncome = v.findViewById(R.id.add_income_image);
+        addExpense = v.findViewById(R.id.addd_expense_image);
 
         loginDaolog = new MaterialDialog.Builder(getContext());
         shar = new SharedPreference();
@@ -87,7 +88,7 @@ public class CategoryFragment extends Fragment {
         });
 
         //List Expense  -----------
-        mList = (GridView) v.findViewById(R.id.category_expense_list);
+        mList = v.findViewById(R.id.category_expense_list);
 
         expenseData.add(new Category("food", 2000.0, R.drawable.home));
         expenseData.add(new Category("food", 2000.0, R.drawable.home));
@@ -112,7 +113,7 @@ public class CategoryFragment extends Fragment {
         });
 
         //List Expense  ------------------------------------------------------------
-        expenceList = (GridView) v.findViewById(R.id.category_income_list);
+        expenceList = v.findViewById(R.id.category_income_list);
 
         incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
         incomeData.add(new Category("Cash", 4000.0, R.drawable.money));

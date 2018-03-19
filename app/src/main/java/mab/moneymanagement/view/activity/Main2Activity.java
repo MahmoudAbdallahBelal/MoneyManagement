@@ -61,29 +61,38 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         shar = new SharedPreference();
         user=new User();
+
+
+        //--------------------------------------check current user--------------
         String tt = shar.getValue(getApplicationContext());
+        // shar.saveUser(getApplicationContext(),getUserData());
+
         if (tt.equals("null null")) {
+            shar.removeValue(getApplicationContext());
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
             finish();
         }
 
+        //--------------------------------------------------------------------------------
+
+
         //-------------View Pager ------
-        mViewPager = (ViewPager) findViewById(R.id.main_tab_pager);
+        mViewPager = findViewById(R.id.main_tab_pager);
         mSectionBageAdapter = new SectionBageAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionBageAdapter);
 
-        mTablLayout = (TabLayout) findViewById(R.id.main_tabs);
+        mTablLayout = findViewById(R.id.main_tabs);
         mTablLayout.setupWithViewPager(mViewPager);
 
         //----------------------------
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,20 +106,20 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         });
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -151,7 +160,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_my_account) {
-            //   Toast.makeText(getApplicationContext(), "111111111111"+accesTocken, Toast.LENGTH_LONG).show();
 
             Intent personalIntent = new Intent(getApplicationContext(), PersonalAccountActivity.class);
             startActivity(personalIntent);
@@ -183,7 +191,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         } else if (id == R.id.nav_setting) {
             Intent settingIntent = new Intent(getApplicationContext(), SettingActivity.class);
-            settingIntent.putExtra("user",user);
             startActivity(settingIntent);
 
 
@@ -196,6 +203,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             //change status of loggin
             shar.removeValue(getApplicationContext());
             shar.clearSharedPreference(getApplicationContext());
+            shar.removeUser(getApplicationContext());
             Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -203,7 +211,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -212,15 +220,14 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onStart() {
         super.onStart();
-        getUserData();
+
+        user = getUserData();
+
     }
 
-    private void getUserData() {
+    private User getUserData() {
 
-
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
+        final User user1 = new User();
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, (String) null,
                 new Response.Listener<JSONObject>() {
@@ -232,23 +239,34 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            ///**----put user data in object
-                            user.setFullName(response.getString("FullName"));
-                            user.setEmail(response.getString("Email"));
-                            user.setCurrency(response.getInt("ConcuranceyId") - 1);
-                            user.setDailyAlert(response.getBoolean("DailyAlert"));
-                            user.setBadgetSelected(response.getBoolean("BadgetSelected"));
-                            user.setBadgetValue(response.getInt("BadgetValue"));
-                            user.setBegainDayOfWeek(response.getInt("BegainDay"));
+                            if (message.equals("Details User Returned")) {
+                                ///**----put user data in object
+                                user1.setEmail(response.getString("Email"));
+                                user1.setFullName(response.getString("FullName"));
+                                user1.setCurrency(response.getInt("ConcuranceyId") - 1);
+                                user1.setDailyAlert(response.getBoolean("DailyAlert"));
+                                user1.setBadgetSelected(response.getBoolean("BadgetSelected"));
+                                user1.setBadgetValue(response.getInt("BadgetValue"));
+                                user1.setBegainDayOfWeek(response.getInt("BegainDay"));
+
+                                shar.saveUser(getApplicationContext(), user1);
 
 
+                            } else {
 
-                            //  Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
+                                Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(logoutIntent);
+                                shar.removeValue(getApplicationContext());
+                                finish();
+
+                            }
+
+
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-
-                            //  Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -258,11 +276,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // if error time out happen  call method again to get all data for user
-                        if (error.toString().equals("")) {
 
-                        }
-                        // Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
 
@@ -281,6 +296,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
+        return user1;
     }
 
 }

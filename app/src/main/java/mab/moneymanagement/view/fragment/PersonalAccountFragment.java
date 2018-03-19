@@ -63,9 +63,9 @@ public class PersonalAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_personal_account, container, false);
-        et_name = (EditText) v.findViewById(R.id.personal_et_name);
-        et_email = (EditText) v.findViewById(R.id.personal_account_et_email);
-        update = (Button) v.findViewById(R.id.personal_account_update);
+        et_name = v.findViewById(R.id.personal_et_name);
+        et_email = v.findViewById(R.id.personal_account_et_email);
+        update = v.findViewById(R.id.personal_account_update);
         loginDaolog = new MaterialDialog.Builder(getContext());
 
 
@@ -204,6 +204,8 @@ public class PersonalAccountFragment extends Fragment {
                 updateObject.put("BadgetSelected", user.getBadgetSelected());
                 updateObject.put("BadgetValue", user.getBadgetValue());
                 updateObject.put("DailyAlert", user.isDailyAlert());
+                updateObject.put("BegainDay", user.getBegainDayOfWeek());
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -219,8 +221,13 @@ public class PersonalAccountFragment extends Fragment {
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
 
-                                loginDaolog.build().dismiss();
-                                loginDaolog.build().hide();
+                                if (message.equals("Infromation Changed Successfuly")) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    shar.saveUser(getContext(), user);
+
+                                    loginDaolog.build().dismiss();
+                                    loginDaolog.build().hide();
+                                }
 
                                 //load data on screen after change data
                                 getUserData();
