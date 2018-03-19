@@ -200,7 +200,6 @@ public class ForgetPasswordFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
-                            verfiyEmail();
 
                             Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
 
@@ -237,7 +236,5 @@ public class ForgetPasswordFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().finish();
-
     }
 }
