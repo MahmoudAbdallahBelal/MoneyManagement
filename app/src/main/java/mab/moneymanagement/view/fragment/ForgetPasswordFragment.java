@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -161,18 +163,10 @@ public class ForgetPasswordFragment extends Fragment {
         if (email.equals("")) {
         } else {
 
-
-//
-//            final JSONObject regsterObject = new JSONObject();
-//            try {
-//                regsterObject.put("Email", email);
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
             // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ForgetUrl, (String) null,
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            String ff = ForgetUrl + "?Email=" + email;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ff, (String) null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -205,16 +199,19 @@ public class ForgetPasswordFragment extends Fragment {
 
                         }
                     }) {
+
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> param = new HashMap<>();
                     param.put("Email", email);
                     return param;
                 }
+
             };
 
             // Add JsonObjectRequest to the RequestQueue
-            MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+            requestQueue.add(jsonObjectRequest);
+            //MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
         }
         //----
