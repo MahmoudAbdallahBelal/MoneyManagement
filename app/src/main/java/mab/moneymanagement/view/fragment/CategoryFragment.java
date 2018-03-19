@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
@@ -49,12 +55,17 @@ public class CategoryFragment extends Fragment {
     GridView expenceList;
     ArrayList<Category> expenseData = new ArrayList<>();
     ArrayList<Category> incomeData = new ArrayList<>();
+    String selectedCategory;
 
-    URL url = new URL();
 
     String incomeCategoryUrl = URL.PATH + URL.CATEGORY_INCOME;
+    String expenseCategoryUrl = URL.PATH + URL.CATEGORY_EXPENSE;
+
     MaterialDialog.Builder loginDaolog;
     SharedPreference shar;
+    String icon;
+    String categoryName;
+    int value;
 
 
     @Override
@@ -69,13 +80,11 @@ public class CategoryFragment extends Fragment {
         loginDaolog = new MaterialDialog.Builder(getContext());
         shar = new SharedPreference();
 
-        getAllCategory();
 
         addIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  dialogAddIncome();
-                getAllCategory();
+                dialogAddIncome();
 
             }
         });
@@ -142,9 +151,33 @@ public class CategoryFragment extends Fragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View expense_layout = inflater.inflate(R.layout.add_expense, null);
+        final View expense_layout = inflater.inflate(R.layout.add_expense, null);
 
-        // EditText expenseName=expense_layout.findViewById(R.id.budget_et_value);
+        final EditText expenseName = expense_layout.findViewById(R.id.add_expense_et_name);
+        final EditText expensvalue = expense_layout.findViewById(R.id.add_expense_et_value);
+        final ImageView iconImage = expense_layout.findViewById(R.id.add_expense_icon);
+
+
+        //------spinner for day ----------
+        final Spinner iconSpinner = expense_layout.findViewById(R.id.spinner_icons_new_expence);
+        final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
+        iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        iconSpinner.setAdapter(iconAdapter);
+
+        iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                iconImage.setImageResource(getIcomImage(position));
+                selectedCategory = iconSpinner.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         builder.setView(expense_layout);
 
         //SET BUTTON
@@ -152,7 +185,15 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                categoryName = expenseName.getText().toString();
+                String hh = expensvalue.getText().toString();
+                if (categoryName.equals("") || hh.equals("")) {
+                } else {
+                    value = Integer.parseInt(hh);
+                    addCategoryExpense(categoryName, value, selectedCategory);
+                }
                 dialog.dismiss();
+
 
             }
 
@@ -176,17 +217,49 @@ public class CategoryFragment extends Fragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View income_layout = inflater.inflate(R.layout.add_income, null);
+        final View expense_layout = inflater.inflate(R.layout.add_income, null);
 
-        // EditText expenseName=expense_layout.findViewById(R.id.budget_et_value);
-        builder.setView(income_layout);
+        final EditText expenseName = expense_layout.findViewById(R.id.add_income_et_name);
+        final EditText expensvalue = expense_layout.findViewById(R.id.add_income_et_value);
+        final ImageView iconImage = expense_layout.findViewById(R.id.add_income_icon);
+
+
+        //------spinner for day ----------
+        final Spinner iconSpinner = expense_layout.findViewById(R.id.spinner_icons_new_income);
+        final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
+        iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        iconSpinner.setAdapter(iconAdapter);
+
+        iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                iconImage.setImageResource(getIcomImage(position));
+                selectedCategory = iconSpinner.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        builder.setView(expense_layout);
 
         //SET BUTTON
         builder.setPositiveButton("Add  ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                categoryName = expenseName.getText().toString();
+                String hh = expensvalue.getText().toString();
+                if (categoryName.equals("") || hh.equals("")) {
+                } else {
+                    value = Integer.parseInt(hh);
+                    addCategoryIncome(categoryName, value, selectedCategory);
+                }
                 dialog.dismiss();
+
 
             }
 
@@ -205,29 +278,39 @@ public class CategoryFragment extends Fragment {
         builder.show();
     }
 
+    private void addCategoryIncome(String categoryName, int value, String selectedCategory) {
 
-    private void getAllCategory() {
 
-        final JSONObject loadObject = new JSONObject();
+        final JSONObject regsterObject = new JSONObject();
         try {
-            loadObject.put("Authorization", shar.getValue(getContext()));
+
+
+            regsterObject.put("Name", categoryName);
+            regsterObject.put("Icon", selectedCategory);
+            regsterObject.put("Price", value);
+            regsterObject.put("Id", 0);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
-                new Response.Listener<JSONArray>() {
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, incomeCategoryUrl, regsterObject,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        try {
 
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
 
-                        //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                        for (int i = 0; i < response.length(); i++) {
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loginDaolog.build().hide();
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -237,49 +320,120 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG);
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
-                });
-
-
-//        // Initialize a new JsonObjectRequest instance
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, incomeCategoryUrl, loadObject,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//
-//                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-//                            String message = response.getString("RequstDetails");
-//
-//                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            loginDaolog.build().dismiss();
-//
-//                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG);
-//
-//                        }
-//
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // Do something when error occurred
-//                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG);
-//
-//                    }
-//                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+                return params;
+            }
+        };
 
         // Add JsonObjectRequest to the RequestQueue
-        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonArrayRequest);
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
     }
 
 
+    private void addCategoryExpense(String name, int value, String icon) {
+
+
+        final JSONObject regsterObject = new JSONObject();
+        try {
+
+
+            regsterObject.put("Name", name);
+            regsterObject.put("Icon", icon);
+            regsterObject.put("Price", value);
+            regsterObject.put("Id", 0);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, expenseCategoryUrl, regsterObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loginDaolog.build().hide();
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+
+    private int getIcomImage(int name) {
+        if (name == 0) {
+            return R.drawable.food;
+        } else if (name == 1) {
+            return R.drawable.house;
+
+
+        } else if (name == 2) {
+            return R.drawable.personal;
+
+        } else if (name == 3) {
+            return R.drawable.salalry;
+
+        } else if (name == 4) {
+            return R.drawable.saving;
+
+        } else if (name == 5) {
+            return R.drawable.shopping;
+
+        } else if (name == 6) {
+            return R.drawable.child;
+
+        } else if (name == 7) {
+            return R.drawable.car;
+
+        } else if (name == 8) {
+            return R.drawable.kast;
+
+        } else
+            return R.drawable.credit;
+
+
+    }
+
 }
+
+
+
+

@@ -24,20 +24,17 @@ import mab.moneymanagement.view.activity.Main2Activity;
 
 public class DialogAddItemFragment extends DialogFragment {
 
-
+    EditText itemName;
+    EditText itemPrice;
+    EditText itemNote;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View edit_layout = inflater.inflate(R.layout.add_item, container, false);
 
 
-//        getDialog().setTitle(R.string.add_item_title);
-//
-//        //                dialogFragment.getActivity().setTitle(getString());
-////                dialogFragment.getActivity().setTitleColor(Color.WHITE);
-
-        EditText itemName = edit_layout.findViewById(R.id.add_item_et_item_name);
-        EditText itemPrice = edit_layout.findViewById(R.id.add_item_price);
-        EditText itemNote = edit_layout.findViewById(R.id.add_item_et_note);
+        itemName = edit_layout.findViewById(R.id.add_item_et_item_name);
+        itemPrice = edit_layout.findViewById(R.id.add_item_price);
+        itemNote = edit_layout.findViewById(R.id.add_item_et_note);
         Button ok = edit_layout.findViewById(R.id.add_item_ok);
         Button cancel = edit_layout.findViewById(R.id.add_item_cancel);
 
@@ -63,7 +60,7 @@ public class DialogAddItemFragment extends DialogFragment {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
 
-        //------spinner for currency ----------
+        //------spinner for payment ----------
         Spinner paymentSpinner = edit_layout.findViewById(R.id.add_item_payment_spiner);
         ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.payment,
                 android.R.layout.simple_spinner_item);
@@ -73,4 +70,7 @@ public class DialogAddItemFragment extends DialogFragment {
         return edit_layout;
     }
 
+    void addItem() {
+
+    }
 }

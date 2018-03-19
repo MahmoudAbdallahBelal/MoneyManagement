@@ -17,13 +17,13 @@
         android:textSize="25dp" />
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/add_expense_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -32,12 +32,23 @@
 
             />
         <EditText
+            android:id="@+id/add_expense_et_value"
+
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="enter income value"
             android:padding="10dp"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:id="@+id/add_expense_icon"
 
             />
 

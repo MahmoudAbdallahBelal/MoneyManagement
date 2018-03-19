@@ -43,7 +43,7 @@ public class RegestrationFragment extends Fragment {
     Spinner daySpinner;
     URL url = new URL();
 
-    String reg_url = url.PATH + url.REGISTER;
+    String reg_url = URL.PATH + URL.REGISTER;
     String name, email, password;
     String kindCurrency;
     String selectedDay;
@@ -61,10 +61,10 @@ public class RegestrationFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_complete_loginfragment, container, false);
 
-        etName = (EditText) v.findViewById(R.id.regester_et_name);
-        etPassword = (EditText) v.findViewById(R.id.regester_et_password);
-        etEmail = (EditText) v.findViewById(R.id.regester_et_email);
-        btnNext = (Button) v.findViewById(R.id.complete_login_btn_next);
+        etName = v.findViewById(R.id.regester_et_name);
+        etPassword = v.findViewById(R.id.regester_et_password);
+        etEmail = v.findViewById(R.id.regester_et_email);
+        btnNext = v.findViewById(R.id.complete_login_btn_next);
 
         loginDaolog = new MaterialDialog.Builder(getContext());
 
@@ -146,9 +146,6 @@ public class RegestrationFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            // Initialize a new RequestQueue instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             // Initialize a new JsonObjectRequest instance
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, reg_url, regsterObject,

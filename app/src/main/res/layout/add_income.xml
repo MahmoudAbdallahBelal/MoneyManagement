@@ -28,6 +28,8 @@
             android:layout_margin="8dp"
             android:hint="Enter imcome name"
             android:padding="10dp"
+            android:id="@+id/add_income_et_name"
+
 
             />
         <EditText
@@ -37,6 +39,17 @@
             android:layout_margin="8dp"
             android:hint="enter income value"
             android:padding="10dp"
+            android:id="@+id/add_income_et_value"
+
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/add_income_icon"
+
 
             />
         <Spinner
