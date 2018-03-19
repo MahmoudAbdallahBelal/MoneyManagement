@@ -219,7 +219,25 @@ public class ForgetPasswordFragment extends Fragment {
 
         }
         //----
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().finish();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().finish();
 
     }
 }

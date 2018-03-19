@@ -43,7 +43,9 @@
         <activity android:name=".view.activity.DetailItemActivity" />
         <activity android:name=".view.activity.CategoryDetailActivity" />
         <activity android:name=".view.activity.AllItemCategory" />
-        <activity android:name=".view.activity.ForgetPasswordActivity"></activity>
+        <activity
+            android:name=".view.activity.ForgetPasswordActivity"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>
