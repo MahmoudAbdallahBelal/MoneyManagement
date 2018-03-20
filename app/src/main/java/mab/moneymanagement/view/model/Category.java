@@ -9,43 +9,39 @@ import java.io.Serializable;
 public class Category implements Serializable {
 
 
-    String id;
+    int id;
     String name;
-    String kind;
-    double target;
-    double expense;
-    String date;
-    String userId;
-    int icon;
+    String icon;
+    int money;
+    int Budget;
+    String createDate;
 
-    public Category(String name, double target, int icon) {
+    public Category(int id, String name, String icon, int money, int budget, String createDate) {
+        this.id = id;
         this.name = name;
-        this.target= target;
         this.icon = icon;
+        this.money = money;
+        Budget = budget;
+        this.createDate = createDate;
     }
 
     public Category() {
     }
 
-    public Category(String date,double target, double expense) {
-        this.target = target;
-        this.expense = expense;
-        this.date=date;
-    }
-
-    public Category(String name, String kind, Double target, Double expense) {
-        this.name = name;
-        this.kind = kind;
-        this.target = target;
-        this.expense = expense;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public String getName() {
@@ -56,51 +52,27 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public String getKind() {
-        return kind;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public double getTarget() {
-        return target;
-    }
-
-    public void setTarget(double target) {
-        this.target = target;
-    }
-
-    public double getExpense() {
-        return expense;
-    }
-
-    public void setExpense(double expense) {
-        this.expense = expense;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getBudget() {
+        return Budget;
+    }
+
+    public void setBudget(int budget) {
+        Budget = budget;
     }
 }

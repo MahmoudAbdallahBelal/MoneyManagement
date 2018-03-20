@@ -39,11 +39,10 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.AllItemCategory;
-import mab.moneymanagement.view.activity.DetailItemActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
+import mab.moneymanagement.view.adapter.CategoryIncomeAdapter;
 import mab.moneymanagement.view.model.Category;
-import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class CategoryFragment extends Fragment {
@@ -51,6 +50,7 @@ public class CategoryFragment extends Fragment {
     ImageView addIncome, addExpense;
 
     CategoryExpenseAdapter adapter;
+    CategoryIncomeAdapter incomeAdapter;
     GridView mList;
     GridView expenceList;
     ArrayList<Category> expenseData = new ArrayList<>();
@@ -86,29 +86,19 @@ public class CategoryFragment extends Fragment {
             public void onClick(View v) {
                 dialogAddIncome();
 
+
             }
         });
         addExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialogAddExpense();
             }
         });
 
         //List Expense  -----------
         mList = v.findViewById(R.id.category_expense_list);
-
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-        expenseData.add(new Category("food", 2000.0, R.drawable.home));
-
-        adapter = new CategoryExpenseAdapter(getContext(), expenseData);
-        mList.setAdapter(adapter);
+        getExpenseCategory();
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -121,14 +111,9 @@ public class CategoryFragment extends Fragment {
             }
         });
 
-        //List Expense  ------------------------------------------------------------
+        //List Income ------------------------------------------------------------
         expenceList = v.findViewById(R.id.category_income_list);
-
-        incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
-        incomeData.add(new Category("Cash", 4000.0, R.drawable.money));
-
-        adapter = new CategoryExpenseAdapter(getContext(), incomeData);
-        expenceList.setAdapter(adapter);
+        getinComeseCategory();
 
         expenceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -337,7 +322,6 @@ public class CategoryFragment extends Fragment {
 
     }
 
-
     private void addCategoryExpense(String name, int value, String icon) {
 
 
@@ -397,7 +381,6 @@ public class CategoryFragment extends Fragment {
 
     }
 
-
     private int getIcomImage(int name) {
         if (name == 0) {
             return R.drawable.food;
@@ -432,7 +415,150 @@ public class CategoryFragment extends Fragment {
 
     }
 
+    //------------------------------------------------------------------------------------
+    private void getExpenseCategory() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, expenseCategoryUrl, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                Category category = new Category(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Icon"),
+                                        jsonObject.getInt("Money"),
+                                        jsonObject.getInt("Budget"),
+                                        jsonObject.getString("CreateDate")
+
+                                );
+                                expenseData.add(category);
+
+
+                            }
+                            adapter = new CategoryExpenseAdapter(getContext(), expenseData);
+                            mList.setAdapter(adapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loginDaolog.build().dismiss();
+
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+    private void getinComeseCategory() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, incomeCategoryUrl, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                Category category = new Category(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Icon"),
+                                        jsonObject.getInt("Money"),
+                                        jsonObject.getInt("Budget"),
+                                        jsonObject.getString("CreateDate")
+
+                                );
+                                Toast.makeText(getContext(), jsonObject.getString("Name"), Toast.LENGTH_LONG).show();
+                                incomeData.add(category);
+
+
+                            }
+                            incomeAdapter = new CategoryIncomeAdapter(getContext(), incomeData);
+                            expenceList.setAdapter(incomeAdapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loginDaolog.build().dismiss();
+
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
 }
+
 
 
 

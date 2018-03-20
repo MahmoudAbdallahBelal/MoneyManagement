@@ -33,13 +33,13 @@ public class ExpectedFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_expected, container, false);
 
-        mList = (ListView) v.findViewById(R.id.expected_list);
-
-        data.add(new Category("food", "expense", 2000.0, 1500.0));
-        data.add(new Category("food", "expense", 2000.0, 1500.0));
-        data.add(new Category("food", "expense", 2000.0, 1500.0));
-        data.add(new Category("food", "expense", 2000.0, 1500.0));
-        data.add(new Category("food", "expense", 2000.0, 1500.0));
+        mList = v.findViewById(R.id.expected_list);
+//
+//        data.add(new Category("food", "expense", 2000.0, 1500.0));
+//        data.add(new Category("food", "expense", 2000.0, 1500.0));
+//        data.add(new Category("food", "expense", 2000.0, 1500.0));
+//        data.add(new Category("food", "expense", 2000.0, 1500.0));
+//        data.add(new Category("food", "expense", 2000.0, 1500.0));
 
 
         adapter = new ExpectedAdapter(getContext(), data);

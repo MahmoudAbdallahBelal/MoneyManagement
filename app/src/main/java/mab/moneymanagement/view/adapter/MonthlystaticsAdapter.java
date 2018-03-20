@@ -57,22 +57,22 @@ public class MonthlystaticsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.row_monthly_statics, null);
 
-        TextView reset = (TextView) v.findViewById(R.id.monthlystatic_reset);
-        TextView expense = (TextView) v.findViewById(R.id.monthlystatic_expense);
-        TextView date = (TextView) v.findViewById(R.id.monthly_statics_date);
+        TextView reset = v.findViewById(R.id.monthlystatic_reset);
+        TextView expense = v.findViewById(R.id.monthlystatic_expense);
+        TextView date = v.findViewById(R.id.monthly_statics_date);
 
-
-        double expen = mList.get(position).getExpense();
-        double tar = mList.get(position).getTarget();
-        double res = tar - expen;
-
-        reset.setText(res + "");
-        expense.setText(expen + "");
-        date.setText(mList.get(position).getDate());
+//
+//        double expen = mList.get(position).getExpense();
+//        double tar = mList.get(position).getTarget();
+//        double res = tar - expen;
+//
+//        reset.setText(res + "");
+//        expense.setText(expen + "");
+//        date.setText(mList.get(position).getDate());
 
 
         //----------chart --------
-        PieChart pieChart = (PieChart) v.findViewById(R.id.pie_chart);
+        PieChart pieChart = v.findViewById(R.id.pie_chart);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
@@ -84,8 +84,8 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
 
         ArrayList<PieEntry> yEntryValue = new ArrayList<>();
-        yEntryValue.add(new PieEntry((float) res, "Reset"));
-        yEntryValue.add(new PieEntry((float) expen, "Expense"));
+//        yEntryValue.add(new PieEntry((float) res, "Reset"));
+//        yEntryValue.add(new PieEntry((float) expen, "Expense"));
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 

@@ -13,14 +13,14 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.view.model.Category;
 
 /**
- * Created by Gihan on 3/4/2018.
+ * Created by Gihan on 3/20/2018.
  */
 
-public class CategoryExpenseAdapter extends BaseAdapter {
+public class CategoryIncomeAdapter extends BaseAdapter {
     private List<Category> mList;
     private Context context;
 
-    public CategoryExpenseAdapter(Context context, List<Category> mList) {
+    public CategoryIncomeAdapter(Context context, List<Category> mList) {
         this.context = context;
         this.mList = mList;
 

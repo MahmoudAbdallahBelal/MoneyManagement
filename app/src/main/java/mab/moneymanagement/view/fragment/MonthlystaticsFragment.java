@@ -30,13 +30,13 @@ public class MonthlystaticsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_monthlystatics, container, false);
 
-        mList = (ListView) v.findViewById(R.id.monthly_statics_list);
+        mList = v.findViewById(R.id.monthly_statics_list);
 
         data.clear();
-        data.add(new Category("1/5/2015", 2000.0, 1500.0));
-        data.add(new Category("1/5/2015", 1000, 500.0));
-        data.add(new Category("1/5/2015", 10000.0, 2000.0));
-        data.add(new Category("1/5/2015", 2000.0, 1500.0));
+//        data.add(new Category("1/5/2015", 2000.0, 1500.0));
+//        data.add(new Category("1/5/2015", 1000, 500.0));
+//        data.add(new Category("1/5/2015", 10000.0, 2000.0));
+//        data.add(new Category("1/5/2015", 2000.0, 1500.0));
 
 
         adapter = new MonthlystaticsAdapter(getContext(), data);

@@ -28,13 +28,13 @@ public class CategoryDetailFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_category_detail, container, false);
-        name=(EditText)v.findViewById(R.id.category_detail_name);
-        value=(EditText)v.findViewById(R.id.category_detail_value);
-
-        name.setText(categoryData.getName());
-        double valu=categoryData.getTarget();
-        value.setText(valu+"");
-
+        name = v.findViewById(R.id.category_detail_name);
+        value = v.findViewById(R.id.category_detail_value);
+//
+//        name.setText(categoryData.getName());
+//        double valu=categoryData.getTarget();
+//        value.setText(valu+"");
+//
 
         return v;
     }
