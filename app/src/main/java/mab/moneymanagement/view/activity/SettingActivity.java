@@ -1,11 +1,10 @@
 package mab.moneymanagement.view.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,6 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogBudgetFragment;
-import mab.moneymanagement.view.dialog.DialogLanguageFragment;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
@@ -45,15 +43,11 @@ public class SettingActivity extends AppCompatActivity {
     CheckedTextView tvBudget;
     CheckedTextView tv_DailyAlert;
     AlertDialog.Builder builder;
-
     User user;
     SharedPreference shar;
     TextView delete;
     Spinner daySpinner;
     TextView password;
-
-    URL url = new URL();
-
     String selectedDay;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
