@@ -31,26 +31,35 @@ import mab.moneymanagement.view.adapter.MainItemAdapter;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
-
-public class MonthlyFragment extends Fragment {
+public class AllItemChooseDateFragment extends Fragment {
 
 
     MainItemAdapter adapter;
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
-    SharedPreference shar;
-    String monthlyUrl = URL.PATH + URL.CURRENT_MONTH;
 
+    String dayUrl = URL.PATH + URL.DAILY_URL;
+    SharedPreference shar;
+    int day;
+    int month;
+    int year;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_monthly, container, false);
-        mList = v.findViewById(R.id.monthly_fragment_list);
+        View v = inflater.inflate(R.layout.fragment_all_item_choose_date, container, false);
+
+        //--get category data from intent to put in menu -------
+
+        day = getActivity().getIntent().getIntExtra("day", -1);
+        month = getActivity().getIntent().getIntExtra("month", -1);
+        year = getActivity().getIntent().getIntExtra("year", -1);
 
         shar = new SharedPreference();
 
+
+        mList = v.findViewById(R.id.all_item_calender_list);
         getAllItem();
 
 
@@ -64,6 +73,8 @@ public class MonthlyFragment extends Fragment {
 
             }
         });
+
+
         return v;
     }
 
@@ -71,7 +82,8 @@ public class MonthlyFragment extends Fragment {
 
 
         // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, monthlyUrl, (String) null,
+        String vvv = dayUrl + "?Year=" + year + "?Month" + month + "?Day=" + day;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vvv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -80,11 +92,10 @@ public class MonthlyFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
 
-                            data.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Item category = new Item(
@@ -106,6 +117,7 @@ public class MonthlyFragment extends Fragment {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -141,5 +153,6 @@ public class MonthlyFragment extends Fragment {
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
     }
+
 
 }

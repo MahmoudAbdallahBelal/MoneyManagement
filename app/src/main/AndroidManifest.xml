@@ -45,7 +45,8 @@
         <activity android:name=".view.activity.AllItemCategory" />
         <activity
             android:name=".view.activity.ForgetPasswordActivity"
-            android:noHistory="true"></activity>
+            android:noHistory="true" />
+        <activity android:name=".view.activity.AllItemChooseDate"></activity>
     </application>
 
 </manifest>

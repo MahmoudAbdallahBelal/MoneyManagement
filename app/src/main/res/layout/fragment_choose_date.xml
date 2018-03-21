@@ -9,17 +9,19 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+    <CalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="@color/colorPrimaryDark"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         />
 
     <Button
+        android:id="@+id/choose_date_done"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +29,8 @@
         android:layout_gravity="center"
         android:background="@android:color/white"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Done"
+        android:text="@string/choose_date_btn_done"
+        android:textStyle="bold"
 
         />
 

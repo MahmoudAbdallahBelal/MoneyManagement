@@ -33,10 +33,6 @@ public class MonthlystaticsFragment extends Fragment {
         mList = v.findViewById(R.id.monthly_statics_list);
 
         data.clear();
-//        data.add(new Category("1/5/2015", 2000.0, 1500.0));
-//        data.add(new Category("1/5/2015", 1000, 500.0));
-//        data.add(new Category("1/5/2015", 10000.0, 2000.0));
-//        data.add(new Category("1/5/2015", 2000.0, 1500.0));
 
 
         adapter = new MonthlystaticsAdapter(getContext(), data);

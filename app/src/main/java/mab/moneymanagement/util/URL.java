@@ -24,6 +24,7 @@ public class URL {
    public static String DELETE_ITEM = "/api/DeleteItem";
    public static String WEEKLY_ITEM = "/api/ItemMange";
    public static String DAILY_URL = "/api/ItemMange";
+   public static String CURRENT_MONTH = "/api/ItemMange";
 
 
 
