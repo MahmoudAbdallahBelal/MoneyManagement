@@ -10,7 +10,6 @@ import java.util.List;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.model.Category;
-import mab.moneymanagement.view.model.Item;
 
 /**
  * Created by Gihan on 3/3/2018.
@@ -53,14 +52,14 @@ public class ExpectedAdapter extends BaseAdapter {
 
         name.setText(mList.get(position).getName());
 
-//
-//        double x1 = mList.get(position).getTarget();
-//        double x2 = mList.get(position).getExpense();
-//        double percent = (x1 - x2) / x2 * 100;
-//        percentage.setText(percent + "");
-//
-//        expense.setText(x1 + "");
-//        target.setText(x2 + "");
+
+        int x1 = mList.get(position).getBudget();
+        int x2 = mList.get(position).getMoney();
+        double percent = (x1 - x2) / x2 * 100;
+        percentage.setText(percent + "");
+
+        expense.setText(x1 + "");
+        target.setText(x2 + "");
 
 
         return v;

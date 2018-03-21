@@ -25,6 +25,8 @@ public class URL {
    public static String WEEKLY_ITEM = "/api/ItemMange";
    public static String DAILY_URL = "/api/ItemMange";
    public static String CURRENT_MONTH = "/api/ItemMange";
+    public static String MONTH_STATICS = "/api/GoToNext";
+
 
 
 

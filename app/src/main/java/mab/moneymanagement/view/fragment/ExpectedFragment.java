@@ -1,30 +1,41 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.activity.DetailItemActivity;
+import mab.moneymanagement.util.URL;
+import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.adapter.ExpectedAdapter;
-import mab.moneymanagement.view.adapter.MainItemAdapter;
 import mab.moneymanagement.view.model.Category;
-import mab.moneymanagement.view.model.Item;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
 public class ExpectedFragment extends Fragment {
     ExpectedAdapter adapter;
     ListView mList;
     ArrayList<Category> data = new ArrayList<>();
+    String staticUrl = URL.PATH + URL.MONTH_STATICS;
+    SharedPreference shar;
 
 
     @Override
@@ -34,20 +45,84 @@ public class ExpectedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_expected, container, false);
 
         mList = v.findViewById(R.id.expected_list);
-//
-//        data.add(new Category("food", "expense", 2000.0, 1500.0));
-//        data.add(new Category("food", "expense", 2000.0, 1500.0));
-//        data.add(new Category("food", "expense", 2000.0, 1500.0));
-//        data.add(new Category("food", "expense", 2000.0, 1500.0));
-//        data.add(new Category("food", "expense", 2000.0, 1500.0));
 
+        shar = new SharedPreference();
 
-        adapter = new ExpectedAdapter(getContext(), data);
-        mList.setAdapter(adapter);
+        getStatics();
 
 
         return v;
     }
 
+    private void getStatics() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, staticUrl, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+                            data.clear();
+
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                Category category = new Category(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Icon"),
+                                        jsonObject.getInt("Money"),
+                                        jsonObject.getInt("Budget"),
+                                        jsonObject.getString("CreateDate"),
+                                        "income"
+
+                                );
+                                data.add(category);
+
+
+                            }
+                            adapter = new ExpectedAdapter(getContext(), data);
+                            mList.setAdapter(adapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            getStatics();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getStatics();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
 
 }
