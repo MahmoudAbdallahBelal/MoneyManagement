@@ -15,17 +15,27 @@ public class Category implements Serializable {
     int money;
     int Budget;
     String createDate;
+    String kind;
 
-    public Category(int id, String name, String icon, int money, int budget, String createDate) {
+    public Category(int id, String name, String icon, int money, int budget, String createDate, String kind) {
         this.id = id;
         this.name = name;
         this.icon = icon;
         this.money = money;
         Budget = budget;
         this.createDate = createDate;
+        this.kind = kind;
     }
 
     public Category() {
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public int getId() {

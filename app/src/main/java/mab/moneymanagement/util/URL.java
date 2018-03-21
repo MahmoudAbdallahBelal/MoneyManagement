@@ -20,6 +20,7 @@ public class URL {
    public static String FORGET_PASSWORD = "/api/ForgetPassword";
    public static String CATEGORY_EXPENSE = "/api/CategoriesOutCome";
 
+   public static String DELETE_CATEGORY = "/api/DeleteCategory";
 
 
 

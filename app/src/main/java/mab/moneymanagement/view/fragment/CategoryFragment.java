@@ -61,6 +61,7 @@ public class CategoryFragment extends Fragment {
     String incomeCategoryUrl = URL.PATH + URL.CATEGORY_INCOME;
     String expenseCategoryUrl = URL.PATH + URL.CATEGORY_EXPENSE;
 
+
     MaterialDialog.Builder loginDaolog;
     SharedPreference shar;
     String icon;
@@ -105,7 +106,9 @@ public class CategoryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Category category = expenseData.get(position);
                 Intent detailIntent = new Intent(getActivity(), AllItemCategory.class);
+                detailIntent.putExtra("kind", 1);
                 detailIntent.putExtra("categoryData", category);
+
                 startActivity(detailIntent);
 
             }
@@ -121,6 +124,7 @@ public class CategoryFragment extends Fragment {
                 Category category = incomeData.get(position);
                 Intent detailIntent = new Intent(getActivity(), AllItemCategory.class);
                 detailIntent.putExtra("categoryData", category);
+
                 startActivity(detailIntent);
 
             }
@@ -143,7 +147,7 @@ public class CategoryFragment extends Fragment {
         final ImageView iconImage = expense_layout.findViewById(R.id.add_expense_icon);
 
 
-        //------spinner for day ----------
+        //------spinner for icon ----------
         final Spinner iconSpinner = expense_layout.findViewById(R.id.spinner_icons_new_expence);
         final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
         iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -441,7 +445,8 @@ public class CategoryFragment extends Fragment {
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate")
+                                        jsonObject.getString("CreateDate"),
+                                        "expense"
 
                                 );
                                 expenseData.add(category);
@@ -456,7 +461,8 @@ public class CategoryFragment extends Fragment {
                             e.printStackTrace();
                             loginDaolog.build().dismiss();
 
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            getExpenseCategory();
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -511,10 +517,10 @@ public class CategoryFragment extends Fragment {
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate")
+                                        jsonObject.getString("CreateDate"),
+                                        "income"
 
                                 );
-                                Toast.makeText(getContext(), jsonObject.getString("Name"), Toast.LENGTH_LONG).show();
                                 incomeData.add(category);
 
 
@@ -538,7 +544,8 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getinComeseCategory();
 
 
                     }

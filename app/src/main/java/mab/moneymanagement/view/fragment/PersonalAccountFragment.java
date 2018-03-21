@@ -45,7 +45,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class PersonalAccountFragment extends Fragment {
 
 
-    URL url = new URL();
     String user_info_url = URL.PATH + URL.USER_INFO;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
 
