@@ -47,15 +47,20 @@ public class MainItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.row_item_main_activity, null);
 
-        TextView name = (TextView) v.findViewById(R.id.row_item_name);
-        TextView price = (TextView) v.findViewById(R.id.row_item_price);
-        TextView payment = (TextView) v.findViewById(R.id.row_item_payment);
-        TextView note = (TextView) v.findViewById(R.id.row_item_note);
+        TextView name = v.findViewById(R.id.row_item_name);
+        TextView price = v.findViewById(R.id.row_item_price);
+        TextView payment = v.findViewById(R.id.row_item_payment);
+        TextView note = v.findViewById(R.id.row_item_note);
 
         name.setText(mList.get(position).getName());
-        price.setText(mList.get(position).getPrice().toString());
-        payment.setText(mList.get(position).getPayment());
-        note.setText(mList.get(position).getNote());
+        int k = mList.get(position).getPrice();
+        price.setText(Integer.toString(k));
+        payment.setText(mList.get(position).getIncomName());
+        if (mList.get(position).getNote().equals("")) {
+            note.setText("");
+
+        } else
+            note.setText(mList.get(position).getNote());
 
 
         return v;

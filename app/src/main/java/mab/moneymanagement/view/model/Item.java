@@ -8,24 +8,34 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
-
+    int id;
     String name;
-    Double Price;
     String note;
-    String category;
-    String Payment;
+    int Price;
+    int incomeId;
+    int expenseId;
+    String incomName;
+    String expenseName;
     String date;
 
-    public Item() {
+    public Item(int id, String name, String note, int price, int incomeId, int expenseId, String incomName, String expenseName, String date) {
+        this.id = id;
+        this.name = name;
+        this.note = note;
+        Price = price;
+        this.incomeId = incomeId;
+        this.expenseId = expenseId;
+        this.incomName = incomName;
+        this.expenseName = expenseName;
+        this.date = date;
     }
 
-    public Item(String name, Double price, String note, String category, String payment, String date) {
-        this.name = name;
-        Price = price;
-        this.note = note;
-        this.category = category;
-        Payment = payment;
-        this.date = date;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,14 +46,6 @@ public class Item implements Serializable {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return Price;
-    }
-
-    public void setPrice(Double price) {
-        Price = price;
-    }
-
     public String getNote() {
         return note;
     }
@@ -52,20 +54,44 @@ public class Item implements Serializable {
         this.note = note;
     }
 
-    public String getCategory() {
-        return category;
+    public int getPrice() {
+        return Price;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setPrice(int price) {
+        Price = price;
     }
 
-    public String getPayment() {
-        return Payment;
+    public int getIncomeId() {
+        return incomeId;
     }
 
-    public void setPayment(String payment) {
-        Payment = payment;
+    public void setIncomeId(int incomeId) {
+        this.incomeId = incomeId;
+    }
+
+    public int getExpenseId() {
+        return expenseId;
+    }
+
+    public void setExpenseId(int expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public String getIncomName() {
+        return incomName;
+    }
+
+    public void setIncomName(String incomName) {
+        this.incomName = incomName;
+    }
+
+    public String getExpenseName() {
+        return expenseName;
+    }
+
+    public void setExpenseName(String expenseName) {
+        this.expenseName = expenseName;
     }
 
     public String getDate() {

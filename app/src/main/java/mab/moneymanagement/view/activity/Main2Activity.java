@@ -53,7 +53,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     User user;
 
 
-    URL url = new URL();
     String user_info_url = URL.PATH + URL.USER_INFO;
 
 

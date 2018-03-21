@@ -127,12 +127,12 @@ public class PersonalAccountFragment extends Fragment {
                             String message = response.getString("RequstDetails");
                             et_name.setText(response.getString("FullName"));
                             et_email.setText(response.getString("Email"));
-                            currncySpinner.setSelection(response.getInt("ConcuranceyId")-1);
+                            currncySpinner.setSelection(response.getInt("ConcuranceyId") - 1);
 
                             ///**----put user data in object
                             user.setFullName(response.getString("FullName"));
                             user.setEmail(response.getString("Email"));
-                            user.setCurrency(response.getInt("ConcuranceyId")-1);
+                            user.setCurrency(response.getInt("ConcuranceyId") - 1);
 
 
                             //  Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
@@ -151,7 +151,7 @@ public class PersonalAccountFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // if error time out happen  call method again to get all data for user
-                        if (error.toString().equals("")){
+                        if (error.toString().equals("")) {
 
                         }
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
@@ -230,7 +230,7 @@ public class PersonalAccountFragment extends Fragment {
 
                                 //load data on screen after change data
                                 getUserData();
-                               // Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
 
 
                             } catch (JSONException e) {

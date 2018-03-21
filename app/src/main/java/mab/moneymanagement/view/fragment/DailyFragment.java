@@ -31,13 +31,13 @@ public class DailyFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_daily, container, false);
 
-        mList = (ListView) v.findViewById(R.id.daily_fragment_list);
+        mList = v.findViewById(R.id.daily_fragment_list);
 
-        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
+//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
+//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
+//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
+//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
+//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
 
         adapter = new MainItemAdapter(getContext(), data);
         mList.setAdapter(adapter);

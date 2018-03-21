@@ -19,8 +19,10 @@ public class URL {
    public static String PASSWORD_PROTECTION="/api/ResetPassword";
    public static String FORGET_PASSWORD = "/api/ForgetPassword";
    public static String CATEGORY_EXPENSE = "/api/CategoriesOutCome";
-
    public static String DELETE_CATEGORY = "/api/DeleteCategory";
+   public static String ITEM = "/api/Items";
+   public static String DELETE_ITEM = "/api/DeleteItem";
+
 
 
 

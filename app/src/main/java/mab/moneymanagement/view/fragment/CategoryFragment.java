@@ -53,8 +53,10 @@ public class CategoryFragment extends Fragment {
     CategoryIncomeAdapter incomeAdapter;
     GridView mList;
     GridView expenceList;
+
     ArrayList<Category> expenseData = new ArrayList<>();
     ArrayList<Category> incomeData = new ArrayList<>();
+
     String selectedCategory;
 
 
@@ -64,7 +66,7 @@ public class CategoryFragment extends Fragment {
 
     MaterialDialog.Builder loginDaolog;
     SharedPreference shar;
-    String icon;
+
     String categoryName;
     int value;
 
@@ -451,17 +453,15 @@ public class CategoryFragment extends Fragment {
                                 );
                                 expenseData.add(category);
 
-
                             }
                             adapter = new CategoryExpenseAdapter(getContext(), expenseData);
                             mList.setAdapter(adapter);
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            loginDaolog.build().dismiss();
-
                             getExpenseCategory();
+
+                            //  loginDaolog.build().dismiss();
                             // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
@@ -473,7 +473,8 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getExpenseCategory();
 
 
                     }
