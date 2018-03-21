@@ -10,13 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
+import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
 import mab.moneymanagement.view.model.Item;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
 public class WeeklyFragment extends Fragment {
@@ -25,6 +41,8 @@ public class WeeklyFragment extends Fragment {
     MainItemAdapter adapter;
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
+    String weekUrl = URL.PATH + URL.WEEKLY_ITEM;
+    SharedPreference shar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,14 +51,9 @@ public class WeeklyFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_weekly, container, false);
         mList = v.findViewById(R.id.weekly_fragment_list);
 
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
 
-        adapter = new MainItemAdapter(getContext(), data);
-        mList.setAdapter(adapter);
+        shar = new SharedPreference();
+        getAllItem();
 
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,6 +67,82 @@ public class WeeklyFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    private void getAllItem() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, weekUrl, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+
+                            data.clear();
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                Item category = new Item(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Notes"),
+                                        jsonObject.getInt("Price"),
+                                        jsonObject.getInt("IncomeCategoryId"),
+                                        jsonObject.getInt("OutComeCategoryId"),
+                                        jsonObject.getString("IncomeCategoryName"),
+                                        jsonObject.getString("OutComeCategoryName"),
+                                        jsonObject.getString("CreateDate")
+
+                                );
+                                data.add(category);
+
+
+                            }
+
+                            adapter = new MainItemAdapter(getContext(), data);
+                            mList.setAdapter(adapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            getAllItem();
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getAllItem();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
     }
 
 }

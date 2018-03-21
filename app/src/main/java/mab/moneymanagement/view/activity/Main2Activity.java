@@ -3,31 +3,27 @@ package mab.moneymanagement.view.activity;
 
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,11 +40,10 @@ import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Spinner spinner;
+    public static Boolean isLoggin = false;
     ViewPager mViewPager;
     SectionBageAdapter mSectionBageAdapter;
     TabLayout mTablLayout;
-    public static Boolean isLoggin = false;
     SharedPreference shar;
     User user;
 
@@ -64,7 +59,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         setSupportActionBar(toolbar);
 
         shar = new SharedPreference();
-        user=new User();
+        user = new User();
 
 
         //--------------------------------------check current user--------------
@@ -261,11 +256,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                             }
 
 
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 

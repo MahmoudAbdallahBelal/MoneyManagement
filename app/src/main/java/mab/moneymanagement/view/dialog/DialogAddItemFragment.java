@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -135,6 +133,8 @@ public class DialogAddItemFragment extends DialogFragment {
         String note = itemNote.getText().toString();
         String val = itemPrice.getText().toString();
         int price = Integer.parseInt(val);
+        incomeId = 2;
+        expenseId = 4;
         if (incomeId == -1 || expenseId == -1 | name.equals("") | val.equals("")) {
             Toast.makeText(getActivity(), "Please complete data ", Toast.LENGTH_LONG).show();
 

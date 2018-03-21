@@ -2,7 +2,6 @@ package mab.moneymanagement.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,27 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import mab.moneymanagement.R;
+import mab.moneymanagement.util.URL;
+import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
 import mab.moneymanagement.view.model.Item;
+import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
 public class DailyFragment extends Fragment {
@@ -23,6 +37,8 @@ public class DailyFragment extends Fragment {
     MainItemAdapter adapter;
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
+    SharedPreference shar;
+    String dailyUrl = URL.PATH + URL.DAILY_URL;
 
 
     @Override
@@ -33,14 +49,8 @@ public class DailyFragment extends Fragment {
 
         mList = v.findViewById(R.id.daily_fragment_list);
 
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-//        data.add(new Item("Rice", 12.5, "Price is cheap", "Food", "cash", "12/2/2015"));
-
-        adapter = new MainItemAdapter(getContext(), data);
-        mList.setAdapter(adapter);
+        shar = new SharedPreference();
+        getAllItem();
 
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,6 +66,83 @@ public class DailyFragment extends Fragment {
 
 
         return v;
+    }
+
+    private void getAllItem() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        String vv = dailyUrl + "?Day=2";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+
+                            data.clear();
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                Item category = new Item(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Notes"),
+                                        jsonObject.getInt("Price"),
+                                        jsonObject.getInt("IncomeCategoryId"),
+                                        jsonObject.getInt("OutComeCategoryId"),
+                                        jsonObject.getString("IncomeCategoryName"),
+                                        jsonObject.getString("OutComeCategoryName"),
+                                        jsonObject.getString("CreateDate")
+
+                                );
+                                data.add(category);
+
+
+                            }
+
+                            adapter = new MainItemAdapter(getContext(), data);
+                            mList.setAdapter(adapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            getAllItem();
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getAllItem();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
