@@ -55,7 +55,7 @@ public class MainItemAdapter extends BaseAdapter {
         name.setText(mList.get(position).getName());
         int k = mList.get(position).getPrice();
         price.setText(Integer.toString(k));
-        payment.setText(mList.get(position).getIncomName());
+        payment.setText(mList.get(position).getExpenseName());
         if (mList.get(position).getNote().equals("")) {
             note.setText("");
 

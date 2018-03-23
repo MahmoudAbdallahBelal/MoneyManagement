@@ -55,8 +55,8 @@ public class DialogAddItemFragment extends DialogFragment {
     Spinner expenseSpinner;
     Spinner paymentSpinner;
 
-    CustomSpinnerAdapter adapter;
-
+    CustomSpinnerAdapter categoryAdapter;
+    CustomSpinnerAdapter incomeAdapter;
 
     int incomeId = -1;
     int expenseId = -1;
@@ -73,19 +73,20 @@ public class DialogAddItemFragment extends DialogFragment {
         Button ok = edit_layout.findViewById(R.id.add_item_ok);
         Button cancel = edit_layout.findViewById(R.id.add_item_cancel);
 
+        expenseSpinner = edit_layout.findViewById(R.id.add_item_category_spiner);
+        paymentSpinner = edit_layout.findViewById(R.id.add_item_payment_spiner);
+
+
         shar = new SharedPreference();
 
 
         //------spinner for category ----------
         getExpenseCategory();
-        expenseSpinner = edit_layout.findViewById(R.id.add_item_category_spiner);
-        CustomSpinnerAdapter ada = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, expenseData);
-        expenseSpinner.setAdapter(ada);
-
+        getinComeseCategory();
         expenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), expenseData.get(position).getName(), Toast.LENGTH_LONG).show();
+                expenseId = expenseData.get(position).getId();
             }
 
             @Override
@@ -94,15 +95,10 @@ public class DialogAddItemFragment extends DialogFragment {
             }
         });
 
-        //------spinner for payment ----------
-        getinComeseCategory();
-        paymentSpinner = edit_layout.findViewById(R.id.add_item_payment_spiner);
-        adapter = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, incomeData);
-        paymentSpinner.setAdapter(adapter);
         paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), expenseData.get(position).getName(), Toast.LENGTH_LONG).show();
+                incomeId = incomeData.get(position).getId();
             }
 
             @Override
@@ -110,12 +106,16 @@ public class DialogAddItemFragment extends DialogFragment {
 
             }
         });
-
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addItem();
+                try {
+                    addItem();
+
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Sorry erro rhappen try again", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -135,8 +135,7 @@ public class DialogAddItemFragment extends DialogFragment {
         String note = itemNote.getText().toString();
         String val = itemPrice.getText().toString();
         int price = Integer.parseInt(val);
-        incomeId = 2;
-        expenseId = 4;
+
         if (incomeId == -1 || expenseId == -1 | name.equals("") | val.equals("")) {
             Toast.makeText(getActivity(), "Please complete data ", Toast.LENGTH_LONG).show();
 
@@ -239,9 +238,9 @@ public class DialogAddItemFragment extends DialogFragment {
                                 );
 
                                 expenseData.add(category);
-
-
                             }
+                            categoryAdapter = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, expenseData);
+                            expenseSpinner.setAdapter(categoryAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -311,6 +310,8 @@ public class DialogAddItemFragment extends DialogFragment {
 
                             }
 
+                            incomeAdapter = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, incomeData);
+                            paymentSpinner.setAdapter(incomeAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

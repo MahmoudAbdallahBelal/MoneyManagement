@@ -61,7 +61,8 @@ public class DailyFragment extends Fragment {
 
         shar = new SharedPreference();
 
-        Date date = new Date();
+
+        java.util.Date date = new java.sql.Date(System.currentTimeMillis());
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         year = localDate.getYear();
         month = localDate.getMonthValue();

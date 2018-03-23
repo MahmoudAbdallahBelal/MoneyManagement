@@ -56,10 +56,10 @@ public class ExpectedAdapter extends BaseAdapter {
         int x1 = mList.get(position).getBudget();//target
         int x2 = mList.get(position).getMoney();//expense
         if (x1 == 0) {
-            percentage.setText("0");
+            percentage.setText("0:0");
 
         } else {
-            double percent = (x1 - x2) / x1 * 100;
+            int percent = ((x1 - x2) / x1) * 100;
             percentage.setText(percent + "");
 
         }

@@ -22,29 +22,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.SplashActivity" />
-        <activity android:name=".view.activity.ChartActivity" />
-        <activity android:name=".view.activity.Category" />
-        <activity android:name=".view.activity.MonthlyStatics" />
-        <activity android:name=".view.activity.ExpectedActivity" />
-        <activity android:name=".view.activity.SettingActivity" />
-        <activity android:name=".view.activity.AccountActivity" />
+        <activity
+            android:name=".view.activity.ChartActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.Category"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.MonthlyStatics"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.ExpectedActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.SettingActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.AccountActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
         <activity android:name=".view.activity.NewTransferActivity" />
         <activity android:name=".view.activity.CashActivity" />
         <activity android:name=".view.activity.CreditActivity" />
-        <activity android:name=".view.activity.RegestrationActivity" />
-        <activity android:name=".view.activity.ChooseActivity" />
-        <activity android:name=".view.activity.PersonalAccountActivity" />
-        <activity android:name=".view.activity.CalenderActivity" />
+        <activity
+            android:name=".view.activity.RegestrationActivity"
+            android:parentActivityName=".view.activity.LoginActivity" />
+
+        <activity
+            android:name=".view.activity.ChooseActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.PersonalAccountActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+        <activity
+            android:name=".view.activity.CalenderActivity"
+            android:parentActivityName=".view.activity.Main2Activity" />
+
         <activity android:name=".view.activity.DetailItemActivity" />
         <activity android:name=".view.activity.CategoryDetailActivity" />
-        <activity android:name=".view.activity.AllItemCategory" />
+        <activity
+            android:name=".view.activity.AllItemCategory"
+            android:parentActivityName=".view.activity.Category" />
         <activity
             android:name=".view.activity.ForgetPasswordActivity"
+            android:parentActivityName=".view.activity.LoginActivity"
             android:noHistory="true" />
         <activity android:name=".view.activity.AllItemChooseDate"></activity>
     </application>

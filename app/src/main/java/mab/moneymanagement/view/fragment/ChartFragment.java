@@ -58,10 +58,6 @@ public class ChartFragment extends Fragment {
 
         shar = new SharedPreference();
 
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        month = localDate.getMonthValue();
-        getStatics(month);
 
 
         barrChart = v.findViewById(R.id.bar_chart);
@@ -69,17 +65,14 @@ public class ChartFragment extends Fragment {
 
         barrChart.setDrawBarShadow(false);
         barrChart.setDrawValueAboveBar(true);
-        barrChart.setMaxVisibleValueCount(70);
+        barrChart.setMaxVisibleValueCount(100);
         barrChart.setPinchZoom(false);
         barrChart.setDrawGridBackground(true);
 
-        if (getStatics(month) == 0) {
-
-        } else {
 
             ArrayList<BarEntry> barEntry = new ArrayList<>();
-            barEntry.add(new BarEntry(1, getStatics(month)));
-            barEntry.add(new BarEntry(2, 50));
+        barEntry.add(new BarEntry(1, income + 10));
+        barEntry.add(new BarEntry(2, expense + 10));
 
             BarDataSet barDataSet = new BarDataSet(barEntry, "");
             barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -87,7 +80,7 @@ public class ChartFragment extends Fragment {
             BarData data = new BarData(barDataSet);
             data.setBarWidth(.9f);
             barrChart.setData(data);
-        }
+
 
         return v;
     }
@@ -156,4 +149,15 @@ public class ChartFragment extends Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        month = localDate.getMonthValue();
+        getStatics(month);
+
+    }
 }
