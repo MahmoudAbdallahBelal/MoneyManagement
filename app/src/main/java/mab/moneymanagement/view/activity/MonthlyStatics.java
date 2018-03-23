@@ -10,6 +10,7 @@ import mab.moneymanagement.view.fragment.MonthlystaticsFragment;
 
 public class MonthlyStatics extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class MonthlyStatics extends AppCompatActivity {
         }
 
 
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.monthly_statics_toolbar);
+        Toolbar mToolbar = findViewById(R.id.monthly_statics_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getString(R.string.nav_monthly_statics));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

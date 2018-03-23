@@ -9,17 +9,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.ExpectedData;
 
 /**
  * Created by Gihan on 3/3/2018.
  */
 
 public class ExpectedAdapter extends BaseAdapter {
-    private List<Category> mList;
+    private List<ExpectedData> mList;
     private Context context;
 
-    public ExpectedAdapter(Context context, List<Category> mList) {
+    public ExpectedAdapter(Context context, List<ExpectedData> mList) {
         this.context = context;
         this.mList = mList;
     }
@@ -53,13 +53,19 @@ public class ExpectedAdapter extends BaseAdapter {
         name.setText(mList.get(position).getName());
 
 
-        int x1 = mList.get(position).getBudget();
-        int x2 = mList.get(position).getMoney();
-        double percent = (x1 - x2) / x2 * 100;
-        percentage.setText(percent + "");
+        int x1 = mList.get(position).getBudget();//target
+        int x2 = mList.get(position).getMoney();//expense
+        if (x1 == 0) {
+            percentage.setText("0");
 
-        expense.setText(x1 + "");
-        target.setText(x2 + "");
+        } else {
+            double percent = (x1 - x2) / x1 * 100;
+            percentage.setText(percent + "");
+
+        }
+
+        expense.setText(x2 + "");
+        target.setText(x1 + "");
 
 
         return v;

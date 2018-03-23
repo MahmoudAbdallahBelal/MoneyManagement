@@ -1,6 +1,8 @@
 package mab.moneymanagement.view.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,17 +32,21 @@ import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.adapter.ExpectedAdapter;
 import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.ExpectedData;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
 public class ExpectedFragment extends Fragment {
     ExpectedAdapter adapter;
     ListView mList;
-    ArrayList<Category> data = new ArrayList<>();
-    String staticUrl = URL.PATH + URL.MONTH_STATICS;
+    ArrayList<ExpectedData> data = new ArrayList<>();
+    String staticUrl = URL.PATH + URL.RESET_CTEGORY;
     SharedPreference shar;
 
 
+    int month;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,17 +57,21 @@ public class ExpectedFragment extends Fragment {
 
         shar = new SharedPreference();
 
-        getStatics();
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        month = localDate.getMonthValue();
+        getStatics(month);
 
 
         return v;
     }
 
-    private void getStatics() {
+    private void getStatics(final int month) {
 
 
         // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, staticUrl, (String) null,
+        String vv = staticUrl + "?month=" + month;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -74,17 +87,17 @@ public class ExpectedFragment extends Fragment {
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
-                                Category category = new Category(
+                                ExpectedData expectedData = new ExpectedData(
                                         jsonObject.getInt("Id"),
                                         jsonObject.getString("Name"),
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate"),
-                                        "income"
+                                        jsonObject.getInt("Month"),
+                                        jsonObject.getInt("Year")
 
                                 );
-                                data.add(category);
+                                data.add(expectedData);
 
 
                             }
@@ -94,8 +107,8 @@ public class ExpectedFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            getStatics();
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            getStatics(month);
                         }
 
 
@@ -105,8 +118,8 @@ public class ExpectedFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                        getStatics();
+                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        getStatics(month);
 
 
                     }

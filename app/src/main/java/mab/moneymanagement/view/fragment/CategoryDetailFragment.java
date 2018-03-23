@@ -114,8 +114,6 @@ public class CategoryDetailFragment extends Fragment {
 
                     }
 
-                } else {
-                    Toast.makeText(getActivity(), "sorry error happen", Toast.LENGTH_LONG).show();
                 }
             }
         });

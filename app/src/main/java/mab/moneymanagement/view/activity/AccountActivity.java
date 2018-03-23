@@ -1,8 +1,11 @@
 package mab.moneymanagement.view.activity;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.AccountFragment;
@@ -22,10 +25,21 @@ public class AccountActivity extends AppCompatActivity {
         }
 
 
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.account_toolbar);
+        Toolbar mToolbar = findViewById(R.id.account_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getString(R.string.account_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        mToolbar.setClickable(true);
+        mToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent maIntent = new Intent(getApplicationContext(), Main2Activity.class);
+                startActivity(maIntent);
+                finish();
+            }
+        });
 
 
     }

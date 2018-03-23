@@ -20,12 +20,9 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +36,6 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.AllItemCategory;
-import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
 import mab.moneymanagement.view.adapter.CategoryIncomeAdapter;
 import mab.moneymanagement.view.model.Category;
@@ -269,7 +265,7 @@ public class CategoryFragment extends Fragment {
         builder.show();
     }
 
-    private void addCategoryIncome(String categoryName, int value, String selectedCategory) {
+    private void addCategoryIncome(final String categoryName, final int value, final String selectedCategory) {
 
 
         final JSONObject regsterObject = new JSONObject();
@@ -301,7 +297,9 @@ public class CategoryFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             loginDaolog.build().hide();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                            addCategoryIncome(categoryName, value, selectedCategory);
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -311,7 +309,9 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+                        addCategoryIncome(categoryName, value, selectedCategory);
 
                     }
                 }) {
@@ -328,7 +328,7 @@ public class CategoryFragment extends Fragment {
 
     }
 
-    private void addCategoryExpense(String name, int value, String icon) {
+    private void addCategoryExpense(String name, final int value, String icon) {
 
 
         final JSONObject regsterObject = new JSONObject();
@@ -360,7 +360,9 @@ public class CategoryFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             loginDaolog.build().hide();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            addCategoryExpense(categoryName, value, selectedCategory);
+
+                            //Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -370,7 +372,9 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+                        addCategoryExpense(categoryName, value, selectedCategory);
 
                     }
                 }) {
@@ -456,6 +460,7 @@ public class CategoryFragment extends Fragment {
                             }
                             adapter = new CategoryExpenseAdapter(getContext(), expenseData);
                             mList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -528,6 +533,7 @@ public class CategoryFragment extends Fragment {
                             }
                             incomeAdapter = new CategoryIncomeAdapter(getContext(), incomeData);
                             expenceList.setAdapter(incomeAdapter);
+                            incomeAdapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {

@@ -1,7 +1,5 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,10 +26,8 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.MonthlyStatics;
-import mab.moneymanagement.view.adapter.CategoryIncomeAdapter;
-import mab.moneymanagement.view.adapter.ExpectedAdapter;
 import mab.moneymanagement.view.adapter.MonthlystaticsAdapter;
-import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.MonthStatics;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
@@ -39,8 +35,8 @@ public class MonthlystaticsFragment extends Fragment {
 
     MonthlystaticsAdapter adapter;
     ListView mList;
-    ArrayList<Category> data = new ArrayList<>();
-    String staticUrl = URL.PATH + URL.MONTH_STATICS;
+    ArrayList<MonthStatics> data = new ArrayList<>();
+    String staticUrl = URL.PATH + URL.RESET_CTEGORY;
     SharedPreference shar;
 
 
@@ -76,17 +72,13 @@ public class MonthlystaticsFragment extends Fragment {
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
-                                Category category = new Category(
-                                        jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
-                                        jsonObject.getString("Icon"),
+                                MonthStatics statics = new MonthStatics(
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate"),
-                                        "income"
-
+                                        jsonObject.getInt("Month"),
+                                        jsonObject.getInt("Year")
                                 );
-                                data.add(category);
+                                data.add(statics);
 
 
                             }

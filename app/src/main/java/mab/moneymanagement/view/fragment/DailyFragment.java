@@ -67,8 +67,12 @@ public class DailyFragment extends Fragment {
         month = localDate.getMonthValue();
         day = localDate.getDayOfMonth();
 
-        getAllItem();
+        if (day != 0) {
+            getAllItem();
+        } else {
+            Toast.makeText(getContext(), "day", Toast.LENGTH_LONG).show();
 
+        }
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
