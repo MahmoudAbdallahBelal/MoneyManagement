@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -38,7 +39,7 @@ public class AllItemChooseDateFragment extends Fragment {
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
 
-    String dayUrl = URL.PATH + URL.DAILY_URL;
+    String dailyUrl = URL.PATH + URL.DAILY_URL;
     SharedPreference shar;
     int day;
     int month;
@@ -82,8 +83,8 @@ public class AllItemChooseDateFragment extends Fragment {
 
 
         // Initialize a new JsonObjectRequest instance
-        String vvv = dayUrl + "?Year=" + year + "?Month" + month + "?Day=" + day;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vvv, (String) null,
+        String vv = dailyUrl + "?Month=" + month + "&Year=" + year + "&Day=" + day;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -95,7 +96,12 @@ public class AllItemChooseDateFragment extends Fragment {
                             //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
+                            if (arr.length() == 0) {
+                                Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
 
+                            }
+
+                            data.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Item category = new Item(
@@ -117,6 +123,7 @@ public class AllItemChooseDateFragment extends Fragment {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {

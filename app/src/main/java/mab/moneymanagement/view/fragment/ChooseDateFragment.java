@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -47,12 +48,15 @@ public class ChooseDateFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AllItemChooseDate.class);
-                intent.putExtra("day", dayy);
-                intent.putExtra("month", monthh);
-                intent.putExtra("tear", yearr);
-                startActivity(intent);
-
+                if (dayy == 0) {
+                    Toast.makeText(getActivity(), "Please select day", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(getActivity(), AllItemChooseDate.class);
+                    intent.putExtra("day", dayy);
+                    intent.putExtra("month", monthh);
+                    intent.putExtra("year", yearr);
+                    startActivity(intent);
+                }
             }
         });
 

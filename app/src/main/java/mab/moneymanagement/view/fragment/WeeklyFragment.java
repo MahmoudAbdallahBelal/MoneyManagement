@@ -82,7 +82,7 @@ public class WeeklyFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
 

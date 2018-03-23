@@ -75,19 +75,6 @@ public class DialogAddItemFragment extends DialogFragment {
 
         shar = new SharedPreference();
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addItem();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
-                dismiss();
-            }
-        });
 
         //------spinner for category ----------
         getExpenseCategory();
@@ -121,6 +108,21 @@ public class DialogAddItemFragment extends DialogFragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItem();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
+                dismiss();
             }
         });
 
@@ -169,7 +171,8 @@ public class DialogAddItemFragment extends DialogFragment {
                                 dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                addItem();
+                                //Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
 
@@ -179,8 +182,9 @@ public class DialogAddItemFragment extends DialogFragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            addItem();
                             // Do something when error occurred
-                            Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }

@@ -1,13 +1,16 @@
 package mab.moneymanagement.view.fragment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -19,7 +22,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +46,11 @@ public class DailyFragment extends Fragment {
     SharedPreference shar;
     String dailyUrl = URL.PATH + URL.DAILY_URL;
 
+    int year;
+    int month;
+    int day;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,8 +60,14 @@ public class DailyFragment extends Fragment {
         mList = v.findViewById(R.id.daily_fragment_list);
 
         shar = new SharedPreference();
-        getAllItem();
 
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        year = localDate.getYear();
+        month = localDate.getMonthValue();
+        day = localDate.getDayOfMonth();
+
+        getAllItem();
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,7 +88,7 @@ public class DailyFragment extends Fragment {
 
 
         // Initialize a new JsonObjectRequest instance
-        String vv = dailyUrl + "?Day=2";
+        String vv = dailyUrl + "?Month=" + month + "&Year=" + year + "&Day=" + day;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -84,7 +100,10 @@ public class DailyFragment extends Fragment {
                             String message = response.getString("RequstDetails");
                             // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
+                            if (arr.length() == 0) {
+                                Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
 
+                            }
 
                             data.clear();
                             for (int i = 0; i < arr.length(); i++) {
@@ -108,6 +127,7 @@ public class DailyFragment extends Fragment {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {

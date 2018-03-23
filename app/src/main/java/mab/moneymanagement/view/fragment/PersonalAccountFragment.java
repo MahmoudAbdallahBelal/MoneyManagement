@@ -230,14 +230,14 @@ public class PersonalAccountFragment extends Fragment {
 
                                 //load data on screen after change data
                                 getUserData();
-                                // Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
 
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 loginDaolog.build().dismiss();
                                 loginDaolog.build().hide();
-                                Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
                                 loginDaolog.autoDismiss(true);
 
                             }
@@ -250,7 +250,7 @@ public class PersonalAccountFragment extends Fragment {
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
                             loginDaolog.build().hide();
-                            Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
                             loginDaolog.autoDismiss(true);
 
 

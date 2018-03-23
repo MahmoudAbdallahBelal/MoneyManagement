@@ -270,8 +270,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        getUserData();
 
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
 

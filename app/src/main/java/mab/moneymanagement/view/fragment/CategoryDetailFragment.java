@@ -1,7 +1,5 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -139,7 +137,7 @@ public class CategoryDetailFragment extends Fragment {
         return v;
     }
 
-    private void deleteCategory(int id) {
+    private void deleteCategory(final int id) {
 
 
         final JSONObject regsterObject = new JSONObject();
@@ -171,7 +169,8 @@ public class CategoryDetailFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            deleteCategory(id);
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -181,7 +180,8 @@ public class CategoryDetailFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        deleteCategory(id);
 
                     }
                 }) {
@@ -232,7 +232,7 @@ public class CategoryDetailFragment extends Fragment {
 
     }
 
-    private void updateCategoryIncome(String categoryName, int value, String selectedCategory, int id) {
+    private void updateCategoryIncome(final String categoryName, final int value, final String selectedCategory, final int id) {
 
 
         final JSONObject regsterObject = new JSONObject();
@@ -263,7 +263,8 @@ public class CategoryDetailFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            updateCategoryIncome(categoryName, value, selectedCategory, id);
+                            //  Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -273,7 +274,8 @@ public class CategoryDetailFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        updateCategoryIncome(categoryName, value, selectedCategory, id);
 
                     }
                 }) {
@@ -290,7 +292,7 @@ public class CategoryDetailFragment extends Fragment {
 
     }
 
-    private void updateCategoryExpense(String categoryName, int value, String selectedCategory, int id) {
+    private void updateCategoryExpense(final String categoryName, final int value, final String selectedCategory, final int id) {
 
 
         final JSONObject regsterObject = new JSONObject();
@@ -322,7 +324,8 @@ public class CategoryDetailFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
 
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            updateCategoryExpense(categoryName, value, selectedCategory, id);
+                            //Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -332,7 +335,9 @@ public class CategoryDetailFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        updateCategoryExpense(categoryName, value, selectedCategory, id);
+
 
                     }
                 }) {
