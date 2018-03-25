@@ -79,11 +79,21 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
         editor = settings.edit(); //2
 
-        if (user.getFullName() != null) {
+        if (user.getBadgetSelected() != null) {
+
             editor.putString(PREFS_EMAIL, user.getEmail());
             editor.putString(PREFS_FULL_NAME, user.getFullName());
             editor.putInt(PREFS_BEING_WEEK, user.getBegainDayOfWeek());
             editor.putBoolean(PREFS_BUDGET_SELECTED, user.getBadgetSelected());
+            editor.putInt(PREFS_BUDGET_VALUE, user.getBadgetValue());
+            editor.putInt(PREFS_CURRENCY, user.getCurrency());
+            editor.putBoolean(PREFS_ALERT, user.isDailyAlert());
+
+        } else {
+            editor.putString(PREFS_EMAIL, user.getEmail());
+            editor.putString(PREFS_FULL_NAME, user.getFullName());
+            editor.putInt(PREFS_BEING_WEEK, user.getBegainDayOfWeek());
+            editor.putBoolean(PREFS_BUDGET_SELECTED, false);
             editor.putInt(PREFS_BUDGET_VALUE, user.getBadgetValue());
             editor.putInt(PREFS_CURRENCY, user.getCurrency());
             editor.putBoolean(PREFS_ALERT, user.isDailyAlert());

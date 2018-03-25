@@ -163,7 +163,7 @@ public class CategoryDetailFragment extends Fragment {
                             name.setText("");
                             value.setText("");
 
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.delete), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -257,7 +257,7 @@ public class CategoryDetailFragment extends Fragment {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -317,7 +317,7 @@ public class CategoryDetailFragment extends Fragment {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

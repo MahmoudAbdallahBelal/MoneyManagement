@@ -165,7 +165,7 @@ public class DialogAddItemFragment extends DialogFragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
+                                //  Toast.makeText(getActivity().getParent().getApplicationContext(), "message" + message, Toast.LENGTH_LONG).show();
 
                                 dismiss();
                             } catch (JSONException e) {

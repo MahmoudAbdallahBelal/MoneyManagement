@@ -52,6 +52,7 @@ public class SettingActivity extends AppCompatActivity {
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
+    int flag = 0;
 
 
     @Override
@@ -69,7 +70,6 @@ public class SettingActivity extends AppCompatActivity {
         shar = new SharedPreference();
         user = shar.getUser(getApplicationContext());
 
-        //  Toast.makeText(getApplicationContext(), ",,,," + user.getEmail(), Toast.LENGTH_LONG).show();
 
 
         //------------------------------------budget
@@ -95,19 +95,26 @@ public class SettingActivity extends AppCompatActivity {
 
         tv_DailyAlert = findViewById(R.id.setting_check_tv_daily_alert);
 
+        User us = shar.getUser(getApplicationContext());
+        if (us.isDailyAlert() == false) {
+
+            flag = 0;
+            // createDialog();
+        }
+        if (us.isDailyAlert() == true) {
+
+            flag = 1;
+            //  removeAlert();
+        }
         tv_DailyAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User us = shar.getUser(getApplicationContext());
 
-                if (us.isDailyAlert() == false) {
+                if (flag == 1) {
 
-                    createDialog();
                 }
-                if (us.isDailyAlert() == true) {
 
-                    removeAlert();
-                }
+
             }
         });
 
@@ -118,7 +125,7 @@ public class SettingActivity extends AppCompatActivity {
 
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelection(user.getBegainDayOfWeek());
+        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -59,7 +59,6 @@ public class AllItemCategoryFragment extends Fragment {
         //--get category data from intent to put in menu -------
          categoryDatd= (Category) getActivity().getIntent().getSerializableExtra("categoryData");
 
-
         shar = new SharedPreference();
 
 
@@ -82,6 +81,12 @@ public class AllItemCategoryFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        data.clear();
+        getAllItem();
+    }
 
 
     @Override
@@ -120,6 +125,8 @@ public class AllItemCategoryFragment extends Fragment {
 
     private void getAllItem() {
 
+        String cc = shar.getValue(getContext());
+
 
         // Initialize a new JsonObjectRequest instance
         String vvv = itemUrl + "?id=" + categoryDatd.getId();
@@ -136,6 +143,7 @@ public class AllItemCategoryFragment extends Fragment {
                             JSONArray arr = response.getJSONArray("data");
 
 
+                            data.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Item category = new Item(

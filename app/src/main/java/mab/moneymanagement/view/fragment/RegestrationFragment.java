@@ -112,7 +112,13 @@ public class RegestrationFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Regester();
+                try {
+                    Regester();
+
+                } catch (Exception e) {
+
+                }
+
 
 
             }

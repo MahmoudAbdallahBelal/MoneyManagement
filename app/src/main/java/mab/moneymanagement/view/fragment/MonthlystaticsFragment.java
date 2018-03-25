@@ -85,6 +85,7 @@ public class MonthlystaticsFragment extends Fragment {
 
                             adapter = new MonthlystaticsAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {

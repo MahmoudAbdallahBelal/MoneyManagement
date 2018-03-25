@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,18 +63,19 @@ public class DailyFragment extends Fragment {
         shar = new SharedPreference();
 
 
-        java.util.Date date = new java.sql.Date(System.currentTimeMillis());
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        year = localDate.getYear();
-        month = localDate.getMonthValue();
-        day = localDate.getDayOfMonth();
-
+        Calendar cal = Calendar.getInstance();       // get calendar instance
+        Date zeroedDate = cal.getTime();
+        year = zeroedDate.getYear();
+        month = zeroedDate.getMonth() + 1;
+        day = zeroedDate.getDate();
         if (day != 0) {
             getAllItem();
         } else {
-            Toast.makeText(getContext(), "day", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getContext(), "day", Toast.LENGTH_LONG).show();
 
         }
+
+
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,7 +108,7 @@ public class DailyFragment extends Fragment {
                             // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
                             if (arr.length() == 0) {
-                                Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
 
                             }
 

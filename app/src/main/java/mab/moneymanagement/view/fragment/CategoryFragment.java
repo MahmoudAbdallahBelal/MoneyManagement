@@ -66,6 +66,15 @@ public class CategoryFragment extends Fragment {
     String categoryName;
     int value;
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        expenseData.clear();
+        incomeData.clear();
+        getExpenseCategory();
+        getinComeseCategory();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -292,7 +301,10 @@ public class CategoryFragment extends Fragment {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            incomeData.clear();
+                            getinComeseCategory();
+
+                            Toast.makeText(getContext(), getString(R.string.add_done), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -354,8 +366,12 @@ public class CategoryFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
+                            Toast.makeText(getContext(), getString(R.string.add_done), Toast.LENGTH_LONG).show();
 
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                            expenseData.clear();
+                            getExpenseCategory();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

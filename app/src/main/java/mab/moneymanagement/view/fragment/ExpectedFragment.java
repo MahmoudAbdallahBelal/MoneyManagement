@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,7 +30,6 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.adapter.ExpectedAdapter;
-import mab.moneymanagement.view.model.Category;
 import mab.moneymanagement.view.model.ExpectedData;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
@@ -60,6 +58,8 @@ public class ExpectedFragment extends Fragment {
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         month = localDate.getMonthValue();
+        data.clear();
+
         getStatics(month);
 
 
@@ -80,24 +80,30 @@ public class ExpectedFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
-                            data.clear();
+                            data.clear()
+                            ;
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
-                                ExpectedData expectedData = new ExpectedData(
-                                        jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
-                                        jsonObject.getString("Icon"),
-                                        jsonObject.getInt("Money"),
-                                        jsonObject.getInt("Budget"),
-                                        jsonObject.getInt("Month"),
-                                        jsonObject.getInt("Year")
 
-                                );
-                                data.add(expectedData);
+                                if (jsonObject.getInt("Budget") == 0) {
+                                    ExpectedData expectedData = new ExpectedData(
+                                            jsonObject.getInt("Id"),
+                                            jsonObject.getString("Name"),
+                                            jsonObject.getString("Icon"),
+                                            jsonObject.getInt("Money"),
+                                            jsonObject.getInt("Budget"),
+                                            jsonObject.getInt("Month"),
+                                            jsonObject.getInt("Year"),
+                                            jsonObject.getInt("Budget") - jsonObject.getInt("Money")
+
+
+                                    );
+                                    data.add(expectedData);
+                                }
 
 
                             }

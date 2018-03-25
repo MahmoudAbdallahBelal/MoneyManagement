@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,7 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
+import mab.moneymanagement.view.model.ExpectedData;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
@@ -41,11 +43,13 @@ public class ChartFragment extends Fragment {
 
 
     BarChart barrChart;
-    SharedPreference shar;
-    int month;
+    ArrayList<ExpectedData> data = new ArrayList<>();
     String staticUrl = URL.PATH + URL.RESET_CTEGORY;
+    SharedPreference shar;
     int income;
     int expense;
+
+    int month;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -54,38 +58,45 @@ public class ChartFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
-
-
-        shar = new SharedPreference();
-
-
-
         barrChart = v.findViewById(R.id.bar_chart);
 
+        shar = new SharedPreference();
+        Calendar cal = Calendar.getInstance();       // get calendar instance
+        Date zeroedDate = cal.getTime();
+        month = zeroedDate.getMonth() + 1;
 
+
+        getStatics(month);
+        for (int i = 0; i < data.size(); i++) {
+            income += data.get(i).getBudget();
+            expense += data.get(i).getMoney();
+        }
+
+
+//--------------------------------------------------------------
         barrChart.setDrawBarShadow(false);
         barrChart.setDrawValueAboveBar(true);
-        barrChart.setMaxVisibleValueCount(100);
+        barrChart.setMaxVisibleValueCount(income + expense);
         barrChart.setPinchZoom(false);
         barrChart.setDrawGridBackground(true);
 
 
-            ArrayList<BarEntry> barEntry = new ArrayList<>();
-        barEntry.add(new BarEntry(1, income + 10));
-        barEntry.add(new BarEntry(2, expense + 10));
+        ArrayList<BarEntry> barEntry = new ArrayList<>();
+        barEntry.add(new BarEntry(1, income));
+        barEntry.add(new BarEntry(2, expense));
 
-            BarDataSet barDataSet = new BarDataSet(barEntry, "");
-            barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        BarDataSet barDataSet = new BarDataSet(barEntry, "");
+        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
-            BarData data = new BarData(barDataSet);
-            data.setBarWidth(.9f);
-            barrChart.setData(data);
+        BarData data = new BarData(barDataSet);
+        data.setBarWidth(.9f);
+        barrChart.setData(data);
 
 
         return v;
     }
 
-    private int getStatics(final int month) {
+    private void getStatics(final int month) {
 
 
         // Initialize a new JsonObjectRequest instance
@@ -99,16 +110,27 @@ public class ChartFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
 
+                                if (jsonObject.getInt("Budget") == 0) {
 
-                                expense += jsonObject.getInt("Money");
-                                income += jsonObject.getInt("Budget");
+                                    ExpectedData expectedData = new ExpectedData(
+                                            jsonObject.getInt("Id"),
+                                            jsonObject.getString("Name"),
+                                            jsonObject.getString("Icon"),
+                                            jsonObject.getInt("Money"),
+                                            jsonObject.getInt("Budget"),
+                                            jsonObject.getInt("Month"),
+                                            jsonObject.getInt("Year"),
+                                            jsonObject.getInt("Money")
+                                    );
+                                    data.add(expectedData);
+                                }
 
 
                             }
@@ -145,19 +167,7 @@ public class ChartFragment extends Fragment {
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
-        return expense;
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        month = localDate.getMonthValue();
-        getStatics(month);
-
-    }
 }

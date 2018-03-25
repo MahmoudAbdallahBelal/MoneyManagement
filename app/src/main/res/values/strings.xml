@@ -25,13 +25,14 @@
         <item>L.E</item>
     </string-array>
     <string-array name="day">
-        <item>Saturday</item>
         <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
         <item>Thurthday</item>
         <item>Friday</item>
+        <item>Saturday</item>
+
     </string-array>
 
     <string-array name="icon">
@@ -137,4 +138,10 @@
     <string name="done">Done</string>
     <string name="choose_date_btn_done">Done</string>
     <string name="all_item_inday">All item in day</string>
+    <string name="complete_data">Please Complete data ...</string>
+    <string name="no_changes">No data changes</string>
+    <string name="update_done">Update Done</string>
+    <string name="delete">Delete done</string>
+    <string name="add_done">Add done</string>
+    <string name="select_day">Please select day</string>
 </resources>

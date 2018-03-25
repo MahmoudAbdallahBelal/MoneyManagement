@@ -2,6 +2,7 @@ package mab.moneymanagement.view.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,10 +20,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +29,7 @@ import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 public class CalenderTapFragment extends Fragment {
-    int year, month, day;
+    int yearr, monthh, dayy;
 
     CalendarView calendarView;
     String restUrl = URL.PATH + URL.RESET_CTEGORY;
@@ -46,18 +43,16 @@ public class CalenderTapFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_calender_tap, container, false);
 
         calendarView = v.findViewById(R.id.calendar_tap_fragment);
-        shar = new SharedPreference();
-
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        year = localDate.getYear();
-        month = localDate.getMonthValue();
-        day = localDate.getDayOfMonth();
-
-        int d = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
-        if (d == day) {
-            resetcategory();
-        }
+//        shar = new SharedPreference();
+//        calendarView.getDate();
+//
+//
+//        int dd = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
+//        int mm=Calendar.getInstance().getActualMaximum(Calendar.MONTH);
+//        int yy=Calendar.getInstance().getActualMaximum(Calendar.YEAR);
+//        if (dd == dayy ||monthh>mm||yearr>yy) {
+//            resetcategory();
+//        }
         return v;
     }
 
@@ -65,7 +60,7 @@ public class CalenderTapFragment extends Fragment {
 
         final JSONObject updateObject = new JSONObject();
         try {
-            updateObject.put("month", month);
+            updateObject.put("month", monthh);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -73,7 +68,7 @@ public class CalenderTapFragment extends Fragment {
 
 
         // Initialize a new JsonObjectRequest instance
-        String vv = restUrl + "?month=" + month;
+        String vv = restUrl + "?month=" + monthh;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, vv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override

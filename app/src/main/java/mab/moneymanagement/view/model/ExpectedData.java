@@ -13,8 +13,9 @@ public class ExpectedData {
     int budget;
     int month;
     int year;
+    int percentage;
 
-    public ExpectedData(int id, String name, String icon, int money, int budget, int month, int year) {
+    public ExpectedData(int id, String name, String icon, int money, int budget, int month, int year, int percentage) {
         this.id = id;
         this.name = name;
         this.icon = icon;
@@ -22,6 +23,15 @@ public class ExpectedData {
         this.budget = budget;
         this.month = month;
         this.year = year;
+        this.percentage = percentage;
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
     }
 
     public int getId() {

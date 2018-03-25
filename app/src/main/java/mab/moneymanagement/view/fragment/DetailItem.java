@@ -300,7 +300,7 @@ public class DetailItem extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.delete), Toast.LENGTH_LONG).show();
 
                             if (message.equals("Delete is Success")) {
                                 name.setText("");
@@ -311,7 +311,8 @@ public class DetailItem extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            deletItem();
+                            //   Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -321,8 +322,9 @@ public class DetailItem extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        deletItem();
                         // Do something when error occurred
-                        Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                     }
@@ -373,11 +375,12 @@ public class DetailItem extends Fragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                updateItem();
+                                // Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
 
@@ -387,8 +390,9 @@ public class DetailItem extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            updateItem();
                             // Do something when error occurred
-                            Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }

@@ -64,7 +64,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         //--------------------------------------check current user--------------
         String tt = shar.getValue(getApplicationContext());
-        // shar.saveUser(getApplicationContext(),getUserData());
+        shar.saveUser(getApplicationContext(), getUserData());
 
         if (tt.equals("null null")) {
             shar.removeValue(getApplicationContext());
@@ -198,7 +198,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             shar.removeValue(getApplicationContext());
             shar.clearSharedPreference(getApplicationContext());
             shar.removeUser(getApplicationContext());
-            Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);

@@ -108,6 +108,7 @@ public class WeeklyFragment extends Fragment {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {

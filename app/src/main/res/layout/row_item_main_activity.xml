@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="5dp"
 
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <!-- TODO: this row that appear in main to show user the item that buy   -->
 
@@ -26,32 +26,29 @@
             android:orientation="horizontal">
 
             <TextView
-                android:textColor="@android:color/black"
                 android:id="@+id/row_item_name"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@android:color/black"
 
                 />
 
             <TextView
                 android:id="@+id/row_item_price"
-                android:textColor="@android:color/black"
-
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@android:color/black"
 
                 />
 
             <TextView
                 android:id="@+id/row_item_payment"
-                android:textColor="@android:color/black"
-
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-               />
+                android:textColor="@android:color/black" />
 
 
         </LinearLayout>
@@ -59,11 +56,9 @@
 
         <TextView
             android:id="@+id/row_item_note"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            />
+            android:padding="10dp" />
 
 
     </LinearLayout>

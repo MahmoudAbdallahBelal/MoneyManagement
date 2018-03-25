@@ -1,12 +1,7 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.JsonToken;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,11 +29,8 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
-import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class PersonalAccountFragment extends Fragment {
@@ -56,7 +47,6 @@ public class PersonalAccountFragment extends Fragment {
     SharedPreference shar;
     String kindCurrency;
 
-    MaterialDialog.Builder loginDaolog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +55,6 @@ public class PersonalAccountFragment extends Fragment {
         et_name = v.findViewById(R.id.personal_et_name);
         et_email = v.findViewById(R.id.personal_account_et_email);
         update = v.findViewById(R.id.personal_account_update);
-        loginDaolog = new MaterialDialog.Builder(getContext());
 
 
         user = new User();
@@ -179,31 +168,40 @@ public class PersonalAccountFragment extends Fragment {
 
     private void makeUpdate() {
 
-        loginDaolog.title("Wait .....").content("Save schanges").show();
 
         String email = et_email.getText().toString();
         String name = et_name.getText().toString();
 
         if (email.equals("") || name.equals("") || kindCurrency.equals("")) {
-            loginDaolog.build().dismiss();
-            Toast.makeText(getActivity(), "Please Complete data ... ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
 
 
         } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) && kindCurrency.equals(user.getCurrency())) {
-            loginDaolog.build().dismiss();
-            Toast.makeText(getActivity(), "No data changes ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_LONG).show();
 
         } else {
 
             final JSONObject updateObject = new JSONObject();
+
             try {
-                updateObject.put("Email", email);
-                updateObject.put("FullName", name);
-                updateObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
-                updateObject.put("BadgetSelected", user.getBadgetSelected());
-                updateObject.put("BadgetValue", user.getBadgetValue());
-                updateObject.put("DailyAlert", user.isDailyAlert());
-                updateObject.put("BegainDay", user.getBegainDayOfWeek());
+                if (user.getBadgetSelected() == null) {
+                    updateObject.put("Email", email);
+                    updateObject.put("FullName", name);
+                    updateObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
+                    updateObject.put("BadgetSelected", false);
+                    updateObject.put("BadgetValue", user.getBadgetValue());
+                    updateObject.put("DailyAlert", user.isDailyAlert());
+                    updateObject.put("BegainDay", user.getBegainDayOfWeek());
+
+                } else {
+                    updateObject.put("Email", email);
+                    updateObject.put("FullName", name);
+                    updateObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
+                    updateObject.put("BadgetSelected", user.getBadgetSelected());
+                    updateObject.put("BadgetValue", user.getBadgetValue());
+                    updateObject.put("DailyAlert", user.isDailyAlert());
+                    updateObject.put("BegainDay", user.getBegainDayOfWeek());
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -221,24 +219,18 @@ public class PersonalAccountFragment extends Fragment {
                                 String message = response.getString("RequstDetails");
 
                                 if (message.equals("Infromation Changed Successfuly")) {
-                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Update Done", Toast.LENGTH_LONG).show();
                                     shar.saveUser(getContext(), user);
 
-                                    loginDaolog.build().dismiss();
-                                    loginDaolog.build().hide();
                                 }
 
                                 //load data on screen after change data
                                 getUserData();
-                                Toast.makeText(getContext(), "message" + message, Toast.LENGTH_LONG).show();
 
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                loginDaolog.build().dismiss();
-                                loginDaolog.build().hide();
-                                // Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
-                                loginDaolog.autoDismiss(true);
+                                makeUpdate();
 
                             }
 
@@ -248,11 +240,7 @@ public class PersonalAccountFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Do something when error occurred
-                            loginDaolog.build().hide();
-                            //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
-                            loginDaolog.autoDismiss(true);
-
+                            makeUpdate();
 
                         }
                     }) {

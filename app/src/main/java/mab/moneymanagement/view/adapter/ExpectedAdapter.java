@@ -44,6 +44,9 @@ public class ExpectedAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(context, R.layout.row_expected, null);
 
+        double x1 = 0;
+        int x2 = 0;
+        int x3 = 0;
         TextView target = v.findViewById(R.id.row_expected_tv_target);
         TextView percentage = v.findViewById(R.id.row_expected_tv_percentage);
         TextView expense = v.findViewById(R.id.row_expected_tv_expense);
@@ -53,19 +56,22 @@ public class ExpectedAdapter extends BaseAdapter {
         name.setText(mList.get(position).getName());
 
 
-        int x1 = mList.get(position).getBudget();//target
-        int x2 = mList.get(position).getMoney();//expense
-        if (x1 == 0) {
-            percentage.setText("0:0");
+        x1 = mList.get(position).getBudget();//target
+        target.setText(x1 + "");
 
-        } else {
-            int percent = ((x1 - x2) / x1) * 100;
-            percentage.setText(percent + "");
+        x2 = mList.get(position).getMoney();//expense
+        expense.setText(x2 + "");
+
+
+        try {
+            x3 = (int) ((mList.get(position).getPercentage() * 100) / x1);
+            percentage.setText(x3 + " %");
+
+
+        } catch (Exception e) {
+            percentage.setText("0 %");
 
         }
-
-        expense.setText(x2 + "");
-        target.setText(x1 + "");
 
 
         return v;

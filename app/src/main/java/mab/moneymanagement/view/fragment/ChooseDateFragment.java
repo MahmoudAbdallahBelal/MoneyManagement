@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
-import java.util.Calendar;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.view.activity.AllItemChooseDate;
@@ -49,11 +48,11 @@ public class ChooseDateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (dayy == 0) {
-                    Toast.makeText(getActivity(), "Please select day", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.select_day), Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(getActivity(), AllItemChooseDate.class);
                     intent.putExtra("day", dayy);
-                    intent.putExtra("month", monthh);
+                    intent.putExtra("month", monthh + 1);
                     intent.putExtra("year", yearr);
                     startActivity(intent);
                 }
