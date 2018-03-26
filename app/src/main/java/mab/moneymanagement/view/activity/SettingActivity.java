@@ -71,7 +71,6 @@ public class SettingActivity extends AppCompatActivity {
         user = shar.getUser(getApplicationContext());
 
 
-
         //------------------------------------budget
         tvBudget = findViewById(R.id.setting_check_tv_budget);
 
@@ -96,22 +95,22 @@ public class SettingActivity extends AppCompatActivity {
         tv_DailyAlert = findViewById(R.id.setting_check_tv_daily_alert);
 
         User us = shar.getUser(getApplicationContext());
-        if (us.isDailyAlert() == false) {
-
-            flag = 0;
-            // createDialog();
-        }
         if (us.isDailyAlert() == true) {
 
             flag = 1;
-            //  removeAlert();
         }
+
         tv_DailyAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (flag == 1) {
+                    removeAlert();
+                    flag = 0;
 
+                } else {
+                    createDialog();
+                    flag = 1;
                 }
 
 

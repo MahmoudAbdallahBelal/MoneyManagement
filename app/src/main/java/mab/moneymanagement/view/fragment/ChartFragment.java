@@ -110,14 +110,17 @@ public class ChartFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            //   Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
                             JSONArray arr = response.getJSONArray("data");
 
+                            if (data.size() == 0) {
+                                Toast.makeText(getContext(), "0000000", Toast.LENGTH_LONG).show();
+
+                            }
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
-
-                                if (jsonObject.getInt("Budget") == 0) {
 
                                     ExpectedData expectedData = new ExpectedData(
                                             jsonObject.getInt("Id"),
@@ -127,10 +130,9 @@ public class ChartFragment extends Fragment {
                                             jsonObject.getInt("Budget"),
                                             jsonObject.getInt("Month"),
                                             jsonObject.getInt("Year"),
-                                            jsonObject.getInt("Money")
+                                            5
                                     );
                                     data.add(expectedData);
-                                }
 
 
                             }
