@@ -1,8 +1,14 @@
 package mab.moneymanagement.view.activity;
 
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.DataTruncation;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +51,8 @@ public class SettingActivity extends AppCompatActivity {
     CheckedTextView tvBudget;
     ImageView imageBudget;
     ImageView imageAlert;
+    TextView createBacup;
+    TextView shareFile;
     CheckedTextView tv_DailyAlert;
     AlertDialog.Builder builder;
     User user;
@@ -55,11 +64,14 @@ public class SettingActivity extends AppCompatActivity {
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
+    String getData = URL.PATH + URL.DATA_URL;
+
     int flag = 0;
     int budgetFlag;
     String budget;
     User us;
-
+    long quiued;
+    DownloadManager downloadManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +89,8 @@ public class SettingActivity extends AppCompatActivity {
         user = shar.getUser(getApplicationContext());
         imageBudget = findViewById(R.id.setting_budget_image);
         imageAlert = findViewById(R.id.setting_alert_image);
+        shareFile = findViewById(R.id.setting_tv_export_file);
+        createBacup = findViewById(R.id.setting_create_backup_database);
 
 
         //------------------------------------budget
@@ -194,14 +208,105 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        //------------------Share file-----------------------------
+
+        //------------------Create backup -----------------------------
+
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+                    DownloadManager.Query query = new DownloadManager.Query();
+                    query.setFilterById(quiued);
+                    Cursor c = downloadManager.query(query);
+
+                    if (c.moveToFirst()) {
+                        int coloumIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                        if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(coloumIndex)) {
+
+                        }
+
+                    }
+                }
+
+            }
+        };
+        createBacup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
+                startActivity(i);
+
+            }
+        });
+
+        //--------------------------------------------------------------------
 
     }
+
+    private void getUrl() {
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, getData, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+
+                            if (message.equals("All Data is Returned")) {
+                                String data = response.getString("Url");
+
+                                //---------------download data ---------
+
+
+                                downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                                Uri uri = Uri.parse(data);
+                                DownloadManager.Request request = new DownloadManager.Request(uri);
+                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
+                                quiued = downloadManager.enqueue(request);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            getUrl();
+
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        getUrl();
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getApplicationContext()));
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(this).addToRequestqueue(jsonObjectRequest);
+
+
+    }
+
+
 
     private void deleteAllData() {
 
 
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, delete_url, (String) null,
@@ -212,12 +317,13 @@ public class SettingActivity extends AppCompatActivity {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            Toast.makeText(getApplicationContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.delete_done), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
 
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            deleteAllData();
+                            //  Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -225,8 +331,9 @@ public class SettingActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        deleteAllData();
                         // Do something when error occurred
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }) {

@@ -9,8 +9,5 @@
 
 
 
-    <include
-        android:id="@+id/item_detail_toolbar"
-        layout="@layout/tool_bar" />
 
 </android.support.constraint.ConstraintLayout>

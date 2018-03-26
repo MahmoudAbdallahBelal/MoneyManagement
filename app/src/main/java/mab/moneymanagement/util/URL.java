@@ -26,6 +26,7 @@ public class URL {
    public static String DAILY_URL = "/api/ItemMange";
    public static String CURRENT_MONTH = "/api/ItemMange";
     public static String RESET_CTEGORY = "/api/GoToNext";
+   public static String DATA_URL = "/api/GetAllData";
 
 
 

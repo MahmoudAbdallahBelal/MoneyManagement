@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">MoneyManagement</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -145,4 +146,5 @@
     <string name="add_done">Add done</string>
     <string name="select_day">Please select day</string>
     <string name="budget_done">Budget Done</string>
+    <string name="delete_done">Delete All Database</string>
 </resources>

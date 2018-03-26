@@ -23,11 +23,5 @@ public class DetailItemActivity extends AppCompatActivity {
                     .commit();
         }
 
-
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.item_detail_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.item_detail_title));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 }

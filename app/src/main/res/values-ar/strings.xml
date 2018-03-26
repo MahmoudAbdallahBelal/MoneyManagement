@@ -1,5 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">اداره الاموال</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Chart</string>
+
+
+    <string-array name="payment">
+        <item>Cash</item>
+        <item>Saving</item>
+        <item>Credit</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>food</item>
+        <item>bill</item>
+        <item>house</item>
+    </string-array>
+    <string-array name="currency">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>UK</item>
+        <item>RSA</item>
+        <item>L.E</item>
+    </string-array>
+    <string-array name="day">
+        <item>الاحد </item>
+        <item>الاتنين </item>
+        <item>الثلاثاء </item>
+        <item>الاربعاء </item>
+        <item>الخميس </item>
+        <item>الجمعه </item>
+        <item>السبت </item>
+
+    </string-array>
+
+    <string-array name="icon">
+        <item>الطعام</item>
+        <item>المنزل</item>
+        <item>الشخصيه</item>
+        <item>المرتب</item>
+        <item>المدخرات</item>
+        <item>التسوق</item>
+        <item>الاطفال</item>
+        <item>السياره</item>
+        <item>القسط</item>
+        <item>بطاقه الاتمان</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_hint_enter_email">ادخل الايميل </string>
+    <string name="login_hint_enter_password">ادخل كلمه السر</string>
+    <string name="login_button_login">تسجيل الدخول</string>
+    <string name="complete_login_enter_name">ادخل الاسم </string>
+    <string name="complete_login_salary">المرتب</string>
+    <string name="complete_login_enter_start_month">ادخل بدايه الشهر</string>
+    <string name="complete_login_title">اكمل البيانات </string>
+    <string name="nav_myaccount">حسابي الشخصي</string>
+    <string name="nav_category">الاقسام</string>
+    <string name="nav_account">الحساب</string>
+    <string name="nav_expect">التوقعات</string>
+    <string name="nav_monthly_statics">احصائيات الشهر</string>
+    <string name="nav_calender">الاجنده</string>
+    <string name="nav_setting">الاعدادات</string>
+    <string name="nav_choosedate">اختار تاريخ</string>
+    <string name="add_item_title">اضافه عنصر</string>
+    <string name="add_item_item_name">ادخل اسم العنصر</string>
+    <string name="add_item_add_note">اضافه ملاحظه</string>
+    <string name="add_item_btn_ok">اضافه</string>
+    <string name="add_item_btn_cancel">الغاء</string>
+    <string name="row_expected_target">الميزانيه</string>
+    <string name="row_expected_expense">المستهلك</string>
+    <string name="row_expected_percentage">النسبه</string>
+    <string name="row_expected_hint_target">100 RSA</string>
+    <string name="row_expected_hint_percentage">70%</string>
+    <string name="row_expected_hint_expense">70 RSA</string>
+    <string name="setting_language">اللغه</string>
+    <string name="setting_currency">العمله</string>
+    <string name="setting_kind_currency">RSA</string>
+    <string name="setting_first_day_of_week">بدايه الاسبوع</string>
+    <string name="setting_first_day_on_month">بدايه الشهر</string>
+    <string name="setting_password_protection">تغير كلمه المرور</string>
+    <string name="setting_daily_alert">تنبيه يومي</string>
+    <string name="setting_budget">الميزانيه</string>
+    <string name="setting_export_file">Export file</string>
+    <string name="setting_create_data_backup">Create data backup</string>
+    <string name="seeting_delete_database">Delete database</string>
+    <string name="budget_title">الميزانيه</string>
+    <string name="budget_descripe">كم المبلغ الذي تريد وضعه ف الميزانيه</string>
+    <string name="budget_value">0.0</string>
+    <string name="budget_btn_cancel">الغاء</string>
+    <string name="ok">اضافه</string>
+    <string name="select_currency_title">اختار العمله</string>
+    <string name="select_language_title">اختار اللغه</string>
+    <string name="arabic"> اللغه العربيه</string>
+    <string name="english">اللغه الانجليزيه</string>
+    <string name="le">LE</string>
+    <string name="kdw">KDW</string>
+    <string name="dollar">Dollar</string>
+    <string name="rsa">RSA</string>
+    <string name="account_cash">كاش</string>
+    <string name="account_payment_card">الدفع بالكريديت</string>
+    <string name="account_new_teansfer">تحويل جديد</string>
+    <string name="account_title">Account title</string>
+    <string name="expected_title">توقعات</string>
+    <string name="category_tv_expense">المستهلك</string>
+    <string name="login_toolbar">تسجيل الدخول</string>
+    <string name="add_new_item">اضافه عنصر جديد</string>
+    <string name="calender_activity_titl">الاجنده</string>
+    <string name="cash_activity_title">كاش</string>
+    <string name="category_activity_title">الاقسام</string>
+    <string name="chart_activity_title">رسم توضيحي</string>
+    <string name="choose_date_activity_title">اختار تاريخ</string>
+    <string name="credit_activity_title">الدفع ببطاقه الاتمان</string>
+    <string name="new_transfer_activity_title">تحويل جديد</string>
+    <string name="personal_account_activity_title">الحساب الشخصي</string>
+    <string name="complete_login_btn_next">حساب جديد</string>
+    <string name="item_detail_title">تفاصيل العنصر</string>
+    <string name="item_detail_update">تعديل</string>
+    <string name="category_detail_title">تفاصيل القسم</string>
+    <string name="item_detail_delete">مسح</string>
+    <string name="all_item_category_title">جميع العناصر</string>
+    <string name="edit_category">تعديل القسم</string>
+    <string name="nav_log_out">تسجيل الخروج</string>
+    <string name="tv_name">الاسم</string>
+    <string name="tv_email">الايميل</string>
+    <string name="forget_Password">كلمه مرور جديده</string>
+    <string name="forget_password_reset">تحقق</string>
+    <string name="verifing_title_dialog">تحقق</string>
+    <string name="verifiy_code">ادخل الكود</string>
+    <string name="login_hint_enter_password_new">ادخل كلمه المرور الجديده</string>
+
+    <string name="reset_new_password">Please enter code has send to email and new password</string>
+    <string name="change_password">تغير كلمه المرور</string>
+    <string name="old_password">ادخل كلمه المرور القديمه</string>
+    <string name="new_password">ادخل كلمه المرور الجديده</string>
+    <string name="done">تم </string>
+    <string name="choose_date_btn_done">Done</string>
+    <string name="all_item_inday">جميع العناصر ف هذا اليوم</string>
+    <string name="complete_data">من فضلك اكمل البيانات</string>
+    <string name="no_changes">لايوجد تغيرات </string>
+    <string name="update_done">تم التعديل </string>
+    <string name="delete">تم عمليه الحذف</string>
+    <string name="add_done">تم الاضافه</string>
+    <string name="select_day">من فضلك اختار اليوم</string>
+    <string name="budget_done">تم وضع الميزانيه </string>
+    <string name="delete_done">تم حذف جميع البيانات</string>
+
 
 </resources>
