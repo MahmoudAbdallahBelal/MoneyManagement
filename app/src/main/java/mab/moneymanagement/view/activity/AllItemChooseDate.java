@@ -22,10 +22,6 @@ public class AllItemChooseDate extends AppCompatActivity {
         }
 
 
-        Toolbar mToolbar = findViewById(R.id.all_item_calender_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(getString(R.string.all_item_inday));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 }

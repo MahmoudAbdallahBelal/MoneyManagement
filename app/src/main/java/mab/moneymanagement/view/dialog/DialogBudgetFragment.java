@@ -11,11 +11,9 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +88,7 @@ public class DialogBudgetFragment extends DialogFragment {
                 updateObject.put("Email", user.getEmail());
                 updateObject.put("FullName", user.getFullName());
                 updateObject.put("ConcuranceyId", user.getCurrency() + 1);
-                //    updateObject.put("BadgetSelected", true);
+                updateObject.put("BadgetSelected", true);
                 updateObject.put("BadgetValue", tt);
                 updateObject.put("DailyAlert", user.isDailyAlert());
                 updateObject.put("BegainDay", user.getBegainDayOfWeek());
@@ -111,7 +109,8 @@ public class DialogBudgetFragment extends DialogFragment {
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
                                 if (message.equals("Infromation Changed Successfuly")) {
-                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), getString(R.string.budget_done), Toast.LENGTH_LONG).show();
+                                    shar.removeUser(getContext());
                                     shar.saveUser(getContext(), user);
 
                                     dismiss();
@@ -121,6 +120,7 @@ public class DialogBudgetFragment extends DialogFragment {
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                makeUpdate();
 
                             }
 
@@ -131,7 +131,8 @@ public class DialogBudgetFragment extends DialogFragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // Do something when error occurred
-                            Toast.makeText(getActivity().getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            makeUpdate();
+                            // Toast.makeText(getActivity().getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }

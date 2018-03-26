@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class SettingActivity extends AppCompatActivity {
 
 
     CheckedTextView tvBudget;
+    ImageView imageBudget;
+    ImageView imageAlert;
     CheckedTextView tv_DailyAlert;
     AlertDialog.Builder builder;
     User user;
@@ -53,6 +56,9 @@ public class SettingActivity extends AppCompatActivity {
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
     int flag = 0;
+    int budgetFlag;
+    String budget;
+    User us;
 
 
     @Override
@@ -69,23 +75,46 @@ public class SettingActivity extends AppCompatActivity {
 
         shar = new SharedPreference();
         user = shar.getUser(getApplicationContext());
+        imageBudget = findViewById(R.id.setting_budget_image);
+        imageAlert = findViewById(R.id.setting_alert_image);
 
 
         //------------------------------------budget
         tvBudget = findViewById(R.id.setting_check_tv_budget);
+        us = shar.getUser(getApplicationContext());
+        budget = tvBudget.getText().toString();
+
+        if (us.getBadgetSelected() == true) {
+            us = shar.getUser(getApplicationContext());
+            budgetFlag = 1;
+
+            imageBudget.setVisibility(View.VISIBLE);
+            tvBudget.setText(budget + "      " + us.getBadgetValue());
+        }
+
 
         tvBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User us = shar.getUser(getApplicationContext());
-
-                if (us.getBadgetSelected() == false) {
+                if (budgetFlag == 0) {
                     FragmentManager fm = getFragmentManager();
                     DialogBudgetFragment dialogFragment = new DialogBudgetFragment();
                     dialogFragment.show(fm, "");
+
+                    us = shar.getUser(getApplicationContext());
+                    imageBudget.setVisibility(View.VISIBLE);
+                    tvBudget.setText(budget + "      " + us.getBadgetValue());
+
+
                 } else {
+                    imageBudget.setVisibility(View.INVISIBLE);
+
                     removeBudget();
+                    us = shar.getUser(getApplicationContext());
+                    tvBudget.setText(budget);
+                    budgetFlag = 0;
                 }
+
 
             }
         });
@@ -94,9 +123,9 @@ public class SettingActivity extends AppCompatActivity {
 
         tv_DailyAlert = findViewById(R.id.setting_check_tv_daily_alert);
 
-        User us = shar.getUser(getApplicationContext());
+        us = shar.getUser(getApplicationContext());
         if (us.isDailyAlert() == true) {
-
+            imageAlert.setVisibility(View.VISIBLE);
             flag = 1;
         }
 
@@ -107,10 +136,14 @@ public class SettingActivity extends AppCompatActivity {
                 if (flag == 1) {
                     removeAlert();
                     flag = 0;
+                    imageAlert.setVisibility(View.INVISIBLE);
+
 
                 } else {
-                    createDialog();
+                    setAlert();
                     flag = 1;
+                    imageAlert.setVisibility(View.VISIBLE);
+
                 }
 
 
@@ -219,6 +252,9 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setAlert();
+
+                imageAlert.setVisibility(View.VISIBLE);
+
                 dialog.dismiss();
             }
         });
@@ -268,13 +304,14 @@ public class SettingActivity extends AppCompatActivity {
 
 
                             } else {
-                                Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
+                                //  Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
 
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplication(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            setAlert();
+                            //  Toast.makeText(getApplication(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }
@@ -286,8 +323,8 @@ public class SettingActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-
-                        Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        setAlert();
+                        //  Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                     }
@@ -482,17 +519,18 @@ public class SettingActivity extends AppCompatActivity {
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                Toast.makeText(getApplication(), "update day", Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getApplication(), "update day", Toast.LENGTH_LONG).show();
 
 
                             } else {
-                                Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
+                                //   Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
 
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            updateDay();
+                            // Toast.makeText(getApplicationContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -502,8 +540,9 @@ public class SettingActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        updateDay();
                         // Do something when error occurred
-                        Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        //   Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
 
 
                     }
