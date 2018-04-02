@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -60,7 +59,6 @@ public class CategoryFragment extends Fragment {
     String expenseCategoryUrl = URL.PATH + URL.CATEGORY_EXPENSE;
 
 
-    MaterialDialog.Builder loginDaolog;
     SharedPreference shar;
 
     String categoryName;
@@ -70,8 +68,6 @@ public class CategoryFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        expenseData.clear();
-        incomeData.clear();
         getExpenseCategory();
         getinComeseCategory();
     }
@@ -85,7 +81,6 @@ public class CategoryFragment extends Fragment {
         addIncome = v.findViewById(R.id.add_income_image);
         addExpense = v.findViewById(R.id.addd_expense_image);
 
-        loginDaolog = new MaterialDialog.Builder(getContext());
         shar = new SharedPreference();
 
 
@@ -308,7 +303,6 @@ public class CategoryFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            loginDaolog.build().hide();
 
                             addCategoryIncome(categoryName, value, selectedCategory);
                             // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
@@ -375,7 +369,6 @@ public class CategoryFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            loginDaolog.build().hide();
                             addCategoryExpense(categoryName, value, selectedCategory);
 
                             //Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
@@ -459,6 +452,7 @@ public class CategoryFragment extends Fragment {
                             JSONArray arr = response.getJSONArray("data");
 
 
+                            expenseData.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Category category = new Category(
@@ -482,8 +476,6 @@ public class CategoryFragment extends Fragment {
                             e.printStackTrace();
                             getExpenseCategory();
 
-                            //  loginDaolog.build().dismiss();
-                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -493,8 +485,6 @@ public class CategoryFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
-                        //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
                         getExpenseCategory();
 
 
@@ -530,6 +520,7 @@ public class CategoryFragment extends Fragment {
                             // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
+                            incomeData.clear();
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
@@ -554,9 +545,7 @@ public class CategoryFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            loginDaolog.build().dismiss();
-
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            getinComeseCategory();
 
                         }
 
@@ -566,8 +555,6 @@ public class CategoryFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
-                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
                         getinComeseCategory();
 
 
@@ -577,6 +564,7 @@ public class CategoryFragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", shar.getValue(getContext()));
+                String hh = shar.getValue(getActivity());
 
                 return params;
             }

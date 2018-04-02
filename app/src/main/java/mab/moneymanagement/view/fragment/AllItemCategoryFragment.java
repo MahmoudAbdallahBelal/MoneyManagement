@@ -48,7 +48,8 @@ public class AllItemCategoryFragment extends Fragment {
     ArrayList<Item> data = new ArrayList<>();
     Category categoryDatd;
 
-    String itemUrl = URL.PATH + URL.ITEM;
+    String itemUrl = URL.PATH + URL.ITEM_CATEGORY;
+
     SharedPreference shar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,12 +126,12 @@ public class AllItemCategoryFragment extends Fragment {
 
     private void getAllItem() {
 
-        String cc = shar.getValue(getContext());
+
 
 
         // Initialize a new JsonObjectRequest instance
         String vvv = itemUrl + "?id=" + categoryDatd.getId();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, itemUrl, (String) null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vvv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

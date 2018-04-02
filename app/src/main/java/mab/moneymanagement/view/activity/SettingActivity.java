@@ -211,34 +211,35 @@ public class SettingActivity extends AppCompatActivity {
         //------------------Share file-----------------------------
 
         //------------------Create backup -----------------------------
-
-        BroadcastReceiver receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-                    DownloadManager.Query query = new DownloadManager.Query();
-                    query.setFilterById(quiued);
-                    Cursor c = downloadManager.query(query);
-
-                    if (c.moveToFirst()) {
-                        int coloumIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-                        if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(coloumIndex)) {
-
-                        }
-
-                    }
-                }
-
-            }
-        };
+//
+//        BroadcastReceiver receiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                String action = intent.getAction();
+//                if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+//                    DownloadManager.Query query = new DownloadManager.Query();
+//                    query.setFilterById(quiued);
+//                    Cursor c = downloadManager.query(query);
+//
+//                    if (c.moveToFirst()) {
+//                        int coloumIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+//                        if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(coloumIndex)) {
+//
+//                        }
+//
+//                    }
+//                }
+//
+//            }
+//        };
         createBacup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
-                i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
-                startActivity(i);
+//                Intent i = new Intent();
+//                i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
+//                startActivity(i);
 
+                getUrl();
             }
         });
 

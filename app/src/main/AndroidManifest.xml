@@ -18,7 +18,6 @@
         <activity android:name=".view.activity.Main2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -68,7 +67,11 @@
             android:name=".view.activity.ForgetPasswordActivity"
             android:parentActivityName=".view.activity.LoginActivity"
             android:noHistory="true" />
-        <activity android:name=".view.activity.AllItemChooseDate"></activity>
+        <activity
+            android:name=".view.activity.AllItemChooseDate"
+            android:parentActivityName=".view.activity.CalenderActivity"
+
+            ></activity>
     </application>
 
 </manifest>

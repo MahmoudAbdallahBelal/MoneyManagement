@@ -3,6 +3,7 @@ package mab.moneymanagement.view.fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class DailyFragment extends Fragment {
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
     SharedPreference shar;
-    String dailyUrl = URL.PATH + URL.DAILY_URL;
+    String dailyUrl = URL.PATH + URL.DAILY_URL_MAIN_ACTIVITY;
 
     int year;
     int month;
@@ -95,8 +96,7 @@ public class DailyFragment extends Fragment {
 
 
         // Initialize a new JsonObjectRequest instance
-        String vv = dailyUrl + "?Month=" + month + "&Year=" + year + "&Day=" + day;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, dailyUrl, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -105,12 +105,8 @@ public class DailyFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
-                            if (arr.length() == 0) {
-                                // Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
 
-                            }
 
                             data.clear();
                             for (int i = 0; i < arr.length(); i++) {
@@ -141,7 +137,6 @@ public class DailyFragment extends Fragment {
                             e.printStackTrace();
 
                             getAllItem();
-                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -151,8 +146,7 @@ public class DailyFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
-                        // Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+
                         getAllItem();
 
 
@@ -173,5 +167,6 @@ public class DailyFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
+
 
 }

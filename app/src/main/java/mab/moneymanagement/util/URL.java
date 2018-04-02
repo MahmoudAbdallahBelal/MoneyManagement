@@ -21,12 +21,17 @@ public class URL {
    public static String CATEGORY_EXPENSE = "/api/CategoriesOutCome";
    public static String DELETE_CATEGORY = "/api/DeleteCategory";
    public static String ITEM = "/api/Items";
+   public static String ITEM_CATEGORY = "/api/ItemCategory";
+
+
    public static String DELETE_ITEM = "/api/DeleteItem";
    public static String WEEKLY_ITEM = "/api/ItemMange";
    public static String DAILY_URL = "/api/ItemMange";
    public static String CURRENT_MONTH = "/api/ItemMange";
     public static String RESET_CTEGORY = "/api/GoToNext";
    public static String DATA_URL = "/api/GetAllData";
+   public static String DAILY_URL_MAIN_ACTIVITY = "/api/ItemDaily";
+
 
 
 

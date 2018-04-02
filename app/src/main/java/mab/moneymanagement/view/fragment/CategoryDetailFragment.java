@@ -1,5 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -87,11 +88,11 @@ public class CategoryDetailFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int vv;
                 if (categoryData.getKind().equals("expense")) {
                     String nam = name.getText().toString();
                     String valu = value.getText().toString();
-                    int vv = Integer.parseInt(valu);
+                    vv = Integer.parseInt(valu);
 
                     if (nam.equals("") || valu.equals("")) {
 
@@ -101,11 +102,10 @@ public class CategoryDetailFragment extends Fragment {
                     }
 
 
-                }
-                if (categoryData.getKind().equals("income")) {
+                } else {
                     String nam = name.getText().toString();
                     String valu = value.getText().toString();
-                    int vv = Integer.parseInt(valu);
+                    vv = Integer.parseInt(valu);
 
                     if (nam.equals("") || valu.equals("")) {
 
@@ -121,6 +121,7 @@ public class CategoryDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 deleteCategory(categoryData.getId());
+
 
             }
         });
@@ -164,6 +165,8 @@ public class CategoryDetailFragment extends Fragment {
                             value.setText("");
 
                             Toast.makeText(getContext(), getString(R.string.delete), Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
+                            startActivity(i);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -258,11 +261,13 @@ public class CategoryDetailFragment extends Fragment {
                             String message = response.getString("RequstDetails");
 
                             Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
+                            startActivity(i);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             updateCategoryIncome(categoryName, value, selectedCategory, id);
-                            //  Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -271,7 +276,6 @@ public class CategoryDetailFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Do something when error occurred
                         //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
                         updateCategoryIncome(categoryName, value, selectedCategory, id);
 
@@ -318,6 +322,9 @@ public class CategoryDetailFragment extends Fragment {
                             String message = response.getString("RequstDetails");
 
                             Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
+                            startActivity(i);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -28,6 +28,11 @@ public class AllItemCategory extends AppCompatActivity {
         }
 
 
+        Toolbar mToolbar = findViewById(R.id.all_item_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle(getString(R.string.all_item_category_title));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 
