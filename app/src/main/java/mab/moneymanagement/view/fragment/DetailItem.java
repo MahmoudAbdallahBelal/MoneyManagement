@@ -99,7 +99,7 @@ public class DetailItem extends Fragment {
 
         //------spinner for category ----------
         getExpenseCategory();
-        categorySpinner.setSelection(item.getExpenseId());
+        categorySpinner.setSelection(item.getExpenseId() - 65);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,7 +115,7 @@ public class DetailItem extends Fragment {
 
         //------spinner for currency ----------
         getinComeseCategory();
-        paymentSpinner.setSelection(item.getIncomeId());
+        paymentSpinner.setSelection(item.getIncomeId() - 65);
         paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

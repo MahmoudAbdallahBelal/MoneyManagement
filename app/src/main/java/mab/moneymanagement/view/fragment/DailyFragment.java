@@ -3,7 +3,6 @@ package mab.moneymanagement.view.fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,11 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +30,15 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
+import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
+import mab.moneymanagement.view.dialog.DialogAddItemFragment;
+import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
-public class DailyFragment extends Fragment {
+public class DailyFragment extends Fragment implements InterfaceItem {
 
     MainItemAdapter adapter;
     ListView mList;
@@ -48,9 +46,6 @@ public class DailyFragment extends Fragment {
     SharedPreference shar;
     String dailyUrl = URL.PATH + URL.DAILY_URL_MAIN_ACTIVITY;
 
-    int year;
-    int month;
-    int day;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -59,23 +54,12 @@ public class DailyFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_daily, container, false);
 
+        Main2Activity.setListner(this);
         mList = v.findViewById(R.id.daily_fragment_list);
 
         shar = new SharedPreference();
 
-
-        Calendar cal = Calendar.getInstance();       // get calendar instance
-        Date zeroedDate = cal.getTime();
-        year = zeroedDate.getYear();
-        month = zeroedDate.getMonth() + 1;
-        day = zeroedDate.getDate();
-        if (day != 0) {
-            getAllItem();
-        } else {
-            //  Toast.makeText(getContext(), "day", Toast.LENGTH_LONG).show();
-
-        }
-
+        getAllItem();
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -130,7 +114,6 @@ public class DailyFragment extends Fragment {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {
@@ -163,6 +146,12 @@ public class DailyFragment extends Fragment {
 
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+    @Override
+    public void onClick(Item item) {
+        getAllItem();
 
     }
 

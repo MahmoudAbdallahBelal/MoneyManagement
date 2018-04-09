@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -135,8 +136,8 @@ public class RegestrationFragment extends Fragment {
         if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
             Toast.makeText(getContext(), "complete all data ", Toast.LENGTH_LONG).show();
 
+            //  String device_id= Settings.Secure.getString(getContext().getContentResolver(),Settings.Secure.ANDROID_ID);
 
-        } else {
 
             loginDaolog.title("Create Account ").content("Please wait untol regester ..").show();
             final JSONObject regsterObject = new JSONObject();
@@ -149,6 +150,9 @@ public class RegestrationFragment extends Fragment {
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);
+                regsterObject.put("DeviceId", "");
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

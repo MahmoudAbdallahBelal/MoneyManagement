@@ -1,6 +1,8 @@
 package mab.moneymanagement.view.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +30,11 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
+import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.CustomSpinnerAdapter;
+import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 /**
@@ -37,6 +42,15 @@ import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
  */
 
 public class DialogAddItemFragment extends DialogFragment {
+
+
+    public static InterfaceItem interfaceItem;
+
+    public static DialogAddItemFragment getDio(InterfaceItem interfaceIt) {
+        interfaceItem = interfaceIt;
+        return new DialogAddItemFragment();
+
+    }
 
     EditText itemName;
     EditText itemPrice;
@@ -61,9 +75,11 @@ public class DialogAddItemFragment extends DialogFragment {
     int incomeId = -1;
     int expenseId = -1;
 
+    Item item;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View edit_layout = inflater.inflate(R.layout.add_item, container, false);
 
 
@@ -111,9 +127,12 @@ public class DialogAddItemFragment extends DialogFragment {
             public void onClick(View v) {
                 try {
                     addItem();
+                    interfaceItem.onClick(item);
+                    //  Toast.makeText(getActivity(), "done", Toast.LENGTH_LONG).show();
+
 
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Sorry erro rhappen try again", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getActivity(), "Sorry erro rhappen try again", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -135,6 +154,9 @@ public class DialogAddItemFragment extends DialogFragment {
         String note = itemNote.getText().toString();
         String val = itemPrice.getText().toString();
         int price = Integer.parseInt(val);
+
+        item = new Item(0, name, note, price, incomeId, expenseId, "", "", "");
+
 
         if (incomeId == -1 || expenseId == -1 | name.equals("") | val.equals("")) {
             Toast.makeText(getActivity(), "Please complete data ", Toast.LENGTH_LONG).show();
@@ -165,13 +187,11 @@ public class DialogAddItemFragment extends DialogFragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                //  Toast.makeText(getActivity().getParent().getApplicationContext(), "message" + message, Toast.LENGTH_LONG).show();
 
                                 dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 addItem();
-                                //Toast.makeText(getContext(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
 
@@ -182,9 +202,6 @@ public class DialogAddItemFragment extends DialogFragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             addItem();
-                            // Do something when error occurred
-                            //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
-
 
                         }
                     }) {
@@ -196,7 +213,6 @@ public class DialogAddItemFragment extends DialogFragment {
                 }
             };
 
-            // Add JsonObjectRequest to the RequestQueue
             MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }
@@ -346,5 +362,6 @@ public class DialogAddItemFragment extends DialogFragment {
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
     }
+
 
 }

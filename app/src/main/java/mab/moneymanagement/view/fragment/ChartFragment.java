@@ -24,8 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +43,7 @@ public class ChartFragment extends Fragment {
     BarChart barrChart;
     ArrayList<ExpectedData> data = new ArrayList<>();
     String staticUrl = URL.PATH + URL.RESET_CTEGORY;
+
     SharedPreference shar;
     int income;
     int expense;
@@ -110,38 +109,39 @@ public class ChartFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            //   Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
-                            if (data.size() == 0) {
-                                Toast.makeText(getContext(), "0000000", Toast.LENGTH_LONG).show();
+
+                            if (arr.length() == 0) {
+                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
                             }
 
+                            data.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
 
-                                    ExpectedData expectedData = new ExpectedData(
-                                            jsonObject.getInt("Id"),
-                                            jsonObject.getString("Name"),
-                                            jsonObject.getString("Icon"),
-                                            jsonObject.getInt("Money"),
-                                            jsonObject.getInt("Budget"),
-                                            jsonObject.getInt("Month"),
-                                            jsonObject.getInt("Year"),
-                                            5
-                                    );
-                                    data.add(expectedData);
+                                ExpectedData expectedData = new ExpectedData(
+                                        jsonObject.getInt("Id"),
+                                        jsonObject.getString("Name"),
+                                        jsonObject.getString("Icon"),
+                                        jsonObject.getInt("Money"),
+                                        jsonObject.getInt("Budget"),
+                                        jsonObject.getInt("Month"),
+                                        jsonObject.getInt("Year"),
+                                        jsonObject.getInt("Budget") - jsonObject.getInt("Money")
 
 
+                                );
+                                data.add(expectedData);
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            getStatics(month);
+                            //getStatics(month);
                         }
 
 
@@ -152,7 +152,7 @@ public class ChartFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
                         //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                        getStatics(month);
+                        /// getStatics(month);
 
 
                     }

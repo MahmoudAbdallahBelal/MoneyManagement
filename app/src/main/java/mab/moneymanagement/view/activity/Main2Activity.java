@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,10 +33,13 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogAddItemFragment;
+import mab.moneymanagement.view.fragment.DailyFragment;
+import mab.moneymanagement.view.interfaces.InterfaceItem;
+import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
-public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, InterfaceItem {
 
     public static Boolean isLoggin = false;
     ViewPager mViewPager;
@@ -49,6 +50,13 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
 
     String user_info_url = URL.PATH + URL.USER_INFO;
+    public static InterfaceItem interfaceItem;
+
+
+    public static void setListner(InterfaceItem interfaceIt) {
+        interfaceItem = interfaceIt;
+
+    }
 
 
     @Override
@@ -90,10 +98,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  showAddItemDialog();
+
                 FragmentManager fm = getFragmentManager();
-                DialogAddItemFragment dialogFragment = new DialogAddItemFragment();
-                dialogFragment.show(fm, "");
+                DialogAddItemFragment dio = DialogAddItemFragment.getDio(Main2Activity.this);
+                dio.show(fm, "");
 
 
             }
@@ -294,4 +302,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         return user1;
     }
 
+
+    @Override
+    public void onClick(Item item) {
+        interfaceItem.onClick(item);
+
+    }
 }

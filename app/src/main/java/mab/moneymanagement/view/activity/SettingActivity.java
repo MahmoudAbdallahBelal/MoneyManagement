@@ -3,12 +3,9 @@ package mab.moneymanagement.view.activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.FragmentManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,16 +22,21 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.DataTruncation;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,8 +72,6 @@ public class SettingActivity extends AppCompatActivity {
     int budgetFlag;
     String budget;
     User us;
-    long quiued;
-    DownloadManager downloadManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,38 +208,15 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        //------------------Share file-----------------------------
 
-        //------------------Create backup -----------------------------
-//
-//        BroadcastReceiver receiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                String action = intent.getAction();
-//                if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-//                    DownloadManager.Query query = new DownloadManager.Query();
-//                    query.setFilterById(quiued);
-//                    Cursor c = downloadManager.query(query);
-//
-//                    if (c.moveToFirst()) {
-//                        int coloumIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-//                        if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(coloumIndex)) {
-//
-//                        }
-//
-//                    }
-//                }
-//
-//            }
-//        };
         createBacup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent();
-//                i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
-//                startActivity(i);
 
-                getUrl();
+                //     getUrl();
+                downloadData("localhost:49399/Files/46c1b090-25aa-452e-ae20-9077c8a23079.txt");
+
+
             }
         });
 
@@ -259,17 +236,9 @@ public class SettingActivity extends AppCompatActivity {
                             String message = response.getString("RequstDetails");
 
                             if (message.equals("All Data is Returned")) {
+                                Toast.makeText(getApplication(), "gggg", Toast.LENGTH_LONG).show();
                                 String data = response.getString("Url");
-
-                                //---------------download data ---------
-
-
-                                downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                                Uri uri = Uri.parse(data);
-                                DownloadManager.Request request = new DownloadManager.Request(uri);
-                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
-                                quiued = downloadManager.enqueue(request);
-
+                                downloadData(data);
                             }
 
 
@@ -304,9 +273,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-
     private void deleteAllData() {
-
 
 
         // Initialize a new JsonObjectRequest instance
@@ -758,7 +725,88 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    void downloadData(String url) {
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
 
+
+    }
+
+    class DownloadTask extends AsyncTask<String, Integer, String> {
+
+        ProgressDialog progressDialog;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(getApplicationContext());
+            progressDialog.setTitle(getString(R.string.download_progress));
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setMax(100);
+            progressDialog.setProgress(0);
+            progressDialog.show();
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String path = params[0];
+            int fileLength = 0;
+            try {
+                java.net.URL url = new java.net.URL(path);
+                URLConnection urlConnection = url.openConnection();
+                urlConnection.connect();
+                fileLength = urlConnection.getContentLength();
+                File newFolder = new File("DataMangement/AllData");
+
+                if (!newFolder.exists()) {
+                    newFolder.mkdir();
+                }
+                File inputFile = new File(newFolder, "download_data.txt");
+                InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
+                byte[] data = new byte[1024];
+                int total = 0;
+                int count = 0;
+
+                OutputStream outputStream = new FileOutputStream(inputFile);
+                while ((count = inputStream.read(data)) != -1) {
+                    total += count;
+                    outputStream.write(data, 0, count);
+                    int progress = total * 100 / fileLength;
+                    publishProgress(progress);
+
+                }
+                inputStream.close();
+                outputStream.close();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return getString(R.string.complete_download);
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+            progressDialog.setProgress(values[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.hide();
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+    }
 }
 
 
