@@ -47,7 +47,7 @@ public class CategoryFragment extends Fragment {
     CategoryExpenseAdapter adapter;
     CategoryIncomeAdapter incomeAdapter;
     GridView mList;
-    GridView expenceList;
+    GridView incomeList;
 
     ArrayList<Category> expenseData = new ArrayList<>();
     ArrayList<Category> incomeData = new ArrayList<>();
@@ -117,10 +117,10 @@ public class CategoryFragment extends Fragment {
         });
 
         //List Income ------------------------------------------------------------
-        expenceList = v.findViewById(R.id.category_income_list);
+        incomeList = v.findViewById(R.id.category_income_list);
         getinComeseCategory();
 
-        expenceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        incomeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Category category = incomeData.get(position);
@@ -539,7 +539,7 @@ public class CategoryFragment extends Fragment {
 
                             }
                             incomeAdapter = new CategoryIncomeAdapter(getContext(), incomeData);
-                            expenceList.setAdapter(incomeAdapter);
+                            incomeList.setAdapter(incomeAdapter);
                             incomeAdapter.notifyDataSetChanged();
 
 

@@ -102,7 +102,9 @@ public class CategoryDetailFragment extends Fragment {
                     }
 
 
-                } else {
+                }
+                if (categoryData.getKind().equals("income")) {
+
                     String nam = name.getText().toString();
                     String valu = value.getText().toString();
                     vv = Integer.parseInt(valu);
@@ -259,10 +261,12 @@ public class CategoryDetailFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
-                            Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                            //  Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
                             Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
                             startActivity(i);
+                            getActivity().finish();
 
 
                         } catch (JSONException e) {
@@ -324,6 +328,7 @@ public class CategoryDetailFragment extends Fragment {
                             Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
                             Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
                             startActivity(i);
+                            getActivity().finish();
 
 
                         } catch (JSONException e) {

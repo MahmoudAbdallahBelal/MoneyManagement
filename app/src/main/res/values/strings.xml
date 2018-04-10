@@ -147,6 +147,7 @@
     <string name="select_day">Please select day</string>
     <string name="budget_done">Budget Done</string>
     <string name="delete_done">Delete All Database</string>
+
     <string name="download_progress">Download on progress</string>
     <string name="complete_download">Download Complete</string>
 </resources>

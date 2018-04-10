@@ -26,9 +26,8 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.ForgetPasswordActivity;
-import mab.moneymanagement.view.activity.RegestrationActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
-import mab.moneymanagement.view.model.User;
+import mab.moneymanagement.view.activity.RegestrationActivity;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
@@ -111,6 +110,7 @@ public class LoginFragment extends Fragment {
             try {
                 loginObject.put("Email", email);
                 loginObject.put("Password", password);
+                loginObject.put("DeviceId", "");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
