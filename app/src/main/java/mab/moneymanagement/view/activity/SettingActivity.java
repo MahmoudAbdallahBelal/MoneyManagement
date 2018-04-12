@@ -743,8 +743,15 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         imageBudget.setVisibility(View.VISIBLE);
         tvBudget.setText(budget + "      " + user.getBadgetValue());
         budgetFlag = 1;
+        if (user.getBadgetSelected() == false) {
+            imageBudget.setVisibility(View.INVISIBLE);
 
+            removeBudget();
+            us = shar.getUser(getApplicationContext());
+            tvBudget.setText(budget);
+            budgetFlag = 0;
 
+        }
     }
 
     class DownloadTask extends AsyncTask<String, Integer, String> {

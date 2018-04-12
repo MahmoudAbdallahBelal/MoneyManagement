@@ -75,6 +75,10 @@ public class DialogBudgetFragment extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shar.removeUser(getActivity());
+                shar.saveUser(getActivity(), user);
+                interfaceBudget.onClick(user);
+
                 dismiss();
             }
         });
