@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     int budgetFlag;
     String budget;
     User us;
+    String urlData = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,22 +215,27 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         });
 
 
+        //----------------------create backup-------------
         createBacup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //     getUrl();
-                downloadData("localhost:49399/Files/46c1b090-25aa-452e-ae20-9077c8a23079.txt");
+                downloadData(getUrl());
 
 
             }
         });
 
-        //--------------------------------------------------------------------
-
+        //----------------------share data ------------------
+        shareFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareData(getUrl());
+            }
+        });
     }
 
-    private void getUrl() {
+    private String getUrl() {
 
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, getData, (String) null,
@@ -240,9 +247,11 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             String message = response.getString("RequstDetails");
 
                             if (message.equals("All Data is Returned")) {
-                                Toast.makeText(getApplication(), "gggg", Toast.LENGTH_LONG).show();
                                 String data = response.getString("Url");
-                                downloadData(data);
+                                urlData = data;
+
+                            } else {
+                                urlData = "";
                             }
 
 
@@ -274,6 +283,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         MysingleTon.getInstance(this).addToRequestqueue(jsonObjectRequest);
 
 
+        return urlData;
     }
 
 
@@ -729,11 +739,40 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     }
 
-    void downloadData(String url) {
-        DownloadTask downloadTask = new DownloadTask();
-        downloadTask.execute(url);
+    void downloadData(String urll) {
+        if (urll.equals("")) {
+            Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
 
+        } else {
 
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(urll);
+        }
+
+    }
+
+    void shareData(String urll) {
+        if (urll.equals("")) {
+            Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
+
+        } else {
+
+            shareTextUrl(urll);
+        }
+
+    }
+
+    private void shareTextUrl(String url) {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
+        share.putExtra(Intent.EXTRA_TEXT, url);
+
+        startActivity(Intent.createChooser(share, "Share link!"));
     }
 
     @Override
@@ -829,6 +868,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
         }
     }
+
 }
 
 
