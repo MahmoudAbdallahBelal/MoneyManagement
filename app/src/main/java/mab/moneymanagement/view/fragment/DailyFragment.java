@@ -151,7 +151,9 @@ public class DailyFragment extends Fragment implements InterfaceItem {
 
     @Override
     public void onClick(Item item) {
-        getAllItem();
+        data.add(item);
+        adapter.notifyDataSetChanged();
+        mList.setAdapter(adapter);
 
     }
 

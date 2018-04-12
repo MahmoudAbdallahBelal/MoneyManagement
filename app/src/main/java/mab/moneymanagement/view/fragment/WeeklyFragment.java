@@ -1,8 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,12 +27,14 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
+import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
+import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
-public class WeeklyFragment extends Fragment {
+public class WeeklyFragment extends Fragment implements InterfaceItem {
 
 
     MainItemAdapter adapter;
@@ -49,8 +48,10 @@ public class WeeklyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_weekly, container, false);
-        mList = v.findViewById(R.id.weekly_fragment_list);
 
+        Main2Activity.setListner(this);
+
+        mList = v.findViewById(R.id.weekly_fragment_list);
 
         shar = new SharedPreference();
         getAllItem();
@@ -146,4 +147,10 @@ public class WeeklyFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(Item item) {
+        data.add(item);
+        adapter.notifyDataSetChanged();
+        mList.setAdapter(adapter);
+    }
 }

@@ -27,12 +27,14 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
+import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
+import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
-public class MonthlyFragment extends Fragment {
+public class MonthlyFragment extends Fragment implements InterfaceItem {
 
 
     MainItemAdapter adapter;
@@ -47,6 +49,9 @@ public class MonthlyFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_monthly, container, false);
+
+        Main2Activity.setListner(this);
+
         mList = v.findViewById(R.id.monthly_fragment_list);
 
         shar = new SharedPreference();
@@ -143,4 +148,10 @@ public class MonthlyFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(Item item) {
+        data.add(item);
+        adapter.notifyDataSetChanged();
+        mList.setAdapter(adapter);
+    }
 }
