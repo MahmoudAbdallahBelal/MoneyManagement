@@ -117,6 +117,7 @@ public class RegestrationFragment extends Fragment {
                     Regester();
 
                 } catch (Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
 
@@ -135,7 +136,7 @@ public class RegestrationFragment extends Fragment {
 
         if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
             Toast.makeText(getContext(), "complete all data ", Toast.LENGTH_LONG).show();
-
+        } else {
             //  String device_id= Settings.Secure.getString(getContext().getContentResolver(),Settings.Secure.ANDROID_ID);
 
 

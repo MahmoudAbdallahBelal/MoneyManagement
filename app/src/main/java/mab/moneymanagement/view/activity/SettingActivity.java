@@ -1,7 +1,6 @@
 package mab.moneymanagement.view.activity;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -44,10 +43,11 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogBudgetFragment;
+import mab.moneymanagement.view.interfaces.InterfaceBudget;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements InterfaceBudget {
 
 
     CheckedTextView tvBudget;
@@ -85,6 +85,9 @@ public class SettingActivity extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(this);
 
+        //-set Listner
+        DialogBudgetFragment.getDio(this);
+
         shar = new SharedPreference();
         user = shar.getUser(getApplicationContext());
         imageBudget = findViewById(R.id.setting_budget_image);
@@ -112,9 +115,10 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (budgetFlag == 0) {
                     FragmentManager fm = getFragmentManager();
-                    DialogBudgetFragment dialogFragment = new DialogBudgetFragment();
-                    dialogFragment.show(fm, "");
+                    DialogBudgetFragment dio = DialogBudgetFragment.getDio(SettingActivity.this);
+                    dio.show(fm, "");
 
+                    dio.getDialog();
                     us = shar.getUser(getApplicationContext());
                     imageBudget.setVisibility(View.VISIBLE);
                     tvBudget.setText(budget + "      " + us.getBadgetValue());
@@ -728,6 +732,17 @@ public class SettingActivity extends AppCompatActivity {
     void downloadData(String url) {
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(url);
+
+
+    }
+
+    @Override
+    public void onClick(User user) {
+
+
+        imageBudget.setVisibility(View.VISIBLE);
+        tvBudget.setText(budget + "      " + user.getBadgetValue());
+        budgetFlag = 1;
 
 
     }

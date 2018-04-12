@@ -24,6 +24,7 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
+import mab.moneymanagement.view.interfaces.InterfaceBudget;
 import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
@@ -37,9 +38,17 @@ public class DialogBudgetFragment extends DialogFragment {
 
     EditText et_Value;
     User user;
+    User xx = new User();
     SharedPreference shar;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     View v;
+    public static InterfaceBudget interfaceBudget;
+
+    public static DialogBudgetFragment getDio(InterfaceBudget interfaceBud) {
+        interfaceBudget = interfaceBud;
+        return new DialogBudgetFragment();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +68,8 @@ public class DialogBudgetFragment extends DialogFragment {
             public void onClick(View v) {
 
                 makeUpdate();
+                interfaceBudget.onClick(xx);
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +83,7 @@ public class DialogBudgetFragment extends DialogFragment {
         return v;
     }
 
-    private void makeUpdate() {
+    private User makeUpdate() {
 
         if (et_Value.getText().toString().equals("") || user == null) {
 
@@ -81,7 +92,20 @@ public class DialogBudgetFragment extends DialogFragment {
 
             String v = et_Value.getText().toString();
             int tt = Integer.parseInt(v);
+
+
+            xx.setCurrency(user.getCurrency() + 1);
+            xx.setDailyAlert(user.isDailyAlert());
+            xx.setBadgetValue(tt);
+            xx.setEmail(user.getEmail());
+            xx.setFullName(user.getFullName());
+            xx.setBadgetSelected(true);
+            xx.setBegainDayOfWeek(user.getBegainDayOfWeek());
+
+
             final JSONObject updateObject = new JSONObject();
+
+
             try {
 
 
@@ -99,6 +123,7 @@ public class DialogBudgetFragment extends DialogFragment {
             }
 
 
+
             // Initialize a new JsonObjectRequest instance
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, update_user_info_url, updateObject,
                     new Response.Listener<JSONObject>() {
@@ -111,7 +136,7 @@ public class DialogBudgetFragment extends DialogFragment {
                                 if (message.equals("Infromation Changed Successfuly")) {
                                     // Toast.makeText(getActivity(), getString(R.string.budget_done), Toast.LENGTH_LONG).show();
                                     shar.removeUser(getContext());
-                                    shar.saveUser(getContext(), user);
+                                    shar.saveUser(getContext(), xx);
 
                                     dismiss();
                                 }
@@ -150,6 +175,7 @@ public class DialogBudgetFragment extends DialogFragment {
             MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
         }
+        return xx;
     }
 
 

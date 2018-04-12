@@ -33,7 +33,6 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogAddItemFragment;
-import mab.moneymanagement.view.fragment.DailyFragment;
 import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.model.User;
@@ -169,11 +168,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_category) {
             Intent categoryIntent = new Intent(getApplicationContext(), Category.class);
             startActivity(categoryIntent);
-
-
-        } else if (id == R.id.nav_account) {
-            Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
-            startActivity(accountIntent);
 
 
         } else if (id == R.id.nav_expect) {
