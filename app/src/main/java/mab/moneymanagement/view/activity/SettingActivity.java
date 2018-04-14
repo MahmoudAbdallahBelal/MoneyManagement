@@ -177,9 +177,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
-
-
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -193,6 +190,8 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
             }
         });
+
+        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
 
 
         //-----------------------------password protection-------------------
@@ -220,8 +219,8 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             @Override
             public void onClick(View v) {
 
-                downloadData(getUrl());
 
+                createDialog();
 
             }
         });
@@ -335,16 +334,14 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     void createDialog() {
 
-        builder.setTitle("Daily Alert ");
-        builder.setMessage("Do you want alert everu day to remmber write in application");
+        builder.setTitle("Download Data ");
+        builder.setMessage("Do you want save data in your mobile");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setAlert();
 
-                imageAlert.setVisibility(View.VISIBLE);
+                downloadData(getUrl());
 
-                dialog.dismiss();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

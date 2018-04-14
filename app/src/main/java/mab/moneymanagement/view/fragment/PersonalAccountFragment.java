@@ -61,8 +61,8 @@ public class PersonalAccountFragment extends Fragment {
 
         //------spinner for currency ----------
         currncySpinner = v.findViewById(R.id.personal_account_spinner_select_currency);
-        ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency,
-                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency, android.R.layout.simple_spinner_item);
+
         currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currncySpinner.setAdapter(currencyAdapter);
         currncySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -128,8 +128,9 @@ public class PersonalAccountFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            getUserData();
 
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -140,11 +141,12 @@ public class PersonalAccountFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // if error time out happen  call method again to get all data for user
-                        if (error.toString().equals("")) {
+//                                               if (error.toString().equals("")) {
+//
+//                        }
+//                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
 
-                        }
-                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
-
+                        getUserData();
                     }
 
 

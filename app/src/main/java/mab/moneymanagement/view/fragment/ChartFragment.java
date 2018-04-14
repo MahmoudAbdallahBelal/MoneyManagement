@@ -1,13 +1,10 @@
 package mab.moneymanagement.view.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,16 +40,16 @@ public class ChartFragment extends Fragment {
     BarChart barrChart;
     ArrayList<ExpectedData> data = new ArrayList<>();
     String staticUrl = URL.PATH + URL.RESET_CTEGORY;
-
     SharedPreference shar;
-    int income;
-    int expense;
+
+
+    public static int income;
+    public static int expense;
 
     int month;
-    int allCount;
+    int flag = 0;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -66,14 +63,15 @@ public class ChartFragment extends Fragment {
         Date zeroedDate = cal.getTime();
         month = zeroedDate.getMonth() + 1;
 
-        getStatics(month);
-
-
+        data = getStatics(month);
 
 //--------------------------------------------------------------
+
+
+        //----------------
         barrChart.setDrawBarShadow(false);
         barrChart.setDrawValueAboveBar(true);
-        barrChart.setMaxVisibleValueCount(allCount);
+        barrChart.setMaxVisibleValueCount(income + expense);
         barrChart.setPinchZoom(false);
         barrChart.setDrawGridBackground(true);
 
@@ -89,47 +87,37 @@ public class ChartFragment extends Fragment {
         data.setBarWidth(.9f);
         barrChart.setData(data);
 
+        //----------------
 
         return v;
     }
 
-    public int getStatics(final int month) {
-
-
-        // Initialize a new JsonObjectRequest instance
-        String vvv = staticUrl + "?month=" + month;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vvv, (String) null,
+    private ArrayList<ExpectedData> getStatics(final int month) {
+        String vv = staticUrl + "?month=" + month;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
 
-
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                            //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
                             JSONArray arr = response.getJSONArray("data");
-
-
-                            if (arr.length() == 0) {
-                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-
-                            }
-
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 income += jsonObject.getInt("Budget");
                                 expense += jsonObject.getInt("Money");
-
-
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            //getStatics(month);
+                            //  Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            getStatics(month);
                         }
 
 
@@ -140,7 +128,7 @@ public class ChartFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
                         //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                        /// getStatics(month);
+                        getStatics(month);
 
 
                     }
@@ -157,8 +145,12 @@ public class ChartFragment extends Fragment {
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
-        return income + expense;
+        return data;
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
