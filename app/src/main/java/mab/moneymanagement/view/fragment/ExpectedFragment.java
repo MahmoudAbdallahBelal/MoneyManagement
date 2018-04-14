@@ -76,14 +76,14 @@ public class ExpectedFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
 
-                            if (arr.length() == 0) {
-                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-
-                            }
+//                            if (arr.length() == 0) {
+//                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+//
+//                            }
 
                             data.clear();
                             for (int i = 0; i < arr.length(); i++) {

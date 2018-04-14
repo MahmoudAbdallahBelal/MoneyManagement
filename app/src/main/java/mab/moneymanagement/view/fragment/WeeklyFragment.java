@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -152,5 +153,7 @@ public class WeeklyFragment extends Fragment implements InterfaceItem {
         data.add(item);
         adapter.notifyDataSetChanged();
         mList.setAdapter(adapter);
+        Toast.makeText(getActivity(), "55555", Toast.LENGTH_LONG).show();
+
     }
 }

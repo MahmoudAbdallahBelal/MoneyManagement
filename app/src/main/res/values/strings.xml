@@ -151,4 +151,5 @@
     <string name="download_progress">Download on progress</string>
     <string name="complete_download">Download Complete</string>
     <string name="setting_download">\"Sorry Error happen\"</string>
+    <string name="category_budget">your Budget through current month :</string>
 </resources>

@@ -54,7 +54,7 @@ public class CategoryIncomeAdapter extends BaseAdapter {
 
         name.setText(mList.get(position).getName());
         icon.setImageResource(getIcomImage(mList.get(position).getIcon()));
-        int tar = mList.get(position).getBudget();
+        int tar = mList.get(position).getMoney();
         target.setText(tar + "");
 
 

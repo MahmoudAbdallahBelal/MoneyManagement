@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -153,5 +154,6 @@ public class MonthlyFragment extends Fragment implements InterfaceItem {
         data.add(item);
         adapter.notifyDataSetChanged();
         mList.setAdapter(adapter);
+
     }
 }

@@ -49,6 +49,7 @@ public class ChartFragment extends Fragment {
     int expense;
 
     int month;
+    int allCount;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -58,24 +59,21 @@ public class ChartFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
         barrChart = v.findViewById(R.id.bar_chart);
-
         shar = new SharedPreference();
+
+
         Calendar cal = Calendar.getInstance();       // get calendar instance
         Date zeroedDate = cal.getTime();
         month = zeroedDate.getMonth() + 1;
 
-
         getStatics(month);
-        for (int i = 0; i < data.size(); i++) {
-            income += data.get(i).getBudget();
-            expense += data.get(i).getMoney();
-        }
+
 
 
 //--------------------------------------------------------------
         barrChart.setDrawBarShadow(false);
         barrChart.setDrawValueAboveBar(true);
-        barrChart.setMaxVisibleValueCount(income + expense);
+        barrChart.setMaxVisibleValueCount(allCount);
         barrChart.setPinchZoom(false);
         barrChart.setDrawGridBackground(true);
 
@@ -95,12 +93,12 @@ public class ChartFragment extends Fragment {
         return v;
     }
 
-    private void getStatics(final int month) {
+    public int getStatics(final int month) {
 
 
         // Initialize a new JsonObjectRequest instance
-        String vv = staticUrl + "?month=" + month;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
+        String vvv = staticUrl + "?month=" + month;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vvv, (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -118,23 +116,13 @@ public class ChartFragment extends Fragment {
 
                             }
 
-                            data.clear();
+
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
-
-                                ExpectedData expectedData = new ExpectedData(
-                                        jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
-                                        jsonObject.getString("Icon"),
-                                        jsonObject.getInt("Money"),
-                                        jsonObject.getInt("Budget"),
-                                        jsonObject.getInt("Month"),
-                                        jsonObject.getInt("Year"),
-                                        jsonObject.getInt("Budget") - jsonObject.getInt("Money")
+                                income += jsonObject.getInt("Budget");
+                                expense += jsonObject.getInt("Money");
 
 
-                                );
-                                data.add(expectedData);
                             }
 
 
@@ -169,6 +157,7 @@ public class ChartFragment extends Fragment {
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
+        return income + expense;
     }
 
 

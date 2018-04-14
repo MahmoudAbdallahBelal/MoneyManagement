@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +31,7 @@ import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.model.Category;
+import mab.moneymanagement.view.model.User;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;
 
 
@@ -48,6 +50,12 @@ public class CategoryDetailFragment extends Fragment {
 
     Category categoryData;
     SharedPreference shar;
+
+    User user;
+
+    int allMoney = 0;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,9 +93,12 @@ public class CategoryDetailFragment extends Fragment {
         });
 
 
+        getExpenseCategory();
+
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkBudget();
                 int vv;
                 if (categoryData.getKind().equals("expense")) {
                     String nam = name.getText().toString();
@@ -128,10 +139,18 @@ public class CategoryDetailFragment extends Fragment {
             }
         });
 
+        if (categoryData.getKind().equals("income")) {
+            int valu = categoryData.getMoney();
+            value.setText(valu + "");
 
+        }
+
+        if (categoryData.getKind().equals("expense")) {
+            int valu = categoryData.getBudget();
+            value.setText(valu + "");
+
+        }
         name.setText(categoryData.getName());
-        int valu = categoryData.getBudget();
-        value.setText(valu + "");
         iconSpinner.setSelection(0);
 
 
@@ -262,7 +281,7 @@ public class CategoryDetailFragment extends Fragment {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
                             // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-                            Toast.makeText(getContext(), "2222222222", Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), "2222222222", Toast.LENGTH_LONG).show();
 
                             //  Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
                             Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
@@ -326,7 +345,7 @@ public class CategoryDetailFragment extends Fragment {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
 
-                            Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
                             Intent i = new Intent(getActivity(), mab.moneymanagement.view.activity.Category.class);
                             startActivity(i);
                             getActivity().finish();
@@ -398,6 +417,76 @@ public class CategoryDetailFragment extends Fragment {
             return 9;
 
 
+    }
+
+    private int getExpenseCategory() {
+
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, expenseCategoryUrl, (String) null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            // Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            JSONArray arr = response.getJSONArray("data");
+
+
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject jsonObject = arr.getJSONObject(i);
+                                allMoney += jsonObject.getInt("Budget");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            getExpenseCategory();
+
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        getExpenseCategory();
+
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", shar.getValue(getContext()));
+
+                return params;
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+        return allMoney;
+    }
+
+    void checkBudget() {
+        user = shar.getUser(getContext());
+        int flag = user.getBadgetValue();
+        int count = 0;
+        if (flag != 0) {
+            int xx = getExpenseCategory();
+            count = flag / 2;
+
+            if (xx > count) {
+                Toast.makeText(getContext(), getString(R.string.category_budget) + user.getBadgetValue(), Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
 }
