@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,6 +133,7 @@ public class RegestrationFragment extends Fragment {
         name = etName.getText().toString();
         password = etPassword.getText().toString();
         email = etEmail.getText().toString();
+        String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
 
         if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
@@ -151,7 +153,7 @@ public class RegestrationFragment extends Fragment {
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);
-                regsterObject.put("DeviceId", "");
+                regsterObject.put("DeviceId", deviceToken);
 
 
             } catch (JSONException e) {

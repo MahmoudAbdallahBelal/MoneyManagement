@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "435711337022",
+    "firebase_url": "https://financeapp2018-1ba8c.firebaseio.com",
+    "project_id": "financeapp2018-1ba8c",
+    "storage_bucket": "financeapp2018-1ba8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435711337022:android:188de63dcc2f5acd",
+        "android_client_info": {
+          "package_name": "mab.moneymanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435711337022-kiaba1v10j6so95c8hq7eiri53k0436f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6zHMNkmpQcHtxYPJYocfSA5891ErEhMI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

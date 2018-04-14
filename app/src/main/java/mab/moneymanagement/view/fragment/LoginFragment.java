@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +99,8 @@ public class LoginFragment extends Fragment {
         loginDaolog.title(getString(R.string.login_toolbar)).content("please wait until login ....").show();
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
+        String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
         //-----check validate -------------
         if (email.equals("") || password.equals("")) {
             Toast.makeText(getContext(), "Complete data ", Toast.LENGTH_LONG).show();
@@ -110,7 +113,7 @@ public class LoginFragment extends Fragment {
             try {
                 loginObject.put("Email", email);
                 loginObject.put("Password", password);
-                loginObject.put("DeviceId", "");
+                loginObject.put("DeviceId", deviceToken);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
