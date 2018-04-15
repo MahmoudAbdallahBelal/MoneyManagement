@@ -31,6 +31,15 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
 
     private void sendPushNotification(Map map) {
+        String messageAr = (String) map.get("messageAr");
+        String messageEn = (String) map.get("messageEn");
+
+        String title = (String) map.get("title");
+
+        MyNotificationManager mNotificationManager = new MyNotificationManager(getBaseContext());
+
+
+        mNotificationManager.showSmallNotification(title, messageEn);
 
     }
 
