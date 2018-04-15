@@ -63,7 +63,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     TextView delete;
     Spinner daySpinner;
     TextView password;
-    String selectedDay;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
@@ -74,6 +73,8 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     String budget;
     User us;
     String urlData = "";
+    int xxx;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getString(R.string.nav_setting));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         builder = new AlertDialog.Builder(this);
 
@@ -177,26 +179,37 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
+        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
+        daySpinner.setSelected(true);
+
+        final int[] iCurrentSelection = {user.getBegainDayOfWeek() - 1};
+
+
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedDay = daySpinner.getItemAtPosition(position).toString();
+
+                xxx = position + 1;
                 updateDay();
 
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                return;
 
             }
         });
 
-        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
-
 
         //-----------------------------password protection-------------------
-        password = findViewById(R.id.setting_tv_password_protection);
-        password.setOnClickListener(new View.OnClickListener() {
+        password =
+
+                findViewById(R.id.setting_tv_password_protection);
+        password.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 passwordProtection();
@@ -205,8 +218,12 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
         //--------------------delete all data in program -----------
-        delete = findViewById(R.id.setting_delete_database);
-        delete.setOnClickListener(new View.OnClickListener() {
+        delete =
+
+                findViewById(R.id.setting_delete_database);
+        delete.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 deleteAllData();
@@ -215,7 +232,9 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
         //----------------------create backup-------------
-        createBacup.setOnClickListener(new View.OnClickListener() {
+        createBacup.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
 
@@ -226,7 +245,9 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         });
 
         //----------------------share data ------------------
-        shareFile.setOnClickListener(new View.OnClickListener() {
+        shareFile.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 shareData(getUrl());
@@ -341,6 +362,29 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             public void onClick(DialogInterface dialog, int which) {
 
                 downloadData(getUrl());
+
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        builder.create().show();
+    }
+
+    void createDialogDay() {
+
+        builder.setTitle("Change Day ");
+        builder.setMessage("Do you want to change day");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                updateDay();
 
             }
         });
@@ -586,7 +630,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             updateObject.put("BadgetSelected", user.getBadgetSelected());
             updateObject.put("BadgetValue", user.getBadgetValue());
             updateObject.put("DailyAlert", user.isDailyAlert());
-            updateObject.put("BegainDay", user.getBegainDayOfWeek());
+            updateObject.put("BegainDay", xxx);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -605,7 +649,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                // Toast.makeText(getApplication(), "update day", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), "update day", Toast.LENGTH_LONG).show();
 
 
                             } else {

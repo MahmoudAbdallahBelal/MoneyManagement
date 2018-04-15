@@ -92,7 +92,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         mTablLayout = findViewById(R.id.main_tabs);
         mTablLayout.setupWithViewPager(mViewPager);
 
-        //----------------------------
+        //-----------------notification -----------
+        if (user.isDailyAlert()) {
+
+
+        }
+        //-----------------------------------------
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
