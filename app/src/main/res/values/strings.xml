@@ -76,7 +76,6 @@
     <string name="row_expected_hint_target">100 RSA</string>
     <string name="row_expected_hint_percentage">70%</string>
     <string name="row_expected_hint_expense">70 RSA</string>
-    <string name="setting_language">Language</string>
     <string name="setting_currency">Currency</string>
     <string name="setting_kind_currency">RSA</string>
     <string name="setting_first_day_of_week">First Day of week</string>
@@ -154,4 +153,5 @@
     <string name="category_budget">your Budget through current month :</string>
     <string name="chart_income">Expect</string>
     <string name="chart_expense">Exppense</string>
+    <string name="setting_language">Language</string>
 </resources>
