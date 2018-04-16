@@ -111,6 +111,7 @@ public class CategoryFragment extends Fragment {
                 detailIntent.putExtra("kind", 1);
                 detailIntent.putExtra("categoryData", category);
 
+
                 startActivity(detailIntent);
 
             }
@@ -433,6 +434,7 @@ public class CategoryFragment extends Fragment {
 
 
     }
+
 
     //------------------------------------------------------------------------------------
     private void getExpenseCategory() {

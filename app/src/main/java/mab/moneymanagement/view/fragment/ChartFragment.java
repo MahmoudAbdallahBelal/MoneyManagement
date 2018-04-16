@@ -54,6 +54,13 @@ public class ChartFragment extends Fragment {
     Calendar cal = Calendar.getInstance();       // get calendar instance
     Date zeroedDate = cal.getTime();
     int month = zeroedDate.getMonth() + 1;
+
+    @Override
+    public void onPause() {
+        getStatics(month);
+        super.onPause();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

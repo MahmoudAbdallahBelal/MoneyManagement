@@ -47,6 +47,7 @@ public class AllItemCategoryFragment extends Fragment {
     ListView mList;
     ArrayList<Item> data = new ArrayList<>();
     Category categoryDatd;
+    int postionCategory;
 
     String itemUrl = URL.PATH + URL.ITEM_CATEGORY;
 
@@ -59,6 +60,7 @@ public class AllItemCategoryFragment extends Fragment {
 
         //--get category data from intent to put in menu -------
          categoryDatd= (Category) getActivity().getIntent().getSerializableExtra("categoryData");
+        postionCategory = getActivity().getIntent().getIntExtra("id", 0);
 
         shar = new SharedPreference();
 
@@ -115,6 +117,7 @@ public class AllItemCategoryFragment extends Fragment {
         if (id == R.id.edit_category) {
             Intent categiryIntent = new Intent(getActivity(), CategoryDetailActivity.class);
             categiryIntent.putExtra("category",categoryDatd);
+
 
             startActivity(categiryIntent);
 

@@ -104,6 +104,7 @@ public class DetailItem extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 expenseId = expenseData.get(position).getId();
+                // Toast.makeText(getActivity(),"55555",Toast.LENGTH_SHORT).show();
             }
 
             @Override

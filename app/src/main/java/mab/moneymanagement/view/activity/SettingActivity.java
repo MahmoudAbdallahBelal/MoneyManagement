@@ -195,16 +195,20 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
         daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
-        daySpinner.setSelected(true);
+
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
 
-                xxx = position + 1;
-                updateDay();
+                } else {
 
+                    xxx = position + 1;
+                    updateDay();
+                }
             }
 
 

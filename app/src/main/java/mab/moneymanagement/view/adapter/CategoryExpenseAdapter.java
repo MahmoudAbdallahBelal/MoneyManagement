@@ -67,33 +67,22 @@ public class CategoryExpenseAdapter extends BaseAdapter {
             return R.drawable.food;
         } else if (name.equals("Home")) {
             return R.drawable.house;
-
-
         } else if (name.equals("Personal")) {
             return R.drawable.personal;
-
         } else if (name.equals("Salary")) {
             return R.drawable.salalry;
-
         } else if (name.equals("saving")) {
             return R.drawable.saving;
-
         } else if (name.equals("Shopping")) {
             return R.drawable.shopping;
-
         } else if (name.equals("Child")) {
             return R.drawable.child;
-
         } else if (name.equals("Car")) {
             return R.drawable.car;
-
         } else if (name.equals("Kast")) {
             return R.drawable.kast;
-
         } else
             return R.drawable.credit;
-
-
     }
 
 }

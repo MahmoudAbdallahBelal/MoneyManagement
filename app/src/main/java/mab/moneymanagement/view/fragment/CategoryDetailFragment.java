@@ -53,8 +53,9 @@ public class CategoryDetailFragment extends Fragment {
 
     User user;
 
-    int allMoney = 0;
 
+    int allMoney = 0;
+    int flag = -1;
 
 
     @Override
@@ -74,7 +75,11 @@ public class CategoryDetailFragment extends Fragment {
 
         //------spinner for icon ----------
         iconSpinner = v.findViewById(R.id.category_detail_spinner_icon);
-        iconSpinner.setSelection(getNameIcon(categoryData.getIcon()));
+        int id = getNameIcon(categoryData.getIcon());
+        if (flag == -1) {
+            iconImage.setImageResource(getIcomImage(id));
+
+        }
 
         final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
         iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,8 +87,17 @@ public class CategoryDetailFragment extends Fragment {
         iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                iconImage.setImageResource(getIcomImage(position));
+
                 selectedCategory = iconSpinner.getItemAtPosition(position).toString();
+                flag = getIcomImage(getNameIcon(selectedCategory));
+
+                //iconImage.setImageResource(getIcomImage(flag));
+                if (id == flag) {
+                    iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
+
+                }
+
+
             }
 
             @Override
@@ -91,6 +105,16 @@ public class CategoryDetailFragment extends Fragment {
 
             }
         });
+//        try {
+//            if (selectedCategory.equals(null)){
+//
+//            }else {
+//                iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
+//
+//            }
+//        }catch (Exception e){
+//
+//        }
 
 
         getExpenseCategory();
@@ -220,39 +244,6 @@ public class CategoryDetailFragment extends Fragment {
 
     }
 
-    private int getIcomImage(int name) {
-        if (name == 0) {
-            return R.drawable.food;
-        } else if (name == 1) {
-            return R.drawable.house;
-
-
-        } else if (name == 2) {
-            return R.drawable.personal;
-
-        } else if (name == 3) {
-            return R.drawable.salalry;
-
-        } else if (name == 4) {
-            return R.drawable.saving;
-
-        } else if (name == 5) {
-            return R.drawable.shopping;
-
-        } else if (name == 6) {
-            return R.drawable.child;
-
-        } else if (name == 7) {
-            return R.drawable.car;
-
-        } else if (name == 8) {
-            return R.drawable.kast;
-
-        } else
-            return R.drawable.credit;
-
-
-    }
 
     private void updateCategoryIncome(final String categoryName, final int value, final String selectedCategory, final int id) {
 
@@ -384,39 +375,53 @@ public class CategoryDetailFragment extends Fragment {
 
     }
 
+    private int getIcomImage(int name) {
+        if (name == 0) {
+            return R.drawable.food;
+        } else if (name == 1) {
+            return R.drawable.house;
+        } else if (name == 2) {
+            return R.drawable.personal;
+        } else if (name == 3) {
+            return R.drawable.salalry;
+        } else if (name == 4) {
+            return R.drawable.saving;
+        } else if (name == 5) {
+            return R.drawable.shopping;
+        } else if (name == 6) {
+            return R.drawable.child;
+        } else if (name == 7) {
+            return R.drawable.car;
+        } else if (name == 8) {
+            return R.drawable.kast;
+        } else
+            return R.drawable.credit;
+
+
+    }
+
     private int getNameIcon(String name) {
         if (name.equals("Food")) {
             return 0;
         } else if (name.equals("Home")) {
             return 1;
-
-
         } else if (name.equals("Personal")) {
             return 2;
-
         } else if (name.equals("Salary")) {
             return 3;
-
         } else if (name.equals("Saving")) {
             return 4;
-
         } else if (name.equals("Shopping")) {
             return 5;
-
         } else if (name.equals("Child")) {
             return 6;
-
         } else if (name.equals("Car")) {
             return 7;
-
         } else if (name.equals("Kast")) {
-
             return 8;
-
         } else
+            //credit
             return 9;
-
-
     }
 
     private int getExpenseCategory() {
