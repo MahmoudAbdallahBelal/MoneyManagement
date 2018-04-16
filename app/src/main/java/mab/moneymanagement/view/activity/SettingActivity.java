@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     TextView delete;
     Spinner daySpinner;
     TextView password;
+    TextView language, selectLanguage;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
@@ -100,7 +102,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         createBacup = findViewById(R.id.setting_create_backup_database);
 
 
-        //------------------------------------budget
+        //------------------------------------budget----------------
         tvBudget = findViewById(R.id.setting_check_tv_budget);
         us = shar.getUser(getApplicationContext());
         budget = tvBudget.getText().toString();
@@ -182,8 +184,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
         daySpinner.setSelected(true);
 
-        final int[] iCurrentSelection = {user.getBegainDayOfWeek() - 1};
-
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -218,9 +218,9 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
         //--------------------delete all data in program -----------
-        delete =
+        delete = findViewById(R.id.setting_delete_database);
 
-                findViewById(R.id.setting_delete_database);
+
         delete.setOnClickListener(new View.OnClickListener()
 
         {
@@ -250,6 +250,59 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                 shareData(getUrl());
             }
         });
+
+        //---------------------------language---------------------
+        language = findViewById(R.id.setting_tv_language);
+        selectLanguage = findViewById(R.id.setting_tv_language_text);
+
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectLanguagee();
+            }
+        });
+
+    }
+
+
+    private void selectLanguagee() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle(getString(R.string.select_language_title));
+
+
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View regester_layout = inflater.inflate(R.layout.language, null);
+
+        final RadioButton arabic = regester_layout.findViewById(R.id.select_language_arabic);
+        final RadioButton english = regester_layout.findViewById(R.id.select_language_english);
+
+
+        builder.setView(regester_layout);
+
+        //SET BUTTON
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+
+            }
+        });
+
+
+        builder.setNegativeButton(getString(R.string.add_item_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+
+
+        builder.show();
+
     }
 
     private String getUrl() {

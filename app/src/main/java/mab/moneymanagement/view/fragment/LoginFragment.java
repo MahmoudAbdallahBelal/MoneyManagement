@@ -67,7 +67,12 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                if (email.equals("") || password.equals("")) {
+                    Toast.makeText(getContext(), "Complete data ", Toast.LENGTH_LONG).show();
+                } else {
+                    login();
+
+                }
 
             }
         });
