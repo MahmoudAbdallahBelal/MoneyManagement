@@ -25,34 +25,41 @@
 
         >
 
-        <RadioButton
-            android:id="@+id/select_language_arabic"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/arabic"
-            android:textColor="@color/colorPrimaryDark"
-            android:padding="12dp"
-            android:textSize="15dp"
-            android:background="@android:color/white" />
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/select_language_english"
+            <RadioButton
+                android:id="@+id/select_language_arabic"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/arabic"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="12dp"
+                android:textSize="15dp"
+                android:background="@android:color/white" />
 
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/english"
-            android:textColor="@color/colorPrimaryDark"
-            android:padding="12dp"
-            android:textSize="15dp"
-            android:background="@android:color/white" />
+            <RadioButton
+                android:id="@+id/select_language_english"
+
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/english"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="12dp"
+                android:textSize="15dp"
+                android:background="@android:color/white" />
+
+        </RadioGroup>
+
 
     </LinearLayout>
 </LinearLayout>

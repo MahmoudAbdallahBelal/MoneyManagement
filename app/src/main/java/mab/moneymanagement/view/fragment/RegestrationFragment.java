@@ -115,7 +115,16 @@ public class RegestrationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    Regester();
+                    name = etName.getText().toString();
+                    password = etPassword.getText().toString();
+                    email = etEmail.getText().toString();
+                    if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
+                        Toast.makeText(getContext(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
+                    } else {
+                        Regester();
+
+                    }
+
 
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();

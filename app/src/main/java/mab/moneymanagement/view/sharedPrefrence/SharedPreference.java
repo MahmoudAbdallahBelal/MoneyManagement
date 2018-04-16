@@ -6,9 +6,6 @@ import android.preference.PreferenceManager;
 
 import mab.moneymanagement.view.model.User;
 
-import static android.content.Context.MODE_PRIVATE;
-import static mab.moneymanagement.view.activity.Main2Activity.isLoggin;
-
 /**
  * Created by Gihan on 3/11/2018.
  */
@@ -48,6 +45,34 @@ public class SharedPreference {
         editor.commit(); //4
         editor.apply();
 
+    }
+
+    //saveLanguage
+    public void saveLanguage(Context context, String language) {
+
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+
+        settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
+        editor = settings.edit(); //2
+
+        editor.putString("myLang", language); //3
+        editor.commit(); //4
+        editor.apply();
+
+    }
+
+    //getLanguage
+    public String getLanguage(Context context) {
+        SharedPreferences settings;
+        String text;
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        text = settings.getString("myLang", null);
+        return text;
     }
 
 

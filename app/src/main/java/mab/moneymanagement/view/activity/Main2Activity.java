@@ -3,6 +3,7 @@ package mab.moneymanagement.view.activity;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import mab.moneymanagement.R;
@@ -47,6 +49,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     TabLayout mTablLayout;
     SharedPreference shar;
     User user;
+    String cc;
 
 
     String user_info_url = URL.PATH + URL.USER_INFO;
@@ -62,6 +65,20 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        //-----------check language--------
+        try {
+            shar = new SharedPreference();
+            cc = shar.getLanguage(getApplicationContext());
+            if (cc.equals(null)) {
+            } else
+                setLocate(cc);
+        } catch (Exception e) {
+
+        }
+
+
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -308,4 +325,16 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         interfaceItem.onClick(item);
 
     }
+
+    void setLocate(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        shar.saveLanguage(getApplicationContext(), language);
+
+    }
+
 }

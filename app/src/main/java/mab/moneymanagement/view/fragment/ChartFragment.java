@@ -49,12 +49,15 @@ public class ChartFragment extends Fragment {
     TextView tvIncome;
     TextView tvExpense;
 
-    int month;
     int flag = 0;
 
-
+    Calendar cal = Calendar.getInstance();       // get calendar instance
+    Date zeroedDate = cal.getTime();
+    int month = zeroedDate.getMonth() + 1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        getStatics(month);
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
@@ -64,11 +67,7 @@ public class ChartFragment extends Fragment {
         tvIncome = v.findViewById(R.id.chart_tv_target);
 
 
-        Calendar cal = Calendar.getInstance();       // get calendar instance
-        Date zeroedDate = cal.getTime();
-        month = zeroedDate.getMonth() + 1;
-
-        getStatics(month);
+        // getStatics(month);
 
 //--------------------------------------------------------------
 
@@ -100,7 +99,7 @@ public class ChartFragment extends Fragment {
         return v;
     }
 
-    private ArrayList<ExpectedData> getStatics(final int month) {
+    private void getStatics(final int month) {
         String vv = staticUrl + "?month=" + month;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, vv, (String) null,
                 new Response.Listener<JSONObject>() {
@@ -114,6 +113,8 @@ public class ChartFragment extends Fragment {
                             //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
                             JSONArray arr = response.getJSONArray("data");
+                            expense = 0;
+                            income = 0;
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
@@ -153,12 +154,14 @@ public class ChartFragment extends Fragment {
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
-        return data;
     }
 
 
     @Override
     public void onStart() {
+        getStatics(month);
+
         super.onStart();
+
     }
 }

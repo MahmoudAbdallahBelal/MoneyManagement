@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import mab.moneymanagement.R;
@@ -69,6 +71,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     String delete_url = URL.PATH + URL.DELETE_ALL_DATA;
     String password_url = URL.PATH + URL.PASSWORD_PROTECTION;
     String getData = URL.PATH + URL.DATA_URL;
+    String LanguageName = "";
 
     int flag = 0;
     int budgetFlag;
@@ -76,33 +79,43 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     User us;
     String urlData = "";
     int xxx;
+    String cc;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //-----------check language--------
+        try {
+            shar = new SharedPreference();
+            cc = shar.getLanguage(getApplicationContext());
+            if (cc.equals(null)) {
+            } else
+                setLocate(cc);
+        } catch (Exception e) {
+
+        }
+
+        //------------------------------------budget----------------
         setContentView(R.layout.activity_setting);
 
         Toolbar mToolbar = findViewById(R.id.setting_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getString(R.string.nav_setting));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         builder = new AlertDialog.Builder(this);
 
         //-set Listner
         DialogBudgetFragment.getDio(this);
-
         shar = new SharedPreference();
         user = shar.getUser(getApplicationContext());
+        cc = shar.getLanguage(getApplicationContext());
         imageBudget = findViewById(R.id.setting_budget_image);
         imageAlert = findViewById(R.id.setting_alert_image);
         shareFile = findViewById(R.id.setting_tv_export_file);
         createBacup = findViewById(R.id.setting_create_backup_database);
 
-
-        //------------------------------------budget----------------
         tvBudget = findViewById(R.id.setting_check_tv_budget);
         us = shar.getUser(getApplicationContext());
         budget = tvBudget.getText().toString();
@@ -254,12 +267,13 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         //---------------------------language---------------------
         language = findViewById(R.id.setting_tv_language);
         selectLanguage = findViewById(R.id.setting_tv_language_text);
+        selectLanguage.setText(LanguageName);
 
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                selectLanguagee();
+                changeLanguage();
             }
         });
 
@@ -268,11 +282,10 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     private void selectLanguagee() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        builder.setTitle(getString(R.string.select_language_title));
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
 
 
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
         View regester_layout = inflater.inflate(R.layout.language, null);
 
         final RadioButton arabic = regester_layout.findViewById(R.id.select_language_arabic);
@@ -285,6 +298,18 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                if (arabic.isSelected()) {
+                    LanguageName = getString(R.string.arabic);
+
+                    Toast.makeText(SettingActivity.this, "jjj", Toast.LENGTH_SHORT).show();
+
+                }
+                if (english.isSelected()) {
+                    LanguageName = getString(R.string.english);
+
+                }
+
                 dialog.dismiss();
 
 
@@ -301,7 +326,52 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         });
 
 
+        builder.create();
         builder.show();
+
+    }
+
+    private void changeLanguage() {
+        final String[] listItems = {getString(R.string.arabic), getString(R.string.english)};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+        builder.setTitle(getString(R.string.select_language_title));
+        builder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (which == 0) {
+                    setLocate("ar");
+                    shar.saveLanguage(getApplicationContext(), "ar");
+
+                    recreate();
+                    LanguageName = getString(R.string.arabic);
+
+                }
+                if (which == 1) {
+                    setLocate("en");
+                    shar.saveLanguage(getApplicationContext(), "en");
+
+                    LanguageName = getString(R.string.english);
+                    recreate();
+
+
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog mAlertDialog = builder.create();
+        mAlertDialog.show();
+    }
+
+    void setLocate(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        shar.saveLanguage(getApplicationContext(), language);
 
     }
 
