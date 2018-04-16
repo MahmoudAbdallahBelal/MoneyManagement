@@ -143,4 +143,9 @@
     <string name="chart_income">Expect</string>
     <string name="chart_expense">Exppense</string>
     <string name="setting_language">Language</string>
+    <string name="login_message">please wait until login</string>
+    <string name="check_email_login">please check email correctly</string>
+    <string name="sucess_login">Sucess login</string>
+
+
 </resources>

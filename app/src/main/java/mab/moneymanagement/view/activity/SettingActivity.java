@@ -284,56 +284,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     }
 
 
-    private void selectLanguagee() {
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
-
-
-        LayoutInflater inflater = LayoutInflater.from(SettingActivity.this);
-        View regester_layout = inflater.inflate(R.layout.language, null);
-
-        final RadioButton arabic = regester_layout.findViewById(R.id.select_language_arabic);
-        final RadioButton english = regester_layout.findViewById(R.id.select_language_english);
-
-
-        builder.setView(regester_layout);
-
-        //SET BUTTON
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if (arabic.isSelected()) {
-                    LanguageName = getString(R.string.arabic);
-
-                    Toast.makeText(SettingActivity.this, "jjj", Toast.LENGTH_SHORT).show();
-
-                }
-                if (english.isSelected()) {
-                    LanguageName = getString(R.string.english);
-
-                }
-
-                dialog.dismiss();
-
-
-            }
-        });
-
-
-        builder.setNegativeButton(getString(R.string.add_item_btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        });
-
-
-        builder.create();
-        builder.show();
-
-    }
 
     private void changeLanguage() {
         final String[] listItems = {getString(R.string.arabic), getString(R.string.english)};

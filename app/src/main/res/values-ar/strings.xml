@@ -8,23 +8,12 @@
     <string name="action_settings">Chart</string>
 
 
-    <string-array name="payment">
-        <item>Cash</item>
-        <item>Saving</item>
-        <item>Credit</item>
-    </string-array>
-
-    <string-array name="category">
-        <item>food</item>
-        <item>bill</item>
-        <item>house</item>
-    </string-array>
     <string-array name="currency">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>UK</item>
-        <item>RSA</item>
-        <item>L.E</item>
+        <item>دولار امريكي</item>
+        <item>يورو</item>
+        <item>درهم اماراتي</item>
+        <item>ريال سعودي</item>
+        <item>جنيه مصري</item>
     </string-array>
     <string-array name="day">
         <item>الاحد </item>
@@ -149,5 +138,15 @@
     <string name="budget_done">تم وضع الميزانيه </string>
     <string name="delete_done">تم حذف جميع البيانات</string>
 
+    <string name="download_progress">Download on progress</string>
+    <string name="complete_download">اكتمل التنزيل</string>
+    <string name="setting_download">عفوا لقد حدث خطأ</string>
+    <string name="category_budget">ميزانيه هذا الشهر :</string>
+    <string name="chart_income">المتوقع</string>
+    <string name="chart_expense">المستهلك</string>
+    <string name="login_message">من فضلك انتظر حتي يتم تسجيل الدخول</string>
+
+    <string name="check_email_login">من فضلك قم بفحص الايميل جيدا</string>
+    <string name="sucess_login">تم تسجيل الدخول</string>
 
 </resources>

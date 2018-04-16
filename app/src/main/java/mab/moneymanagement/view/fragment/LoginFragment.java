@@ -1,5 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,11 +14,9 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
@@ -103,90 +102,83 @@ public class LoginFragment extends Fragment {
     }
 
     private void login() {
-        loginDaolog.title(getString(R.string.login_toolbar)).content("please wait until login ....").show();
+//        loginDaolog.setTitle(getString(R.string.login_toolbar));
+//        loginDaolog.setMessage(getString(R.string.login_message)).show();
+        loginDaolog.build().cancel();
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
         String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
         //-----check validate -------------
-        if (email.equals("") || password.equals("")) {
-            Toast.makeText(getContext(), "Complete data ", Toast.LENGTH_LONG).show();
-            loginDaolog.build().dismiss();
+
+        final JSONObject loginObject = new JSONObject();
+        try {
+            loginObject.put("Email", email);
+            loginObject.put("Password", password);
+            loginObject.put("DeviceId", deviceToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, login_url, loginObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            //----------HANDEL MESSAGE COME FROM REQUEST -------------------
+                            String message = response.getString("RequstDetails");
+                            String accessTocken = response.getString("access_token");
+                            String authorization = response.getString("token_type");
 
 
-        } else {
+                            if (message.equals("loginSuccess")) {
+                                loginDaolog.autoDismiss(true);
+                                Toast.makeText(getContext(), getString(R.string.sucess_login), Toast.LENGTH_LONG).show();
 
-            final JSONObject loginObject = new JSONObject();
-            try {
-                loginObject.put("Email", email);
-                loginObject.put("Password", password);
-                loginObject.put("DeviceId", deviceToken);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                                //save id  in shared prefrence
 
-            // Initialize a new RequestQueue instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                                SharedPreference shar = new SharedPreference();
+                                shar.save(getActivity(), accessTocken, authorization);
 
-            // Initialize a new JsonObjectRequest instance
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, login_url, loginObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-
-                                //----------HANDEL MESSAGE COME FROM REQUEST -------------------
-                                String message = response.getString("RequstDetails");
-                                String accessTocken = response.getString("access_token");
-                                String authorization = response.getString("token_type");
+                                Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
+                                startActivity(mainIntent);
+                                getActivity().finish();
 
 
-                                if (message.equals("loginSuccess")) {
-                                    loginDaolog.build().dismiss();
-                                    Toast.makeText(getContext(), "Sucess login ", Toast.LENGTH_LONG).show();
-
-                                    //save id  in shared prefrence
-
-                                    SharedPreference shar = new SharedPreference();
-                                    shar.save(getActivity(), accessTocken, authorization);
-
-                                    Intent mainIntent = new Intent(getActivity(), Main2Activity.class);
-                                    startActivity(mainIntent);
-                                    getActivity().finish();
+                            } else {
+                                loginDaolog.build().cancel();
 
 
-                                } else {
-                                    loginDaolog.build().dismiss();
-                                    Toast.makeText(getContext(), "please check email correctly  ", Toast.LENGTH_LONG).show();
-
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                loginDaolog.build().dismiss();
-
-                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG);
+                                Toast.makeText(getContext(), getString(R.string.check_email_login), Toast.LENGTH_LONG).show();
 
                             }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            login();
+
 
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Do something when error occurred
 
-                        }
-                    });
 
-            // Add JsonObjectRequest to the RequestQueue
-            MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
 
-        }
+                        login();
+                    }
+                });
 
+        // Add JsonObjectRequest to the RequestQueue
+        MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
     }
 
 
 }
+
