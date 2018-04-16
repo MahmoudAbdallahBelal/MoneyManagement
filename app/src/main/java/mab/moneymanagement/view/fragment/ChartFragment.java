@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -45,6 +46,8 @@ public class ChartFragment extends Fragment {
 
     public static int income;
     public static int expense;
+    TextView tvIncome;
+    TextView tvExpense;
 
     int month;
     int flag = 0;
@@ -57,16 +60,21 @@ public class ChartFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
         barrChart = v.findViewById(R.id.bar_chart);
         shar = new SharedPreference();
+        tvExpense = v.findViewById(R.id.chart_tv_expense);
+        tvIncome = v.findViewById(R.id.chart_tv_target);
 
 
         Calendar cal = Calendar.getInstance();       // get calendar instance
         Date zeroedDate = cal.getTime();
         month = zeroedDate.getMonth() + 1;
 
-        data = getStatics(month);
+        getStatics(month);
 
 //--------------------------------------------------------------
 
+
+        tvIncome.setText(getText(R.string.chart_income) + " : " + income);
+        tvExpense.setText(getText(R.string.chart_expense) + " : " + expense);
 
         //----------------
         barrChart.setDrawBarShadow(false);
@@ -81,7 +89,7 @@ public class ChartFragment extends Fragment {
         barEntry.add(new BarEntry(2, expense));
 
         BarDataSet barDataSet = new BarDataSet(barEntry, "");
-        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
 
         BarData data = new BarData(barDataSet);
         data.setBarWidth(.9f);

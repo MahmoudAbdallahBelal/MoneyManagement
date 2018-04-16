@@ -237,10 +237,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         {
             @Override
             public void onClick(View v) {
-
-
                 createDialog();
-
             }
         });
 
@@ -361,7 +358,15 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                downloadData(getUrl());
+                String dd = getUrl();
+                if (dd.equals("")) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                } else {
+
+                    DownloadTask downloadTask = new DownloadTask();
+                    downloadTask.execute(dd);
+                }
 
             }
         });
@@ -545,7 +550,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     }//22
 
-
     private void removeBudget() {
 
         final JSONObject updateObject = new JSONObject();
@@ -617,7 +621,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
     }//22
-
 
     private void updateDay() {
 
@@ -777,18 +780,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         });
 
         builder.show();
-
-    }
-
-    void downloadData(String urll) {
-        if (urll.equals("")) {
-            Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
-
-        } else {
-
-            DownloadTask downloadTask = new DownloadTask();
-            downloadTask.execute(urll);
-        }
 
     }
 

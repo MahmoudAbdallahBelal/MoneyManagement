@@ -1,15 +1,58 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="mab.moneymanagement.view.fragment.ChartFragment">
 
     <!-- TODO: chart the percentage betwwen expense and income  -->
 
 
     <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="200dp"
-        android:id="@+id/bar_chart"></com.github.mikephil.charting.charts.BarChart>
-</FrameLayout>
+        android:layout_margin="10dp"></com.github.mikephil.charting.charts.BarChart>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+
+        >
+
+        <TextView
+
+            android:id="@+id/chart_tv_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_marginRight="5dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/chart_tv_expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+
+            />
+
+
+    </LinearLayout>
+</LinearLayout>
