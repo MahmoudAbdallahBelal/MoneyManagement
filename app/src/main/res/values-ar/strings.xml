@@ -155,7 +155,6 @@
     <string name="weekly">اسبوعيا</string>
     <string name="monthly">شهريا</string>
     <string name="price_item">السعر</string>
-
     <string name="food">الطعام</string>
     <string name="home">المنزل</string>
     <string name="personal">الشخصيه</string>
@@ -166,8 +165,6 @@
     <string name="car">السياره</string>
     <string name="kast">القسط</string>
     <string name="credit">بطاقه الاتمان</string>
-
-
     <string name="create_new_account">انشاء حساب جديد</string>
     <string name="forget_password">كلمه سر جديده</string>
     <string name="income">الايرادات</string>
@@ -175,6 +172,19 @@
     <string name="item_price">سعر العنصر</string>
     <string name="price">السعر</string>
     <string name="item_note">ملاحظه</string>
+    <string name="month1">يناير</string>
+    <string name="month2">فبرايل</string>
+    <string name="month3">مارس</string>
+    <string name="month4">ابريل</string>
+    <string name="month5">مايو</string>
+    <string name="month6">يونيو</string>
+    <string name="month7">يوليو</string>
+    <string name="month8">اغسطس</string>
+    <string name="month9">سبتمبر</string>
+    <string name="month10">اكتوبر</string>
+    <string name="month11">نوفمبر</string>
+    <string name="month12">ديسمبر</string>
+    <string name="month13">شهر غير معروف</string>
 
 
 </resources>

@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.model.Category;
-import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.model.MonthStatics;
 
 /**
@@ -111,43 +108,43 @@ public class MonthlystaticsAdapter extends BaseAdapter {
         String monthString;
         switch (x) {
             case 1:
-                monthString = "January";
+                monthString = context.getString(R.string.month1);
                 break;
             case 2:
-                monthString = "February";
+                monthString = context.getString(R.string.month2);
                 break;
             case 3:
-                monthString = "March";
+                monthString = context.getString(R.string.month3);
                 break;
             case 4:
-                monthString = "April";
+                monthString = context.getString(R.string.month4);
                 break;
             case 5:
-                monthString = "May";
+                monthString = context.getString(R.string.month5);
                 break;
             case 6:
-                monthString = "June";
+                monthString = context.getString(R.string.month6);
                 break;
             case 7:
-                monthString = "July";
+                monthString = context.getString(R.string.month7);
                 break;
             case 8:
-                monthString = "August";
+                monthString = context.getString(R.string.month8);
                 break;
             case 9:
-                monthString = "September";
+                monthString = context.getString(R.string.month9);
                 break;
             case 10:
-                monthString = "October";
+                monthString = context.getString(R.string.month10);
                 break;
             case 11:
-                monthString = "November";
+                monthString = context.getString(R.string.month11);
                 break;
             case 12:
-                monthString = "December";
+                monthString = context.getString(R.string.month12);
                 break;
             default:
-                monthString = "Invalid month";
+                monthString = context.getString(R.string.month13);
                 break;
         }
         return monthString;
