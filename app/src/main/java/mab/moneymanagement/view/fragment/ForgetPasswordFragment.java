@@ -1,7 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
 import android.app.AlertDialog;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +22,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,16 +72,14 @@ public class ForgetPasswordFragment extends Fragment {
         builder.setView(login_layout);
 
         //SET BUTTON
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.done), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 //Check Validation
-
                 //---------------------------------
                 String code = et_code.getText().toString();
                 String newPassword = et_newPassword.getText().toString();
-
 
                 if (code.equals("") || newPassword.equals("")) {
 
@@ -110,10 +106,7 @@ public class ForgetPasswordFragment extends Fragment {
 
                                         //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                         String message = response.getString("RequstDetails");
-
-
                                         Toast.makeText(getContext(), message.toString(), Toast.LENGTH_LONG).show();
-
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -138,10 +131,6 @@ public class ForgetPasswordFragment extends Fragment {
                     MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
                 }
-                //----
-
-                //---------------------------------
-
             }
 
         });
@@ -155,12 +144,12 @@ public class ForgetPasswordFragment extends Fragment {
         });
 
         builder.show();
-
     }
 
     void verfiyEmail() {
         email = et_Email.getText().toString();
         if (email.equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
         } else {
 
             // Initialize a new JsonObjectRequest instance
@@ -176,27 +165,19 @@ public class ForgetPasswordFragment extends Fragment {
                                 String message = response.getString("RequstDetails");
                                 if (message.equals("Email is Send Please Check Email")) {
                                     showDialog();
+                                } else {
+                                    Toast.makeText(getContext(), message.toString(), Toast.LENGTH_LONG).show();
                                 }
-
-
-                                Toast.makeText(getContext(), message.toString(), Toast.LENGTH_LONG).show();
-
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                verfiyEmail();
                             }
-
-
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Do something when error occurred
-
-                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-
+                            verfiyEmail();
                         }
                     }) {
 
@@ -211,7 +192,7 @@ public class ForgetPasswordFragment extends Fragment {
 
             // Add JsonObjectRequest to the RequestQueue
             requestQueue.add(jsonObjectRequest);
-            //MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+            MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
 
         }
         //----
