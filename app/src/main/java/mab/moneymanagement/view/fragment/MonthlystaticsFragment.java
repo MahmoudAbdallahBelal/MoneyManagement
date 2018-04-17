@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,12 +40,13 @@ public class MonthlystaticsFragment extends Fragment {
     String staticUrl = URL.PATH + URL.RESET_CTEGORY;
     SharedPreference shar;
 
-
+    TextView tvMessage;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_monthlystatics, container, false);
         mList = v.findViewById(R.id.monthly_statics_list);
+        tvMessage = v.findViewById(R.id.monthly_statics_tv_message);
 
         shar = new SharedPreference();
         getStatics();
@@ -65,8 +67,12 @@ public class MonthlystaticsFragment extends Fragment {
 
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
+                            if (arr.length() == 0) {
+                                tvMessage.setVisibility(View.VISIBLE);
+                                tvMessage.setText(getString(R.string.no_statics_until_now));
+                            }
 
                             data.clear();
 

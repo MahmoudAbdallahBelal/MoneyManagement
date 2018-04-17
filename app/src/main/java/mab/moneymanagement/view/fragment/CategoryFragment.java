@@ -173,7 +173,7 @@ public class CategoryFragment extends Fragment {
         builder.setView(expense_layout);
 
         //SET BUTTON
-        builder.setPositiveButton("Add  ", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -192,7 +192,7 @@ public class CategoryFragment extends Fragment {
         });
 
 
-        builder.setNegativeButton(" Cancel ", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.budget_btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -239,7 +239,7 @@ public class CategoryFragment extends Fragment {
         builder.setView(expense_layout);
 
         //SET BUTTON
-        builder.setPositiveButton("Add  ", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -258,7 +258,7 @@ public class CategoryFragment extends Fragment {
         });
 
 
-        builder.setNegativeButton(" Cancel ", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.budget_btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

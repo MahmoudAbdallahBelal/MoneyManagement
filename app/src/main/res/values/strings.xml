@@ -191,6 +191,17 @@
     <string name="please_enter_password">Please enter password</string>
     <string name="password_week">Weak password</string>
     <string name="not_correct_email">Not correct email</string>
+    <string name="no_item_added">No item added</string>
+
+    <string name="add_new_income">Add new income</string>
+    <string name="enter_imcome_name">Enter imcome name</string>
+    <string name="enter_income_value">Enter income value</string>
+    <string name="add_new_expense">Add new expense</string>
+    <string name="enter_expense_value">Enter expense value</string>
+    <string name="enter_expense_name">Enter expense name</string>
+    <string name="add">Add</string>
+    <string name="no_expected_until_now">No expected until now</string>
+    <string name="no_statics_until_now">No statics until now</string>
 
 
 </resources>

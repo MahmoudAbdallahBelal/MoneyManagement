@@ -1,8 +1,6 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,7 +32,6 @@ import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.CategoryDetailActivity;
 import mab.moneymanagement.view.activity.DetailItemActivity;
-import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
 import mab.moneymanagement.view.model.Category;
 import mab.moneymanagement.view.model.Item;
@@ -48,6 +45,7 @@ public class AllItemCategoryFragment extends Fragment {
     ArrayList<Item> data = new ArrayList<>();
     Category categoryDatd;
     int postionCategory;
+    TextView tvMessage;
 
     String itemUrl = URL.PATH + URL.ITEM_CATEGORY;
 
@@ -84,11 +82,12 @@ public class AllItemCategoryFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_all_item_category, container, false);
 
         //--get category data from intent to put in menu -------
-         categoryDatd= (Category) getActivity().getIntent().getSerializableExtra("categoryData");
+        categoryDatd = (Category) getActivity().getIntent().getSerializableExtra("categoryData");
         postionCategory = getActivity().getIntent().getIntExtra("id", 0);
 
         shar = new SharedPreference();
 
+        tvMessage = v.findViewById(R.id.all_item_cateogry_tv_message);
 
         mList = v.findViewById(R.id.all_item_category_list);
         try {
@@ -97,7 +96,6 @@ public class AllItemCategoryFragment extends Fragment {
         } catch (Exception e) {
 
         }
-
 
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,8 +112,6 @@ public class AllItemCategoryFragment extends Fragment {
 
         return v;
     }
-
-
 
 
     @Override
@@ -142,7 +138,7 @@ public class AllItemCategoryFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.edit_category) {
             Intent categiryIntent = new Intent(getActivity(), CategoryDetailActivity.class);
-            categiryIntent.putExtra("category",categoryDatd);
+            categiryIntent.putExtra("category", categoryDatd);
 
 
             startActivity(categiryIntent);
@@ -154,8 +150,6 @@ public class AllItemCategoryFragment extends Fragment {
     }
 
     private void getAllItem() {
-
-
 
 
         // Initialize a new JsonObjectRequest instance
@@ -172,6 +166,10 @@ public class AllItemCategoryFragment extends Fragment {
                             //  Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                             JSONArray arr = response.getJSONArray("data");
 
+                            if (arr.length() == 0) {
+                                tvMessage.setVisibility(View.VISIBLE);
+                                tvMessage.setText(getString(R.string.no_item_added));
+                            }
 
                             data.clear();
                             for (int i = 0; i < arr.length(); i++) {

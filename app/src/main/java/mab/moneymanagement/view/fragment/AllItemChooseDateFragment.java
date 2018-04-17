@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,6 +45,7 @@ public class AllItemChooseDateFragment extends Fragment {
     int day;
     int month;
     int year;
+    TextView tvMessage;
 
     @Override
     public void onStart() {
@@ -73,6 +75,7 @@ public class AllItemChooseDateFragment extends Fragment {
         shar = new SharedPreference();
 
 
+        tvMessage = v.findViewById(R.id.all_item_choose_date_tv_message);
         mList = v.findViewById(R.id.all_item_calender_list);
         getAllItem();
 
@@ -110,8 +113,8 @@ public class AllItemChooseDateFragment extends Fragment {
                             JSONArray arr = response.getJSONArray("data");
 
                             if (arr.length() == 0) {
-                                Toast.makeText(getContext(), "no item add", Toast.LENGTH_LONG).show();
-
+                                tvMessage.setVisibility(View.VISIBLE);
+                                tvMessage.setText(getString(R.string.no_item_added));
                             }
 
                             data.clear();

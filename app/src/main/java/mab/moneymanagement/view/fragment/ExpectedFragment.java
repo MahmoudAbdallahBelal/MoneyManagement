@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -40,7 +41,7 @@ public class ExpectedFragment extends Fragment {
     ArrayList<ExpectedData> data = new ArrayList<>();
     String staticUrl = URL.PATH + URL.RESET_CTEGORY;
     SharedPreference shar;
-
+    TextView tvMessage;
 
     int month;
 
@@ -52,6 +53,7 @@ public class ExpectedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_expected, container, false);
 
         mList = v.findViewById(R.id.expected_list);
+        tvMessage = v.findViewById(R.id.expected_tv_message);
 
         shar = new SharedPreference();
 
@@ -79,10 +81,11 @@ public class ExpectedFragment extends Fragment {
                             JSONArray arr = response.getJSONArray("data");
 
 
-//                            if (arr.length() == 0) {
-//                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-//
-//                            }
+                            if (arr.length() == 0) {
+                                tvMessage.setVisibility(View.VISIBLE);
+                                tvMessage.setText(getString(R.string.no_expected_until_now));
+
+                            }
 
                             data.clear();
                             for (int i = 0; i < arr.length(); i++) {
@@ -113,7 +116,7 @@ public class ExpectedFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            //getStatics(month);
+                            getStatics(month);
                         }
 
 
@@ -124,7 +127,7 @@ public class ExpectedFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
                         //  Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
-                        /// getStatics(month);
+                        getStatics(month);
 
 
                     }

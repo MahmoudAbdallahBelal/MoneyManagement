@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:padding="10dp"
-        android:text="Add new expense"
+        android:text="@string/add_new_expense"
         android:textColor="@android:color/white"
         android:textSize="25dp" />
 
     <LinearLayout
-        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical">
 
         <EditText
@@ -27,36 +27,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Enter imcome name"
+            android:hint="@string/enter_expense_name"
             android:padding="10dp"
 
             />
+
         <EditText
             android:id="@+id/add_expense_et_value"
 
-            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="enter income value"
+            android:hint="@string/enter_expense_value"
+            android:inputType="number"
             android:padding="10dp"
 
             />
 
         <ImageView
+            android:id="@+id/add_expense_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center"
-            android:id="@+id/add_expense_icon"
+            android:layout_margin="10dp"
+            android:padding="10dp"
 
             />
 
         <Spinner
-            android:layout_margin="8dp"
+            android:id="@+id/spinner_icons_new_expence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner_icons_new_expence"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+
             ></Spinner>
     </LinearLayout>
 

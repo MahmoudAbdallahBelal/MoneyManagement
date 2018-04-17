@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -118,7 +118,6 @@ public class MonthlyFragment extends Fragment implements InterfaceItem {
                             e.printStackTrace();
 
                             getAllItem();
-                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 

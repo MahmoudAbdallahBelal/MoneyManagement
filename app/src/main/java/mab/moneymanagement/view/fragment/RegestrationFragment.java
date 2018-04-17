@@ -138,7 +138,7 @@ public class RegestrationFragment extends Fragment {
 
                     }
 
-                    String c = "\"\\\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,4}\\\\b\"";
+                    String c = "";
                     if (!email.matches(c)) {
                         etEmail.setError(getString(R.string.not_correct_email));
                         flag = -1;

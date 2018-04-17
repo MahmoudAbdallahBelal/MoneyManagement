@@ -121,7 +121,6 @@
     <string name="verifing_title_dialog">تحقق</string>
     <string name="verifiy_code">ادخل الكود</string>
     <string name="login_hint_enter_password_new">ادخل كلمه المرور الجديده</string>
-
     <string name="reset_new_password">Please enter code has send to email and new password</string>
     <string name="change_password">تغير كلمه المرور</string>
     <string name="old_password">ادخل كلمه المرور القديمه</string>
@@ -149,7 +148,6 @@
     <string name="create_account">انشاء حساب جديد</string>
     <string name="content">من فضلك انتظر حتي يتم انشاء حساب جديد</string>
     <string name="error_happen">عفوا حدث خطأ</string>
-
     <string name="daily">يوميا</string>
     <string name="claender">الاجنده</string>
     <string name="weekly">اسبوعيا</string>
@@ -185,12 +183,20 @@
     <string name="month11">نوفمبر</string>
     <string name="month12">ديسمبر</string>
     <string name="month13">شهر غير معروف</string>
-
-
     <string name="please_enter_email">من فضلك قم بادخال الايميل</string>
     <string name="please_enter_password">من فضلك قم بادخال كلمه المرور</string>
     <string name="password_week">كلمه مرور ضعيفه</string>
     <string name="not_correct_email">ايميل غير صحيح</string>
+    <string name="no_item_added">لايوجد عناصر مضافه</string>
+    <string name="add_new_income">ادخل ايراد جديد</string>
+    <string name="enter_imcome_name">ادخل اسم الايراد</string>
+    <string name="enter_income_value">ادخل قيمه الايراد</string>
+    <string name="add_new_expense">ادخل مستهلك جديد</string>
+    <string name="enter_expense_value">ادخل قيمه المستهلك</string>
+    <string name="enter_expense_name">ادخل اسم المستهلك</string>
+    <string name="add">اضافه</string>
+    <string name="no_expected_until_now">لايوجد توقعات حتي الان</string>
+    <string name="no_statics_until_now">لايوجد احصائيات حتي الان</string>
 
 
 </resources>

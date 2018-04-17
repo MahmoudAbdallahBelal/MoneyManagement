@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <TextView
@@ -10,53 +10,56 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:padding="10dp"
-        android:text="Add new income"
+        android:text="@string/add_new_income"
         android:textColor="@android:color/white"
         android:textSize="25dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        >
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <EditText
+            android:id="@+id/add_income_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Enter imcome name"
+            android:hint="@string/enter_imcome_name"
             android:padding="10dp"
-            android:id="@+id/add_income_et_name"
 
 
             />
+
         <EditText
-            android:inputType="number"
+            android:id="@+id/add_income_et_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="enter income value"
+            android:hint="@string/enter_income_value"
+            android:inputType="number"
             android:padding="10dp"
-            android:id="@+id/add_income_et_value"
 
 
             />
 
         <ImageView
+            android:id="@+id/add_income_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/add_income_icon"
 
+            android:layout_margin="10dp"
+            android:padding="10dp"
 
             />
+
         <Spinner
-            android:layout_margin="8dp"
+            android:id="@+id/spinner_icons_new_income"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner_icons_new_income"
-            ></Spinner>
+            android:layout_margin="10dp"
+            android:padding="10dp"></Spinner>
     </LinearLayout>
 </LinearLayout>
