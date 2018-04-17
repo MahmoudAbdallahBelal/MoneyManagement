@@ -46,6 +46,7 @@ public class RegestrationFragment extends Fragment {
 
     MaterialDialog.Builder builder;
     MaterialDialog dialog;
+    int flag = 0;
 
 
     @Override
@@ -110,12 +111,41 @@ public class RegestrationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+
+                    flag = 0;
                     name = etName.getText().toString();
                     password = etPassword.getText().toString();
                     email = etEmail.getText().toString();
-                    if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
-                        Toast.makeText(getContext(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
-                    } else {
+
+                    if (name.equals("")) {
+                        etName.setError(getString(R.string.please_enter_email));
+                        flag = -1;
+                    }
+
+                    if (password.equals("")) {
+                        etPassword.setError(getString(R.string.please_enter_email));
+                        flag = -1;
+
+                    }
+                    if (password.length() < 6) {
+                        etPassword.setError(getString(R.string.password_week));
+                        flag = -1;
+
+                    }
+                    if (email.equals("")) {
+                        etEmail.setError(getString(R.string.please_enter_email));
+                        flag = -1;
+
+                    }
+
+                    String c = "\"\\\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,4}\\\\b\"";
+                    if (!email.matches(c)) {
+                        etEmail.setError(getString(R.string.not_correct_email));
+                        flag = -1;
+
+                    }
+
+                    if (flag == 0) {
                         Regester();
 
                     }

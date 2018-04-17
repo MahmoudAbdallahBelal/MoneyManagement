@@ -278,10 +278,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
                             } else {
 
-                                Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(logoutIntent);
-                                shar.removeValue(getApplicationContext());
-                                finish();
+//                                Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+//                                startActivity(logoutIntent);
+//                                shar.removeValue(getApplicationContext());
+//                                finish();
 
                             }
 

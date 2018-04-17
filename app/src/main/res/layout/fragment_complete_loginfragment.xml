@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mab.moneymanagement.view.fragment.RegestrationFragment">
 
     <!-- TODO: user will complete data name ,salary,start of month,currency
@@ -12,109 +12,135 @@
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         android:padding="8dp"
-        android:textSize="25sp"
         android:text="@string/complete_login_btn_next"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
 
 
         />
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
 
         >
 
 
-
-        <EditText
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/regester_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/login_hint_enter_email"
-            android:padding="8dp"
             android:inputType="textEmailAddress"
-            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"
 
             />
 
-        <EditText
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/regester_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:hint="@string/login_hint_enter_password"
-            android:padding="8dp"
-            android:layout_margin="10dp"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"
+
 
             />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+
+        />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/regester_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:hint="@string/complete_login_enter_name"
-            android:padding="8dp"
-            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"
 
             />
 
         <!--<EditText-->
-            <!--android:inputType="number"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/regester_et_salary"-->
-            <!--android:hint="@string/complete_login_salary"-->
-            <!--android:padding="8dp"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:text="2000"-->
+        <!--android:inputType="number"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/regester_et_salary"-->
+        <!--android:hint="@string/complete_login_salary"-->
+        <!--android:padding="8dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:text="2000"-->
 
-            <!--/>-->
+        <!--/>-->
 
         <!--<EditText-->
-            <!--android:inputType="number"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/complete_login_et_start_month"-->
-            <!--android:hint="@string/complete_login_enter_start_month"-->
-            <!--android:padding="8dp"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:text="25"-->
+        <!--android:inputType="number"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/complete_login_et_start_month"-->
+        <!--android:hint="@string/complete_login_enter_start_month"-->
+        <!--android:padding="8dp"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:text="25"-->
 
-            <!--/>-->
+        <!--/>-->
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/complete_login_spinner_select_day"
-            android:padding="8dp"
-            android:textColor="@android:color/black"
-            android:layout_margin="10dp" />
-
-        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/complete_login_spinner_select_currency"
+            android:layout_margin="10dp"
             android:padding="8dp"
-            android:textColor="@android:color/black"
-            android:layout_margin="10dp" />
+            android:textColor="@android:color/black" />
+
+        <Spinner
+            android:id="@+id/complete_login_spinner_select_currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="8dp"
+            android:textColor="@android:color/black" />
 
 
         <Button
             android:id="@+id/complete_login_btn_next"
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_marginLeft="100dp"
-            android:padding="8dp"
-            android:textColor="@android:color/white"
-            android:text="@string/complete_login_btn_next"
             android:background="@color/colorPrimaryDark"
+            android:padding="8dp"
+            android:text="@string/complete_login_btn_next"
+            android:textColor="@android:color/white"
 
 
             />
