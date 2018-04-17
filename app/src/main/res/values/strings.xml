@@ -185,6 +185,7 @@
     <string name="month11">November</string>
     <string name="month12">December</string>
     <string name="month13">Invalid Month</string>
+    <string name="remove_budget">Remove Budget</string>
 
 
 </resources>

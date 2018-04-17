@@ -615,11 +615,11 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                Toast.makeText(getApplication(), "remove Budget", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), getString(R.string.remove_budget), Toast.LENGTH_LONG).show();
 
 
                             } else {
-                                Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
                             }
 

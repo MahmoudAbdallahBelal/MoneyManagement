@@ -63,7 +63,7 @@ public class LoginFragment extends Fragment {
 
 
         builder = new MaterialDialog.Builder(getActivity())
-                .title(R.string.complete_login_title)
+                .title(R.string.login_message)
                 .content(R.string.login_message)
                 .positiveText(R.string.ok);
 
