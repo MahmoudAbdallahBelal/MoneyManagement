@@ -1,9 +1,12 @@
 package mab.moneymanagement.view.activity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import mab.moneymanagement.R;
 import mab.moneymanagement.view.fragment.CalenderTapFragment;
 import mab.moneymanagement.view.fragment.DailyFragment;
 import mab.moneymanagement.view.fragment.MonthlyFragment;
@@ -13,8 +16,11 @@ import mab.moneymanagement.view.fragment.WeeklyFragment;
 class SectionBageAdapter extends FragmentPagerAdapter {
 
 
-    public SectionBageAdapter(FragmentManager fm) {
+    Context contextt;
+
+    public SectionBageAdapter(FragmentManager fm, Context context) {
         super(fm);
+        contextt = context;
     }
 
     @Override
@@ -40,6 +46,7 @@ class SectionBageAdapter extends FragmentPagerAdapter {
 
     }
 
+
     @Override
     public int getCount() {
         return 4;
@@ -47,15 +54,17 @@ class SectionBageAdapter extends FragmentPagerAdapter {
 
     public CharSequence getPageTitle(int postion) {
 
+        //  String yourstring =contextt.getString();
+
         switch (postion) {
             case 0:
-                return "Daily";
+                return contextt.getString(R.string.daily);
             case 1:
-                return "اCalender";
+                return contextt.getString(R.string.claender);
             case 2:
-                return "Weekly";
+                return contextt.getString(R.string.weekly);
             case 3:
-                return "Monthly";
+                return contextt.getString(R.string.monthly);
             default:
                 return null;
         }

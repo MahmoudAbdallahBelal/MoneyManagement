@@ -1,13 +1,8 @@
 package mab.moneymanagement.view.fragment;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +13,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +44,8 @@ public class RegestrationFragment extends Fragment {
     String authorization;
 
 
-    MaterialDialog.Builder loginDaolog;
+    MaterialDialog.Builder builder;
+    MaterialDialog dialog;
 
 
     @Override
@@ -68,7 +60,10 @@ public class RegestrationFragment extends Fragment {
         etEmail = v.findViewById(R.id.regester_et_email);
         btnNext = v.findViewById(R.id.complete_login_btn_next);
 
-        loginDaolog = new MaterialDialog.Builder(getContext());
+        builder = new MaterialDialog.Builder(getActivity())
+                .title(R.string.create_account)
+                .content(R.string.content)
+                .positiveText(R.string.ok);
 
 
         //------spinner for currency ----------
@@ -132,13 +127,17 @@ public class RegestrationFragment extends Fragment {
                 }
 
 
-
             }
         });
         return v;
     }
 
     void Regester() {
+
+        dialog = builder.build();
+        dialog.show();
+
+
         name = etName.getText().toString();
         password = etPassword.getText().toString();
         email = etEmail.getText().toString();
@@ -148,10 +147,8 @@ public class RegestrationFragment extends Fragment {
         if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
             Toast.makeText(getContext(), "complete all data ", Toast.LENGTH_LONG).show();
         } else {
-            //  String device_id= Settings.Secure.getString(getContext().getContentResolver(),Settings.Secure.ANDROID_ID);
 
 
-            loginDaolog.title("Create Account ").content("Please wait untol regester ..").show();
             final JSONObject regsterObject = new JSONObject();
             try {
                 regsterObject.put("Email", email);
@@ -182,7 +179,7 @@ public class RegestrationFragment extends Fragment {
                                 authorization = response.getString("token_type");
 
                                 if (message.equals("create account success")) {
-                                    loginDaolog.build().dismiss();
+                                    builder.build().dismiss();
                                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                     //save id  in shared prefrence
                                     SharedPreference shar = new SharedPreference();
@@ -194,14 +191,20 @@ public class RegestrationFragment extends Fragment {
 
 
                                 } else {
-                                    loginDaolog.build().hide();
-                                    Toast.makeText(getContext(), "error message" + message, Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+                                    dialog.cancel();
+                                    dialog.hide();
+                                    Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                loginDaolog.build().hide();
-                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                //  Regester();
+                                dialog.dismiss();
+                                dialog.cancel();
+                                dialog.hide();
+                                Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
+
                             }
 
 
@@ -210,8 +213,13 @@ public class RegestrationFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Do something when error occurred
+                            dialog.dismiss();
+                            dialog.cancel();
+                            dialog.hide();
+                            Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
+                            // Do something when error occurred
+                            //  Regester();
                         }
                     });
 

@@ -1,6 +1,5 @@
 package mab.moneymanagement.view.fragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +44,9 @@ public class LoginFragment extends Fragment {
 
     String login_url = URL.PATH + URL.LOGIN;
 
-    MaterialDialog.Builder loginDaolog;
+
+    MaterialDialog.Builder builder;
+    MaterialDialog dialog;
 
 
     @Override
@@ -61,7 +62,10 @@ public class LoginFragment extends Fragment {
         restePassword = v.findViewById(R.id.login_tv_forget_password);
 
 
-        loginDaolog = new MaterialDialog.Builder(getContext());
+        builder = new MaterialDialog.Builder(getActivity())
+                .title(R.string.complete_login_title)
+                .content(R.string.login_message)
+                .positiveText(R.string.ok);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,9 +106,10 @@ public class LoginFragment extends Fragment {
     }
 
     private void login() {
-//        loginDaolog.setTitle(getString(R.string.login_toolbar));
-//        loginDaolog.setMessage(getString(R.string.login_message)).show();
-        loginDaolog.build().cancel();
+
+        dialog = builder.build();
+        dialog.show();
+
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
         String deviceToken = FirebaseInstanceId.getInstance().getToken();
@@ -134,7 +139,6 @@ public class LoginFragment extends Fragment {
 
 
                             if (message.equals("loginSuccess")) {
-                                loginDaolog.autoDismiss(true);
                                 Toast.makeText(getContext(), getString(R.string.sucess_login), Toast.LENGTH_LONG).show();
 
                                 //save id  in shared prefrence
@@ -148,7 +152,10 @@ public class LoginFragment extends Fragment {
 
 
                             } else {
-                                loginDaolog.build().cancel();
+                                dialog.dismiss();
+                                dialog.cancel();
+                                dialog.hide();
+                                // Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
 
                                 Toast.makeText(getContext(), getString(R.string.check_email_login), Toast.LENGTH_LONG).show();
@@ -157,7 +164,10 @@ public class LoginFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            login();
+                            dialog.dismiss();
+                            dialog.cancel();
+                            dialog.hide();
+                            Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
 
                         }
@@ -170,7 +180,10 @@ public class LoginFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
 
-                        login();
+                        dialog.dismiss();
+                        dialog.cancel();
+                        dialog.hide();
+                        Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
                     }
                 });
 

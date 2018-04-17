@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,7 +31,6 @@ import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.DetailItemActivity;
 import mab.moneymanagement.view.activity.Main2Activity;
 import mab.moneymanagement.view.adapter.MainItemAdapter;
-import mab.moneymanagement.view.dialog.DialogAddItemFragment;
 import mab.moneymanagement.view.interfaces.InterfaceItem;
 import mab.moneymanagement.view.model.Item;
 import mab.moneymanagement.view.sharedPrefrence.SharedPreference;

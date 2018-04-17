@@ -48,6 +48,7 @@ public class PersonalAccountFragment extends Fragment {
     String kindCurrency;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -62,7 +63,6 @@ public class PersonalAccountFragment extends Fragment {
         //------spinner for currency ----------
         currncySpinner = v.findViewById(R.id.personal_account_spinner_select_currency);
         ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency, android.R.layout.simple_spinner_item);
-
         currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currncySpinner.setAdapter(currencyAdapter);
         currncySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,8 +89,24 @@ public class PersonalAccountFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(getActivity(), shar.getValue(getActivity()), Toast.LENGTH_LONG).show();
-                makeUpdate();
+
+                String email = et_email.getText().toString();
+                String name = et_name.getText().toString();
+                if (!kindCurrency.equals(user.getCurrency())) {
+                    makeUpdate();
+
+                }
+
+                if (email.equals("") || name.equals("") || kindCurrency.equals("")) {
+                    Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
+
+
+                } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) || kindCurrency.equals(user.getCurrency())) {
+                    Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_LONG).show();
+
+                } else {
+                    makeUpdate();
+                }
             }
         });
 
@@ -124,13 +140,10 @@ public class PersonalAccountFragment extends Fragment {
                             user.setCurrency(response.getInt("ConcuranceyId") - 1);
 
 
-                            //  Toast.makeText(getContext(), "mmmmm" + message, Toast.LENGTH_LONG).show();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             getUserData();
 
-                            // Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -221,7 +234,7 @@ public class PersonalAccountFragment extends Fragment {
                                 String message = response.getString("RequstDetails");
 
                                 if (message.equals("Infromation Changed Successfuly")) {
-                                    Toast.makeText(getContext(), "Update Done", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
                                     shar.saveUser(getContext(), user);
 
                                 }

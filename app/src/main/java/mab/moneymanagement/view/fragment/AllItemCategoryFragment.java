@@ -52,6 +52,31 @@ public class AllItemCategoryFragment extends Fragment {
     String itemUrl = URL.PATH + URL.ITEM_CATEGORY;
 
     SharedPreference shar;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        try {
+            getAllItem();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            getAllItem();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -66,7 +91,13 @@ public class AllItemCategoryFragment extends Fragment {
 
 
         mList = v.findViewById(R.id.all_item_category_list);
-        getAllItem();
+        try {
+            getAllItem();
+
+        } catch (Exception e) {
+
+        }
+
 
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,12 +115,7 @@ public class AllItemCategoryFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        data.clear();
-        getAllItem();
-    }
+
 
 
     @Override
@@ -157,8 +183,8 @@ public class AllItemCategoryFragment extends Fragment {
                                         jsonObject.getInt("Price"),
                                         jsonObject.getInt("IncomeCategoryId"),
                                         jsonObject.getInt("OutComeCategoryId"),
-                                        jsonObject.getString("IncomeCategoryName"),
-                                        jsonObject.getString("OutComeCategoryName"),
+                                        changeName(jsonObject.getString("IncomeCategoryName")),
+                                        changeName(jsonObject.getString("OutComeCategoryName")),
                                         jsonObject.getString("CreateDate")
 
                                 );
@@ -206,6 +232,32 @@ public class AllItemCategoryFragment extends Fragment {
 
     }
 
+    public String changeName(String name) {
+        if (name.equals("Food")) {
+            return getString(R.string.food);
+        } else if (name.equals("Home")) {
+            return getString(R.string.home);
+        } else if (name.equals("Personal")) {
+            return getString(R.string.personal);
+        } else if (name.equals("Salary")) {
+            return getString(R.string.salary);
+        } else if (name.equals("Saving")) {
+            return getString(R.string.saving);
+        } else if (name.equals("Shopping")) {
+            return getString(R.string.shopping);
+        } else if (name.equals("Child")) {
+            return getString(R.string.child);
+        } else if (name.equals("Car")) {
+            return getString(R.string.car);
+        } else if (name.equals("Kast")) {
+            return getString(R.string.kast);
+        } else if (name.equals("Credit")) {
+            return getString(R.string.credit);
+        } else
+            return name;
+
+
+    }
 
 
 }

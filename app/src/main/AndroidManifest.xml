@@ -61,7 +61,10 @@
             android:parentActivityName=".view.activity.Main2Activity" />
 
         <activity android:name=".view.activity.DetailItemActivity" />
-        <activity android:name=".view.activity.CategoryDetailActivity" />
+
+        <activity
+            android:name=".view.activity.CategoryDetailActivity"
+            android:parentActivityName=".view.activity.Category" />
         <activity
             android:name=".view.activity.AllItemCategory"
             android:parentActivityName=".view.activity.Category" />

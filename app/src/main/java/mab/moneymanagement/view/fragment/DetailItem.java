@@ -1,6 +1,7 @@
 package mab.moneymanagement.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
+import mab.moneymanagement.view.activity.AllItemCategory;
 import mab.moneymanagement.view.adapter.CustomSpinnerAdapter;
 import mab.moneymanagement.view.model.Category;
 import mab.moneymanagement.view.model.Item;
@@ -85,14 +87,33 @@ public class DetailItem extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateItem();
+
+                final String nam = name.getText().toString();
+                String not = note.getText().toString();
+                String val = price.getText().toString();
+                final int pric = Integer.parseInt(val);
+                if (nam.equals(item.getName()) && not.equals(item.getNote()) && pric == item.getPrice()) {
+                    Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_SHORT).show();
+                } else {
+                    updateItem();
+
+                }
+
+
+
             }
         });
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletItem();
+                if (name.getText().toString().equals("") || price.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    deletItem();
+                }
+
 
             }
         });
@@ -121,6 +142,7 @@ public class DetailItem extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 incomeId = incomeData.get(position).getId();
+
 
             }
 
@@ -163,7 +185,7 @@ public class DetailItem extends Fragment {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
+                                        changeName(jsonObject.getString("Name")),
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
@@ -234,7 +256,7 @@ public class DetailItem extends Fragment {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
+                                        changeName(jsonObject.getString("Name")),
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
@@ -349,7 +371,7 @@ public class DetailItem extends Fragment {
         String val = price.getText().toString();
         final int pric = Integer.parseInt(val);
         if (incomeId == -1 || expenseId == -1 | nam.equals("") | val.equals("")) {
-            Toast.makeText(getActivity(), "Please complete data ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
 
         } else {
 
@@ -376,8 +398,12 @@ public class DetailItem extends Fragment {
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
-                                Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                                if (message.equals("Save Changes is Success")) {
+                                    Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 updateItem();
@@ -413,4 +439,32 @@ public class DetailItem extends Fragment {
 
 
     }
+
+    public String changeName(String name) {
+        if (name.equals("Food")) {
+            return getString(R.string.food);
+        } else if (name.equals("Home")) {
+            return getString(R.string.home);
+        } else if (name.equals("Personal")) {
+            return getString(R.string.personal);
+        } else if (name.equals("Salary")) {
+            return getString(R.string.salary);
+        } else if (name.equals("Saving")) {
+            return getString(R.string.saving);
+        } else if (name.equals("Shopping")) {
+            return getString(R.string.shopping);
+        } else if (name.equals("Child")) {
+            return getString(R.string.child);
+        } else if (name.equals("Car")) {
+            return getString(R.string.car);
+        } else if (name.equals("Kast")) {
+            return getString(R.string.kast);
+        } else if (name.equals("Credit")) {
+            return getString(R.string.credit);
+        } else
+            return name;
+
+
+    }
+
 }

@@ -49,7 +49,6 @@ public class ChartFragment extends Fragment {
     TextView tvIncome;
     TextView tvExpense;
 
-    int flag = 0;
 
     Calendar cal = Calendar.getInstance();       // get calendar instance
     Date zeroedDate = cal.getTime();
@@ -57,8 +56,15 @@ public class ChartFragment extends Fragment {
 
     @Override
     public void onPause() {
-        getStatics(month);
         super.onPause();
+        getStatics(month);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getStatics(month);
     }
 
     @Override
@@ -164,11 +170,4 @@ public class ChartFragment extends Fragment {
     }
 
 
-    @Override
-    public void onStart() {
-        getStatics(month);
-
-        super.onStart();
-
-    }
 }

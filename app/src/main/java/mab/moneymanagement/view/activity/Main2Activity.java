@@ -1,6 +1,7 @@
 package mab.moneymanagement.view.activity;
 
 
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -17,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -81,7 +81,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(getString(R.string.app_name));
+
         setSupportActionBar(toolbar);
+
+//        ActionBar actionBar=getActionBar();
+//        actionBar.setTitle();
 
         shar = new SharedPreference();
         user = new User();
@@ -103,7 +108,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         //-------------View Pager ------
         mViewPager = findViewById(R.id.main_tab_pager);
-        mSectionBageAdapter = new SectionBageAdapter(getSupportFragmentManager());
+        mSectionBageAdapter = new SectionBageAdapter(getSupportFragmentManager(), getApplicationContext());
         mViewPager.setAdapter(mSectionBageAdapter);
 
         mTablLayout = findViewById(R.id.main_tabs);

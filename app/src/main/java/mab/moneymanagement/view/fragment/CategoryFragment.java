@@ -459,7 +459,7 @@ public class CategoryFragment extends Fragment {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
+                                        changeName(jsonObject.getString("Name")),
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
@@ -528,7 +528,7 @@ public class CategoryFragment extends Fragment {
                                 JSONObject jsonObject = arr.getJSONObject(i);
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
+                                        changeName(jsonObject.getString("Name")),
                                         jsonObject.getString("Icon"),
                                         jsonObject.getInt("Money"),
                                         jsonObject.getInt("Budget"),
@@ -574,6 +574,33 @@ public class CategoryFragment extends Fragment {
 
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+    public String changeName(String name) {
+        if (name.equals("Food")) {
+            return getString(R.string.food);
+        } else if (name.equals("Home")) {
+            return getString(R.string.home);
+        } else if (name.equals("Personal")) {
+            return getString(R.string.personal);
+        } else if (name.equals("Salary")) {
+            return getString(R.string.salary);
+        } else if (name.equals("Saving")) {
+            return getString(R.string.saving);
+        } else if (name.equals("Shopping")) {
+            return getString(R.string.shopping);
+        } else if (name.equals("Child")) {
+            return getString(R.string.child);
+        } else if (name.equals("Car")) {
+            return getString(R.string.car);
+        } else if (name.equals("Kast")) {
+            return getString(R.string.kast);
+        } else if (name.equals("Credit")) {
+            return getString(R.string.credit);
+        } else
+            return name;
+
 
     }
 

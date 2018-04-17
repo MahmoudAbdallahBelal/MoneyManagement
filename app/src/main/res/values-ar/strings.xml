@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">اداره الاموال</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="app_name">ادارة الاموال</string>
+    <string name="title_activity_main2">اداره الاموال</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Chart</string>
+    <string name="action_settings">الرسومات البيانيه</string>
 
 
     <string-array name="currency">
@@ -74,9 +74,9 @@
     <string name="setting_password_protection">تغير كلمه المرور</string>
     <string name="setting_daily_alert">تنبيه يومي</string>
     <string name="setting_budget">الميزانيه</string>
-    <string name="setting_export_file">Export file</string>
-    <string name="setting_create_data_backup">Create data backup</string>
-    <string name="seeting_delete_database">Delete database</string>
+    <string name="setting_export_file">مشاركه البيانات</string>
+    <string name="setting_create_data_backup">عمل نسخه احتياطيه </string>
+    <string name="seeting_delete_database">مسح جميع البيانات</string>
     <string name="budget_title">الميزانيه</string>
     <string name="budget_descripe">كم المبلغ الذي تريد وضعه ف الميزانيه</string>
     <string name="budget_value">0.0</string>
@@ -86,10 +86,10 @@
     <string name="select_language_title">اختار اللغه</string>
     <string name="arabic"> اللغه العربيه</string>
     <string name="english">اللغه الانجليزيه</string>
-    <string name="le">LE</string>
-    <string name="kdw">KDW</string>
-    <string name="dollar">Dollar</string>
-    <string name="rsa">RSA</string>
+    <string name="le">جنيه مصري</string>
+    <string name="kdw">دبنار كويتي</string>
+    <string name="dollar">دولار امريكي </string>
+    <string name="rsa">ريال سعودي</string>
     <string name="account_cash">كاش</string>
     <string name="account_payment_card">الدفع بالكريديت</string>
     <string name="account_new_teansfer">تحويل جديد</string>
@@ -127,7 +127,7 @@
     <string name="old_password">ادخل كلمه المرور القديمه</string>
     <string name="new_password">ادخل كلمه المرور الجديده</string>
     <string name="done">تم </string>
-    <string name="choose_date_btn_done">Done</string>
+    <string name="choose_date_btn_done">تم</string>
     <string name="all_item_inday">جميع العناصر ف هذا اليوم</string>
     <string name="complete_data">من فضلك اكمل البيانات</string>
     <string name="no_changes">لايوجد تغيرات </string>
@@ -137,7 +137,6 @@
     <string name="select_day">من فضلك اختار اليوم</string>
     <string name="budget_done">تم وضع الميزانيه </string>
     <string name="delete_done">تم حذف جميع البيانات</string>
-
     <string name="download_progress">Download on progress</string>
     <string name="complete_download">اكتمل التنزيل</string>
     <string name="setting_download">عفوا لقد حدث خطأ</string>
@@ -145,8 +144,37 @@
     <string name="chart_income">المتوقع</string>
     <string name="chart_expense">المستهلك</string>
     <string name="login_message">من فضلك انتظر حتي يتم تسجيل الدخول</string>
-
     <string name="check_email_login">من فضلك قم بفحص الايميل جيدا</string>
     <string name="sucess_login">تم تسجيل الدخول</string>
+    <string name="create_account">انشاء حساب جديد</string>
+    <string name="content">من فضلك انتظر حتي يتم انشاء حساب جديد</string>
+    <string name="error_happen">عفوا حدث خطأ</string>
+
+    <string name="daily">يوميا</string>
+    <string name="claender">الاجنده</string>
+    <string name="weekly">اسبوعيا</string>
+    <string name="monthly">شهريا</string>
+    <string name="price_item">السعر</string>
+
+    <string name="food">الطعام</string>
+    <string name="home">المنزل</string>
+    <string name="personal">الشخصيه</string>
+    <string name="salary">المرتب</string>
+    <string name="saving">المدخرات</string>
+    <string name="shopping">التسوق</string>
+    <string name="child">الاطفال</string>
+    <string name="car">السياره</string>
+    <string name="kast">القسط</string>
+    <string name="credit">بطاقه الاتمان</string>
+
+
+    <string name="create_new_account">انشاء حساب جديد</string>
+    <string name="forget_password">كلمه سر جديده</string>
+    <string name="income">الايرادات</string>
+    <string name="item_name">اسم العنصر</string>
+    <string name="item_price">سعر العنصر</string>
+    <string name="price">السعر</string>
+    <string name="item_note">ملاحظه</string>
+
 
 </resources>

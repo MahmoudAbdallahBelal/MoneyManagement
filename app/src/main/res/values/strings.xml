@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">MoneyManagement</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">MoneyManagement</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Chart</string>
@@ -135,7 +135,6 @@
     <string name="select_day">Please select day</string>
     <string name="budget_done">Budget Done</string>
     <string name="delete_done">Delete All Database</string>
-
     <string name="download_progress">Download on progress</string>
     <string name="complete_download">Download Complete</string>
     <string name="setting_download">\"Sorry Error happen\"</string>
@@ -146,6 +145,32 @@
     <string name="login_message">please wait until login</string>
     <string name="check_email_login">please check email correctly</string>
     <string name="sucess_login">Sucess login</string>
+    <string name="create_account">Create Account</string>
+    <string name="content">Please wait until regester ..</string>
+    <string name="error_happen">Sorry Erorr</string>
+    <string name="daily">DAILY</string>
+    <string name="claender">Calender</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="price_item">Price</string>
+
+    <string name="food">Food</string>
+    <string name="home">Home</string>
+    <string name="personal">Personal</string>
+    <string name="salary">Salary</string>
+    <string name="saving">Saving</string>
+    <string name="shopping">Shopping</string>
+    <string name="child">Child</string>
+    <string name="car">Car</string>
+    <string name="kast">Kast</string>
+    <string name="credit">Credit</string>
+    <string name="create_new_account">Create new Account</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="income">Income</string>
+    <string name="item_name">Item name</string>
+    <string name="item_price">Item Price</string>
+    <string name="price">Price</string>
+    <string name="item_note">Item Note</string>
 
 
 </resources>
