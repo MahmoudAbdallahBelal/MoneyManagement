@@ -54,60 +54,28 @@ public class ChartFragment extends Fragment {
     Date zeroedDate = cal.getTime();
     int month = zeroedDate.getMonth() + 1;
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        getStatics(month);
-
-    }
 
     @Override
     public void onStart() {
         super.onStart();
-        getStatics(month);
+        drawChart(income, expense);
+
+        //  barrChart.refreshDrawableState();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        getStatics(month);
-
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
-        barrChart = v.findViewById(R.id.bar_chart);
         shar = new SharedPreference();
         tvExpense = v.findViewById(R.id.chart_tv_expense);
         tvIncome = v.findViewById(R.id.chart_tv_target);
+        barrChart = v.findViewById(R.id.bar_chart);
 
-
-        // getStatics(month);
-
-//--------------------------------------------------------------
-
-
-        tvIncome.setText(getText(R.string.chart_income) + " : " + income);
-        tvExpense.setText(getText(R.string.chart_expense) + " : " + expense);
-
-        //----------------
-        barrChart.setDrawBarShadow(false);
-        barrChart.setDrawValueAboveBar(true);
-        barrChart.setMaxVisibleValueCount(income + expense);
-        barrChart.setPinchZoom(false);
-        barrChart.setDrawGridBackground(true);
-
-
-        ArrayList<BarEntry> barEntry = new ArrayList<>();
-        barEntry.add(new BarEntry(1, income));
-        barEntry.add(new BarEntry(2, expense));
-
-        BarDataSet barDataSet = new BarDataSet(barEntry, "");
-        barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-
-        BarData data = new BarData(barDataSet);
-        data.setBarWidth(.9f);
-        barrChart.setData(data);
-
-        //----------------
+        getStatics(month);
+//        drawChart(income,expense);
+//        barrChart.refreshDrawableState();
 
         return v;
     }
@@ -134,6 +102,14 @@ public class ChartFragment extends Fragment {
                                 income += jsonObject.getInt("Budget");
                                 expense += jsonObject.getInt("Money");
                             }
+
+                            barrChart.removeAllViews();
+                            drawChart(income, expense);
+                            barrChart.refreshDrawableState();
+
+
+                            tvIncome.setText(getText(R.string.chart_income) + " : " + income);
+                            tvExpense.setText(getText(R.string.chart_expense) + " : " + expense);
 
 
                         } catch (JSONException e) {
@@ -166,6 +142,32 @@ public class ChartFragment extends Fragment {
 
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
+    }
+
+    void drawChart(int income, int expense) {
+        //--------------------------------------------------------------
+
+        barrChart.setDrawBarShadow(false);
+        barrChart.setDrawValueAboveBar(true);
+        barrChart.setMaxVisibleValueCount(income + expense);
+        barrChart.setPinchZoom(false);
+        barrChart.setDrawGridBackground(true);
+
+
+        ArrayList<BarEntry> barEntry = new ArrayList<>();
+        barEntry.add(new BarEntry(1, income));
+        barEntry.add(new BarEntry(2, expense));
+
+        BarDataSet barDataSet = new BarDataSet(barEntry, "");
+        barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        BarData data = new BarData(barDataSet);
+        data.setBarWidth(.9f);
+        barrChart.setData(data);
+
+        //----------------
+
 
     }
 
