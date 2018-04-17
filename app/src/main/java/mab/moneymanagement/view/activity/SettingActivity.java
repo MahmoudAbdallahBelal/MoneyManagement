@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -197,7 +196,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
 
 
-
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -254,7 +252,20 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         {
             @Override
             public void onClick(View v) {
-                createDialog();
+                try {
+                    // v.removeCallbacks();
+                    String dd = getUrl();
+                    if (dd.equals("")) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
+                    } else {
+
+                        DownloadTask downloadTask = new DownloadTask();
+                        downloadTask.execute(dd);
+                    }
+                } catch (Exception e) {
+
+
+                }
             }
         });
 
@@ -282,7 +293,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         });
 
     }
-
 
 
     private void changeLanguage() {
@@ -427,59 +437,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     }
 
-    void createDialog() {
 
-        builder.setTitle("Download Data ");
-        builder.setMessage("Do you want save data in your mobile");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                String dd = getUrl();
-                if (dd.equals("")) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
-                } else {
-
-                    DownloadTask downloadTask = new DownloadTask();
-                    downloadTask.execute(dd);
-                }
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-
-        builder.create().show();
-    }
-
-    void createDialogDay() {
-
-        builder.setTitle("Change Day ");
-        builder.setMessage("Do you want to change day");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                updateDay();
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-
-        builder.create().show();
-    }
 
     private void setAlert() {
 
@@ -887,19 +845,25 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     @Override
     public void onClick(User user) {
 
-
-        imageBudget.setVisibility(View.VISIBLE);
-        tvBudget.setText(budget + "      " + user.getBadgetValue());
-        budgetFlag = 1;
-        if (user.getBadgetSelected() == false) {
+        try {
+            imageBudget.setVisibility(View.VISIBLE);
+            tvBudget.setText(budget + "      " + user.getBadgetValue());
+            budgetFlag = 1;
+            if (user.getBadgetSelected() == false) {
+                imageBudget.setVisibility(View.INVISIBLE);
+                removeBudget();
+                us = shar.getUser(getApplicationContext());
+                tvBudget.setText(budget);
+                budgetFlag = 0;
+            }
+        } catch (Exception x) {
             imageBudget.setVisibility(View.INVISIBLE);
-
             removeBudget();
             us = shar.getUser(getApplicationContext());
             tvBudget.setText(budget);
             budgetFlag = 0;
-
         }
+
     }
 
     class DownloadTask extends AsyncTask<String, Integer, String> {

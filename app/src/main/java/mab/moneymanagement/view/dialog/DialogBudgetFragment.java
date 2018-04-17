@@ -56,6 +56,7 @@ public class DialogBudgetFragment extends DialogFragment {
 
         shar = new SharedPreference();
 
+        getDialog().setCanceledOnTouchOutside(false);
 
         et_Value = v.findViewById(R.id.budget_et_value);
         Button ok = v.findViewById(R.id.budget_btn_ok);
