@@ -76,43 +76,39 @@ public class CategoryDetailFragment extends Fragment {
         //------spinner for icon ----------
         iconSpinner = v.findViewById(R.id.category_detail_spinner_icon);
         int id = getNameIcon(categoryData.getIcon());
-        if (flag == -1) {
-            iconImage.setImageResource(getIcomImage(id));
+        iconImage.setImageResource(getIcomImage(id));
 
-        }
 
         final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
         iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         iconSpinner.setAdapter(iconAdapter);
+        iconSpinner.setSelection(getNameIcon(categoryData.getIcon()));
+
+
         iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 selectedCategory = iconSpinner.getItemAtPosition(position).toString();
-                flag = getIcomImage(getNameIcon(selectedCategory));
-                if (id == flag) {
-                    iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
+                if (flag == -1) {
+                    selectedCategory = categoryData.getIcon();
 
                 }
-
-
+                flag = 0;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                selectedCategory = categoryData.getIcon();
 
             }
         });
-//        try {
-//            if (selectedCategory.equals(null)){
-//
-//            }else {
-//                iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
-//
-//            }
-//        }catch (Exception e){
-//
-//        }
+
+        try {
+            iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
+
+        } catch (Exception e) {
+
+        }
 
 
         getExpenseCategory();
@@ -128,6 +124,11 @@ public class CategoryDetailFragment extends Fragment {
                     vv = Integer.parseInt(valu);
 
                     if (nam.equals("") || valu.equals("")) {
+                        Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
+
+                    } else if (nam.equals(categoryData.getName()) && vv == categoryData.getBudget() && selectedCategory == categoryData.getIcon()) {
+
+                        Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_SHORT).show();
 
                     } else {
                         updateCategoryExpense(nam, vv, selectedCategory, categoryData.getId());
@@ -143,6 +144,11 @@ public class CategoryDetailFragment extends Fragment {
                     int vvv = Integer.parseInt(valu);
 
                     if (nam.equals("") || valu.equals("")) {
+                        Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
+
+                    } else if (nam.equals(categoryData.getName()) && vvv == categoryData.getMoney() && selectedCategory == categoryData.getIcon()) {
+
+                        Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_SHORT).show();
 
                     } else {
                         updateCategoryIncome(nam, vvv, selectedCategory, categoryData.getId());
