@@ -28,29 +28,40 @@
             android:weightSum="3">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="@string/row_expected_target"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
 
                 />
 
 
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="@string/row_expected_expense"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+
 
                 />
 
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="@string/row_expected_percentage"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+
 
                 />
         </LinearLayout>
@@ -63,27 +74,32 @@
             <TextView
                 android:id="@+id/row_expected_tv_target"
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
+
 
                 />
 
 
             <TextView
                 android:id="@+id/row_expected_tv_expense"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
+
 
                 />
 
             <TextView
                 android:id="@+id/row_expected_tv_percentage"
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
 
                 />
         </LinearLayout>

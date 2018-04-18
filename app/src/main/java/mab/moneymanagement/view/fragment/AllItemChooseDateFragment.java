@@ -118,24 +118,29 @@ public class AllItemChooseDateFragment extends Fragment {
                             }
 
                             data.clear();
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonObject = arr.getJSONObject(i);
-                                Item category = new Item(
-                                        jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
-                                        jsonObject.getString("Notes"),
-                                        jsonObject.getInt("Price"),
-                                        jsonObject.getInt("IncomeCategoryId"),
-                                        jsonObject.getInt("OutComeCategoryId"),
-                                        changeName(jsonObject.getString("IncomeCategoryName")),
-                                        changeName(jsonObject.getString("OutComeCategoryName")),
-                                        jsonObject.getString("CreateDate")
+                            try {
+                                for (int i = 0; i < arr.length(); i++) {
+                                    JSONObject jsonObject = arr.getJSONObject(i);
+                                    Item category = new Item(
+                                            jsonObject.getInt("Id"),
+                                            jsonObject.getString("Name"),
+                                            jsonObject.getString("Notes"),
+                                            jsonObject.getInt("Price"),
+                                            jsonObject.getInt("IncomeCategoryId"),
+                                            jsonObject.getInt("OutComeCategoryId"),
+                                            changeName(jsonObject.getString("IncomeCategoryName")),
+                                            changeName(jsonObject.getString("OutComeCategoryName")),
+                                            jsonObject.getString("CreateDate")
 
-                                );
-                                data.add(category);
+                                    );
+                                    data.add(category);
 
+
+                                }
+                            } catch (Exception e) {
 
                             }
+
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
@@ -179,25 +184,25 @@ public class AllItemChooseDateFragment extends Fragment {
 
     public String changeName(String name) {
         if (name.equals("Food")) {
-            return getString(R.string.food);
+            return getContext().getString(R.string.food);
         } else if (name.equals("Home")) {
-            return getString(R.string.home);
+            return getContext().getString(R.string.home);
         } else if (name.equals("Personal")) {
-            return getString(R.string.personal);
+            return getContext().getString(R.string.personal);
         } else if (name.equals("Salary")) {
-            return getString(R.string.salary);
+            return getContext().getString(R.string.salary);
         } else if (name.equals("Saving")) {
-            return getString(R.string.saving);
+            return getContext().getString(R.string.saving);
         } else if (name.equals("Shopping")) {
-            return getString(R.string.shopping);
+            return getContext().getString(R.string.shopping);
         } else if (name.equals("Child")) {
-            return getString(R.string.child);
+            return getContext().getString(R.string.child);
         } else if (name.equals("Car")) {
-            return getString(R.string.car);
+            return getContext().getString(R.string.car);
         } else if (name.equals("Kast")) {
-            return getString(R.string.kast);
+            return getContext().getString(R.string.kast);
         } else if (name.equals("Credit")) {
-            return getString(R.string.credit);
+            return getContext().getString(R.string.credit);
         } else
             return name;
 

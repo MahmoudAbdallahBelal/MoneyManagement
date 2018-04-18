@@ -146,8 +146,8 @@ public class DialogBudgetFragment extends DialogFragment {
                                 if (message.equals("Infromation Changed Successfuly")) {
                                     try {
                                         // Toast.makeText(getActivity(), getString(R.string.budget_done), Toast.LENGTH_LONG).show();
-                                        shar.removeUser(getContext());
-                                        shar.saveUser(getContext(), xx);
+                                        shar.removeUser(getActivity());
+                                        shar.saveUser(getActivity(), xx);
 
                                         dismiss();
                                     } catch (Exception e) {
