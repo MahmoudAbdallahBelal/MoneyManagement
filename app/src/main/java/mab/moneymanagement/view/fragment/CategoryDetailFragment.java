@@ -76,8 +76,10 @@ public class CategoryDetailFragment extends Fragment {
         //------spinner for icon ----------
         iconSpinner = v.findViewById(R.id.category_detail_spinner_icon);
         int id = getNameIcon(categoryData.getIcon());
-        iconImage.setImageResource(getIcomImage(id));
+        if (flag == -1) {
+            iconImage.setImageResource(getIcomImage(id));
 
+        }
 
         final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
         iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,8 +90,6 @@ public class CategoryDetailFragment extends Fragment {
 
                 selectedCategory = iconSpinner.getItemAtPosition(position).toString();
                 flag = getIcomImage(getNameIcon(selectedCategory));
-
-                //iconImage.setImageResource(getIcomImage(flag));
                 if (id == flag) {
                     iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
 
@@ -103,6 +103,17 @@ public class CategoryDetailFragment extends Fragment {
 
             }
         });
+//        try {
+//            if (selectedCategory.equals(null)){
+//
+//            }else {
+//                iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
+//
+//            }
+//        }catch (Exception e){
+//
+//        }
+
 
         getExpenseCategory();
 
@@ -387,25 +398,24 @@ public class CategoryDetailFragment extends Fragment {
 
     }
 
-
     private int getNameIcon(String name) {
-        if (name.equals("Food")) {
+        if (name.equals(getString(R.string.food))) {
             return 0;
-        } else if (name.equals("Home")) {
+        } else if (name.equals(getString(R.string.home))) {
             return 1;
-        } else if (name.equals("Personal")) {
+        } else if (name.equals(getString(R.string.personal))) {
             return 2;
-        } else if (name.equals("Salary")) {
+        } else if (name.equals(getString(R.string.salary))) {
             return 3;
-        } else if (name.equals("Saving")) {
+        } else if (name.equals(getString(R.string.saving))) {
             return 4;
-        } else if (name.equals("Shopping")) {
+        } else if (name.equals(getString(R.string.shopping))) {
             return 5;
-        } else if (name.equals("Child")) {
+        } else if (name.equals(getString(R.string.child))) {
             return 6;
-        } else if (name.equals("Car")) {
+        } else if (name.equals(getString(R.string.car))) {
             return 7;
-        } else if (name.equals("Kast")) {
+        } else if (name.equals(getString(R.string.kast))) {
             return 8;
         } else
             //credit

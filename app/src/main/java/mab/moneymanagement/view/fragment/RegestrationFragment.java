@@ -137,13 +137,13 @@ public class RegestrationFragment extends Fragment {
                         flag = -1;
 
                     }
-
-                    String c = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,61}$";
-                    if (!email.matches(c)) {
-                        etEmail.setError(getString(R.string.not_correct_email));
-                        flag = -1;
-
-                    }
+//
+//                    String c = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,61}$";
+//                    if (!email.matches(c)) {
+//                        etEmail.setError(getString(R.string.not_correct_email));
+//                        flag = -1;
+//
+//                    }
 
                     if (flag == 0) {
                         Regester();
@@ -152,7 +152,7 @@ public class RegestrationFragment extends Fragment {
 
 
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
                 }
 
@@ -175,7 +175,7 @@ public class RegestrationFragment extends Fragment {
 
 
         if (name.equals("") || password.equals("") || email.equals("") || selectedDay.equals("") || kindCurrency.equals("")) {
-            Toast.makeText(getContext(), "complete all data ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
         } else {
 
 
@@ -210,7 +210,7 @@ public class RegestrationFragment extends Fragment {
 
                                 if (message.equals("create account success")) {
                                     builder.build().dismiss();
-                                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), getString(R.string.create_account_sucess), Toast.LENGTH_LONG).show();
                                     //save id  in shared prefrence
                                     SharedPreference shar = new SharedPreference();
                                     shar.save(getActivity(), accessTocken, authorization);

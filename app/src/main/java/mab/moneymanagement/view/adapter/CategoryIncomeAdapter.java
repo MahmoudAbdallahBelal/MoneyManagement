@@ -63,37 +63,26 @@ public class CategoryIncomeAdapter extends BaseAdapter {
     }
 
     private int getIcomImage(String name) {
-        if (name.equals("Food")) {
+        if (name.equals(context.getString(R.string.food))) {
             return R.drawable.food;
-        } else if (name.equals("Home")) {
+        } else if (name.equals(context.getString(R.string.home))) {
             return R.drawable.house;
-
-
-        } else if (name.equals("Personal")) {
+        } else if (name.equals(context.getString(R.string.personal))) {
             return R.drawable.personal;
-
-        } else if (name.equals("Salary")) {
+        } else if (name.equals(context.getString(R.string.salary))) {
             return R.drawable.salalry;
-
-        } else if (name.equals("saving")) {
+        } else if (name.equals(context.getString(R.string.saving))) {
             return R.drawable.saving;
-
-        } else if (name.equals("Shopping")) {
+        } else if (name.equals(context.getString(R.string.shopping))) {
             return R.drawable.shopping;
-
-        } else if (name.equals("Child")) {
+        } else if (name.equals(context.getString(R.string.child))) {
             return R.drawable.child;
-
-        } else if (name.equals("Car")) {
+        } else if (name.equals(context.getString(R.string.car))) {
             return R.drawable.car;
-
-        } else if (name.equals("Kast")) {
+        } else if (name.equals(context.getString(R.string.kast))) {
             return R.drawable.kast;
-
         } else
             return R.drawable.credit;
-
-
     }
 
 }

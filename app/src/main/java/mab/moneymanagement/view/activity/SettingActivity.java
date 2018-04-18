@@ -254,7 +254,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
             public void onClick(View v) {
                 try {
                     // v.removeCallbacks();
-                    String dd = getUrl();
+                    String dd = "gasem1234-001-site1.dtempurl.com/Files/ed25f7f4-1ae4-45ce-a316-f1582d74ce61.txt";
                     if (dd.equals("")) {
                         Toast.makeText(getApplicationContext(), getString(R.string.setting_download), Toast.LENGTH_LONG).show();
                     } else {
@@ -438,8 +438,6 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
     }
 
-
-
     private void setAlert() {
 
         final JSONObject updateObject = new JSONObject();
@@ -471,18 +469,17 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                Toast.makeText(getApplication(), "make alert", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), getString(R.string.make_alert), Toast.LENGTH_LONG).show();
 
 
                             } else {
-                                //  Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
+                                setAlert();
 
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             setAlert();
-                            //  Toast.makeText(getApplication(), "message" + e.getMessage(), Toast.LENGTH_LONG).show();
 
 
                         }
@@ -545,11 +542,11 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                Toast.makeText(getApplication(), "remove alert", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), getString(R.string.remove_alert), Toast.LENGTH_LONG).show();
 
 
                             } else {
-                                Toast.makeText(getApplication(), "Error happen", Toast.LENGTH_LONG).show();
+                                removeAlert();
 
                             }
                         } catch (JSONException e) {
@@ -742,7 +739,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         builder.setView(login_layout);
 
         //SET BUTTON
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.done), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Check Validation
@@ -759,7 +756,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
                     }
                     // Initialize a new JsonObjectRequest instance
@@ -771,7 +768,12 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                                     //----------HANDEL MESSAGE COME FROM REQUEST -------------------
 
                                     try {
-                                        Toast.makeText(getApplicationContext(), jsonObject.getString("RequstDetails"), Toast.LENGTH_LONG).show();
+                                        if (jsonObject.getString("RequstDetails").equals("Password Changed Successfully")) {
+                                            Toast.makeText(getApplicationContext(), getString(R.string.change_password_sucessful), Toast.LENGTH_LONG).show();
+                                        } else if (jsonObject.getString("RequstDetails").equals("Password Changed Failed")) {
+                                            Toast.makeText(getApplicationContext(), getString(R.string.change_password_failed), Toast.LENGTH_LONG).show();
+
+                                        }
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -784,7 +786,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     // Do something when error occurred
-                                    Toast.makeText(getApplicationContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.error_happen_server), Toast.LENGTH_LONG).show();
 
 
                                 }
@@ -807,7 +809,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.budget_btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -900,7 +902,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                 if (!newFolder.exists()) {
                     newFolder.mkdir();
                 }
-                File inputFile = new File(newFolder, "download_data.txt");
+                File inputFile = new File(newFolder, "MoneyMangeMent.txt");
                 InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
                 byte[] data = new byte[1024];
                 int total = 0;

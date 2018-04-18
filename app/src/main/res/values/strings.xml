@@ -206,6 +206,11 @@
     <string name="error_happen_server">Excuse me error on connect with server</string>
     <string name="fail_to_send">Failed to Send Email</string>
     <string name="email_not_found">Email Not Found In System Please Get Regist</string>
+    <string name="make_alert">make alert</string>
+    <string name="remove_alert">Remove alert</string>
+    <string name="change_password_sucessful">Password Changed Successfully</string>
+    <string name="change_password_failed">Password Changed Failed</string>
+    <string name="create_account_sucess">Create account sucess</string>
 
 
 </resources>

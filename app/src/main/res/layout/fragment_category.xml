@@ -29,23 +29,24 @@
             android:weightSum="5">
 
             <GridView
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp"
-                android:layout_margin="15dp"
                 android:id="@+id/category_expense_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="15dp"
                 android:layout_weight="4"
+                android:horizontalSpacing="10dp"
                 android:numColumns="2"
                 android:scrollbars="vertical"
-                ></GridView>
+                android:verticalSpacing="10dp"></GridView>
 
             <ImageView
                 android:id="@+id/addd_expense_image"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+
                 android:layout_weight="1"
                 android:background="@color/background"
                 android:padding="10dp"
@@ -65,34 +66,36 @@
             android:textSize="25dp" />
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="210dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="5">
 
             <GridView
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp"
                 android:id="@+id/category_income_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
                 android:layout_margin="15dp"
-                android:numColumns="2"></GridView>
+                android:layout_weight="4"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:verticalSpacing="10dp"></GridView>
 
             <ImageView
                 android:id="@+id/add_income_image"
                 android:layout_width="0dp"
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@color/background"
+
+                android:horizontalSpacing="10dp"
                 android:padding="10dp"
-                android:src="@drawable/plus" />
+                android:src="@drawable/plus"
+                android:verticalSpacing="10dp" />
 
         </LinearLayout>
     </LinearLayout>

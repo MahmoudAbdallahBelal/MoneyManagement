@@ -199,8 +199,13 @@
     <string name="no_statics_until_now">لايوجد احصائيات حتي الان</string>
     <string name="update">حفظ التغيرات</string>
     <string name="error_happen_server">عفوا حدث خطا اتناء الاتصال بالخادم </string>
-
     <string name="fail_to_send">حدث خطاء اثناء ارسال الكود</string>
     <string name="email_not_found">هذا الايميل غير موجود </string>
+    <string name="make_alert">عمل تنبيه يومي</string>
+    <string name="remove_alert">حذف التنبيه اليومي</string>
+    <string name="change_password_sucessful">تم تغير كلمه المرور بنجاح</string>
+    <string name="change_password_failed">حدث خطاء اثناء تغير كلمه المرور </string>
+    <string name="create_account_sucess">تم انشاء الحساب بنجاح</string>
+
 
 </resources>
