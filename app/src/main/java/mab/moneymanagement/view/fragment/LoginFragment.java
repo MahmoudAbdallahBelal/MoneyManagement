@@ -191,7 +191,7 @@ public class LoginFragment extends Fragment {
                         dialog.dismiss();
                         dialog.cancel();
                         dialog.hide();
-                        Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.error_happen_server) + error, Toast.LENGTH_LONG).show();
                     }
                 });
 

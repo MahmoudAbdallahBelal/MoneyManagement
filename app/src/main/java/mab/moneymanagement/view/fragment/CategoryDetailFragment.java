@@ -76,10 +76,8 @@ public class CategoryDetailFragment extends Fragment {
         //------spinner for icon ----------
         iconSpinner = v.findViewById(R.id.category_detail_spinner_icon);
         int id = getNameIcon(categoryData.getIcon());
-        if (flag == -1) {
-            iconImage.setImageResource(getIcomImage(id));
+        iconImage.setImageResource(getIcomImage(id));
 
-        }
 
         final ArrayAdapter<CharSequence> iconAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.icon, android.R.layout.simple_spinner_item);
         iconAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -105,17 +103,6 @@ public class CategoryDetailFragment extends Fragment {
 
             }
         });
-//        try {
-//            if (selectedCategory.equals(null)){
-//
-//            }else {
-//                iconImage.setImageResource(getIcomImage(getNameIcon(selectedCategory)));
-//
-//            }
-//        }catch (Exception e){
-//
-//        }
-
 
         getExpenseCategory();
 
@@ -399,6 +386,7 @@ public class CategoryDetailFragment extends Fragment {
 
 
     }
+
 
     private int getNameIcon(String name) {
         if (name.equals("Food")) {

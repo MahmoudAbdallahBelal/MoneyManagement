@@ -76,6 +76,7 @@ public class SharedPreference {
     }
 
 
+    //get token
     public String getValue(Context context) {
         SharedPreferences settings;
         String text;
@@ -95,6 +96,28 @@ public class SharedPreference {
         }
     }
 
+    //get user data
+    public User getUser(Context context) {
+        SharedPreferences settings;
+
+        User user = new User();
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        user.setEmail(settings.getString(PREFS_EMAIL, null));
+        user.setFullName(settings.getString(PREFS_FULL_NAME, null));
+        user.setBegainDayOfWeek(settings.getInt(PREFS_BEING_WEEK, 0));
+        user.setBadgetSelected(settings.getBoolean(PREFS_BUDGET_SELECTED, false));
+        user.setBadgetValue(settings.getInt(PREFS_BUDGET_VALUE, 0));
+        user.setDailyAlert(settings.getBoolean(PREFS_ALERT, false));
+        user.setCurrency(settings.getInt(PREFS_CURRENCY, 0));
+
+
+        return user;
+    }
+
+    //save user data
     public void saveUser(Context context, User user) {
 
         SharedPreferences settings;
@@ -129,26 +152,7 @@ public class SharedPreference {
 
     }
 
-    public User getUser(Context context) {
-        SharedPreferences settings;
-
-        User user = new User();
-
-        //settings = PreferenceManager.getDefaultSharedPreferences(context);
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-
-        user.setEmail(settings.getString(PREFS_EMAIL, null));
-        user.setFullName(settings.getString(PREFS_FULL_NAME, null));
-        user.setBegainDayOfWeek(settings.getInt(PREFS_BEING_WEEK, 0));
-        user.setBadgetSelected(settings.getBoolean(PREFS_BUDGET_SELECTED, false));
-        user.setBadgetValue(settings.getInt(PREFS_BUDGET_VALUE, 0));
-        user.setDailyAlert(settings.getBoolean(PREFS_ALERT, false));
-        user.setCurrency(settings.getInt(PREFS_CURRENCY, 0));
-
-
-        return user;
-    }
-
+    //
     public void clearSharedPreference(Context context) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
@@ -169,12 +173,13 @@ public class SharedPreference {
         editor = settings.edit();
 
         editor.remove(PREFS_NAME);
-
         editor.remove(accessTocken);
         editor.remove(authentication);
-
-        editor.commit();
         editor.apply();
+        editor.clear();
+        editor.commit();
+
+
     }
 
     public void removeUser(Context context) {

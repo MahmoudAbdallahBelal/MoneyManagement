@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -226,9 +227,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             //change status of loggin
             shar.removeValue(getApplicationContext());
-            shar.clearSharedPreference(getApplicationContext());
             shar.removeUser(getApplicationContext());
-            // Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
+
+            // shar.clearSharedPreference(getApplicationContext());
+            Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
@@ -244,6 +246,17 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onStart() {
         super.onStart();
+
+        //-----------check language--------
+        try {
+            shar = new SharedPreference();
+            cc = shar.getLanguage(getApplicationContext());
+            if (cc.equals(null)) {
+            } else
+                setLocate(cc);
+        } catch (Exception e) {
+
+        }
 
         user = getUserData();
 

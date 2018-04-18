@@ -202,6 +202,8 @@
     <string name="add">Add</string>
     <string name="no_expected_until_now">No expected until now</string>
     <string name="no_statics_until_now">No statics until now</string>
+    <string name="update">Update</string>
+    <string name="error_happen_server">Excuse me error on connect with server</string>
 
 
 </resources>

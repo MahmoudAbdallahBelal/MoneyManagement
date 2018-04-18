@@ -197,6 +197,8 @@
     <string name="add">اضافه</string>
     <string name="no_expected_until_now">لايوجد توقعات حتي الان</string>
     <string name="no_statics_until_now">لايوجد احصائيات حتي الان</string>
+    <string name="update">حفظ التغيرات</string>
+    <string name="error_happen_server">عفوا حدث خطا اتناء الاتصال بالخادم </string>
 
 
 </resources>
