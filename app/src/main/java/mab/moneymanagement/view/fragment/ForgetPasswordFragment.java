@@ -13,11 +13,9 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -170,8 +168,10 @@ public class ForgetPasswordFragment extends Fragment {
                                 String message = response.getString("RequstDetails");
                                 if (message.equals("Email is Send Please Check Email")) {
                                     showDialog();
-                                } else {
-                                    Toast.makeText(getContext(), message.toString(), Toast.LENGTH_LONG).show();
+                                } else if (message.equals("Failed to Send Email")) {
+                                    Toast.makeText(getContext(), getString(R.string.fail_to_send), Toast.LENGTH_LONG).show();
+                                } else if (message.equals("Email Not Found In System Please Get Regist")) {
+                                    Toast.makeText(getContext(), getString(R.string.email_not_found), Toast.LENGTH_LONG).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

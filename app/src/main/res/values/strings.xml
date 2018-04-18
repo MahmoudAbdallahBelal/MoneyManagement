@@ -204,6 +204,8 @@
     <string name="no_statics_until_now">No statics until now</string>
     <string name="update">Update</string>
     <string name="error_happen_server">Excuse me error on connect with server</string>
+    <string name="fail_to_send">Failed to Send Email</string>
+    <string name="email_not_found">Email Not Found In System Please Get Regist</string>
 
 
 </resources>

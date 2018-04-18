@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <item name="fail_to_send" type="id">Failed to Send Email</item>
+    <item name="email_not_found" type="id">Email Not Found In System Please Get Regist</item>
+</resources>

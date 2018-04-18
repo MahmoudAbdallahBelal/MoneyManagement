@@ -200,5 +200,7 @@
     <string name="update">حفظ التغيرات</string>
     <string name="error_happen_server">عفوا حدث خطا اتناء الاتصال بالخادم </string>
 
+    <string name="fail_to_send">حدث خطاء اثناء ارسال الكود</string>
+    <string name="email_not_found">هذا الايميل غير موجود </string>
 
 </resources>
