@@ -355,7 +355,8 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                                 urlData = data;
 
                             } else {
-                                urlData = "";
+                                getUrl();
+                                // urlData = "";
                             }
 
 
