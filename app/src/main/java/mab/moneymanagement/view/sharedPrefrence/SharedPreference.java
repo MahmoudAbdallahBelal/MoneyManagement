@@ -157,7 +157,6 @@ public class SharedPreference {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
-        //settings = PreferenceManager.getDefaultSharedPreferences(context);
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
 
@@ -175,7 +174,7 @@ public class SharedPreference {
         editor.remove(PREFS_NAME);
         editor.remove(accessTocken);
         editor.remove(authentication);
-        editor.apply();
+
         editor.clear();
         editor.commit();
 

@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
 
         builder = new MaterialDialog.Builder(getActivity())
                 .title(R.string.login_message)
-                .content(R.string.login_message)
+                .content("")
                 .positiveText(R.string.ok);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +76,10 @@ public class LoginFragment extends Fragment {
                     etEmail.setError(getString(R.string.please_enter_email));
 
                 }
-                //  Toast.makeText(getContext(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
                 if (password.equals("")) {
                     etPassword.setError(getString(R.string.please_enter_password));
                 }
 
-                //  Toast.makeText(getContext(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
                 if (!email.equals("") && !password.equals("")) {
                     login();
 
@@ -163,7 +161,6 @@ public class LoginFragment extends Fragment {
                                 dialog.dismiss();
                                 dialog.cancel();
                                 dialog.hide();
-                                // Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
 
 
                                 Toast.makeText(getContext(), getString(R.string.check_email_login), Toast.LENGTH_LONG).show();
@@ -191,7 +188,7 @@ public class LoginFragment extends Fragment {
                         dialog.dismiss();
                         dialog.cancel();
                         dialog.hide();
-                        Toast.makeText(getContext(), getString(R.string.error_happen_server) + error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.error_happen_server), Toast.LENGTH_LONG).show();
                     }
                 });
 

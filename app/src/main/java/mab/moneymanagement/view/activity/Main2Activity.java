@@ -1,7 +1,6 @@
 package mab.moneymanagement.view.activity;
 
 
-import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -226,10 +225,13 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_logout) {
 
             //change status of loggin
-            shar.removeValue(getApplicationContext());
+            // shar.removeValue(getApplicationContext());
             shar.removeUser(getApplicationContext());
+            shar.save(getApplicationContext(), "null", "null");
             // shar.clearSharedPreference(getApplicationContext());
-            Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), shar.getLanguage(getApplicationContext()), Toast.LENGTH_LONG).show();
+
+            // Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(logoutIntent);
