@@ -166,7 +166,7 @@ public class AllItemCategoryFragment extends Fragment {
 
                             if (arr.length() == 0) {
                                 tvMessage.setVisibility(View.VISIBLE);
-                                tvMessage.setText(getString(R.string.no_item_added));
+                                tvMessage.setText(getActivity().getString(R.string.no_item_added));
                             }
 
                             data.clear();

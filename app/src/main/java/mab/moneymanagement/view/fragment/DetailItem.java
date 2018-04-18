@@ -58,6 +58,8 @@ public class DetailItem extends Fragment {
     public static int expenseId = -1;
     int cateogryIncomId = -1;
     int cateogryExpenseId = -1;
+    public static int x = 0;
+    public static int x1 = 0;
 
     Item item;
 
@@ -87,22 +89,47 @@ public class DetailItem extends Fragment {
         paymentSpinner = v.findViewById(R.id.item_detail_payment_spiner);
 
 
+        //   ------spinner for expense ----------
+        getExpenseCategory();
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cateogryExpenseId = expenseData.get(position).getId();
+                // Toast.makeText(getActivity(),"55555",Toast.LENGTH_SHORT).show();
+                x += 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+//
+
+        //------spinner for income ----------
+
+        paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cateogryIncomId = incomeData.get(position).getId();
+                x1 += 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        name.setText(item.getName());
+        price.setText(Integer.toString(item.getPrice()));
+        note.setText(item.getNote());
+
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final String nam = name.getText().toString();
-                String not = note.getText().toString();
-                String val = price.getText().toString();
-                final int pric = Integer.parseInt(val);
-                if (nam.equals(item.getName()) && not.equals(item.getNote()) && pric == item.getPrice() && cateogryExpenseId == expenseId && cateogryIncomId == incomeId) {
-                    Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_SHORT).show();
-                } else {
-                    updateItem();
-
-                }
-
-
+                updateItem();
             }
         });
 
@@ -119,42 +146,6 @@ public class DetailItem extends Fragment {
 
             }
         });
-
-        //   ------spinner for expense ----------
-        getExpenseCategory();
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cateogryExpenseId = expenseData.get(position).getId();
-                // Toast.makeText(getActivity(),"55555",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-//
-
-        //------spinner for income ----------
-
-        paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cateogryIncomId = incomeData.get(position).getId();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        name.setText(item.getName());
-        price.setText(Integer.toString(item.getPrice()));
-        note.setText(item.getNote());
-
 
         return v;
     }
@@ -380,6 +371,9 @@ public class DetailItem extends Fragment {
         final int pric = Integer.parseInt(val);
         if (nam.equals("") | val.equals("")) {
             Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
+
+        } else if (name.getText().toString().equals("") || price.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
 
         } else {
 
