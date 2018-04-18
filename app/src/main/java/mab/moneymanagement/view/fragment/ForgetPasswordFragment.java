@@ -52,7 +52,12 @@ public class ForgetPasswordFragment extends Fragment {
         verifiy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verfiyEmail();
+                try {
+                    verfiyEmail();
+
+                } catch (Exception e) {
+
+                }
 
             }
         });
@@ -153,7 +158,7 @@ public class ForgetPasswordFragment extends Fragment {
         } else {
 
             // Initialize a new JsonObjectRequest instance
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            //   RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
             String ff = ForgetUrl + "?Email=" + email;
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ff, (String) null,
                     new Response.Listener<JSONObject>() {
@@ -191,8 +196,8 @@ public class ForgetPasswordFragment extends Fragment {
             };
 
             // Add JsonObjectRequest to the RequestQueue
-            requestQueue.add(jsonObjectRequest);
-            MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+            //requestQueue.add(jsonObjectRequest);
+            MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }
         //----

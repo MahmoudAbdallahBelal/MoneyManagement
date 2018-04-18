@@ -228,7 +228,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             //change status of loggin
             shar.removeValue(getApplicationContext());
             shar.removeUser(getApplicationContext());
-
             // shar.clearSharedPreference(getApplicationContext());
             Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
