@@ -46,6 +46,12 @@ public class MonthlyFragment extends Fragment implements InterfaceItem {
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        getAllItem();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment

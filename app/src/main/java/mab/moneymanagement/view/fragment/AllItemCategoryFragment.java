@@ -172,24 +172,29 @@ public class AllItemCategoryFragment extends Fragment {
                             }
 
                             data.clear();
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonObject = arr.getJSONObject(i);
-                                Item category = new Item(
-                                        jsonObject.getInt("Id"),
-                                        jsonObject.getString("Name"),
-                                        jsonObject.getString("Notes"),
-                                        jsonObject.getInt("Price"),
-                                        jsonObject.getInt("IncomeCategoryId"),
-                                        jsonObject.getInt("OutComeCategoryId"),
-                                        changeName(jsonObject.getString("IncomeCategoryName")),
-                                        changeName(jsonObject.getString("OutComeCategoryName")),
-                                        jsonObject.getString("CreateDate")
+                            try {
+                                for (int i = 0; i < arr.length(); i++) {
+                                    JSONObject jsonObject = arr.getJSONObject(i);
+                                    Item category = new Item(
+                                            jsonObject.getInt("Id"),
+                                            jsonObject.getString("Name"),
+                                            jsonObject.getString("Notes"),
+                                            jsonObject.getInt("Price"),
+                                            jsonObject.getInt("IncomeCategoryId"),
+                                            jsonObject.getInt("OutComeCategoryId"),
+                                            changeName(jsonObject.getString("IncomeCategoryName")),
+                                            changeName(jsonObject.getString("OutComeCategoryName")),
+                                            jsonObject.getString("CreateDate")
 
-                                );
-                                data.add(category);
+                                    );
+                                    data.add(category);
 
+
+                                }
+                            } catch (Exception x) {
 
                             }
+
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
@@ -253,8 +258,6 @@ public class AllItemCategoryFragment extends Fragment {
             return getString(R.string.credit);
         } else
             return name;
-
-
     }
 
 

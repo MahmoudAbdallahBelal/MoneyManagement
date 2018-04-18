@@ -138,7 +138,7 @@ public class RegestrationFragment extends Fragment {
 
                     }
 
-                    String c = "";
+                    String c = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{1,61}$";
                     if (!email.matches(c)) {
                         etEmail.setError(getString(R.string.not_correct_email));
                         flag = -1;

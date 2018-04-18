@@ -455,19 +455,25 @@ public class CategoryFragment extends Fragment {
 
 
                             expenseData.clear();
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonObject = arr.getJSONObject(i);
-                                Category category = new Category(
-                                        jsonObject.getInt("Id"),
-                                        changeName(jsonObject.getString("Name")),
-                                        jsonObject.getString("Icon"),
-                                        jsonObject.getInt("Money"),
-                                        jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate"),
-                                        "expense"
+                            try {
+                                for (int i = 0; i < arr.length(); i++) {
+                                    JSONObject jsonObject = arr.getJSONObject(i);
+                                    Category category = new Category(
+                                            jsonObject.getInt("Id"),
+                                            changeName(jsonObject.getString("Name")),
+                                            jsonObject.getString("Icon"),
+                                            jsonObject.getInt("Money"),
+                                            jsonObject.getInt("Budget"),
+                                            jsonObject.getString("CreateDate"),
+                                            "expense"
 
-                                );
-                                expenseData.add(category);
+                                    );
+                                    expenseData.add(category);
+
+                                }
+
+
+                            } catch (Exception e) {
 
                             }
                             adapter = new CategoryExpenseAdapter(getContext(), expenseData);
@@ -524,22 +530,26 @@ public class CategoryFragment extends Fragment {
 
                             incomeData.clear();
 
-                            for (int i = 0; i < arr.length(); i++) {
-                                JSONObject jsonObject = arr.getJSONObject(i);
-                                Category category = new Category(
-                                        jsonObject.getInt("Id"),
-                                        changeName(jsonObject.getString("Name")),
-                                        jsonObject.getString("Icon"),
-                                        jsonObject.getInt("Money"),
-                                        jsonObject.getInt("Budget"),
-                                        jsonObject.getString("CreateDate"),
-                                        "income"
+                            try {
+                                for (int i = 0; i < arr.length(); i++) {
+                                    JSONObject jsonObject = arr.getJSONObject(i);
+                                    Category category = new Category(
+                                            jsonObject.getInt("Id"),
+                                            changeName(jsonObject.getString("Name")),
+                                            jsonObject.getString("Icon"),
+                                            jsonObject.getInt("Money"),
+                                            jsonObject.getInt("Budget"),
+                                            jsonObject.getString("CreateDate"),
+                                            "income"
+                                    );
+                                    incomeData.add(category);
 
-                                );
-                                incomeData.add(category);
 
+                                }
+                            } catch (Exception e) {
 
                             }
+
                             incomeAdapter = new CategoryIncomeAdapter(getContext(), incomeData);
                             incomeList.setAdapter(incomeAdapter);
                             incomeAdapter.notifyDataSetChanged();

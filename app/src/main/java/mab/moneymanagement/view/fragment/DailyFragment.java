@@ -45,6 +45,12 @@ public class DailyFragment extends Fragment implements InterfaceItem {
     String dailyUrl = URL.PATH + URL.DAILY_URL_MAIN_ACTIVITY;
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getAllItem();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

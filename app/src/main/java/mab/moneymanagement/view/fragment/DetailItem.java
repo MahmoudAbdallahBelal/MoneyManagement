@@ -1,15 +1,11 @@
 package mab.moneymanagement.view.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,7 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +28,6 @@ import java.util.Map;
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
 import mab.moneymanagement.view.Volley.MysingleTon;
-import mab.moneymanagement.view.activity.AllItemCategory;
 import mab.moneymanagement.view.adapter.CustomSpinnerAdapter;
 import mab.moneymanagement.view.model.Category;
 import mab.moneymanagement.view.model.Item;
@@ -60,10 +54,20 @@ public class DetailItem extends Fragment {
     String deleteUrl = URL.PATH + URL.DELETE_ITEM;
 
 
-    int incomeId = -1;
-    int expenseId = -1;
+    public static int incomeId = -1;
+    public static int expenseId = -1;
+    int cateogryIncomId = -1;
+    int cateogryExpenseId = -1;
 
     Item item;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getinComeseCategory();
+        getExpenseCategory();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -71,6 +75,7 @@ public class DetailItem extends Fragment {
         View v = inflater.inflate(R.layout.fragment_detail_item, container, false);
 
         item = (Item) getActivity().getIntent().getSerializableExtra("item");
+        shar = new SharedPreference();
 
 
         name = v.findViewById(R.id.item_detail_et_item_name);
@@ -82,8 +87,6 @@ public class DetailItem extends Fragment {
         paymentSpinner = v.findViewById(R.id.item_detail_payment_spiner);
 
 
-        shar = new SharedPreference();
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,13 +95,12 @@ public class DetailItem extends Fragment {
                 String not = note.getText().toString();
                 String val = price.getText().toString();
                 final int pric = Integer.parseInt(val);
-                if (nam.equals(item.getName()) && not.equals(item.getNote()) && pric == item.getPrice()) {
+                if (nam.equals(item.getName()) && not.equals(item.getNote()) && pric == item.getPrice() && cateogryExpenseId == expenseId && cateogryIncomId == incomeId) {
                     Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_SHORT).show();
                 } else {
                     updateItem();
 
                 }
-
 
 
             }
@@ -118,13 +120,12 @@ public class DetailItem extends Fragment {
             }
         });
 
-        //------spinner for category ----------
+        //   ------spinner for expense ----------
         getExpenseCategory();
-        categorySpinner.setSelection(item.getExpenseId() - 65);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                expenseId = expenseData.get(position).getId();
+                cateogryExpenseId = expenseData.get(position).getId();
                 // Toast.makeText(getActivity(),"55555",Toast.LENGTH_SHORT).show();
             }
 
@@ -133,17 +134,14 @@ public class DetailItem extends Fragment {
 
             }
         });
+//
 
+        //------spinner for income ----------
 
-        //------spinner for currency ----------
-        getinComeseCategory();
-        paymentSpinner.setSelection(item.getIncomeId() - 65);
         paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                incomeId = incomeData.get(position).getId();
-
-
+                cateogryIncomId = incomeData.get(position).getId();
             }
 
             @Override
@@ -151,7 +149,6 @@ public class DetailItem extends Fragment {
 
             }
         });
-
 
 
         name.setText(item.getName());
@@ -183,6 +180,10 @@ public class DetailItem extends Fragment {
 
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
+                                if (item.getExpenseId() == jsonObject.getInt("Id")) {
+                                    expenseId = i;
+                                }
+
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
                                         changeName(jsonObject.getString("Name")),
@@ -201,6 +202,8 @@ public class DetailItem extends Fragment {
 
                             categoryAdapter = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, expenseData);
                             categorySpinner.setAdapter(categoryAdapter);
+                            categorySpinner.setSelection(expenseId);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -254,6 +257,9 @@ public class DetailItem extends Fragment {
                             incomeData.clear();
                             for (int i = 0; i < arr.length(); i++) {
                                 JSONObject jsonObject = arr.getJSONObject(i);
+                                if (item.getIncomeId() == jsonObject.getInt("Id")) {
+                                    incomeId = i;
+                                }
                                 Category category = new Category(
                                         jsonObject.getInt("Id"),
                                         changeName(jsonObject.getString("Name")),
@@ -270,6 +276,8 @@ public class DetailItem extends Fragment {
 
                             incomeAdapter = new CustomSpinnerAdapter(getActivity(), R.layout.spinner_row, incomeData);
                             paymentSpinner.setAdapter(incomeAdapter);
+                            paymentSpinner.setSelection(incomeId);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -370,7 +378,7 @@ public class DetailItem extends Fragment {
         String not = note.getText().toString();
         String val = price.getText().toString();
         final int pric = Integer.parseInt(val);
-        if (incomeId == -1 || expenseId == -1 | nam.equals("") | val.equals("")) {
+        if (nam.equals("") | val.equals("")) {
             Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
 
         } else {
@@ -381,8 +389,8 @@ public class DetailItem extends Fragment {
                 updateObject.put("Name", nam);
                 updateObject.put("Notes", not);
                 updateObject.put("Price", pric);
-                updateObject.put("IncomeCategoryId", incomeId);
-                updateObject.put("OutComeCategoryId", expenseId);
+                updateObject.put("IncomeCategoryId", cateogryIncomId);
+                updateObject.put("OutComeCategoryId", cateogryExpenseId);
 
             } catch (JSONException e) {
                 e.printStackTrace();
