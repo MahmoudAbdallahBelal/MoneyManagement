@@ -68,8 +68,13 @@ public class DialogBudgetFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                makeUpdate();
-                interfaceBudget.onClick(xx);
+                try {
+                    makeUpdate();
+                    interfaceBudget.onClick(xx);
+
+                } catch (Exception e) {
+
+                }
 
             }
         });
@@ -139,11 +144,16 @@ public class DialogBudgetFragment extends DialogFragment {
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
                                 if (message.equals("Infromation Changed Successfuly")) {
-                                    // Toast.makeText(getActivity(), getString(R.string.budget_done), Toast.LENGTH_LONG).show();
-                                    shar.removeUser(getContext());
-                                    shar.saveUser(getContext(), xx);
+                                    try {
+                                        // Toast.makeText(getActivity(), getString(R.string.budget_done), Toast.LENGTH_LONG).show();
+                                        shar.removeUser(getContext());
+                                        shar.saveUser(getContext(), xx);
 
-                                    dismiss();
+                                        dismiss();
+                                    } catch (Exception e) {
+
+                                    }
+
                                 }
 
                                 // Toast.makeText(getContext().getApplicationContext(),"bu"+message,Toast.LENGTH_LONG).show();
@@ -177,7 +187,7 @@ public class DialogBudgetFragment extends DialogFragment {
 
             // Add JsonObjectRequest to the RequestQueue
 
-            MysingleTon.getInstance(getActivity().getApplicationContext()).addToRequestqueue(jsonObjectRequest);
+            MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
         }
         return xx;
