@@ -38,7 +38,6 @@
                 <TextView
                     android:padding="8dp"
                     android:textColor="@android:color/black"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/reset" />
@@ -53,14 +52,12 @@
                     android:padding="8dp"
 
                     android:textColor="@android:color/black"
-                    android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/expense" />
 
                 <TextView
                     android:padding="8dp"
-
                     android:id="@+id/monthlystatic_expense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

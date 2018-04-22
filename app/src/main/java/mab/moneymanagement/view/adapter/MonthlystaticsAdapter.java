@@ -28,7 +28,11 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
     private List<MonthStatics> mList;
     private Context context;
+    int expen;
+    int yy;
 
+    int x1 = 0;
+    int x2 = 0;
     public MonthlystaticsAdapter(Context context, List<MonthStatics> mList) {
         this.context = context;
         this.mList = mList;
@@ -61,8 +65,16 @@ public class MonthlystaticsAdapter extends BaseAdapter {
         TextView date = v.findViewById(R.id.monthly_statics_date);
 
 
-        int expen = mList.get(position).getMoney();
-        int yy = mList.get(position).getBudget() - expen;
+        expen = mList.get(position).getMoney();
+        yy = mList.get(position).getBudget() - expen;
+
+//if (yy<0){
+//    yy=0;
+//}
+        int sum = expen + yy;
+        x1 = (expen / sum) * 100;
+        x2 = (yy / sum) * 100;
+
 
         reset.setText(yy + "");
         expense.setText(expen + "");
@@ -82,15 +94,15 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
 
         ArrayList<PieEntry> yEntryValue = new ArrayList<>();
-        yEntryValue.add(new PieEntry((float) yy));
-        yEntryValue.add(new PieEntry((float) expen));
+        yEntryValue.add(new PieEntry((float) yy, context.getString(R.string.reset)));
+        yEntryValue.add(new PieEntry((float) expen, context.getString(R.string.expense)));
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 
-        PieDataSet dataSet = new PieDataSet(yEntryValue, "للل");
+        PieDataSet dataSet = new PieDataSet(yEntryValue, context.getString(R.string.app_name));
         //dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(8f);
