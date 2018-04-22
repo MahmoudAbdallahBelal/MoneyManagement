@@ -79,7 +79,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     String budget;
     User us;
     String urlData = "";
-    int xxx;
+    public static int xxx;
     String cc;
 
 
@@ -190,7 +190,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
         //-------------------------------spinner for day ----------
-        daySpinner = (NiceSpinner)findViewById(R.id.setting_spinner_select_day);
+        daySpinner = findViewById(R.id.setting_spinner_select_day);
         ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.day, android.R.layout.simple_list_item_1);
 
         dayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);

@@ -208,6 +208,8 @@
     <string name="create_account_sucess">تم انشاء الحساب بنجاح</string>
 
     <string name="select_day_spinner">اختر اليوم</string>
+    <string name="reset">الباقي</string>
+    <string name="expense">المستهلك</string>
 
 
 </resources>

@@ -87,7 +87,7 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 
-        PieDataSet dataSet = new PieDataSet(yEntryValue, "");
+        PieDataSet dataSet = new PieDataSet(yEntryValue, "للل");
         //dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);

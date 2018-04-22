@@ -15,7 +15,6 @@
             android:id="@+id/monthly_statics_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1-2018"
             android:gravity="center"
             android:textSize="20dp"
             android:padding="10dp"
@@ -42,14 +41,13 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rest   " />
+                    android:text="@string/reset" />
 
                 <TextView
                     android:id="@+id/monthlystatic_reset"
                     android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="25 RSA" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:padding="8dp"
@@ -58,15 +56,14 @@
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Expense  " />
+                    android:text="@string/expense" />
 
                 <TextView
                     android:padding="8dp"
 
                     android:id="@+id/monthlystatic_expense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="75 RSA" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
