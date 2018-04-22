@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context="mab.moneymanagement.view.activity.SettingActivity">
 
 
@@ -48,133 +49,143 @@
         </LinearLayout>
 
 
-        <Spinner
+        <!--<Spinner-->
+            <!--android:id="@+id/setting_spinner_select_day"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!---->
+            <!--/>-->
+
+
+        <org.angmarch.views.NiceSpinner
+            android:textColorHint="#000"
+            android:padding="10dp"
+            android:hint="@string/select_day_spinner"
             android:id="@+id/setting_spinner_select_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textColor="#000000"
 
 
+        />
 
-            />
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/setting_tv_language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:weightSum="3">
-
-            <TextView
-                android:id="@+id/setting_tv_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="@string/setting_language"
-                android:textColor="@android:color/black"
-
-                />
-
-            <TextView
-                android:id="@+id/setting_tv_language_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:padding="8dp"
-
-                />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/setting_tv_password_protection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:text="@string/setting_password_protection"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/setting_language"
             android:textColor="@android:color/black"
-            android:textSize="15dp"
 
             />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/setting_tv_language_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <CheckedTextView
-                android:id="@+id/setting_check_tv_daily_alert"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:checked="false"
-                android:padding="4dp"
-                android:text="@string/setting_daily_alert" />
-
-            <ImageView
-                android:id="@+id/setting_alert_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/check"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/setting_tv_export_file"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:text="@string/setting_export_file"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"
+            android:layout_weight="2"
+            android:padding="8dp"
 
             />
 
-        <TextView
-            android:id="@+id/setting_create_backup_database"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:text="@string/setting_create_data_backup"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"
-
-            />
-
-        <TextView
-            android:id="@+id/setting_delete_database"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:text="@string/seeting_delete_database"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"
-
-            />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/setting_tv_password_protection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:text="@string/setting_password_protection"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <CheckedTextView
+            android:id="@+id/setting_check_tv_daily_alert"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:checked="false"
+            android:padding="4dp"
+            android:text="@string/setting_daily_alert" />
+
+        <ImageView
+            android:id="@+id/setting_alert_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/check"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/setting_tv_export_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:text="@string/setting_export_file"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/setting_create_backup_database"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:text="@string/setting_create_data_backup"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/setting_delete_database"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:text="@string/seeting_delete_database"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+
+        />
+</LinearLayout>
 </FrameLayout>

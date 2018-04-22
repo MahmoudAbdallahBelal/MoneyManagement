@@ -207,5 +207,7 @@
     <string name="change_password_failed">حدث خطاء اثناء تغير كلمه المرور </string>
     <string name="create_account_sucess">تم انشاء الحساب بنجاح</string>
 
+    <string name="select_day_spinner">اختر اليوم</string>
+
 
 </resources>

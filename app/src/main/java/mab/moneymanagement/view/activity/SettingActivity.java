@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.angmarch.views.NiceSpinner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +65,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     User user;
     SharedPreference shar;
     TextView delete;
-    Spinner daySpinner;
+    NiceSpinner daySpinner;
     TextView password;
     TextView language, selectLanguage;
     String update_user_info_url = URL.PATH + URL.UPDATE_USER_INFO;
@@ -188,19 +190,20 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
         //-------------------------------spinner for day ----------
-        daySpinner = findViewById(R.id.setting_spinner_select_day);
-        ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.day, android.R.layout.simple_spinner_item);
+        daySpinner = (NiceSpinner)findViewById(R.id.setting_spinner_select_day);
+        ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.day, android.R.layout.simple_list_item_1);
 
-        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+
         daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
+        daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    daySpinner.setSelection(user.getBegainDayOfWeek() - 1);
+                    daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
 
                 } else {
 
