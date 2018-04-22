@@ -82,8 +82,8 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
 
         ArrayList<PieEntry> yEntryValue = new ArrayList<>();
-        yEntryValue.add(new PieEntry((float) yy, "Reset"));
-        yEntryValue.add(new PieEntry((float) expen, "Expense"));
+        yEntryValue.add(new PieEntry((float) yy));
+        yEntryValue.add(new PieEntry((float) expen));
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 

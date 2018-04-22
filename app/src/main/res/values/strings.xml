@@ -211,6 +211,8 @@
     <string name="change_password_sucessful">Password Changed Successfully</string>
     <string name="change_password_failed">Password Changed Failed</string>
     <string name="create_account_sucess">Create account sucess</string>
+    <string name="reset">Reset</string>
+    <string name="expense">Expense</string>
 
     <string name="select_day_spinner">Select Day</string>
 
