@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -58,6 +58,7 @@
 
                 <TextView
                     android:padding="8dp"
+
                     android:id="@+id/monthlystatic_expense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -67,7 +68,7 @@
 
             <com.github.mikephil.charting.charts.PieChart
                 android:layout_width="230dp"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:id="@+id/pie_chart"></com.github.mikephil.charting.charts.PieChart>
 
         </LinearLayout>

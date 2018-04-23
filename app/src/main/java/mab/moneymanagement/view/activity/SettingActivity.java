@@ -196,7 +196,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         dayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 
         daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
+        daySpinner.setSelectedIndex(user.getBegainDayOfWeek() - 1);
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -688,7 +688,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                             if (message.equals("Infromation Changed Successfuly")) {
                                 shar.removeUser(getApplication());
                                 shar.saveUser(getApplication(), user);
-                                Toast.makeText(getApplication(), "update day", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
 
 
                             } else {
