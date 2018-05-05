@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,7 +161,11 @@ public class WeeklyFragment extends Fragment implements InterfaceItem {
         data.add(item);
         adapter.notifyDataSetChanged();
         mList.setAdapter(adapter);
-        Toast.makeText(getActivity(), "55555", Toast.LENGTH_LONG).show();
 
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
     }
 }

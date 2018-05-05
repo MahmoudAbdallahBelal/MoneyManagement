@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -389,5 +391,6 @@ public class DialogAddItemFragment extends DialogFragment {
 
 
     }
+
 
 }

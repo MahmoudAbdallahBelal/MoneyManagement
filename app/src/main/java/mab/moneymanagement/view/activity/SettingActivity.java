@@ -82,6 +82,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     public static int xxx;
     String cc;
 
+    AlertDialog.Builder builderRemove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,10 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
         //------------------------------------budget----------------
         setContentView(R.layout.activity_setting);
+
+
+        builderRemove = new AlertDialog.Builder(SettingActivity.this);
+
 
         Toolbar mToolbar = findViewById(R.id.setting_toolbar);
         setSupportActionBar(mToolbar);
@@ -145,12 +150,30 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
 
                 } else {
-                    imageBudget.setVisibility(View.INVISIBLE);
 
-                    removeBudget();
-                    us = shar.getUser(getApplicationContext());
-                    tvBudget.setText(budget);
-                    budgetFlag = 0;
+
+                    builderRemove.setMessage(getString(R.string.remove_budget_builder));
+                    builderRemove.setPositiveButton(getString(R.string.yes_remove), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            imageBudget.setVisibility(View.INVISIBLE);
+                            removeBudget();
+
+                            us = shar.getUser(getApplicationContext());
+                            tvBudget.setText(budget);
+                            budgetFlag = 0;
+                        }
+                    });
+                    builderRemove.setNegativeButton(getString(R.string.no_remove), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+
+                    builderRemove.show();
                 }
 
 
@@ -196,7 +219,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
         dayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 
         daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelectedIndex(user.getBegainDayOfWeek() - 1);
+        daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,7 +230,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
                 } else {
 
-                    xxx = position + 1;
+                    xxx = position;
                     updateDay();
                 }
             }

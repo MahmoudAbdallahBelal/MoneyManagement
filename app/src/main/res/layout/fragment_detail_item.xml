@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="mab.moneymanagement.view.fragment.DetailItem">
 
     <!-- TODO: Update blank fragment layout -->
@@ -25,6 +26,8 @@
             />
 
         <TextView
+
+            android:textStyle="bold"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,6 +41,8 @@
 
 
         <EditText
+            android:gravity="center"
+            android:background="@drawable/edit_text_border"
             android:layout_marginTop="5dp"
             android:id="@+id/item_detail_et_item_name"
             android:layout_width="match_parent"
@@ -62,6 +67,8 @@
 
             />
         <EditText
+            android:gravity="center"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/item_detail_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,6 +90,8 @@
             android:hint="@string/item_note"
             android:padding="10dp" />
         <EditText
+            android:gravity="center"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/item_detail_et_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,14 +103,15 @@
         <Spinner
             android:id="@+id/item_detail_category_spiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
             android:padding="8dp"></Spinner>
 
         <Spinner
+
             android:id="@+id/item_detail_payment_spiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:padding="8dp"></Spinner>
 
@@ -111,10 +121,10 @@
             android:orientation="horizontal">
 
             <Button
+
                 android:id="@+id/item_detail_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
                 android:background="@android:color/white"
                 android:padding="10dp"
                 android:text="@string/item_detail_delete"

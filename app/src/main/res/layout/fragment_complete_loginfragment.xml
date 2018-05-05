@@ -3,24 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="mab.moneymanagement.view.fragment.RegestrationFragment">
 
     <!-- TODO: user will complete data name ,salary,start of month,currency
 
      -->
-    <TextView
 
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/complete_login_btn_next"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-
-
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,27 +20,28 @@
         >
 
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
+            android:gravity="center"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/regester_et_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:hint="@string/login_hint_enter_email"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorPrimaryDark"
+
             android:textSize="20sp"
-            app:met_baseColor="@color/colorPrimary"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"
+
 
             />
 
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:gravity="center"
             android:id="@+id/regester_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,13 +49,8 @@
             android:layout_marginRight="10dp"
             android:hint="@string/login_hint_enter_password"
             android:inputType="textPassword"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorPrimaryDark"
+           android:background="@drawable/edit_text_border"
             android:textSize="20sp"
-            app:met_baseColor="@color/colorPrimary"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"
 
 
             />
@@ -73,20 +58,19 @@
 
         />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:id="@+id/regester_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="@string/complete_login_enter_name"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/colorPrimaryDark"
+          android:background="@drawable/edit_text_border"
             android:textSize="20sp"
-            app:met_baseColor="@color/colorPrimary"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"
+
 
             />
 
@@ -115,29 +99,39 @@
         <!--/>-->
 
         <Spinner
+
+
+            android:background="#fff"
             android:id="@+id/complete_login_spinner_select_day"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="8dp"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:padding="10dp"
             android:textColor="@android:color/black" />
 
         <Spinner
+
+            android:background="#fff"
             android:id="@+id/complete_login_spinner_select_currency"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
             android:padding="8dp"
             android:textColor="@android:color/black" />
 
 
         <Button
+
+
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:id="@+id/complete_login_btn_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginLeft="100dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/button_border"
             android:padding="8dp"
             android:text="@string/complete_login_btn_next"
             android:textColor="@android:color/white"

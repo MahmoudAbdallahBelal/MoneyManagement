@@ -7,6 +7,8 @@
 
     <!-- TODO: we will make expected here on list  the row of list on row expected layout  -->
     <TextView
+
+        android:textStyle="bold"
         android:id="@+id/expected_tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

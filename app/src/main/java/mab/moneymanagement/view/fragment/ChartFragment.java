@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -171,5 +173,11 @@ public class ChartFragment extends Fragment {
 
     }
 
+
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
+    }
 
 }

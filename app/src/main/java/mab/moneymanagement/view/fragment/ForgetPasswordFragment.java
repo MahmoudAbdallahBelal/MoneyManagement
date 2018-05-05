@@ -1,12 +1,14 @@
 package mab.moneymanagement.view.fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +40,10 @@ public class ForgetPasswordFragment extends Fragment {
     String ForgetUrl = URL.PATH + URL.FORGET_PASSWORD;
     String email;
 
+    ProgressDialog progressDialog;
+
+    MDToast mdToast;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +53,8 @@ public class ForgetPasswordFragment extends Fragment {
         et_Email = v.findViewById(R.id.forget__et_emal);
         verifiy = v.findViewById(R.id.forget_password_reset);
         builder = new AlertDialog.Builder(getContext());
+
+        progressDialog  = new ProgressDialog(getActivity());
 
 
         verifiy.setOnClickListener(new View.OnClickListener() {
@@ -109,11 +119,25 @@ public class ForgetPasswordFragment extends Fragment {
 
                                         //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                         String message = response.getString("RequstDetails");
-                                        Toast.makeText(getContext(), message.toString(), Toast.LENGTH_LONG).show();
+                                        if(message.equals("Password is Reset Success")) {
+                                            mdToast = MDToast.makeText(getActivity(),message.toString() , 8,MDToast.TYPE_SUCCESS );
+                                            mdToast.show();
 
+                                            getActivity().finish();
+                                        }
+
+                                        else {
+
+                                            mdToast = MDToast.makeText(getActivity(),message.toString() , 8,MDToast.TYPE_ERROR );
+                                            mdToast.show();
+                                        }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                                        //Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                                        mdToast = MDToast.makeText(getActivity(),e.toString() , 8,MDToast.TYPE_ERROR );
+                                        mdToast.show();
                                     }
 
 
@@ -155,6 +179,9 @@ public class ForgetPasswordFragment extends Fragment {
             Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
         } else {
 
+
+            progressDialog.setMessage(getString(R.string.wait));
+            progressDialog.show();
             // Initialize a new JsonObjectRequest instance
             //   RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
             String ff = ForgetUrl + "?Email=" + email;
@@ -164,14 +191,21 @@ public class ForgetPasswordFragment extends Fragment {
                         public void onResponse(JSONObject response) {
                             try {
 
+                                progressDialog.dismiss();
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
                                 if (message.equals("Email is Send Please Check Email")) {
                                     showDialog();
                                 } else if (message.equals("Failed to Send Email")) {
-                                    Toast.makeText(getContext(), getString(R.string.fail_to_send), Toast.LENGTH_LONG).show();
-                                } else if (message.equals("Email Not Found In System Please Get Regist")) {
-                                    Toast.makeText(getContext(), getString(R.string.email_not_found), Toast.LENGTH_LONG).show();
+
+                                    mdToast = MDToast.makeText(getActivity(),getString(R.string.fail_to_send) , 8,MDToast.TYPE_ERROR );
+                                    mdToast.show();
+                                }
+                                else if (message.equals("Email Not Found In System Please Get Register")) {
+
+                                    mdToast = MDToast.makeText(getActivity(),getString(R.string.email_not_found) , 8,MDToast.TYPE_ERROR );
+                                    mdToast.show();
+
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -220,4 +254,11 @@ public class ForgetPasswordFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
+    }
+
 }
+

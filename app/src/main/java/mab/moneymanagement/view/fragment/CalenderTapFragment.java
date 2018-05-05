@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,6 +112,13 @@ public class CalenderTapFragment extends Fragment {
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
 
+    }
+
+
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
     }
 
 }

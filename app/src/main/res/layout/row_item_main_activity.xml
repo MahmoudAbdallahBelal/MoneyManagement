@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -11,6 +12,14 @@
 
     <!-- TODO: this row that appear in main to show user the item that buy   -->
 
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="6dp"
+        app:cardMaxElevation="8dp"
+        >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -63,5 +72,6 @@
 
     </LinearLayout>
 
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

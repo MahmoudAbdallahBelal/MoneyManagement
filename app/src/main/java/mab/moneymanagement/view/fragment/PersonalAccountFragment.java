@@ -1,10 +1,12 @@
 package mab.moneymanagement.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
+import org.angmarch.views.NiceSpinner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +52,9 @@ public class PersonalAccountFragment extends Fragment {
     SharedPreference shar;
     String kindCurrency;
 
+    ProgressDialog progressDialog;
 
+    MDToast mdToast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +66,9 @@ public class PersonalAccountFragment extends Fragment {
 
 
         user = new User();
+          progressDialog = new ProgressDialog(getActivity());
+
+
 
         //------spinner for currency ----------
         currncySpinner = v.findViewById(R.id.personal_account_spinner_select_currency);
@@ -92,18 +102,26 @@ public class PersonalAccountFragment extends Fragment {
 
                 String email = et_email.getText().toString();
                 String name = et_name.getText().toString();
+
+
+                /*
                 if (!kindCurrency.equals(user.getCurrency())) {
                     makeUpdate();
 
                 }
+             */
+
 
                 if (email.equals("") || name.equals("") || kindCurrency.equals("")) {
                     Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_LONG).show();
 
+                    return;
 
-                } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) || kindCurrency.equals(user.getCurrency())) {
+                } else if (email.equals(user.getEmail()) && name.equals(user.getFullName()) && kindCurrency.equals(user.getCurrency())) {
+
                     Toast.makeText(getActivity(), getString(R.string.no_changes), Toast.LENGTH_LONG).show();
 
+                    return;
                 } else {
                     makeUpdate();
                 }
@@ -117,6 +135,9 @@ public class PersonalAccountFragment extends Fragment {
     private void getUserData() {
 
 
+        progressDialog.setMessage(getString(R.string.wait));
+        progressDialog.show();
+
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
@@ -127,6 +148,7 @@ public class PersonalAccountFragment extends Fragment {
                     public void onResponse(JSONObject response) {
 
 
+                        progressDialog.dismiss();
                         try {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
@@ -142,7 +164,9 @@ public class PersonalAccountFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+
                             getUserData();
+
 
 
                         }
@@ -160,6 +184,7 @@ public class PersonalAccountFragment extends Fragment {
 //                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
 
                         getUserData();
+
                     }
 
 
@@ -198,6 +223,8 @@ public class PersonalAccountFragment extends Fragment {
 
             final JSONObject updateObject = new JSONObject();
 
+            progressDialog.setMessage(getString(R.string.wait));
+            progressDialog.show();
             try {
                 if (user.getBadgetSelected() == null) {
                     updateObject.put("Email", email);
@@ -229,12 +256,15 @@ public class PersonalAccountFragment extends Fragment {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                progressDialog.dismiss();
 
                                 //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                                 String message = response.getString("RequstDetails");
 
                                 if (message.equals("Infromation Changed Successfuly")) {
-                                    Toast.makeText(getContext(), getString(R.string.update_done), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getContext(), , Toast.LENGTH_LONG).show();
+                                    mdToast = MDToast.makeText(getActivity(),getString(R.string.update_done) , 8,MDToast.TYPE_SUCCESS );
+                                    mdToast.show();
                                     shar.saveUser(getContext(), user);
 
                                 }
@@ -292,4 +322,8 @@ public class PersonalAccountFragment extends Fragment {
     }
 
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
+    }
 }

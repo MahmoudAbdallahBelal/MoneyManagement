@@ -1,11 +1,13 @@
 package mab.moneymanagement.view.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +52,10 @@ public class LoginFragment extends Fragment {
     MaterialDialog.Builder builder;
     MaterialDialog dialog;
 
+    ProgressDialog progressDialog ;
+
+    MDToast mdToast;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +69,8 @@ public class LoginFragment extends Fragment {
         tvRegester = v.findViewById(R.id.login_tv_crate_account);
         restePassword = v.findViewById(R.id.login_tv_forget_password);
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.login_message));
 
         builder = new MaterialDialog.Builder(getActivity())
                 .title(R.string.login_message)
@@ -113,8 +123,8 @@ public class LoginFragment extends Fragment {
 
     private void login() {
 
-        dialog = builder.build();
-        dialog.show();
+        //dialog = builder.build();
+        //dialog.show();
 
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
@@ -122,6 +132,7 @@ public class LoginFragment extends Fragment {
 
         //-----check validate -------------
 
+        progressDialog.show();
         final JSONObject loginObject = new JSONObject();
         try {
             loginObject.put("Email", email);
@@ -138,6 +149,7 @@ public class LoginFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
 
+                            progressDialog.dismiss();
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
                             String accessTocken = response.getString("access_token");
@@ -145,8 +157,10 @@ public class LoginFragment extends Fragment {
 
 
                             if (message.equals("loginSuccess")) {
-                                Toast.makeText(getContext(), getString(R.string.sucess_login), Toast.LENGTH_LONG).show();
 
+
+                                mdToast = MDToast.makeText(getActivity(),getString(R.string.sucess_login) , 8,MDToast.TYPE_SUCCESS );
+                                mdToast.show();
                                 //save id  in shared prefrence
 
                                 SharedPreference shar = new SharedPreference();
@@ -158,22 +172,23 @@ public class LoginFragment extends Fragment {
 
 
                             } else {
-                                dialog.dismiss();
-                                dialog.cancel();
-                                dialog.hide();
+                                progressDialog.dismiss();
+                               // dialog.cancel();
+                                //dialog.hide();
 
 
-                                Toast.makeText(getContext(), getString(R.string.check_email_login), Toast.LENGTH_LONG).show();
+                                mdToast = MDToast.makeText(getActivity(),getString(R.string.check_email_login) , 8,MDToast.TYPE_ERROR );
+                                mdToast.show();
 
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            dialog.dismiss();
-                            dialog.cancel();
-                            dialog.hide();
-                            Toast.makeText(getContext(), getString(R.string.error_happen), Toast.LENGTH_LONG).show();
-
+                            progressDialog.dismiss();
+                           // dialog.cancel();
+                            //dialog.hide();
+                            mdToast = MDToast.makeText(getActivity(),getString(R.string.error_happen) , 8,MDToast.TYPE_ERROR );
+                            mdToast.show();
 
                         }
 
@@ -185,10 +200,12 @@ public class LoginFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
 
-                        dialog.dismiss();
-                        dialog.cancel();
-                        dialog.hide();
-                        Toast.makeText(getContext(), getString(R.string.error_happen_server), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        //dialog.cancel();
+                        //dialog.hide();
+
+                        mdToast = MDToast.makeText(getActivity(),getString(R.string.error_happen_server) , 8,MDToast.TYPE_ERROR );
+                        mdToast.show();
                     }
                 });
 
@@ -198,5 +215,10 @@ public class LoginFragment extends Fragment {
     }
 
 
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
+    }
 }
 

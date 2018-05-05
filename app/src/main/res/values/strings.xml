@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">MoneyManagement</string>
+    <string name="app_name">Finance</string>
     <string name="title_activity_main2">MoneyManagement</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -41,7 +41,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_hint_enter_email">Email</string>
     <string name="login_hint_enter_password">Password</string>
-    <string name="login_button_login">login</string>
+    <string name="login_button_login">Login</string>
     <string name="complete_login_enter_name">Name</string>
     <string name="complete_login_salary">salary</string>
     <string name="complete_login_enter_start_month">Enter start month</string>
@@ -104,7 +104,7 @@
     <string name="credit_activity_title">Payment Card</string>
     <string name="new_transfer_activity_title">New transfer</string>
     <string name="personal_account_activity_title">Personal account</string>
-    <string name="complete_login_btn_next">Regester</string>
+    <string name="complete_login_btn_next">Register</string>
     <string name="item_detail_title">Item detail</string>
     <string name="item_detail_update">update</string>
     <string name="category_detail_title">Category detail</string>
@@ -165,7 +165,7 @@
     <string name="kast">Kast</string>
     <string name="credit">Credit</string>
     <string name="create_new_account">Create new Account</string>
-    <string name="forget_password">Forget Password</string>
+    <string name="forget_password"><u>Forget Password</u></string>
     <string name="income">Income</string>
     <string name="item_name">Item name</string>
     <string name="item_price">Item Price</string>
@@ -203,9 +203,9 @@
     <string name="no_expected_until_now">No expected until now</string>
     <string name="no_statics_until_now">No statics until now</string>
     <string name="update">Update</string>
-    <string name="error_happen_server">Excuse me error on connect with server</string>
+    <string name="error_happen_server">please enter valid email or password</string>
     <string name="fail_to_send">Failed to Send Email</string>
-    <string name="email_not_found">Email Not Found In System Please Get Regist</string>
+    <string name="email_not_found">Email Not Found In System Please Get Register</string>
     <string name="make_alert">make alert</string>
     <string name="remove_alert">Remove alert</string>
     <string name="change_password_sucessful">Password Changed Successfully</string>
@@ -215,6 +215,11 @@
     <string name="expense">Expense</string>
 
     <string name="select_day_spinner">Select Day</string>
+    <string name="wait">please, wait .. </string>
+    <string name="remove_budget_builder">Are you sure you want to remove the budget ? </string>
+    <string name="yes_remove">yes</string>
+    <string name="no_remove">No</string>
+
 
 
 </resources>

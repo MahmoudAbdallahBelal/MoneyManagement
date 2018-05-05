@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/background"
 
     android:layout_height="250dp">
 
     <TextView
+
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/background"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/select_language_title"
@@ -21,7 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/background"
 
         >
 

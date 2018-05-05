@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import mab.moneymanagement.R;
 
@@ -20,5 +23,12 @@ public class AccountFragment extends Fragment {
 
         return v;
     }
+
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
+    }
+
 
 }
