@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/expected_activity"
+    android:background="@color/background"
+
     tools:context="mab.moneymanagement.view.activity.ExpectedActivity">
 
 

@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background"
     android:orientation="vertical">
 
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -22,17 +24,21 @@
         android:orientation="vertical">
 
         <EditText
+            android:layout_margin="8dp"
+
+            android:background="@drawable/edit_text_border"
             android:id="@+id/add_income_et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/enter_imcome_name"
+android:layout_marginTop="10dp"            android:hint="@string/enter_imcome_name"
             android:padding="10dp"
 
 
             />
 
         <EditText
+
+            android:background="@drawable/edit_text_border"
             android:id="@+id/add_income_et_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +52,8 @@
 
         <ImageView
             android:id="@+id/add_income_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
 
             android:layout_margin="10dp"
@@ -56,9 +62,10 @@
             />
 
         <Spinner
+            android:layout_marginBottom="10dp"
             android:id="@+id/spinner_icons_new_income"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:padding="10dp"></Spinner>
     </LinearLayout>

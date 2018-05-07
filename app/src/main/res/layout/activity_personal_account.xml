@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/personal_account_activity"
+    android:background="@color/background"
+
     tools:context="mab.moneymanagement.view.activity.PersonalAccountActivity">
 
 

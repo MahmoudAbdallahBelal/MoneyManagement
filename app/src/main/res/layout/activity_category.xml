@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/category_activity"
     android:orientation="vertical"
+    android:background="@color/background"
+
     tools:context="mab.moneymanagement.view.activity.Category">
 
     <include

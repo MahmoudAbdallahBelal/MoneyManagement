@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/background"
+    android:gravity="center"
+
     tools:context="mab.moneymanagement.view.activity.SplashActivity">
 
     <ImageView
         android:layout_margin="20dp"
         android:layout_gravity="center"
         android:background="@drawable/logo_finance"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         />
 
 </LinearLayout>

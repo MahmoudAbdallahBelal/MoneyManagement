@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/background"
     android:layout_height="wrap_content"
+
     android:orientation="vertical">
 
     <!-- TODO: this layout to appear when enter on + on main activity on bottom  we will add data of item and select category and method of payment in  from spinner when user enter on  ok add item  in database enter on cancel make nothing  -->
 
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -24,6 +26,8 @@
         android:orientation="vertical">
 
         <EditText
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/add_item_et_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,6 +37,8 @@
             />
 
         <EditText
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_border"
             android:id="@+id/add_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,32 +50,35 @@
             />
 
         <EditText
+            android:background="@drawable/edit_text_border"
             android:id="@+id/add_item_et_note"
-
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/add_item_add_note"
             android:padding="10dp" />
 
         <Spinner
+
             android:id="@+id/add_item_category_spiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:padding="8dp"></Spinner>
 
         <Spinner
             android:id="@+id/add_item_payment_spiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:padding="8dp"></Spinner>
 
 
         <LinearLayout
+            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp">
+            >
 
             <Button
                 android:id="@+id/add_item_cancel"

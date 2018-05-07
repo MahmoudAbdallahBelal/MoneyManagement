@@ -43,7 +43,7 @@
 
                 android:background="@color/background"
                 android:padding="10dp"
-                android:src="@drawable/plus" />
+                android:src="@drawable/add_edit" />
 
         </LinearLayout>
 
@@ -117,7 +117,7 @@
 
                 android:horizontalSpacing="10dp"
                 android:padding="10dp"
-                android:src="@drawable/plus"
+                android:src="@drawable/add_edit"
                 android:verticalSpacing="10dp" />
 
         </LinearLayout>
