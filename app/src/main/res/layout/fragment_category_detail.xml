@@ -2,12 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/background"
+    android:layout_gravity="center"
     tools:context="mab.moneymanagement.view.fragment.CategoryDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -16,66 +17,71 @@
         >
 
         <EditText
-            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:id="@+id/category_detail_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Enter imcome name"
+            android:hint="@string/enter_income_name"
             android:padding="10dp"
 
             />
         <EditText
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
             android:id="@+id/category_detail_value"
-            android:gravity="center"
             android:background="@drawable/edit_text_border"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="enter income value"
+            android:hint="@string/enter_income_value"
             android:padding="10dp"
 
             />
 
         <ImageView
+            android:layout_marginTop="10dp"
+            android:padding="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/category_detail_icon" />
         <Spinner
             android:id="@+id/category_detail_spinner_icon"
-
-
-
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             ></Spinner>
 
         <LinearLayout
-            android:layout_gravity="center"
+            android:padding="20dp"
+            android:layout_margin="15dp"
             android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
+
+                android:layout_weight="1"
                 android:id="@+id/category_detail_delete_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@drawable/button_border_white"
                 android:padding="10dp"
                 android:text="@string/item_detail_delete"
                 android:textColor="@color/colorPrimary" />
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/category_detail_update_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/button_border"
                 android:padding="10dp"
                 android:text="@string/item_detail_update"
                 android:textColor="@android:color/white" />

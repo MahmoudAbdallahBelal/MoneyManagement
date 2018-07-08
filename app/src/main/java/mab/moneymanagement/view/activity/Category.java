@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.fragment.AccountFragment;
 import mab.moneymanagement.view.fragment.CategoryFragment;
 
 public class Category extends AppCompatActivity {

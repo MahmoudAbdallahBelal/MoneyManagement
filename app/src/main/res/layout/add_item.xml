@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="wrap_content"
-
+android:background="@drawable/background"
+    android:layout_gravity="center"
     android:orientation="vertical">
 
     <!-- TODO: this layout to appear when enter on + on main activity on bottom  we will add data of item and select category and method of payment in  from spinner when user enter on  ok add item  in database enter on cancel make nothing  -->
@@ -20,14 +20,16 @@
         android:textSize="25dp" />
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical">
 
         <EditText
-            android:layout_margin="10dp"
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/edit_text_border"
+            android:layout_margin="10dp"
             android:id="@+id/add_item_et_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,8 +39,6 @@
             />
 
         <EditText
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text_border"
             android:id="@+id/add_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,10 +46,15 @@
             android:inputType="number"
             android:padding="10dp"
 
-
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/edit_text_border"
+            android:layout_margin="10dp"
             />
 
         <EditText
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:id="@+id/add_item_et_note"
             android:layout_margin="10dp"
@@ -59,45 +64,57 @@
             android:padding="10dp" />
 
         <Spinner
-
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/add_item_category_spiner"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:padding="8dp"></Spinner>
+           ></Spinner>
 
         <Spinner
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/add_item_payment_spiner"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:padding="8dp"></Spinner>
+            ></Spinner>
 
 
         <LinearLayout
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
+
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
             <Button
+                android:textSize="18sp"
+                android:textColor="@color/colorButton"
+                android:layout_weight="1"
                 android:id="@+id/add_item_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@android:color/white"
+                android:background="@drawable/button_border_white"
                 android:padding="10dp"
                 android:text="@string/add_item_btn_cancel" />
 
             <Button
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:layout_weight="1"
                 android:id="@+id/add_item_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
                 android:padding="10dp"
                 android:text="@string/add_item_btn_ok"
-                android:textColor="@android:color/white" />
+                android:background="@drawable/button_border" />
 
         </LinearLayout>
     </LinearLayout>

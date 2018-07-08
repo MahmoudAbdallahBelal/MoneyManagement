@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background"
+    android:background="@drawable/background"
 
     tools:context="mab.moneymanagement.view.activity.SettingActivity">
 
@@ -44,6 +44,7 @@
             android:weightSum="5">
 
             <CheckedTextView
+                android:textColor="@color/colorButton"
                 android:textStyle="bold"
                 android:textSize="17sp"
                 android:gravity="center"
@@ -88,6 +89,7 @@
             >
 
         <org.angmarch.views.NiceSpinner
+            android:textColor="@color/colorButton"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColorHint="#000"
@@ -116,6 +118,7 @@
         android:weightSum="3">
 
         <TextView
+            android:textColor="@color/colorButton"
             android:textStyle="bold"
             android:textSize="17sp"
             android:id="@+id/setting_tv_language"
@@ -124,7 +127,6 @@
             android:layout_weight="1"
             android:padding="8dp"
             android:text="@string/setting_language"
-            android:textColor="@android:color/black"
 
             />
 
@@ -151,6 +153,7 @@
 
             >
     <TextView
+        android:textColor="@color/colorButton"
 
         android:textStyle="bold"
         android:id="@+id/setting_tv_password_protection"
@@ -161,7 +164,6 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:text="@string/setting_password_protection"
-        android:textColor="@android:color/black"
         android:textSize="17sp"
 
         />
@@ -186,6 +188,7 @@
         android:weightSum="5">
 
         <CheckedTextView
+            android:textColor="@color/colorButton"
             android:textSize="17sp"
             android:textStyle="bold"
             android:id="@+id/setting_check_tv_daily_alert"
@@ -218,6 +221,7 @@
 
             >
     <TextView
+        android:textColor="@color/colorButton"
 
         android:textStyle="bold"
         android:id="@+id/setting_tv_export_file"
@@ -228,7 +232,6 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:text="@string/setting_export_file"
-        android:textColor="@android:color/black"
         android:textSize="17sp"
 
         />
@@ -251,7 +254,7 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:text="@string/setting_create_data_backup"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorButton"
         android:textSize="17sp"
 
         />
@@ -275,7 +278,7 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:text="@string/seeting_delete_database"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorButton"
         android:textSize="17sp"
 
         />

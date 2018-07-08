@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,7 +81,7 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     User us;
     String urlData = "";
     public static int xxx;
-    String cc;
+    String cc =null;
 
     AlertDialog.Builder builderRemove;
 
@@ -88,19 +89,21 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_setting);
+
+        shar = new SharedPreference();
+
         //-----------check language--------
         try {
-            shar = new SharedPreference();
             cc = shar.getLanguage(getApplicationContext());
             if (cc.equals(null)) {
             } else
                 setLocate(cc);
         } catch (Exception e) {
-
+            Log.e("***", e.getMessage());
         }
 
         //------------------------------------budget----------------
-        setContentView(R.layout.activity_setting);
 
 
         builderRemove = new AlertDialog.Builder(SettingActivity.this);
@@ -214,12 +217,14 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
 
         //-------------------------------spinner for day ----------
         daySpinner = findViewById(R.id.setting_spinner_select_day);
+        //daySpinner.setTextColor(R.color.colorButton);
         ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.day, android.R.layout.simple_list_item_1);
 
         dayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 
-        daySpinner.setAdapter(dayAdapter);
-        daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
+         daySpinner.setAdapter(dayAdapter);
+         daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
+
 
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -228,7 +233,10 @@ public class SettingActivity extends AppCompatActivity implements InterfaceBudge
                 if (position == 0) {
                     daySpinner.setSelectedIndex(user.getBegainDayOfWeek());
 
-                } else {
+                }
+
+
+                else {
 
                     xxx = position;
                     updateDay();

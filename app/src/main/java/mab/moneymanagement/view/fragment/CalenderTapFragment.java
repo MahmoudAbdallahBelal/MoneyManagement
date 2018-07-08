@@ -95,7 +95,7 @@ public class CalenderTapFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
-                        Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getContext(), "nnn" + error.getMessage(), Toast.LENGTH_LONG).show();
                         resetcategory();
 
 
@@ -116,10 +116,6 @@ public class CalenderTapFragment extends Fragment {
 
 
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
 
 }
 

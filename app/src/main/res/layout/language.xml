@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/background"
 
     android:layout_height="250dp">
 
     <TextView
 
+        android:gravity="center"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/select_language_title"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="25dp" />
 
     <LinearLayout
@@ -23,7 +23,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/background"
 
         >
 
@@ -32,6 +31,7 @@
             android:layout_height="wrap_content">
 
             <RadioButton
+                android:textStyle="bold"
                 android:id="@+id/select_language_arabic"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -40,14 +40,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/arabic"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:padding="12dp"
-                android:textSize="15dp"
-                android:background="@android:color/white" />
+                android:textSize="18dp"
+               />
 
             <RadioButton
+                android:textStyle="bold"
                 android:id="@+id/select_language_english"
-
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
@@ -55,10 +55,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/english"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:padding="12dp"
-                android:textSize="15dp"
-                android:background="@android:color/white" />
+                android:textSize="18dp"
+                 />
 
         </RadioGroup>
 

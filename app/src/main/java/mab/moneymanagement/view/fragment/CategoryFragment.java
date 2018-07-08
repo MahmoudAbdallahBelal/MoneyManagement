@@ -617,10 +617,7 @@ public class CategoryFragment extends Fragment {
     }
 
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 
 }
 

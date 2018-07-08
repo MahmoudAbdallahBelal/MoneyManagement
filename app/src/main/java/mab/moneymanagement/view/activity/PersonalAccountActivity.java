@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import mab.moneymanagement.R;
-import mab.moneymanagement.view.fragment.AccountFragment;
 import mab.moneymanagement.view.fragment.PersonalAccountFragment;
 
 public class PersonalAccountActivity extends AppCompatActivity {
@@ -16,6 +15,7 @@ public class PersonalAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_account);
 
 
+
         //TO PUT FRAGMENT ON ACTIVITY
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -23,11 +23,12 @@ public class PersonalAccountActivity extends AppCompatActivity {
                     .commit();
         }
 
-
-        Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.personal_activity_toolbar);
+        Toolbar mToolbar = findViewById(R.id.personal_activity_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getString(R.string.personal_account_activity_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
     }
 }

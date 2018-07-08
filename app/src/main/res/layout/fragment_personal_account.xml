@@ -1,9 +1,9 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context="mab.moneymanagement.view.fragment.PersonalAccountFragment">
+    android:background="@drawable/background"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -14,8 +14,9 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -24,17 +25,19 @@
             android:text="@string/tv_name" />
 
         <EditText
+            android:padding="10dp"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:id="@+id/personal_et_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:padding="8dp"
 
             />
 
         <TextView
-            android:textSize="17sp"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,23 +47,23 @@
             android:text="@string/tv_email" />
 
         <EditText
+            android:padding="10dp"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:id="@+id/personal_account_et_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:padding="8dp"
 
             />
 
         <Spinner
-
-            android:background="#fff"
+            android:textColor="@color/colorWhite"
             android:id="@+id/personal_account_spinner_select_currency"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_margin="20dp"
@@ -80,7 +83,7 @@
             android:padding="8dp"
             android:text="@string/update"
             android:textColor="@android:color/white"
-            android:textSize="23sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

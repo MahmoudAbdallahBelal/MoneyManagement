@@ -262,10 +262,7 @@ public class AllItemCategoryFragment extends Fragment {
             return name;
     }
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 
 
 }

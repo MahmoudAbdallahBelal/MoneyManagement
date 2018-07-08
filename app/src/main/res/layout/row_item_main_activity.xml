@@ -13,13 +13,13 @@
     <!-- TODO: this row that appear in main to show user the item that buy   -->
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="6dp"
-        app:cardMaxElevation="8dp"
-        >
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--app:cardCornerRadius="6dp"-->
+        <!--app:cardMaxElevation="8dp"-->
+        <!--&gt;-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,6 +35,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/row_item_name"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -44,6 +45,8 @@
                 />
 
             <TextView
+                android:textStyle="bold"
+
                 android:id="@+id/row_item_price"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -53,6 +56,8 @@
                 />
 
             <TextView
+                android:textStyle="bold"
+
                 android:id="@+id/row_item_payment"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
@@ -64,6 +69,8 @@
 
 
         <TextView
+            android:textStyle="bold"
+
             android:id="@+id/row_item_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +79,6 @@
 
     </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
 </LinearLayout>

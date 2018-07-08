@@ -175,9 +175,15 @@ public class ForgetPasswordFragment extends Fragment {
 
     void verfiyEmail() {
         email = et_Email.getText().toString();
+        String c = "[a-zA-Z0-9]+[._a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]*[a-zA-Z]*@[a-zA-Z0-9]{2,8}.[a-zA-Z.]{2,6}";
+
         if (email.equals("")) {
             Toast.makeText(getActivity(), getString(R.string.complete_data), Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if(!email.matches(c)){
+            Toast.makeText(getActivity(), ""+getString(R.string.not_correct_email), Toast.LENGTH_SHORT).show();
+        }
+        else {
 
 
             progressDialog.setMessage(getString(R.string.wait));
@@ -255,10 +261,7 @@ public class ForgetPasswordFragment extends Fragment {
         super.onDestroy();
     }
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 
 }
 

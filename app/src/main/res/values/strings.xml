@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Finance</string>
+    <string name="app_name">Bezati</string>
     <string name="title_activity_main2">MoneyManagement</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,15 +11,15 @@
         <item>USD</item>
         <item>EUR</item>
         <item>UK</item>
-        <item>RSA</item>
-        <item>L.E</item>
+        <item>SAR</item>
+        <!--<item>L.E</item>-->
     </string-array>
     <string-array name="day">
         <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
-        <item>Thurthday</item>
+        <item>Thursday</item>
         <item>Friday</item>
         <item>Saturday</item>
 
@@ -34,10 +34,17 @@
         <item>Shopping</item>
         <item>Child</item>
         <item>Car</item>
-        <item>Kast</item>
+        <item>installment</item>
         <item>Credit</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="enter_income_name">Income Name</string>
+    <string name="enter_income_value">Income Value</string>
+    <string name="enter_imcome_name">Income Name</string>
+    <string name="error_load_data">Error While Loading Data</string>
+
+    <string name="sign_up"><u>Sign Up</u></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_hint_enter_email">Email</string>
     <string name="login_hint_enter_password">Password</string>
@@ -55,18 +62,18 @@
     <string name="nav_setting">Setting</string>
     <string name="nav_choosedate">ChooseDate</string>
     <string name="add_item_title">Add item</string>
-    <string name="add_item_item_name">Enter Item name ..</string>
+    <string name="add_item_item_name">Item name</string>
     <string name="add_item_add_note">Add note</string>
     <string name="add_item_btn_ok">Ok</string>
     <string name="add_item_btn_cancel">Cancel</string>
     <string name="row_expected_target">Target</string>
     <string name="row_expected_expense">Expense</string>
     <string name="row_expected_percentage">Percentage</string>
-    <string name="row_expected_hint_target">100 RSA</string>
+    <string name="row_expected_hint_target">100 SAR</string>
     <string name="row_expected_hint_percentage">70%</string>
-    <string name="row_expected_hint_expense">70 RSA</string>
+    <string name="row_expected_hint_expense">70 SAR</string>
     <string name="setting_currency">Currency</string>
-    <string name="setting_kind_currency">RSA</string>
+    <string name="setting_kind_currency">SAR</string>
     <string name="setting_first_day_of_week">First Day of week</string>
     <string name="setting_first_day_on_month">first day on month</string>
     <string name="setting_password_protection">Password Protection</string>
@@ -87,10 +94,10 @@
     <string name="le">LE</string>
     <string name="kdw">KDW</string>
     <string name="dollar">Dollar</string>
-    <string name="rsa">RSA</string>
+    <string name="rsa">SAR</string>
     <string name="account_cash">Cash</string>
     <string name="account_payment_card">Payment card</string>
-    <string name="account_new_teansfer">new Teansfer</string>
+    <string name="account_new_teansfer">new Transfer</string>
     <string name="account_title">Account title</string>
     <string name="expected_title">Expected</string>
     <string name="category_tv_expense">Expense</string>
@@ -115,13 +122,13 @@
     <string name="tv_name">Name</string>
     <string name="tv_email">Email</string>
     <string name="forget_Password">Reset new password</string>
-    <string name="forget_password_reset">Verify</string>
-    <string name="verifing_title_dialog">Verifing</string>
-    <string name="verifiy_code">Enter verifing code</string>
+    <string name="forget_password_reset">VERIFY</string>
+    <string name="verifing_title_dialog">VERIFYING</string>
+    <string name="verifiy_code">Enter verifying code</string>
     <string name="login_hint_enter_password_new">Enter new password</string>
 
     <string name="reset_new_password">Please enter code has send to email and new password</string>
-    <string name="change_password">Change pasword</string>
+    <string name="change_password">Change password</string>
     <string name="old_password">Enter old Password</string>
     <string name="new_password">Enter new password</string>
     <string name="done">Done</string>
@@ -140,14 +147,14 @@
     <string name="setting_download">\"Sorry Error happen\"</string>
     <string name="category_budget">your Budget through current month :</string>
     <string name="chart_income">Expect</string>
-    <string name="chart_expense">Exppense</string>
+    <string name="chart_expense">Expense</string>
     <string name="setting_language">Language</string>
-    <string name="login_message">please wait until login</string>
+    <string name="login_message">please wait </string>
     <string name="check_email_login">please check email correctly</string>
-    <string name="sucess_login">Sucess login</string>
+    <string name="sucess_login">Success login</string>
     <string name="create_account">Create Account</string>
-    <string name="content">Please wait until regester ..</string>
-    <string name="error_happen">Sorry Erorr</string>
+    <string name="content">Please wait...</string>
+    <string name="error_happen">Sorry Error</string>
     <string name="daily">DAILY</string>
     <string name="claender">Calender</string>
     <string name="weekly">Weekly</string>
@@ -162,10 +169,10 @@
     <string name="shopping">Shopping</string>
     <string name="child">Child</string>
     <string name="car">Car</string>
-    <string name="kast">Kast</string>
+    <string name="kast">installment</string>
     <string name="credit">Credit</string>
-    <string name="create_new_account">Create new Account</string>
-    <string name="forget_password"><u>Forget Password</u></string>
+    <string name="create_new_account">Don`t have an Account?</string>
+    <string name="forget_password"><u>Forget Password?</u></string>
     <string name="income">Income</string>
     <string name="item_name">Item name</string>
     <string name="item_price">Item Price</string>
@@ -194,8 +201,6 @@
     <string name="no_item_added">No item added</string>
 
     <string name="add_new_income">Add new income</string>
-    <string name="enter_imcome_name">Enter imcome name</string>
-    <string name="enter_income_value">Enter income value</string>
     <string name="add_new_expense">Add new expense</string>
     <string name="enter_expense_value">Enter expense value</string>
     <string name="enter_expense_name">Enter expense name</string>
@@ -210,7 +215,7 @@
     <string name="remove_alert">Remove alert</string>
     <string name="change_password_sucessful">Password Changed Successfully</string>
     <string name="change_password_failed">Password Changed Failed</string>
-    <string name="create_account_sucess">Create account sucess</string>
+    <string name="create_account_sucess">Create account success</string>
     <string name="reset">Reset</string>
     <string name="expense">Expense</string>
 

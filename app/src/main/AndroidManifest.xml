@@ -12,21 +12,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo_finance"
+        android:icon="@drawable/finance_main_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_finance"
+        android:roundIcon="@drawable/finance_main_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.Main2Activity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".view.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask"
+            />
+        <activity android:name=".view.activity.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-        <activity android:name=".view.activity.SplashActivity" />
         <activity
             android:name=".view.activity.ChartActivity"
             android:parentActivityName=".view.activity.Main2Activity" />
@@ -42,12 +48,6 @@
         <activity
             android:name=".view.activity.SettingActivity"
             android:parentActivityName=".view.activity.Main2Activity" />
-        <activity
-            android:name=".view.activity.AccountActivity"
-            android:parentActivityName=".view.activity.Main2Activity" />
-        <activity android:name=".view.activity.NewTransferActivity" />
-        <activity android:name=".view.activity.CashActivity" />
-        <activity android:name=".view.activity.CreditActivity" />
         <activity
             android:name=".view.activity.RegestrationActivity"
             android:parentActivityName=".view.activity.LoginActivity" />

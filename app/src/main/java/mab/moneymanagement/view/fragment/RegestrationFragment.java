@@ -208,7 +208,7 @@ public class RegestrationFragment extends Fragment {
                 regsterObject.put("FullName", name);
                 regsterObject.put("ConcuranceyId", getCurrency(kindCurrency) + 1);
                 regsterObject.put("Password", password);
-                regsterObject.put("BegainDayOfWeek", getDay(selectedDay) + 1);
+                regsterObject.put("BegainDayOfWeek", getDay(selectedDay));
                 regsterObject.put("BadgetSelected", false);
                 regsterObject.put(" BadgetValue", 0);
                 regsterObject.put("DailyAlert", false);
@@ -298,7 +298,7 @@ public class RegestrationFragment extends Fragment {
             return 2;
         } else if (day.equals("Wednesday")) {
             return 3;
-        } else if (day.equals("Thurthday")) {
+        } else if (day.equals("Thursday")) {
             return 4;
         } else if (day.equals("Friday")) {
             return 5;
@@ -314,17 +314,18 @@ public class RegestrationFragment extends Fragment {
             return 1;
         } else if (cur.equals("UK")) {
             return 2;
-        } else if (cur.equals("RSA")) {
+        }
+        else
             return 3;
-        } else
-            return 4;
+
+// else if (cur.equals("SAR")) {
+//            return 3;
+//        } else
+//            return 4;
 
 
     }
 
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 }

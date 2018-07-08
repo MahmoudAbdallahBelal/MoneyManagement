@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ادارة الاموال</string>
+    <string name="app_name">بيزاتي</string>
     <string name="title_activity_main2">اداره الاموال</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">الرسومات البيانيه</string>
 
 
@@ -13,7 +11,7 @@
         <item>يورو</item>
         <item>درهم اماراتي</item>
         <item>ريال سعودي</item>
-        <item>جنيه مصري</item>
+        <!--<item>جنيه مصري</item>-->
     </string-array>
     <string-array name="day">
         <item>الاحد </item>
@@ -39,8 +37,12 @@
         <item>بطاقه الاتمان</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="login_hint_enter_email"> الايميل </string>
-    <string name="login_hint_enter_password"> كلمه المرور</string>
+    <string name="enter_income_name">ادخل اسم الايراد</string>
+    <string name="error_load_data">حدث خطأ أثناء تحميل البيانات</string>
+
+    <string name="enter_income_value">دخل قيمه الايراد</string>
+    <string name="login_hint_enter_email">  الايميل </string>
+    <string name="login_hint_enter_password">  كلمه المرور</string>
     <string name="login_button_login">تسجيل الدخول</string>
     <string name="complete_login_enter_name"> الاسم </string>
     <string name="complete_login_salary">المرتب</string>
@@ -62,12 +64,12 @@
     <string name="row_expected_target">الميزانيه</string>
     <string name="row_expected_expense">المستهلك</string>
     <string name="row_expected_percentage">النسبه</string>
-    <string name="row_expected_hint_target">100 RSA</string>
-    <string name="row_expected_hint_percentage">70%</string>
-    <string name="row_expected_hint_expense">70 RSA</string>
-    <string name="setting_language">اللغه</string>
-    <string name="setting_currency">العمله</string>
-    <string name="setting_kind_currency">RSA</string>
+    <string name="row_expected_hint_target">١٠٠ ريال سعودي</string>
+    <string name="row_expected_hint_percentage">٧٠ ٪</string>
+    <string name="row_expected_hint_expense">٧٠ ريال سعودي</string>
+    <string name="setting_language">اللغة</string>
+    <string name="setting_currency">العملة</string>
+    <string name="setting_kind_currency">ريال سعودي</string>
     <string name="setting_first_day_of_week">بدايه الاسبوع</string>
     <string name="setting_first_day_on_month">بدايه الشهر</string>
     <string name="setting_password_protection">تغير كلمه المرور</string>
@@ -78,7 +80,7 @@
     <string name="seeting_delete_database">مسح جميع البيانات</string>
     <string name="budget_title">الميزانيه</string>
     <string name="budget_descripe">كم المبلغ الذي تريد وضعه ف الميزانيه</string>
-    <string name="budget_value">0.0</string>
+    <string name="budget_value">٠.٠</string>
     <string name="budget_btn_cancel">الغاء</string>
     <string name="ok">اضافه</string>
     <string name="select_currency_title">اختار العمله</string>
@@ -120,7 +122,7 @@
     <string name="verifing_title_dialog">تحقق</string>
     <string name="verifiy_code">ادخل الكود</string>
     <string name="login_hint_enter_password_new">ادخل كلمه المرور الجديده</string>
-    <string name="reset_new_password">Please enter code has send to email and new password</string>
+    <string name="reset_new_password">من فضلك أدخل الكود الذي تم ارساله علي الايميل الخاص بك و كلمة السر الجديدة </string>
     <string name="change_password">تغير كلمه المرور</string>
     <string name="old_password">ادخل كلمه المرور القديمه</string>
     <string name="new_password">ادخل كلمه المرور الجديده</string>
@@ -135,7 +137,7 @@
     <string name="select_day">من فضلك اختار اليوم</string>
     <string name="budget_done">تم وضع الميزانيه </string>
     <string name="delete_done">تم حذف جميع البيانات</string>
-    <string name="download_progress">Download on progress</string>
+    <string name="download_progress">يتم التحميل الان</string>
     <string name="complete_download">اكتمل التنزيل</string>
     <string name="setting_download">عفوا لقد حدث خطأ</string>
     <string name="category_budget">ميزانيه هذا الشهر :</string>
@@ -162,8 +164,9 @@
     <string name="car">السياره</string>
     <string name="kast">القسط</string>
     <string name="credit">بطاقه الاتمان</string>
-    <string name="create_new_account">انشاء حساب جديد</string>
-    <string name="forget_password"><u>كلمه سر جديده</u></string>
+    <string name="create_new_account">ليس لديك حساب؟</string>
+    <string name="sign_up"><u>التسجيل</u></string>
+    <string name="forget_password"><u>كلمه سر جديده؟</u></string>
     <string name="income">الايرادات</string>
     <string name="item_name">اسم العنصر</string>
     <string name="item_price">سعر العنصر</string>
@@ -188,8 +191,6 @@
     <string name="not_correct_email">ايميل غير صحيح</string>
     <string name="no_item_added">لايوجد عناصر مضافه</string>
     <string name="add_new_income">ادخل ايراد جديد</string>
-    <string name="enter_imcome_name">ادخل اسم الايراد</string>
-    <string name="enter_income_value">ادخل قيمه الايراد</string>
     <string name="add_new_expense">ادخل مستهلك جديد</string>
     <string name="enter_expense_value">ادخل قيمه المستهلك</string>
     <string name="enter_expense_name">ادخل اسم المستهلك</string>

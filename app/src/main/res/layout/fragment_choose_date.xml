@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/background"
+    android:background="@drawable/background"
 
     android:gravity="center"
     tools:context="mab.moneymanagement.view.fragment.ChooseDateFragment">
@@ -12,13 +12,13 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <android.support.v7.widget.CardView
-        android:layout_gravity="center"
-        app:cardCornerRadius="6dp"
-        app:cardMaxElevation="8dp"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_gravity="center"-->
+        <!--app:cardCornerRadius="6dp"-->
+        <!--app:cardMaxElevation="8dp"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
     <CalendarView
 
         android:id="@+id/calendarView"
@@ -29,21 +29,20 @@
         android:layout_marginBottom="10dp"
         />
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
     <Button
 
 
         android:id="@+id/choose_date_done"
         android:layout_margin="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
         android:background="@drawable/button_border"
         android:textColor="#fff"
         android:text="@string/choose_date_btn_done"
-        android:textStyle="bold"
 
         />
 

@@ -1,5 +1,6 @@
 package mab.moneymanagement.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

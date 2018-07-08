@@ -164,8 +164,5 @@ public class WeeklyFragment extends Fragment implements InterfaceItem {
 
     }
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 }

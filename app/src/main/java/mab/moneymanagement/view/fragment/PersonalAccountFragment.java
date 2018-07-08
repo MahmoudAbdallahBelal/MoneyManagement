@@ -24,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import com.labo.kaji.fragmentanimations.CubeAnimation;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
-import org.angmarch.views.NiceSpinner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,23 +54,30 @@ public class PersonalAccountFragment extends Fragment {
     ProgressDialog progressDialog;
 
     MDToast mdToast;
-
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_personal_account, container, false);
-        et_name = v.findViewById(R.id.personal_et_name);
-        et_email = v.findViewById(R.id.personal_account_et_email);
-        update = v.findViewById(R.id.personal_account_update);
+         view = inflater.inflate(R.layout.fragment_personal_account, container, false);
 
 
-        user = new User();
-          progressDialog = new ProgressDialog(getActivity());
+        et_name = view.findViewById(R.id.personal_et_name);
+        et_email =view.findViewById(R.id.personal_account_et_email);
+        update = view.findViewById(R.id.personal_account_update);
+        currncySpinner = view.findViewById(R.id.personal_account_spinner_select_currency);
 
 
+             user = new User();
+            progressDialog = new ProgressDialog(getActivity());
+
+
+             shar = new SharedPreference();
 
         //------spinner for currency ----------
-        currncySpinner = v.findViewById(R.id.personal_account_spinner_select_currency);
+        getUserData();
+
+
+
         ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.currency, android.R.layout.simple_spinner_item);
         currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currncySpinner.setAdapter(currencyAdapter);
@@ -91,9 +97,8 @@ public class PersonalAccountFragment extends Fragment {
         });
 
 
-        shar = new SharedPreference();
         //get informatio of user  from server
-        getUserData();
+
 
 
         update.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +109,7 @@ public class PersonalAccountFragment extends Fragment {
                 String name = et_name.getText().toString();
 
 
-                /*
-                if (!kindCurrency.equals(user.getCurrency())) {
-                    makeUpdate();
 
-                }
-             */
 
 
                 if (email.equals("") || name.equals("") || kindCurrency.equals("")) {
@@ -128,18 +128,20 @@ public class PersonalAccountFragment extends Fragment {
             }
         });
 
-        return v;
+
+        return view;
     }
 
 
     private void getUserData() {
 
 
+
         progressDialog.setMessage(getString(R.string.wait));
         progressDialog.show();
 
         // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+       // RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, user_info_url, (String) null,
@@ -152,15 +154,23 @@ public class PersonalAccountFragment extends Fragment {
                         try {
                             //----------HANDEL MESSAGE COME FROM REQUEST -------------------
                             String message = response.getString("RequstDetails");
-                            et_name.setText(response.getString("FullName"));
-                            et_email.setText(response.getString("Email"));
-                            currncySpinner.setSelection(response.getInt("ConcuranceyId") - 1);
+                           if(message.equals("Details User Returned")) {
 
-                            ///**----put user data in object
-                            user.setFullName(response.getString("FullName"));
-                            user.setEmail(response.getString("Email"));
-                            user.setCurrency(response.getInt("ConcuranceyId") - 1);
+                               et_name.setText(response.getString("FullName"));
+                               et_email.setText(response.getString("Email"));
+                               currncySpinner.setSelection(response.getInt("ConcuranceyId") - 1);
 
+                               ///**----put user data in object
+                               user.setFullName(response.getString("FullName"));
+                               user.setEmail(response.getString("Email"));
+                               user.setCurrency(response.getInt("ConcuranceyId") - 1);
+
+                           }
+                           else{
+
+                               mdToast = MDToast.makeText(getActivity(),getString(R.string.error_load_data) , 8,MDToast.TYPE_ERROR );
+                               mdToast.show();
+                           }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -192,9 +202,8 @@ public class PersonalAccountFragment extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                String v = "bearer jYfZKvuTA7ccsWsirAV9Hh7OLUWRW9UkThNrZ0SDVpo9iunNIx1Ec-1DZ_-cLkVrns7CD6tkenVKryL1ws3hrygNo5EiOlQV0W0V0ya8m8-ofQb7n0q0JDo3ljKSREFGLJJUXDaJSbFbQmSJCjEGLk-EtYJMIiErov-wwo2okyG6ytvOdiRoViiCpn-Hfp4NrMN9b0IOJafMeFWKQgBsuRElAI8R24BRY4rLu_oL0dEVm3KuQ1JjtxWD6YOQ_NA33gxp4Gx2bzgqT782hzxxQKlX-de3rMhna8BIRN7Co30SJqrc7ikyGyWnUARB8spCRjCbN6b4TV5s2FdkeahQwr7Sfmh75B5sjzZP26werzLq5sd3fF9bA3zd7dlZdLPFBtpQ1zz5AKdRw3DBCBFrwDkpdPMY4A9-7pR2gIODOMRxtqKaJb6OPXM2iI04Pe_YNyIWllP5xixBMtEH67Uz2g_idXyqrhnG8BjDcRRdkCU";
 
-                params.put("Authorization", shar.getValue(getContext()));
+                params.put("Authorization", shar.getValue(getActivity()));
                 return params;
             }
         };
@@ -202,6 +211,7 @@ public class PersonalAccountFragment extends Fragment {
 
         // Add JsonObjectRequest to the RequestQueue
         MysingleTon.getInstance(getActivity()).addToRequestqueue(jsonObjectRequest);
+
 
     }
 
@@ -306,24 +316,27 @@ public class PersonalAccountFragment extends Fragment {
 
     private int getCurrency(String cur) {
 
-        if (cur.equals("USD")) {
-            return 0;
-        } else if (cur.equals("EUR")) {
-            return 1;
-        } else if (cur.equals("UK")) {
-            return 2;
-        } else if (cur.equals("RSA")) {
-            return 3;
-        } else
-            ///return 4 mean return L.E
-            return 4;
+
+
+            if (cur.equals("USD")) {
+                return 0;
+            } else if (cur.equals("EUR")) {
+                return 1;
+            } else if (cur.equals("UK")) {
+                return 2;
+            }
+            else
+                return  3;
+// else if (cur.equals("SAR")) {
+//                return 3;
+//            } else
+//                ///return 4 mean return L.E
+//                return 4;
+
 
 
     }
 
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.DOWN, enter, 700);
-    }
+
 }

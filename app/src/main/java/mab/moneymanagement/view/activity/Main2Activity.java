@@ -99,6 +99,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         if (tt.equals("null null")) {
             shar.removeValue(getApplicationContext());
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            logoutIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(logoutIntent);
             finish();
         }
@@ -190,7 +191,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         if (id == R.id.nav_my_account) {
 
-            Intent personalIntent = new Intent(getApplicationContext(), PersonalAccountActivity.class);
+            Intent personalIntent = new Intent(Main2Activity.this, PersonalAccountActivity.class);
             startActivity(personalIntent);
 
         } else if (id == R.id.nav_category) {
@@ -234,6 +235,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             // Toast.makeText(getApplicationContext(), shar.getValue(getApplicationContext()), Toast.LENGTH_LONG).show();
 
             Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+
             startActivity(logoutIntent);
             finish();
         }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/background"
     tools:context="mab.moneymanagement.view.fragment.DetailItem">
 
     <!-- TODO: Update blank fragment layout -->
@@ -27,21 +27,22 @@
 
         <TextView
 
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/item_name"
-            android:textColor="@android:color/black"
-            android:padding="10dp"
+            android:textColor="@color/colorButton"
+            android:padding="5dp"
 
             />
 
 
         <EditText
-            android:gravity="center"
+            android:textColorHint="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:layout_marginTop="5dp"
             android:id="@+id/item_detail_et_item_name"
@@ -55,19 +56,23 @@
             />
 
         <TextView
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/item_price"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorButton"
             android:inputType="number"
-            android:padding="10dp"
+            android:padding="5dp"
 
 
             />
         <EditText
-            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/colorWhite"
             android:background="@drawable/edit_text_border"
             android:id="@+id/item_detail_price"
             android:layout_width="match_parent"
@@ -83,6 +88,10 @@
             />
 
         <TextView
+            android:textColor="@color/colorButton"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -90,7 +99,8 @@
             android:hint="@string/item_note"
             android:padding="10dp" />
         <EditText
-            android:gravity="center"
+            android:textColorHint="@color/colorWhite"
+            android:layout_marginTop="5dp"
             android:background="@drawable/edit_text_border"
             android:id="@+id/item_detail_et_note"
             android:layout_width="match_parent"
@@ -105,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="15dp"
-            android:padding="8dp"></Spinner>
+            android:padding="10dp"></Spinner>
 
         <Spinner
 
@@ -113,17 +123,19 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:padding="8dp"></Spinner>
+            android:padding="10dp"></Spinner>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
 
+                android:layout_weight="1"
                 android:id="@+id/item_detail_delete"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:padding="10dp"
@@ -131,8 +143,9 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/item_detail_update"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@color/colorPrimary"
