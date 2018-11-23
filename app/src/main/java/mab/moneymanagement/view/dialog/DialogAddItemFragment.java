@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -93,6 +94,7 @@ public class DialogAddItemFragment extends DialogFragment {
 
         expenseSpinner = edit_layout.findViewById(R.id.add_item_category_spiner);
         paymentSpinner = edit_layout.findViewById(R.id.add_item_payment_spiner);
+
 
 
         shar = new SharedPreference();

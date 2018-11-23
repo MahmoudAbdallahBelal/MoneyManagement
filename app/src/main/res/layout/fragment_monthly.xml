@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:id="@+id/monthly_fragment_list"
         android:layout_margin="8dp"
-        android:dividerHeight="10.0sp"
         ></ListView>
 
 </FrameLayout>

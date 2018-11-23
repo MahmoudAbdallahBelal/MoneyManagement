@@ -4,8 +4,11 @@ package mab.moneymanagement.view.activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +20,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -24,6 +30,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +42,7 @@ import java.util.Map;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
+import mab.moneymanagement.util.helperChache;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.dialog.DialogAddItemFragment;
 import mab.moneymanagement.view.interfaces.InterfaceItem;
@@ -122,8 +131,93 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
         //-----------------------------------------
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+//        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
+//        actionC.setTitle("Hide/Show Action above");
+//        actionC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+//            }
+//        });
+
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        //menuMultipleActions.addButton(actionC);
+
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
+        final FloatingActionButton actionB = (FloatingActionButton) findViewById(R.id.action_b);
+
+
+        final TextView txtB = findViewById(R.id.textView_b);
+        final TextView txtDepartments = findViewById(R.id.textView_departments);
+        txtB.setVisibility(View.INVISIBLE);
+        txtDepartments.setVisibility(View.INVISIBLE);
+
+
+
+        menuMultipleActions.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+            @Override
+            public void onMenuExpanded() {
+
+
+
+                    txtB.setVisibility(View.VISIBLE);
+                txtDepartments.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+
+                txtB.setVisibility(View.INVISIBLE);
+
+                txtDepartments.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent categoryIntent = new Intent(getApplicationContext(), Category.class);
+                startActivity(categoryIntent);
+            }
+        });
+
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // check before
+
+                if(helperChache.retrieveCountExpense(Main2Activity.this) > 0 && helperChache.retrieveCountIncome(Main2Activity.this) > 0) {
+                    FragmentManager fm = getFragmentManager();
+                    DialogAddItemFragment dio = DialogAddItemFragment.getDio(Main2Activity.this);
+
+                    dio.show(fm, "");
+
+                }
+                else
+                {
+                    Toast.makeText(Main2Activity.this, getString(R.string.you_must_add_element), Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+        // Test that FAMs containing FABs with visibility GONE do not cause crashes
+
+
+
+
+
+
+        //========================================================
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -134,7 +228,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             }
         });
-
+*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

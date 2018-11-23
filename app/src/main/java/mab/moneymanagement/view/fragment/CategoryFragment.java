@@ -23,6 +23,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.github.mikephil.charting.utils.Utils;
 import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import org.json.JSONArray;
@@ -35,6 +36,7 @@ import java.util.Map;
 
 import mab.moneymanagement.R;
 import mab.moneymanagement.util.URL;
+import mab.moneymanagement.util.helperChache;
 import mab.moneymanagement.view.Volley.MysingleTon;
 import mab.moneymanagement.view.activity.AllItemCategory;
 import mab.moneymanagement.view.adapter.CategoryExpenseAdapter;
@@ -555,6 +557,7 @@ public class CategoryFragment extends Fragment {
                             incomeAdapter = new CategoryIncomeAdapter(getContext(), incomeData);
                             incomeList.setAdapter(incomeAdapter);
                             incomeAdapter.notifyDataSetChanged();
+                            helperChache.saveCounter(getActivity() , incomeData.size() , expenseData.size());
 
 
                         } catch (JSONException e) {

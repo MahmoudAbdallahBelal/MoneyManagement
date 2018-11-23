@@ -26,12 +26,17 @@
         <activity android:name=".view.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
-            />
-        <activity android:name=".view.activity.SplashActivity" >
+            >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.SplashActivity" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".view.activity.ChartActivity"
@@ -50,7 +55,12 @@
             android:parentActivityName=".view.activity.Main2Activity" />
         <activity
             android:name=".view.activity.RegestrationActivity"
-            android:parentActivityName=".view.activity.LoginActivity" />
+            android:parentActivityName=".view.activity.LoginActivity" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
 
         <activity
             android:name=".view.activity.ChooseActivity"

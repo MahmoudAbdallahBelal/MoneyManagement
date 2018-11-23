@@ -22,15 +22,99 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main2" />
 
-    <include layout="@layout/content_main2" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:srcCompat="@drawable/add_edit" />-->
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/add_edit" />
+
+<!--/>-->
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/multiple_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            fab:fab_addButtonColorNormal="@color/colorPrimaryDark"
+            fab:fab_addButtonColorPressed="@color/cpb_white"
+            fab:fab_addButtonPlusIconColor="@color/cpb_white"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorWhite"
+
+
+
+                fab:fab_title="@string/menu_departments"
+                fab:fab_icon="@drawable/add_department"
+                fab:fab_colorPressed="@color/cpb_white">
+            </com.getbase.floatingactionbutton.FloatingActionButton>
+
+
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+
+                fab:fab_icon="@drawable/add_element"
+                android:id="@+id/action_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorWhite"
+                fab:fab_colorPressed="@color/cpb_white"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/textView_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/multiple_actions"
+            android:layout_marginBottom="106dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/multiple_actions"
+            android:text="@string/menu_add_element" />
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/textView_departments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView_b"
+            android:layout_alignEnd="@+id/textView_b"
+            android:layout_marginBottom="57dp"
+            android:text="@string/menu_departments" />
+
+
+    </RelativeLayout>
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>

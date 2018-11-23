@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/background"
+
+    android:background="@color/colorPrimaryDark"
     android:gravity="center"
 
     tools:context="mab.moneymanagement.view.activity.SplashActivity">
 
     <ImageView
+
+        android:id="@+id/imageView_splash"
         android:layout_margin="20dp"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/finance_main_logo"
         />
 

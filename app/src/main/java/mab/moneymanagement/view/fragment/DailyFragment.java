@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -65,7 +66,14 @@ public class DailyFragment extends Fragment implements InterfaceItem {
 
         shar = new SharedPreference();
 
+
+
+
+
+
         getAllItem();
+
+
 
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,6 +128,8 @@ public class DailyFragment extends Fragment implements InterfaceItem {
 
                             adapter = new MainItemAdapter(getContext(), data);
                             mList.setAdapter(adapter);
+
+
 
 
                         } catch (JSONException e) {

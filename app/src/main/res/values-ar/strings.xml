@@ -4,6 +4,17 @@
     <string name="app_name">بيزاتي</string>
     <string name="title_activity_main2">اداره الاموال</string>
     <string name="action_settings">الرسومات البيانيه</string>
+    <string name="menu_departments">الاقسام</string>
+    <string name="menu_add_element">اضافة عنصر</string>
+    <string name="you_must_add_element"> أولا لابد من اضافة قسم (الدخل &amp;المستهلك )</string>
+
+
+
+    <string name="name_element">اسم العنصر</string>
+    <string name="name_department">القسم</string>
+    <string name="value">القيمة</string>
+    <string name="notes">الملاحظات</string>
+    <string name="there_is_no_items">لا يوجد اي عناصر الأن قم بادخال قسم معين أولا  و من ثم اضافة العنصر بكل سهولة</string>
 
 
     <string-array name="currency">
@@ -216,5 +227,6 @@
     <string name="remove_budget_builder">هل تريد مسح الميزانية ؟</string>
     <string name="yes_remove">نعم</string>
     <string name="no_remove">لا</string>
+    <string name="negative">لقد تم صرف أكثر من الدخل </string>
 
 </resources>

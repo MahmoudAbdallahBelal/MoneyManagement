@@ -63,6 +63,7 @@ public class MonthlystaticsAdapter extends BaseAdapter {
         TextView reset = v.findViewById(R.id.monthlystatic_reset);
         TextView expense = v.findViewById(R.id.monthlystatic_expense);
         TextView date = v.findViewById(R.id.monthly_statics_date);
+        TextView txtNegative = v.findViewById(R.id.textView_negative);
 
 
         expen = mList.get(position).getMoney();
@@ -75,11 +76,19 @@ public class MonthlystaticsAdapter extends BaseAdapter {
         x1 = (expen / sum) * 100;
         x2 = (yy / sum) * 100;
 
-
         reset.setText(yy + "");
         expense.setText(expen + "");
         date.setText(getMonthName(mList.get(position).getMonth()) + " " + mList.get(position).getMonth() + " / " + mList.get(position).getYear());
 
+        if(expen < 0) {
+            txtNegative.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            txtNegative.setVisibility(View.INVISIBLE);
+
+        }
 
         //----------chart --------
         PieChart pieChart = v.findViewById(R.id.pie_chart);
@@ -94,8 +103,8 @@ public class MonthlystaticsAdapter extends BaseAdapter {
 
 
         ArrayList<PieEntry> yEntryValue = new ArrayList<>();
-        yEntryValue.add(new PieEntry((float) yy, context.getString(R.string.reset)));
-        yEntryValue.add(new PieEntry((float) expen, context.getString(R.string.expense)));
+        yEntryValue.add(new PieEntry((float) yy, /*context.getString(R.string.reset)*/ ""));
+        yEntryValue.add(new PieEntry((float) expen, /*context.getString(R.string.expense)*/ ""));
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 

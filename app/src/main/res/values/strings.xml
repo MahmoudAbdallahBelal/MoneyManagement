@@ -5,8 +5,18 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Chart</string>
+    <string name="menu_departments">Categorize</string>
+    <string name="menu_add_element">Add New Item</string>
+
+    <string name="name_element">Item Name</string>
+    <string name="name_department">Category</string>
+    <string name="value">Value</string>
+    <string name="notes">Notes</string>
+
+    <string name="there_is_no_items">There is no Items Yet add category firstly then add item</string>
 
 
+    <string name="you_must_add_element">Firstly You must add Category ( Expense &amp; Income ) </string>
     <string-array name="currency">
         <item>USD</item>
         <item>EUR</item>
@@ -225,6 +235,7 @@
     <string name="yes_remove">yes</string>
     <string name="no_remove">No</string>
 
+    <string name="negative">you have spent more than expected</string>
 
 
 </resources>
